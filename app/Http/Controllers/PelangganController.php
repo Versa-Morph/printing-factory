@@ -14,7 +14,7 @@ class PelangganController extends Controller
         $this->middleware('permission:list-pelanggan', ['only' => ['index']]);
         $this->middleware('permission:create-pelanggan', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit-pelanggan', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:delete-pelanggan', ['only' => ['destroy']]);
+        $this->middleware('permission:delete-pelanggan', ['only' => ['delete']]);
     }
 
     public function index()
