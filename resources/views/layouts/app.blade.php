@@ -24,6 +24,7 @@
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
+                    @include('layouts.alert')
                     @yield('content')
                     {{-- <div class="row">
                         <div class="col-xl-8">

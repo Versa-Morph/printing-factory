@@ -22,12 +22,18 @@ class PermissionSeeder extends Seeder
             'delete-user',
             'create-product',
             'edit-product',
-            'delete-product'
+            'delete-product',
+            'list-pelanggan',
+            'create-pelanggan',
+            'edit-pelanggan',
+            'delete-pelanggan',
          ];
  
           // Looping and Inserting Array's Permissions into Permission Table
-         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
-          }
+          foreach ($permissions as $permission) {
+            Permission::updateOrCreate(
+                ['name' => $permission]
+            );
+        }
     }
 }

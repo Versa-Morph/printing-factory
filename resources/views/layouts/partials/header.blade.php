@@ -263,14 +263,14 @@
     @yield('header-info-content')
 
 
-    <!-- start dash troggle-icon -->
+    {{-- <!-- start dash troggle-icon -->
     <div>
         <a class="dash-troggle-icon" id="dash-troggle-icon" data-bs-toggle="collapse" href="#dashtoggle"
             aria-expanded="true" aria-controls="dashtoggle">
             <i class="bx bx-up-arrow-alt"></i>
         </a>
     </div>
-    <!-- end dash troggle-icon -->
+    <!-- end dash troggle-icon --> --}}
 
 
 </header>
