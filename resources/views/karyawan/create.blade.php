@@ -93,7 +93,7 @@
                         </div>
                     </div><!-- end row -->
 
-                    <a href="{{ route('karyawan') }}" class="btn btn-danger" style="float: left">Kembali</a>
+                    <a href="{{ route('karyawan-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
                     <button type="submit" class="btn btn-primary" style="float: right">Simpan</button>
                 </form><!-- end form -->
             </div><!-- end card body -->
@@ -173,7 +173,7 @@
                         success: function(response) {
                             if (response.success) {
                                 alertSuccess(response.msg);
-                                window.location.href = '{{ route('karyawan') }}';
+                                window.location.href = '{{ route('karyawan-list') }}';
                             } else {
                                 alertFiled(response.msg);
                             }

@@ -52,7 +52,7 @@
 
                 @can('create-karyawan')
                 <li>
-                    <a href="{{ route('karyawan') }}">
+                    <a href="{{ route('karyawan-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Karyawan</span>
                     </a>
