@@ -25,7 +25,6 @@
                                         {{ $user->name }} </option>
                                     @endforeach
                                 </select>
-                                @enderror
                             </div>
                         </div>
 
