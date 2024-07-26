@@ -49,7 +49,6 @@
                     </a>
                 </li>
                 @endcan
-                
                 <li class="menu-title" data-key="t-menu">Management User</li>
 
                 <li>
