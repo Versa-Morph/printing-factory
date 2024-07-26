@@ -35,13 +35,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 // START PELANGGAN 
-Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan');
-Route::get('/pelanggan-get-data', [PelangganController::class, 'getData'])->name('pelanggan-get-data');
-Route::get('/pelanggan-create', [PelangganController::class, 'create'])->name('pelanggan-create');
-Route::post('/pelanggan-store', [PelangganController::class, 'store'])->name('pelanggan-store');
-Route::get('/pelanggan-edit/{id}', [PelangganController::class, 'edit'])->name('pelanggan-edit');
-Route::post('/pelanggan-update/{id}', [PelangganController::class, 'update'])->name('pelanggan-update');
-Route::get('/pelanggan-delete/{id}', [PelangganController::class, 'delete'])->name('pelanggan-delete');
+Route::prefix('pelanggan')->name('pelanggan-')->group(function (){ 
+    Route::get('/', [PelangganController::class, 'index'])->name('list');
+    Route::get('/get-data', [PelangganController::class, 'getData'])->name('get-data');
+    Route::get('/create', [PelangganController::class, 'create'])->name('create');
+    Route::post('/store', [PelangganController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [PelangganController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [PelangganController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [PelangganController::class, 'delete'])->name('delete');
+});
 // END PELANGGAN 
 
 
