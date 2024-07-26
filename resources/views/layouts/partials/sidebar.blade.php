@@ -43,7 +43,7 @@
 
                 @can('create-pelanggan')
                 <li>
-                    <a href="{{ route('pelanggan') }}">
+                    <a href="{{ route('pelanggan-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Pelanggan</span>
                     </a>
