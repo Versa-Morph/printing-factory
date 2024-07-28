@@ -41,6 +41,24 @@
                     </a>
                 </li>
 
+                @can('create-pelanggan')
+                <li>
+                    <a href="{{ route('pelanggan-list') }}">
+                        <i class="uil-users-alt nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Pelanggan</span>
+                    </a>
+                </li>
+                @endcan
+
+                @can('create-karyawan')
+                <li>
+                    <a href="{{ route('karyawan') }}">
+                        <i class="uil-users-alt nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Karyawan</span>
+                    </a>
+                </li>
+                @endcan
+                
                 <li class="menu-title" data-key="t-menu">Management User</li>
 
                 <li>
