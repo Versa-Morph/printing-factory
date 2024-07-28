@@ -6,9 +6,14 @@ use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+
+
 
 class RoleController extends Controller
 {
@@ -23,103 +28,214 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        return view('roles.index', [
-            'roles' => Role::orderBy('id','DESC')->paginate(3)
-        ]);
+        $data['page_title'] = 'Role List';
+        $data['roles'] = Role::orderby('id', 'asc')->get();
+
+        return view('roles.index-new', $data);
+    }
+
+    // public function getRoles(Request $request)
+    // {
+    //     try {
+    //         $roles = Role::with('permissions:id,name')
+    //             ->orderBy('id', 'asc')
+    //             ->select('id', 'name')
+    //             ->get();
+
+    //         $permissions = Permission::orderBy('id', 'asc')
+    //             ->select('id', 'name')
+    //             ->get();
+
+    //         return response()->json([
+    //             'roles' => $roles,
+    //             'permissions' => $permissions
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
+
+    // public function getPermissions($roleId)
+    // {
+    //     try {
+    //         $role = Role::findOrFail($roleId);
+    //         $permissions = $role->permissions()->select('id', 'name')->get();
+
+    //         return response()->json(['permissions' => $permissions]);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
+
+    // public function getAllPermissions()
+    // {
+    //     try {
+    //         $permissions = Permission::orderBy('id', 'asc')
+    //             ->select('id', 'name')
+    //             ->get();
+
+    //         return response()->json(['permissions' => $permissions]);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
+
+    // public function getRoles(Request $request)
+    // {
+    //     try {
+    //         $data['roles'] = Role::with('permissions:id,name')->orderBy('id', 'asc')->select('id', 'name')->get();
+    //         $data['permissions'] = Permission::orderBy('id', 'asc')->select('id', 'name')->get();
+
+    //         return response()->json($data);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
+
+    public function getRoles(Request $request)
+    {
+
+        try {
+            $data['roles'] = Role::with('permissions:id,name')->orderBy('id', 'asc')->select('id', 'name')->get();
+            $data['permissions'] = Permission::orderBy('id', 'asc')->select('id', 'name')->get();
+
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function getModalAdd()
     {
-        return view('roles.create', [
-            'permissions' => Permission::get()
-        ]);
+        return View::make('roles.modal-add');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRoleRequest $request): RedirectResponse
+    public function store(StoreRoleRequest $request)
     {
-        $role = Role::create(['name' => $request->name]);
+        $dataRole = $request->validated();
 
-        $permissions = Permission::whereIn('id', $request->permissions)->get(['name'])->toArray();
-        
-        $role->syncPermissions($permissions);
+        try {
+            $role = new Role();
+            $role->name = $dataRole['name'];
+            $role->guard_name = 'web';
+            $role->save();
 
-        return redirect()->route('roles.index')
-                ->withSuccess('New role is added successfully.');
+            session()->flash('success', "Create data role successfully!");
+            return redirect(route('roles.index'));
+        } catch (\Throwable $th) {
+            session()->flash('failed', "Failed to create data role!");
+            return redirect(route('roles.index'));
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Role $role): View
+    public function getModalEdit($roleId)
     {
-        $rolePermissions = Permission::join("role_has_permissions","permission_id","=","id")
-            ->where("role_id",$role->id)
-            ->select('name')
-            ->get();
-        return view('roles.show', [
-            'role' => $role,
-            'rolePermissions' => $rolePermissions
+        $role = Role::findOrFail($roleId);
+        return View::make('admin.role.modal-edit')->with('role', $role);
+    }
+
+    public function update(UpdateRoleRequest $request, $roleId)
+    {
+        $dataRole = $request->validated();
+        try {
+            $role = Role::find($roleId);
+
+            // Check if role doesn't exists
+            if (!$role) {
+                session()->flash('failed', "Role not found!");
+                return redirect()->back();
+            }
+
+            $role->name = $dataRole['name'];
+            $role->save();
+
+            session()->flash('success', "Update data role successfully!");
+            return redirect(route('roles.index'));
+        } catch (\Throwable $th) {
+            session()->flash('failed', "Failed to update data role!");
+            return redirect(route('roles.index'));
+        }
+    }
+
+    public function getModalDelete($roleId)
+    {
+        $role = Role::findOrFail($roleId);
+        return View::make('admin.role.modal-delete')->with('role', $role);
+    }
+
+    public function destroy(Request $request, $roleId)
+    {
+        try {
+            $role = Role::findOrFail($roleId);
+            $role->delete();
+
+            session()->flash('success', "Delete data role successfully!");
+        } catch (ModelNotFoundException $e) {
+            session()->flash('failed', "Role not found!");
+        } catch (QueryException $e) {
+            session()->flash('failed', "Failed to delete data role!");
+        }
+
+        return redirect(route('roles.index'));
+    }
+
+    public function updatePermissionByID(Request $request)
+    {
+        try {
+            // Get data from AJAX Post
+            $roleId = $request->input('roleId');
+            $permissionId = $request->input('permissionId');
+            $isChecked = $request->input('isChecked');
+
+            // Find role and permission by Id
+            $role = Role::findOrFail($roleId);
+            $permission = Permission::findOrFail($permissionId);
+
+            // Update relation role and permission by checkbox
+            if ($isChecked == "true") {
+                $role->permissions()->attach($permission);
+            } else {
+                $role->permissions()->detach($permission);
+            }
+
+            // Kirim respons ke klien (jika diperlukan)
+            return response()->json(['message' => 'Permission updated successfully']);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Permission updated failed', 'error' => $th->getMessage()]);
+        }
+    }
+
+    public function updateAllPermissions(Request $request)
+    {
+        // Validation Data
+        $request->validate([
+            'roleId' => 'required|exists:roles,id',
+            'status' => 'required',
         ]);
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Role $role): View
-    {
-        if($role->name=='Super Admin'){
-            abort(403, 'SUPER ADMIN ROLE CAN NOT BE EDITED');
+        try {
+            // Get Role By ID
+            $role = Role::findOrFail($request->roleId);
+
+            if ($request->status == 'true') {
+                // Check status True add all permission
+                $role->givePermissionTo(Permission::all());
+            } else {
+                // Check status False delete all permission
+                $role->revokePermissionTo(Permission::all());
+            }
+
+            return response()->json(['message' => 'Permissions updated successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to update permissions'], 500);
         }
-
-        $rolePermissions = DB::table("role_has_permissions")->where("role_id",$role->id)
-            ->pluck('permission_id')
-            ->all();
-
-        return view('roles.edit', [
-            'role' => $role,
-            'permissions' => Permission::get(),
-            'rolePermissions' => $rolePermissions
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
-    {
-        $input = $request->only('name');
-
-        $role->update($input);
-
-        $permissions = Permission::whereIn('id', $request->permissions)->get(['name'])->toArray();
-
-        $role->syncPermissions($permissions);    
-        
-        return redirect()->back()
-                ->withSuccess('Role is updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role): RedirectResponse
-    {
-        if($role->name=='Super Admin'){
-            abort(403, 'SUPER ADMIN ROLE CAN NOT BE DELETED');
-        }
-        if(auth()->user()->hasRole($role->name)){
-            abort(403, 'CAN NOT DELETE SELF ASSIGNED ROLE');
-        }
-        $role->delete();
-        return redirect()->route('roles.index')
-                ->withSuccess('Role is deleted successfully.');
     }
 }
