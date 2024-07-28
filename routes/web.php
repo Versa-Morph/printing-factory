@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KaryawanController;
@@ -23,10 +24,19 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     if (Auth::check() != null) {
         return redirect('home');
-    }else{
+    } else {
         return redirect('login');
     }
 });
+
+// START FORGOT PASSWORD 
+Route::prefix('forgot-password')->name('forgot-password-')->group(function () {
+    Route::get('/', [ForgotPasswordController::class, 'index'])->name('view');
+    Route::post('/send-email', [ForgotPasswordController::class, 'sendEmail'])->name('send-email');
+    Route::get('/reset-password', [ForgotPasswordController::class, 'reset'])->name('reset-password');
+    Route::post('/proses-reset-password', [ForgotPasswordController::class, 'prosesReset'])->name('proses-reset-password');
+});
+// END FORGOT PASSWORD 
 
 Auth::routes();
 
@@ -35,7 +45,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 // START PELANGGAN 
-Route::prefix('pelanggan')->name('pelanggan-')->group(function (){ 
+Route::prefix('pelanggan')->name('pelanggan-')->group(function () {
     Route::get('/', [PelangganController::class, 'index'])->name('list');
     Route::get('/get-data', [PelangganController::class, 'getData'])->name('get-data');
     Route::get('/create', [PelangganController::class, 'create'])->name('create');
