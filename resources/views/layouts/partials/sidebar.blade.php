@@ -41,7 +41,7 @@
                     </a>
                 </li>
 
-                @can('pelanggan-list')
+                @can('list-pelanggan')
                 <li>
                     <a href="{{ route('pelanggan-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
@@ -60,7 +60,7 @@
                 @endcan
 
                 {{-- @dd(Auth::user()->can('list-gaji')) --}}
-                @can('list-gaasdsadasji')
+                @can('list-gaji')
                 <li>
                     <a href="{{ route('gaji-list') }}">
                         <i class="bx bx-credit-card nav-icon"></i>
