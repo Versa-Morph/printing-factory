@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateRoleRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -19,11 +20,11 @@ class UpdateRoleRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
+        $roleId = $this->route('roleId');
         return [
-            'name' => 'required|string|max:250|unique:roles,name,'.$this->role->id,
-            'permissions' => 'required',
+            'name' => 'required|string|unique:roles,name,'.$roleId,
         ];
     }
 }

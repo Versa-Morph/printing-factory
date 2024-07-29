@@ -33,7 +33,7 @@ class RoleController extends Controller
         $data['page_title'] = 'Role List';
         $data['roles'] = Role::orderby('id', 'asc')->get();
 
-        return view('roles.index-new', $data);
+        return view('roles.index', $data);
     }
 
     // public function getRoles(Request $request)
@@ -139,7 +139,7 @@ class RoleController extends Controller
     public function getModalEdit($roleId)
     {
         $role = Role::findOrFail($roleId);
-        return View::make('admin.role.modal-edit')->with('role', $role);
+        return View::make('roles.modal-edit')->with('role', $role);
     }
 
     public function update(UpdateRoleRequest $request, $roleId)
@@ -158,17 +158,17 @@ class RoleController extends Controller
             $role->save();
 
             session()->flash('success', "Update data role successfully!");
-            return redirect(route('roles.index'));
+            return redirect(route('roles-index'));
         } catch (\Throwable $th) {
             session()->flash('failed', "Failed to update data role!");
-            return redirect(route('roles.index'));
+            return redirect(route('roles-index'));
         }
     }
 
     public function getModalDelete($roleId)
     {
         $role = Role::findOrFail($roleId);
-        return View::make('admin.role.modal-delete')->with('role', $role);
+        return View::make('roles.modal-delete')->with('role', $role);
     }
 
     public function destroy(Request $request, $roleId)
@@ -184,7 +184,7 @@ class RoleController extends Controller
             session()->flash('failed', "Failed to delete data role!");
         }
 
-        return redirect(route('roles.index'));
+        return redirect(route('roles-index'));
     }
 
     public function updatePermissionByID(Request $request)

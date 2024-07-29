@@ -1,7 +1,8 @@
-<div class="modal fade modal-notification" id="tabs-add-role" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
+<div class="modal fade modal-notification" id="tabs-{{ $role->id }}-edit-role" tabindex="-1" role="dialog" aria-labelledby="tabsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="{{ route('roles-store') }}" method="post" class="modal-content" >
-        @csrf
+        <form class="mt-0 modal-content" action="{{ route('roles-update', $role->id) }}" method="post">
+            @csrf
+            @method('PUT')
             <div class="modal-body">
                 <div class="d-flex justify-content-center">
                     <div class="icon-content m-0">
@@ -10,14 +11,14 @@
                 </div>
 
                 <div class="text-center mb-3 mt-3">
-                    <h4 class="mb-0">ADD ROLE</h4>
+                    <h4 class="mb-0">EDIT ROLE</h4>
                 </div>
 
                 <div class="mt-0 row">
                     <div class="col-12">
                         <div class="form-group mb-3">
                             <label for="name">Role Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control form-control-sm" placeholder="Ex:cashier" aria-label="name" id="name" value="{{ old('name') }}">
+                            <input type="text" name="name" class="form-control form-control-sm" placeholder="Ex:cashier" aria-label="name" id="name" value="{{ $role->name ?? old('name') }}">
 
                             @if($errors->has('name'))
                                 <p class="text-danger">{{ $errors->first('name') }}</p>
@@ -27,7 +28,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-light-dark" type="button" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-light-dark" type="button" data-bs-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>

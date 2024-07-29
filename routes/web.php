@@ -60,25 +60,8 @@ Route::prefix('karyawan')->name('karyawan-')->group(function (){
 
 // END Karyawan 
 
-// START ROLE
-// Route::prefix('roles')->name('roles-')->group(function () {
-//     Route::get('/', [RoleController::class, 'index'])->name('list');
-//     Route::get('get-data', [RoleController::class, 'getRoles'])->name('get-data');
-//     Route::get('get-permissions/{roleId}', [RoleController::class, 'getPermissions'])->name('get-permissions');
-//     Route::get('{roleId}/permissions', [RoleController::class, 'getPermissions'])->name('permissions');
-//     Route::get('permissions/get-all', [RoleController::class, 'getAllPermissions'])->name('get-all');
-//     Route::get('modal-add', [RoleController::class, 'getModalAdd'])->name('modal-add');
-//     Route::post('store', [RoleController::class, 'store'])->name('store');
-//     Route::get('modal-edit/{roleId}', [RoleController::class, 'getModalEdit'])->name('modal-edit');
-//     Route::put('update/{roleId}', [RoleController::class, 'update'])->name('update');
-//     Route::get('modal-delete/{roleId}', [RoleController::class, 'getModalDelete'])->name('modal-delete');
-//     Route::delete('delete/{roleId}', [RoleController::class, 'destroy'])->name('destroy');
-//     Route::post('update-permission', [RoleController::class, 'updatePermissionByID'])->name('update.permission');
-//     Route::post('update-all-permissions', [RoleController::class, 'updateAllPermissions'])->name('update.permission');
-// });
-
-// Roles
-Route::prefix('roles')->name('roles.')->group(function () {
+// START ROLES
+Route::prefix('roles')->name('roles-')->group(function () {
     Route::get('/', [RoleController::class, 'index'])->name('index');
     Route::get('get-data', [RoleController::class, 'getRoles'])->name('get-data');
     Route::get('modal-add', [RoleController::class, 'getModalAdd'])->name('modal-add');
@@ -91,7 +74,7 @@ Route::prefix('roles')->name('roles.')->group(function () {
     Route::post('update-all-permissions', [RoleController::class, 'updateAllPermissions'])->name('update.permission');
 });
 
-// END ROLE
+// END ROLES
 
 Route::resources([
     // 'roles' => RoleController::class,
