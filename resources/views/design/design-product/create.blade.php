@@ -37,7 +37,7 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label class="form-label" for="validationCustom01">Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control" placeholder="Ex:Jakarta..."></textarea>
+                                <textarea name="deskripsi" class="form-control" placeholder="Ex:..."></textarea>
                             </div>
                         </div><!-- end col -->
                     </div><!-- end row -->
@@ -64,46 +64,24 @@
                     element.remove();
                 });
 
-                const jabatan = document.querySelector('input[name="jabatan"]').value.trim();
-                const gaji = document.querySelector('input[name="gaji"]').value.trim();
-                const email = document.querySelector('input[name="email"]').value.trim();
-                const noTelepon = document.querySelector('input[name="no_telepon"]').value.trim();
-                const alamat = document.querySelector('textarea[name="alamat"]').value.trim();
-                const tanggalLahir = document.querySelector('input[name="tanggal_lahir"]').value.trim();
-                const tanggalMasuk = document.querySelector('input[name="tanggal_masuk"]').value.trim();
+                const namaDesain = document.querySelector('input[name="nama_desain"]').value.trim();
+                const fileDesain = document.querySelector('input[name="file_desain"]').value.trim();
+                const tanggalBuat = document.querySelector('input[name="tanggal_buat"]').value.trim();
+
                 let isValid = true;
 
-                if (!jabatan) {
-                    showError('Jabatan tidak boleh kosong', 'input[name="jabatan"]');
+                if (!namaDesain) {
+                    showError('Nama Desain tidak boleh kosong', 'input[name="jabatan"]');
                     isValid = false;
                 }
 
-                if (!gaji) {
-                    showError('Gaji tidak boleh kosong', 'input[name="gaji"]');
+                if (!fileDesain) {
+                    showError('File Desain tidak boleh kosong', 'input[name="jabatan"]');
                     isValid = false;
                 }
 
-                if (!email) {
-                    showError('Email tidak boleh kosong', 'textarea[name="email"]');
-                    isValid = false;
-                }
-
-                if (!noTelepon) {
-                    showError('No Telepon tidak boleh kosong', 'textarea[name="no_telepon"]');
-                    isValid = false;
-                }
-
-                if (!alamat) {
-                    showError('Alamat tidak boleh kosong', 'textarea[name="alamat"]');
-                    isValid = false;
-                }
-                if (!tanggalLahir) {
-                    showError('Tanggal Lahir tidak boleh kosong', 'textarea[name="tanggal_lahir"]');
-                    isValid = false;
-                }
-
-                if (!tanggalMasuk) {
-                    showError('Tanggal Masuk tidak boleh kosong', 'textarea[name="tanggal_masuk"]');
+                if (!tanggalBuat) {
+                    showError('Tanggal Buat tidak boleh kosong', 'input[name="jabatan"]');
                     isValid = false;
                 }
 
@@ -111,7 +89,7 @@
                     const formData = new FormData(form);
 
                     $.ajax({
-                        url: '{{ route('karyawan-store') }}',
+                        url: '{{ route('desain-product-store') }}',
                         type: 'POST',
                         data: formData,
                         processData: false,
@@ -124,7 +102,8 @@
                                 alertSuccess(response.msg);
                                 window.location.href = '{{ route('karyawan-list') }}';
                             } else {
-                                alertFiled(response.msg);
+                                console.log(response.msg);
+                                // alertFiled(response.msg);
                             }
                         },
                         error: function(xhr) {

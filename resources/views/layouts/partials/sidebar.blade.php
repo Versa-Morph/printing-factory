@@ -69,7 +69,7 @@
                 </li>
                 @endcan
 
-                @can('list-desain-produdasdct')
+                @can('list-desain-product')
                 <li>
                     <a href="{{ route('desain-product-list') }}">
                         <i class="bx bx-credit-card nav-icon"></i>
