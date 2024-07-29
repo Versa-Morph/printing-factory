@@ -41,7 +41,7 @@
                     </a>
                 </li>
 
-                @can('create-pelanggan')
+                @can('pelanggan-list')
                 <li>
                     <a href="{{ route('pelanggan-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
@@ -55,6 +55,15 @@
                     <a href="{{ route('karyawan') }}">
                         <i class="uil-users-alt nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Karyawan</span>
+                    </a>
+                </li>
+                @endcan
+
+                @can('gaji-list')
+                <li>
+                    <a href="{{ route('gaji-list') }}">
+                        <i class="bx bx-credit-card nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Gaji</span>
                     </a>
                 </li>
                 @endcan

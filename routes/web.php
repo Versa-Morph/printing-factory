@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\GajiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KaryawanController;
@@ -66,6 +67,20 @@ Route::get('/karyawan-edit/{id}', [KaryawanController::class, 'edit'])->name('ka
 Route::post('/karyawan-update/{id}', [KaryawanController::class, 'update'])->name('karyawan-update');
 Route::get('/karyawan-delete/{id}', [KaryawanController::class, 'delete'])->name('karyawan-delete');
 // END Karyawan 
+
+
+// START GAJI
+Route::prefix('gaji')->name('gaji-')->group(function () {
+    Route::get('/', [GajiController::class, 'index'])->name('list');
+    Route::get('/get-data', [GajiController::class, 'getData'])->name('get-data');
+    Route::get('/get-data-karyawan/{id}', [GajiController::class, 'getDataKaryawan'])->name('get-data-karyawan');
+    Route::get('/create', [GajiController::class, 'create'])->name('create');
+    Route::post('/store', [GajiController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [GajiController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [GajiController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [GajiController::class, 'delete'])->name('delete');
+}); 
+// END GAJI 
 
 Route::resources([
     'roles' => RoleController::class,
