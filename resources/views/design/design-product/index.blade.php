@@ -14,28 +14,23 @@
     <div class="card-body">
         <div class="row align-items-start">
             <div class="col-sm">
-                @can('create-karyawan')
+                @can('create-desain-product')
                 <div>
-                    <a href="{{ route('karyawan-create') }}" class="btn btn-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Karyawan</a>
+                    <a href="{{ route('desain-product-create') }}" class="btn btn-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Desain Product</a>
                 </div>
                 @endcan
             </div>
         </div>
 
         <div class="table-responsive mt-4 mt-sm-0">
-            <table class="table align-middle table-nowrap table-check" id="karyawan-table">
+            <table class="table align-middle table-nowrap table-check" id="desain-product-table">
                 <thead>
                     <tr class="bg-transparent">
                         <th>No</th>
-                        <th>Nama Karyawan</th>
-                        <th>Jabatan</th>
-                        <th>Gaji</th>
-                        <th>Alamat</th>
-                        <th>No Telepon</th>
-                        <th>Email</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Tanggal Masuk</th>
-                        <th>Status</th>
+                        <th>Nama Desain</th>
+                        <th>Deskripsi</th>
+                        {{-- <th>File Design</th> --}}
+                        <th>Tanggal Buat </th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -56,21 +51,15 @@
 
 <script>
 $(document).ready(function() {
-    $('#karyawan-table').DataTable({
+    $('#desain-product-table').DataTable({
         processing: false,
         serverSide: true,
-        ajax: '{{ route('karyawan-get-data') }}',
+        ajax: '{{ route('desain-product-get-data') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-            { data: 'nama_karyawan', name: 'nama_karyawan' },
-            { data: 'jabatan', name: 'jabatan' },
-            { data: 'gaji', name: 'gaji' },
-            { data: 'alamat', name: 'alamat' },
-            { data: 'no_telepon', name: 'no_telepon' },
-            { data: 'email', name: 'email' },
-            { data: 'tanggal_lahir', name: 'tanggal_lahir' },
-            { data: 'tanggal_masuk', name: 'tanggal_masuk' },
-            { data: 'status', name: 'status' },
+            { data: 'nama_desain', name: 'nama_desain' },
+            { data: 'deskripsi', name: 'deskripsi' },
+            { data: 'tanggal_buat', name: 'tanggal_buat' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ]
     });

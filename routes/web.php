@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DesainProductController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GajiController;
 use Illuminate\Support\Facades\Route;
@@ -68,7 +69,6 @@ Route::prefix('karyawan')->name('karyawan-')->group(function (){
     Route::post('/karyawan-update/{id}', [KaryawanController::class, 'update'])->name('update');
     Route::get('/karyawan-delete/{id}', [KaryawanController::class, 'delete'])->name('delete');
 });
-
 // END Karyawan 
 
 // START ROLES
@@ -98,6 +98,19 @@ Route::prefix('gaji')->name('gaji-')->group(function () {
     Route::delete('/delete/{id}', [GajiController::class, 'delete'])->name('delete');
 }); 
 // END GAJI 
+
+// START Karyawan 
+Route::prefix('desain-product')->name('desain-product-')->group(function (){ 
+    Route::get('/', [DesainProductController::class, 'index'])->name('list');
+    Route::get('/desain-product-get-data', [DesainProductController::class, 'getData'])->name('get-data');
+    Route::get('/desain-product-create', [DesainProductController::class, 'create'])->name('create');
+    Route::post('/desain-product-store', [DesainProductController::class, 'store'])->name('store');
+    Route::get('/desain-product-edit/{id}', [DesainProductController::class, 'edit'])->name('edit');
+    Route::post('/desain-product-update/{id}', [DesainProductController::class, 'update'])->name('update');
+    Route::get('/desain-product-delete/{id}', [DesainProductController::class, 'delete'])->name('delete');
+});
+
+// END Karyawan 
 
 Route::resources([
     // 'roles' => RoleController::class,

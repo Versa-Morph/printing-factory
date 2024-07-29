@@ -35,6 +35,10 @@ class PermissionSeeder extends Seeder
             'create-gaji',
             'edit-gaji',
             'delete-gaji',
+            'list-desain-product',
+            'create-desain-product',
+            'edit-desain-product',
+            'delete-desain-product',
          ];
  
           // Looping and Inserting Array's Permissions into Permission Table

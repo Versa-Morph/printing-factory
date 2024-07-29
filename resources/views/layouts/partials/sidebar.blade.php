@@ -50,7 +50,7 @@
                 </li>
                 @endcan
 
-                @can('create-karyawan')
+                @can('list-karyawan')
                 <li>
                     <a href="{{ route('karyawan-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
@@ -64,6 +64,15 @@
                     <a href="{{ route('gaji-list') }}">
                         <i class="bx bx-credit-card nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Gaji</span>
+                    </a>
+                </li>
+                @endcan
+
+                @can('list-desain-produdasdct')
+                <li>
+                    <a href="{{ route('desain-product-list') }}">
+                        <i class="bx bx-credit-card nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Desain Product</span>
                     </a>
                 </li>
                 @endcan
