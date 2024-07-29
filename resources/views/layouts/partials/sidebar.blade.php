@@ -59,7 +59,8 @@
                 </li>
                 @endcan
 
-                @can('gaji-list')
+                {{-- @dd(Auth::user()->can('list-gaji')) --}}
+                @can('list-gaasdsadasji')
                 <li>
                     <a href="{{ route('gaji-list') }}">
                         <i class="bx bx-credit-card nav-icon"></i>
