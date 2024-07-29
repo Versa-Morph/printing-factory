@@ -52,13 +52,13 @@
                                                 <h5 class="mb-0">Welcome Back !</h5>
                                                 <p class="text-muted mt-2">Sign in to continue to Printing Factory.</p>
                                             </div>
-                                            <form class="mt-4 pt-2" method="POST" action="{{ route('login') }}">
+                                            <form class="mt-4 pt-2 form-data" method="POST" action="{{ route('login') }}">
                                                 @csrf
                                                 <div class="form-floating form-floating-custom mb-3">
                                                     <input type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
                                                         id="input-email" placeholder="Enter Email" name="email"
-                                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                                        value="{{ old('email') }}" autocomplete="email" autofocus>
                                                     <label for="input-email">Email</label>
                                                     <div class="form-floating-icon">
                                                         <i class="uil uil-envelope-alt"></i>
@@ -72,8 +72,8 @@
                                                 <div class="form-floating form-floating-custom mb-3 auth-pass-inputgroup">
                                                     <input type="password"
                                                         class="form-control @error('password') is-invalid @enderror"
-                                                        name="password" required autocomplete="current-password"
-                                                        id="password-input" placeholder="Enter Password">
+                                                        name="password" autocomplete="current-password" id="password-input"
+                                                        placeholder="Enter Password">
                                                     <button type="button"
                                                         class="btn btn-link position-absolute h-100 end-0 top-0"
                                                         id="password-addon">
@@ -90,9 +90,11 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-check form-check-primary font-size-16 py-1">
-                                                    <input class="form-check-input" id="remember-check" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                    <input class="form-check-input" id="remember-check" type="checkbox"
+                                                        name="remember" id="remember"
+                                                        {{ old('remember') ? 'checked' : '' }}>
                                                     <div class="float-end">
-                                                        <a href="auth-resetpassword-basic.html"
+                                                        <a href="{{ route('forgot-password-view') }}"
                                                             class="text-muted text-decoration-underline font-size-14">Forgot
                                                             your password?</a>
                                                     </div>
@@ -148,4 +150,107 @@
         </div>
         <!-- end container fluid -->
     </div>
+@endsection
+
+@section('script-auth')
+{{-- UPDATE  --}}
+    <script>
+        function alertSuccess(msg) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: msg,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+
+        function alertFailed(msg) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: msg,
+                timer: 1500
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.form-data');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Clear previous validation messages
+                const errorElements = document.querySelectorAll('.error-msg');
+                errorElements.forEach(function(element) {
+                    element.remove();
+                });
+
+                const email = document.querySelector('input[name="email"]').value.trim();
+                const password = document.querySelector('input[name="password"]').value.trim();
+                let isValid = true;
+
+                if (!email) {
+                    showError('Email tidak boleh kosong', 'input[name="email"]');
+                    isValid = false;
+                }
+
+                if (!password) {
+                    showError('Password tidak boleh kosong', 'input[name="password"]');
+                    isValid = false;
+                }
+
+
+                if (isValid) {
+                    const formData = new FormData(form);
+
+                    $.ajax({
+                        url: '{{ route('login') }}',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: response.msg,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                window.location.href = '{{ route('home') }}';
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: response.msg,
+                                    timer: 1500
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            const errors = xhr.responseJSON.errors;
+                            for (const key in errors) {
+                                if (errors.hasOwnProperty(key)) {
+                                    showError(errors[key][0], `[name="${key}"]`);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+
+            function showError(message, selector) {
+                const element = document.querySelector(selector);
+                const error = document.createElement('span');
+                error.className = 'error-msg text-danger';
+                error.textContent = message;
+                element.parentNode.appendChild(error);
+            }
+        });
+    </script>
 @endsection

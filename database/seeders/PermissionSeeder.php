@@ -31,6 +31,10 @@ class PermissionSeeder extends Seeder
             'create-karyawan',
             'edit-karyawan',
             'delete-karyawan',
+            'list-gaji',
+            'create-gaji',
+            'edit-gaji',
+            'delete-gaji',
          ];
  
           // Looping and Inserting Array's Permissions into Permission Table
