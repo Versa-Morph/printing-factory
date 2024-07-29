@@ -68,7 +68,6 @@ Route::post('/karyawan-update/{id}', [KaryawanController::class, 'update'])->nam
 Route::get('/karyawan-delete/{id}', [KaryawanController::class, 'delete'])->name('karyawan-delete');
 // END Karyawan 
 
-
 // START GAJI
 Route::prefix('gaji')->name('gaji-')->group(function () {
     Route::get('/', [GajiController::class, 'index'])->name('list');
