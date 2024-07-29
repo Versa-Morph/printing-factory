@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->string('file_desain',255);
             $table->date('tanggal_buat');
-            $table->date('created_by', 255)->nullable();
-            $table->date('updated_by', 255)->nullable();
+            $table->string('created_by', 255)->nullable();
+            $table->string('updated_by', 255)->nullable();
             $table->timestamps();
         });
     }

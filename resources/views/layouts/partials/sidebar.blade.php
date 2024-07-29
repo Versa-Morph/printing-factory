@@ -77,6 +77,15 @@
                     </a>
                 </li>
                 @endcan
+
+                @can('list-rencana-produksi')
+                <li>
+                    <a href="{{ route('rencana-produksi-list') }}">
+                        <i class="bx bx-credit-card nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Rencana Produksi</span>
+                    </a>
+                </li>
+                @endcan
                 
                 <li class="menu-title" data-key="t-menu">Management User</li>
 

@@ -6,7 +6,7 @@
 @section('header-info-content')
 @endsection
 @section('content')
-    <div class="col-lg-12">
+    <div class="col-lg-12 mx-auto">
         <div class="card">
             <div class="card-header justify-content-between d-flex align-items-center">
                 <h4 class="card-title">{{ $page_title }}</h4>
@@ -15,36 +15,57 @@
                 <form class="form-data">
                     <div class="row">
                         <div class="col-md-4">
+                            <div class="mb-3"style="text-align: left">
+                                <label class="form-label">User</label>
+                                <select class="form-select mr-sm-2 @error('id_desain') is-invalid @enderror" id="id_desain" name="id_desain" style="width:100%">
+                                    <option disabled selected>Pilih Desain Produk</option>
+                                    @foreach ($desain_products as $desain_product)
+                                    <option value="{{ $desain_product->id }}"
+                                        {{ old('id_desain') == $desain_product->id ? 'selected' : '' }}>
+                                        {{ $desain_product->nama_desain }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom01">Nama Desain</label>
-                                <input type="text" class="form-control" value="{{ $karyawan->nama_desain }}" name="nama_desain" placeholder="Ex:David..">
+                                <label class="form-label" for="validationCustom01">Jumlah Produksi</label>
+                                <input type="number" class="form-control" name="jumlah_produksi" placeholder="Ex:10..">
                             </div>
                         </div><!-- end col -->
 
-                        <div class="col-12">
-                            <div class="form-group mb-3 text-left">
-                                <label for="file_desain">File Desain</label>
-                                <img src="{{ $detail_propduct->file_desain ? asset('assets/images/products/'.$detail_product->file_desain) : 'https://ui-avatars.com/api/?name=No+Image' }}" alt="" class="d-block mx-auto p-1 bg-black mb-2" style="width: 73px !important; border-radius:50%;">
-                                <input type="file" class="form-control file-upload-input" name="file_desain" aria-label="file_desain" id="file_desain">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom01">Jabatan</label>
+                                <input type="text" class="form-control" name="jabatan" placeholder="Ex:Supervisor">
                             </div>
+                        </div><!-- end col -->
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom01">Tanggal Mulai</label>
+                                <input type="date" class="form-control" name="tanggal_mulai">
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom01">Tanggal Selesai</label>
+                                <input type="date" class="form-control" name="tanggal_selesai">
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-md-4 mb-4">
+                            <label class="col-form-label">Status Rencana</label>
+                            <select class="form-select" name="status_rencana">
+                                <option selected value="Aktif">Aktif</option>
+                                <option value="Selesai">Selesai</option>
+                            </select>
                         </div>
-    
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label class="form-label" for="validationCustom01">Tanggal Buat</label>
-                                <input type="date" class="form-control"value="{{ $karyawan->tanggal_buat }}" name="tanggal_buat">
-                            </div>
-                        </div><!-- end col -->
-    
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label class="form-label" for="validationCustom01">Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control" placeholder="Ex:Jakarta...">{{ $karyawan->deskripsi }}</textarea>
-                            </div>
-                        </div><!-- end col -->
-    
                     </div><!-- end row -->
-                    <a href="{{ route('desain-product-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
+
+                    <a href="{{ route('rencana-produksi-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
                     <button type="submit" class="btn btn-primary" style="float: right">Simpan</button>
                 </form><!-- end form -->
             </div><!-- end card body -->
@@ -66,24 +87,23 @@
                     element.remove();
                 });
 
-                const namaDesain = document.querySelector('input[name="nama_desain"]').value.trim();
-                const fileDesain = document.querySelector('input[name="file_desain"]').value.trim();
-                const tanggalBuat = document.querySelector('input[name="tanggal_buat"]').value.trim();
-
+                const jumlahProduksi = document.querySelector('input[name="jumlah_produksi"]').value.trim();
+                const tanggalMulai = document.querySelector('input[name="tanggal_mulai"]').value.trim();
+                const tanggalSelesai = document.querySelector('input[name="tanggal_selesai"]').value.trim();
                 let isValid = true;
 
-                if (!namaDesain) {
-                    showError('Nama Desain tidak boleh kosong', 'input[name="jabatan"]');
+                if (!jumlahProduksi) {
+                    showError('Jumlah Produksi tidak boleh kosong', 'input[name="jumlah_produksi"]');
                     isValid = false;
                 }
 
-                if (!fileDesain) {
-                    showError('File Desain tidak boleh kosong', 'input[name="jabatan"]');
+                if (!tanggalMulai) {
+                    showError('Tanggal Mulai tidak boleh kosong', 'input[name="tanggal_mulai"]');
                     isValid = false;
-                }
 
-                if (!tanggalBuat) {
-                    showError('Tanggal Buat tidak boleh kosong', 'input[name="jabatan"]');
+                }
+                if (!tanggalSelesai) {
+                    showError('Tanggal Selesai tidak boleh kosong', 'input[name="tanggal_selesai"]');
                     isValid = false;
                 }
 
@@ -91,7 +111,7 @@
                     const formData = new FormData(form);
 
                     $.ajax({
-                        url: '{{ route('desain-product-update',$desain_product->id) }}',
+                        url: '{{ route('rencana-produksi-store') }}',
                         type: 'POST',
                         data: formData,
                         processData: false,
@@ -102,7 +122,7 @@
                         success: function(response) {
                             if (response.success) {
                                 alertSuccess(response.msg);
-                                window.location.href = '{{ route('desain-product-list') }}';
+                                window.location.href = '{{ route('rencana-produksi-list') }}';
                             } else {
                                 alertFiled(response.msg);
                             }
