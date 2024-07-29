@@ -61,7 +61,7 @@
                     <div class="mb-3 row">
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
                         <div class="col-md-6">           
-                            <select class="form-select @error('roles') is-invalid @enderror" multiple aria-label="Roles" id="roles" name="roles[]">
+                            <select class="form-select @error('roles') is-invalid @enderror" aria-label="Roles" id="floatingSelect" name="roles[]">
                                 @forelse ($roles as $role)
 
                                     @if ($role!='Super Admin')

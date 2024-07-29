@@ -59,16 +59,33 @@ Route::prefix('pelanggan')->name('pelanggan-')->group(function () {
 
 
 // START Karyawan 
-Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
-Route::get('/karyawan-get-data', [KaryawanController::class, 'getData'])->name('karyawan-get-data');
-Route::get('/karyawan-create', [KaryawanController::class, 'create'])->name('karyawan-create');
-Route::post('/karyawan-store', [KaryawanController::class, 'store'])->name('karyawan-store');
-Route::get('/karyawan-edit/{id}', [KaryawanController::class, 'edit'])->name('karyawan-edit');
-Route::post('/karyawan-update/{id}', [KaryawanController::class, 'update'])->name('karyawan-update');
-Route::get('/karyawan-delete/{id}', [KaryawanController::class, 'delete'])->name('karyawan-delete');
+Route::prefix('karyawan')->name('karyawan-')->group(function (){ 
+    Route::get('/', [KaryawanController::class, 'index'])->name('list');
+    Route::get('/karyawan-get-data', [KaryawanController::class, 'getData'])->name('get-data');
+    Route::get('/karyawan-create', [KaryawanController::class, 'create'])->name('create');
+    Route::post('/karyawan-store', [KaryawanController::class, 'store'])->name('store');
+    Route::get('/karyawan-edit/{id}', [KaryawanController::class, 'edit'])->name('edit');
+    Route::post('/karyawan-update/{id}', [KaryawanController::class, 'update'])->name('update');
+    Route::get('/karyawan-delete/{id}', [KaryawanController::class, 'delete'])->name('delete');
+});
+
 // END Karyawan 
 
+// START ROLES
+Route::prefix('roles')->name('roles-')->group(function () {
+    Route::get('/', [RoleController::class, 'index'])->name('index');
+    Route::get('get-data', [RoleController::class, 'getRoles'])->name('get-data');
+    Route::get('modal-add', [RoleController::class, 'getModalAdd'])->name('modal-add');
+    Route::post('store', [RoleController::class, 'store'])->name('store');
+    Route::get('modal-edit/{roleId}', [RoleController::class, 'getModalEdit'])->name('modal-edit');
+    Route::put('update/{roleId}', [RoleController::class, 'update'])->name('update');
+    Route::get('modal-delete/{roleId}', [RoleController::class, 'getModalDelete'])->name('modal-delete');
+    Route::delete('delete/{roleId}', [RoleController::class, 'destroy'])->name('destroy');
+    Route::post('update-permission', [RoleController::class, 'updatePermissionByID'])->name('update.permission');
+    Route::post('update-all-permissions', [RoleController::class, 'updateAllPermissions'])->name('update.permission');
+});
 
+// END ROLES
 // START GAJI
 Route::prefix('gaji')->name('gaji-')->group(function () {
     Route::get('/', [GajiController::class, 'index'])->name('list');
@@ -83,7 +100,7 @@ Route::prefix('gaji')->name('gaji-')->group(function () {
 // END GAJI 
 
 Route::resources([
-    'roles' => RoleController::class,
+    // 'roles' => RoleController::class,
     'users' => UserController::class,
     'products' => ProductController::class,
 ]);

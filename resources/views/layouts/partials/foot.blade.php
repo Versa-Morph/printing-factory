@@ -3,6 +3,7 @@
  <script src="{{ asset('assets/libs/metismenujs/metismenujs.min.js') }}"></script>
  <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
  <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+ <script src="{{ asset('assets/role/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
  <!-- apexcharts -->
  <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
@@ -20,6 +21,7 @@
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ @stack('scripts')
  <script>
 
      function alertSuccess(msg) {
