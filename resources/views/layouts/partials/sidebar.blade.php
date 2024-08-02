@@ -50,24 +50,7 @@
                 </li>
                 @endcan
 
-                @can('list-karyawan')
-                <li>
-                    <a href="{{ route('karyawan-list') }}">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Karyawan</span>
-                    </a>
-                </li>
-                @endcan
-
-                {{-- @dd(Auth::user()->can('list-gaji')) --}}
-                @can('list-gaji')
-                <li>
-                    <a href="{{ route('gaji-list') }}">
-                        <i class="bx bx-credit-card nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Gaji</span>
-                    </a>
-                </li>
-                @endcan
+          
 
                 @can('list-desain-product')
                 <li>
@@ -83,6 +66,52 @@
                     <a href="{{ route('rencana-produksi-list') }}">
                         <i class="bx bx-credit-card nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Rencana Produksi</span>
+                    </a>
+                </li>
+                @endcan
+
+                @can('list-order')
+                <li>
+                    <a href="{{ route('order-list') }}">
+                        <i class="bx bx-file nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Order</span>
+                    </a>
+                </li>
+                @endcan
+
+                @can('list-jadwal-produksi')
+                <li>
+                    <a href="{{ route('jadwal-produksi-list') }}">
+                        <i class="bx bx-calendar-alt nav-icon nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Jadwal Produksi</span>
+                    </a>
+                </li>
+                @endcan
+
+                @can('list-laporan-produksi')
+                <li>
+                    <a href="{{ route('laporan-produksi-list') }}">
+                        <i class="bx bx-book nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Laporan Produksi</span>
+                    </a>
+                </li>
+                @endcan
+
+                @can('list-karyawan')
+                <li>
+                    <a href="{{ route('karyawan-list') }}">
+                        <i class="uil-users-alt nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Karyawan</span>
+                    </a>
+                </li>
+                @endcan
+
+                {{-- @dd(Auth::user()->can('list-gaji')) --}}
+                @can('list-gaji')
+                <li>
+                    <a href="{{ route('gaji-list') }}">
+                        <i class="bx bx-credit-card nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Gaji</span>
                     </a>
                 </li>
                 @endcan

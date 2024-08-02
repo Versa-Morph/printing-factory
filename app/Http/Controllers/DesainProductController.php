@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\DesainProduct;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use Intervention\Image\Facades\Image;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\Facades\Image as Image;
 
 class DesainProductController extends Controller
 {

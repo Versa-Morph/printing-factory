@@ -39,10 +39,22 @@ class PermissionSeeder extends Seeder
             'create-desain-product',
             'edit-desain-product',
             'delete-desain-product',
+            'list-rencana-produksi',
+            'create-rencana-produksi',
+            'edit-rencana-produksi',
+            'delete-rencana-produksi',
             'list-order',
             'create-order',
             'edit-order',
             'delete-order',
+            'list-jadwal-produksi',
+            'create-jadwal-produksi',
+            'edit-jadwal-produksi',
+            'delete-jadwal-produksi',
+            'list-laporan-produksi',
+            'create-laporan-produksi',
+            'edit-laporan-produksi',
+            'delete-laporan-produksi',
          ];
  
           // Looping and Inserting Array's Permissions into Permission Table

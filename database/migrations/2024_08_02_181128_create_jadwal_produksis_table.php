@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('jadwal_produksis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pelanggan');
-            $table->date('tanggal_order');
-            $table->decimal('total_harga', 10, 2);
-            $table->string('status_order',50);
+            $table->unsignedBigInteger('id_rencana');
+            $table->date('tanggal_produksi');
+            $table->string('shift',50);
             $table->string('created_by',255)->nullable();
             $table->string('updated_by',255)->nullable();
-            $table->foreign('id_pelanggan')->references('id')->on('pelanggans')->onDelete('cascade');
+            $table->foreign('id_rencana')->references('id')->on('rencana_produksis')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('jadwal_produksis');
     }
 };
