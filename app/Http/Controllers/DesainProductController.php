@@ -119,7 +119,7 @@ class DesainProductController extends Controller
     public function edit($id)
     {
         $data['page_title'] = 'Edit Desian Product';
-        $data['desain_products'] = DesainProduct::find($id);
+        $data['desain_product'] = DesainProduct::find($id);
 
         return view('design.design-product.edit', $data);
     }
@@ -142,9 +142,26 @@ class DesainProductController extends Controller
             $desain_product->deskripsi = $request->input('deskripsi');
             $desain_product->tanggal_buat = $request->input('tanggal_buat');
             $desain_product->updated_by = auth()->user()->name;
+
+            if ($request->hasFile('file_desain')) {
+                $image = $request->file('file_desain');
+                $imageName = uniqid() . '' . time() . '.webp';
+
+                // Resize and compres image
+                $resizedImage = Image::make($image)
+                    ->resize(90, 90, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->encode('webp', 80); // Kompresi kualitas 80%
+
+                // Save iamge after resize, compres, and change format to webp format
+                $resizedImage->save(public_path('assets/images/desain-product/' . $imageName));
+                $desain_product->file_desain = $imageName;
+            }
+
             $desain_product->save();
     
-            return response()->json(['success' => true, 'msg' => 'Data Karyawan berhasil diedit!']);
+            return response()->json(['success' => true, 'msg' => 'Data Sesain Product berhasil diedit!']);
         } catch (\Throwable $th) {
             return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
         }

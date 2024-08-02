@@ -71,17 +71,17 @@
                 let isValid = true;
 
                 if (!namaDesain) {
-                    showError('Nama Desain tidak boleh kosong', 'input[name="jabatan"]');
+                    showError('Nama Desain tidak boleh kosong', 'input[name="nama_desain"]');
                     isValid = false;
                 }
 
                 if (!fileDesain) {
-                    showError('File Desain tidak boleh kosong', 'input[name="jabatan"]');
+                    showError('File Desain tidak boleh kosong', 'input[name="file_desain"]');
                     isValid = false;
                 }
 
                 if (!tanggalBuat) {
-                    showError('Tanggal Buat tidak boleh kosong', 'input[name="jabatan"]');
+                    showError('Tanggal Buat tidak boleh kosong', 'input[name="tanggal_buat"]');
                     isValid = false;
                 }
 

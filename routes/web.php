@@ -10,6 +10,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RencanaProduksiController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -99,7 +100,7 @@ Route::prefix('gaji')->name('gaji-')->group(function () {
 }); 
 // END GAJI 
 
-// START Karyawan 
+// START Desain Product 
 Route::prefix('desain-product')->name('desain-product-')->group(function (){ 
     Route::get('/', [DesainProductController::class, 'index'])->name('list');
     Route::get('/desain-product-get-data', [DesainProductController::class, 'getData'])->name('get-data');
@@ -109,8 +110,19 @@ Route::prefix('desain-product')->name('desain-product-')->group(function (){
     Route::post('/desain-product-update/{id}', [DesainProductController::class, 'update'])->name('update');
     Route::get('/desain-product-delete/{id}', [DesainProductController::class, 'delete'])->name('delete');
 });
+// END Desain Product 
 
-// END Karyawan 
+// START Desain Product 
+Route::prefix('rencana-produksi')->name('rencana-produksi-')->group(function (){ 
+    Route::get('/', [RencanaProduksiController::class, 'index'])->name('list');
+    Route::get('/rencana-produksi-get-data', [RencanaProduksiController::class, 'getData'])->name('get-data');
+    Route::get('/rencana-produksi-create', [RencanaProduksiController::class, 'create'])->name('create');
+    Route::post('/rencana-produksi-store', [RencanaProduksiController::class, 'store'])->name('store');
+    Route::get('/rencana-produksi-edit/{id}', [RencanaProduksiController::class, 'edit'])->name('edit');
+    Route::post('/rencana-produksi-update/{id}', [RencanaProduksiController::class, 'update'])->name('update');
+    Route::get('/rencana-produksi-delete/{id}', [RencanaProduksiController::class, 'delete'])->name('delete');
+});
+// END Desain Product 
 
 Route::resources([
     // 'roles' => RoleController::class,
