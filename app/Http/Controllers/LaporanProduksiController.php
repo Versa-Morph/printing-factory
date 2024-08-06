@@ -63,7 +63,7 @@ class LaporanProduksiController extends Controller
             $query->with('desain'); 
         }])->orderBy('created_at', 'desc')->get();
 
-        return view('produksi.jadwal_produksi.create', $data);
+        return view('produksi.laporan_produksi.create', $data);
     }
 
     /**
@@ -91,7 +91,7 @@ class LaporanProduksiController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Laporan Produksi berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
     /**
@@ -140,7 +140,7 @@ class LaporanProduksiController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Laporan Produksi berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 

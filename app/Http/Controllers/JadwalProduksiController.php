@@ -73,19 +73,17 @@ class JadwalProduksiController extends Controller
             $request->validate([
                 'id_rencana' => 'required',
                 'tanggal_produksi' => 'required|date',
-                'shift' => 'required',
             ]);
     
             $data = new JadwalProduksi();
             $data->id_rencana = $request->input('id_rencana');
             $data->tanggal_produksi = $request->input('tanggal_produksi');
-            $data->shift = $request->input('shift');
             $data->created_by = auth()->user()->name;
             $data->save();
     
             return response()->json(['success' => true, 'msg' => 'Data Jadwal Produksi berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
     /**
@@ -116,19 +114,17 @@ class JadwalProduksiController extends Controller
             $request->validate([
                 'id_rencana' => 'required',
                 'tanggal_produksi' => 'required|date',
-                'shift' => 'required',
             ]);
     
             $data = JadwalProduksi::find($id);
             $data->id_rencana = $request->input('id_rencana');
             $data->tanggal_produksi = $request->input('tanggal_produksi');
-            $data->shift = $request->input('shift');
             $data->updated_by = auth()->user()->name;
             $data->save();
     
             return response()->json(['success' => true, 'msg' => 'Data Jadwal Produksi berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 

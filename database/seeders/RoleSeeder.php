@@ -31,5 +31,6 @@ class RoleSeeder extends Seeder
             'edit-product',
             'delete-product'
         ]);
+        
     }
 }

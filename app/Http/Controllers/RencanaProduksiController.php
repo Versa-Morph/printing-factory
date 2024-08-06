@@ -88,7 +88,7 @@ class RencanaProduksiController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Rencana Produksi berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 
@@ -139,7 +139,7 @@ class RencanaProduksiController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Rencana Produksi berhasil diedit!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 

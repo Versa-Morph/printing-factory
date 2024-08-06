@@ -67,6 +67,11 @@
 
 @section('script')
     <script>
+        $(document).ajaxStart(function() {
+            showLoading('Sedang memproses permintaan...');
+        }).ajaxStop(function() {
+            hideLoading();
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('.form-data');
 

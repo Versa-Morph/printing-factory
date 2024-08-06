@@ -104,7 +104,7 @@
                                 alertSuccess(response.msg);
                                 window.location.href = '{{ route('desain-product-list') }}';
                             } else {
-                                alertFiled(response.msg);
+                                alertFailed(response.msg);
                             }
                         },
                         error: function(xhr) {

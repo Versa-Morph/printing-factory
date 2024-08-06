@@ -85,7 +85,8 @@ class OrderController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Order berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
+
         }
     }
     /**
@@ -130,7 +131,7 @@ class OrderController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Order berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 

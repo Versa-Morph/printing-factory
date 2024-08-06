@@ -28,7 +28,6 @@
                             <th>Design Produk</th>
                             <th>Rencana Produksi</th>
                             <th>Tanggal Produksi</th>
-                            <th>Shift</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -70,10 +69,6 @@
                     {
                         data: 'tanggal_produksi',
                         name: 'tanggal_produksi'
-                    },
-                    {
-                        data: 'shift',
-                        name: 'shift'
                     },
                     {
                         data: 'action',

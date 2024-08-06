@@ -6,6 +6,7 @@
 
 @section('header-info-content')
 @endsection
+
 @section('content')
     <div class="card">
         <div class="card-body">
@@ -50,10 +51,10 @@
         $(document).ready(function() {
             $('#order-table').DataTable({
                 processing: false,
-
                 serverSide: true,
                 ajax: '{{ route('order-get-data') }}',
-                columns: [{
+                columns: [
+                    {
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         orderable: false,
@@ -69,7 +70,11 @@
                     },
                     {
                         data: 'total_harga',
-                        name: 'total_harga'
+                        name: 'total_harga',
+                        render: function(data, type, row) {
+                            // Format total_harga with Rupiah separator
+                            return formatRupiah(data);
+                        }
                     },
                     {
                         data: 'status_order',
@@ -82,8 +87,6 @@
                         searchable: false
                     }
                 ],
-               
-
             });
 
             // Delete action
@@ -123,6 +126,8 @@
                     }
                 });
             });
+
+            
         });
     </script>
 @endsection

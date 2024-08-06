@@ -124,7 +124,7 @@
                                 alertSuccess(response.msg);
                                 window.location.href = '{{ route('rencana-produksi-list') }}';
                             } else {
-                                alertFiled(response.msg);
+                                alertFailed(response.msg);
                             }
                         },
                         error: function(xhr) {

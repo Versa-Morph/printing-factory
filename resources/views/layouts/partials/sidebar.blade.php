@@ -50,6 +50,14 @@
                 </li>
                 @endcan
 
+                @can('list-order')
+                <li>
+                    <a href="{{ route('order-list') }}">
+                        <i class="bx bx-file nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Order</span>
+                    </a>
+                </li>
+                @endcan
           
 
                 @can('list-desain-product')
@@ -70,14 +78,6 @@
                 </li>
                 @endcan
 
-                @can('list-order')
-                <li>
-                    <a href="{{ route('order-list') }}">
-                        <i class="bx bx-file nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Order</span>
-                    </a>
-                </li>
-                @endcan
 
                 @can('list-jadwal-produksi')
                 <li>
@@ -96,6 +96,10 @@
                     </a>
                 </li>
                 @endcan
+
+                @if(Auth::user()->can('list-karyawan') || Auth::user()->can('list-gaji'))
+                    <li class="menu-title" data-key="t-menu">HR Management</li>
+                @endif
 
                 @can('list-karyawan')
                 <li>

@@ -33,19 +33,6 @@
                         </div><!-- end col -->
 
                     </div><!-- end row -->
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label" for="validationCustom01">Shift</label>
-                                <select name="shift" class="form-control" id="shift">
-                                    <option value="">Pilih Status</option>
-                                    <option value="SHIFT 1" {{ $jadwal->shift == 'SHIFT 1' ? 'selected' : '' }}>SHIFT 1</option>
-                                    <option value="SHIFT 2" {{ $jadwal->shift == 'SHIFT 2' ? 'selected' : '' }}>SHIFT 2</option>
-                                </select>
-                            </div>
-                        </div><!-- end col -->
-                    </div><!-- end row -->
                     <a href="{{ route('jadwal-produksi-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
                     <button type="submit" class="btn btn-primary" style="float: right">Simpan</button>
                 </form><!-- end form -->
@@ -56,6 +43,11 @@
 
 @section('script')
     <script>
+        $(document).ajaxStart(function() {
+            showLoading('Sedang memproses permintaan...');
+        }).ajaxStop(function() {
+            hideLoading();
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('.form-data');
 
@@ -70,21 +62,15 @@
 
                 const id_rencana = document.querySelector('select[name="id_rencana"]').value.trim();
                 const tanggal_produksi = document.querySelector('input[name="tanggal_produksi"]').value.trim();
-                const shift = document.querySelector('select[name="shift"]').value.trim();
                 let isValid = true;
 
                 if (!id_rencana) {
-                    showError('Rencana Produksi tidak boleh kosong', 'select[name="id_pelanggan"]');
+                    showError('Rencana Produksi tidak boleh kosong', 'select[name="id_rencana"]');
                     isValid = false;
                 }
 
                 if (!tanggal_produksi) {
                     showError('Tanggal Produksi tidak boleh kosong', 'input[name="tanggal_produksi"]');
-                    isValid = false;
-                }
-
-                if (!shift) {
-                    showError('Shift tidak boleh kosong', 'select[name="shift"]');
                     isValid = false;
                 }
 

@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('style')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.css" rel="stylesheet">
 @endsection
 
 @section('header-info-content')
 @endsection
+
 @section('content')
     <div class="col-lg-12">
         <div class="card">
@@ -20,7 +22,7 @@
                                 <select name="id_pelanggan" class="form-control select2" id="id_pelanggan">
                                     <option value="">Pilih Pelanggan</option>
                                     @foreach ($pelanggan as $item)
-                                        <option value="{{ $item->id }}" {{ $order->id_pelanggan == $item->id ? 'selected' : '' }} >{{ $item->nama_pelanggan }}</option>
+                                        <option value="{{ $item->id }}" {{ $order->id_pelanggan == $item->id ? 'selected' : '' }}>{{ $item->nama_pelanggan }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -31,14 +33,17 @@
                                 <input type="date" class="form-control" value="{{ $order->tanggal_order }}" name="tanggal_order">
                             </div>
                         </div><!-- end col -->
-
                     </div><!-- end row -->
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label" for="validationCustom01">Total Harga</label>
-                                <input type="integer" class="form-control" value="{{ $order->total_harga }}" name="total_harga">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="text" class="form-control" value="{{ number_format($order->total_harga, 0, ',', '.') }}" name="total_harga" id="total_harga"
+                                        placeholder="Ex: 10.000.000">
+                                </div>
                             </div>
                         </div><!-- end col -->
                         <div class="col-md-6">
@@ -62,9 +67,22 @@
 @endsection
 
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script>
+        $(document).ajaxStart(function() {
+            showLoading('Sedang memproses permintaan...');
+        }).ajaxStop(function() {
+            hideLoading();
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('.form-data');
+            const totalHargaInput = document.querySelector('#total_harga');
+
+            // Format input value on keyup
+            totalHargaInput.addEventListener('input', function() {
+                let value = this.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+                this.value = formatRupiah(value);
+            });
 
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -77,7 +95,7 @@
 
                 const id_pelanggan = document.querySelector('select[name="id_pelanggan"]').value.trim();
                 const tanggal_order = document.querySelector('input[name="tanggal_order"]').value.trim();
-                const total_harga = document.querySelector('input[name="total_harga"]').value.trim();
+                let total_harga = totalHargaInput.value.trim().replace(/[^0-9]/g, ''); // Remove formatting
                 const status_order = document.querySelector('select[name="status_order"]').value.trim();
                 let isValid = true;
 
@@ -104,8 +122,11 @@
                 if (isValid) {
                     const formData = new FormData(form);
 
+                    // Append raw integer value for total_harga
+                    formData.set('total_harga', total_harga);
+
                     $.ajax({
-                        url: '{{ route('order-update',$order->id) }}',
+                        url: '{{ route('order-update', $order->id) }}',
                         type: 'POST',
                         data: formData,
                         processData: false,
@@ -133,12 +154,18 @@
                 }
             });
 
+            function formatRupiah(value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            }
+
             function showError(message, selector) {
                 const element = document.querySelector(selector);
-                const error = document.createElement('span');
-                error.className = 'error-msg text-danger';
-                error.textContent = message;
-                element.parentNode.appendChild(error);
+                if (element) { // Ensure element exists
+                    const error = document.createElement('span');
+                    error.className = 'error-msg text-danger';
+                    error.textContent = message;
+                    element.parentNode.appendChild(error);
+                }
             }
         });
     </script>
