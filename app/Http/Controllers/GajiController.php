@@ -54,7 +54,8 @@ class GajiController extends Controller
         try {
             $karyawan = Karyawan::find($id);
             if ($karyawan) {
-                return response()->json(['jumlah_gaji' => $karyawan->gaji]);
+                $gaji = number_format($karyawan->gaji, 0, ',', '.');
+                return response()->json(['jumlah_gaji' => $gaji]);
             }
             return response()->json(['jumlah_gaji' => 0]);
         } catch (\Throwable $th) {
@@ -78,7 +79,7 @@ class GajiController extends Controller
                 'tanggal_gaji' => 'required|date',
                 'keterangan' => 'nullable|string',
             ]);
-    
+
             $gaji = new Gaji();
             $gaji->id_karyawan = $request->input('id_karyawan');
             $gaji->jumlah_gaji = $request->input('jumlah_gaji');
@@ -86,10 +87,10 @@ class GajiController extends Controller
             $gaji->keterangan = $request->input('keterangan');
             $gaji->created_by = auth()->user()->name;
             $gaji->save();
-    
+
             return response()->json(['success' => true, 'msg' => 'Data Gaji berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 
@@ -110,7 +111,7 @@ class GajiController extends Controller
                 'tanggal_gaji' => 'required|date',
                 'keterangan' => 'nullable|string',
             ]);
-    
+
             $gaji = Gaji::find($id);
             $gaji->id_karyawan = $request->input('id_karyawan');
             $gaji->jumlah_gaji = $request->input('jumlah_gaji');
@@ -118,10 +119,10 @@ class GajiController extends Controller
             $gaji->keterangan = $request->input('keterangan');
             $gaji->updated_by = auth()->user()->name;
             $gaji->save();
-    
+
             return response()->json(['success' => true, 'msg' => 'Data Gaji berhasil diupdate!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 

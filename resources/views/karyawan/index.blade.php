@@ -16,7 +16,7 @@
             <div class="col-sm">
                 @can('create-karyawan')
                 <div>
-                    <a href="{{ route('karyawan-create') }}" class="btn btn-light mb-4"><i class="mdi mdi-plus me-1"></i> Tambah Karyawan</a>
+                    <a href="{{ route('karyawan-create') }}" class="btn btn-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Karyawan</a>
                 </div>
                 @endcan
             </div>

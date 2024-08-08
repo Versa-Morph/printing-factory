@@ -1,14 +1,19 @@
 <?php
 
+use App\Http\Controllers\DesainProductController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GajiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JadwalProduksiController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\LaporanProduksiController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RencanaProduksiController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -30,14 +35,14 @@ Route::get('/', function () {
     }
 });
 
-// START FORGOT PASSWORD 
+// START FORGOT PASSWORD
 Route::prefix('forgot-password')->name('forgot-password-')->group(function () {
     Route::get('/', [ForgotPasswordController::class, 'index'])->name('view');
     Route::post('/send-email', [ForgotPasswordController::class, 'sendEmail'])->name('send-email');
     Route::get('/reset-password', [ForgotPasswordController::class, 'reset'])->name('reset-password');
     Route::post('/proses-reset-password', [ForgotPasswordController::class, 'prosesReset'])->name('proses-reset-password');
 });
-// END FORGOT PASSWORD 
+// END FORGOT PASSWORD
 
 Auth::routes();
 
@@ -45,7 +50,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 
-// START PELANGGAN 
+// START PELANGGAN
 Route::prefix('pelanggan')->name('pelanggan-')->group(function () {
     Route::get('/', [PelangganController::class, 'index'])->name('list');
     Route::get('/get-data', [PelangganController::class, 'getData'])->name('get-data');
@@ -55,19 +60,36 @@ Route::prefix('pelanggan')->name('pelanggan-')->group(function () {
     Route::post('/update/{id}', [PelangganController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [PelangganController::class, 'delete'])->name('delete');
 });
-// END PELANGGAN 
+// END PELANGGAN
 
 
-// START Karyawan 
-Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
-Route::get('/karyawan-get-data', [KaryawanController::class, 'getData'])->name('karyawan-get-data');
-Route::get('/karyawan-create', [KaryawanController::class, 'create'])->name('karyawan-create');
-Route::post('/karyawan-store', [KaryawanController::class, 'store'])->name('karyawan-store');
-Route::get('/karyawan-edit/{id}', [KaryawanController::class, 'edit'])->name('karyawan-edit');
-Route::post('/karyawan-update/{id}', [KaryawanController::class, 'update'])->name('karyawan-update');
-Route::get('/karyawan-delete/{id}', [KaryawanController::class, 'delete'])->name('karyawan-delete');
-// END Karyawan 
+// START Karyawan
+Route::prefix('karyawan')->name('karyawan-')->group(function (){
+    Route::get('/', [KaryawanController::class, 'index'])->name('list');
+    Route::get('/karyawan-get-data', [KaryawanController::class, 'getData'])->name('get-data');
+    Route::get('/karyawan-create', [KaryawanController::class, 'create'])->name('create');
+    Route::post('/karyawan-store', [KaryawanController::class, 'store'])->name('store');
+    Route::get('/karyawan-edit/{id}', [KaryawanController::class, 'edit'])->name('edit');
+    Route::post('/karyawan-update/{id}', [KaryawanController::class, 'update'])->name('update');
+    Route::get('/karyawan-delete/{id}', [KaryawanController::class, 'delete'])->name('delete');
+});
+// END Karyawan
 
+// START ROLES
+Route::prefix('roles')->name('roles-')->group(function () {
+    Route::get('/', [RoleController::class, 'index'])->name('index');
+    Route::get('get-data', [RoleController::class, 'getRoles'])->name('get-data');
+    Route::get('modal-add', [RoleController::class, 'getModalAdd'])->name('modal-add');
+    Route::post('store', [RoleController::class, 'store'])->name('store');
+    Route::get('modal-edit/{roleId}', [RoleController::class, 'getModalEdit'])->name('modal-edit');
+    Route::put('update/{roleId}', [RoleController::class, 'update'])->name('update');
+    Route::get('modal-delete/{roleId}', [RoleController::class, 'getModalDelete'])->name('modal-delete');
+    Route::delete('delete/{roleId}', [RoleController::class, 'destroy'])->name('destroy');
+    Route::post('update-permission', [RoleController::class, 'updatePermissionByID'])->name('update.permission');
+    Route::post('update-all-permissions', [RoleController::class, 'updateAllPermissions'])->name('update.permission');
+});
+
+// END ROLES
 // START GAJI
 Route::prefix('gaji')->name('gaji-')->group(function () {
     Route::get('/', [GajiController::class, 'index'])->name('list');
@@ -78,11 +100,71 @@ Route::prefix('gaji')->name('gaji-')->group(function () {
     Route::get('/edit/{id}', [GajiController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [GajiController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [GajiController::class, 'delete'])->name('delete');
-}); 
-// END GAJI 
+});
+// END GAJI
+
+// START Desain Product
+Route::prefix('desain-product')->name('desain-product-')->group(function (){
+    Route::get('/', [DesainProductController::class, 'index'])->name('list');
+    Route::get('/desain-product-get-data', [DesainProductController::class, 'getData'])->name('get-data');
+    Route::get('/desain-product-create', [DesainProductController::class, 'create'])->name('create');
+    Route::post('/desain-product-store', [DesainProductController::class, 'store'])->name('store');
+    Route::get('/desain-product-edit/{id}', [DesainProductController::class, 'edit'])->name('edit');
+    Route::post('/desain-product-update/{id}', [DesainProductController::class, 'update'])->name('update');
+    Route::get('/desain-product-delete/{id}', [DesainProductController::class, 'delete'])->name('delete');
+});
+// END Desain Product
+
+// START Desain Product
+Route::prefix('rencana-produksi')->name('rencana-produksi-')->group(function (){
+    Route::get('/', [RencanaProduksiController::class, 'index'])->name('list');
+    Route::get('/rencana-produksi-get-data', [RencanaProduksiController::class, 'getData'])->name('get-data');
+    Route::get('/rencana-produksi-create', [RencanaProduksiController::class, 'create'])->name('create');
+    Route::post('/rencana-produksi-store', [RencanaProduksiController::class, 'store'])->name('store');
+    Route::get('/rencana-produksi-edit/{id}', [RencanaProduksiController::class, 'edit'])->name('edit');
+    Route::post('/rencana-produksi-update/{id}', [RencanaProduksiController::class, 'update'])->name('update');
+    Route::get('/rencana-produksi-delete/{id}', [RencanaProduksiController::class, 'delete'])->name('delete');
+});
+// END Desain Product
+
+// START ORDER
+Route::prefix('order')->name('order-')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('list');
+    Route::get('/get-data', [OrderController::class, 'getData'])->name('get-data');
+    Route::get('/create', [OrderController::class, 'create'])->name('create');
+    Route::post('/store', [OrderController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delete');
+});
+// END ORDER
+
+// START JADWAL PRODUKSI
+Route::prefix('jadwal-produksi')->name('jadwal-produksi-')->group(function () {
+    Route::get('/', [JadwalProduksiController::class, 'index'])->name('list');
+    Route::get('/get-data', [JadwalProduksiController::class, 'getData'])->name('get-data');
+    Route::get('/create', [JadwalProduksiController::class, 'create'])->name('create');
+    Route::post('/store', [JadwalProduksiController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [JadwalProduksiController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [JadwalProduksiController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [JadwalProduksiController::class, 'delete'])->name('delete');
+});
+// END JADWAL PRODUKSI
+
+// START LAPORAN PRODUKSI
+Route::prefix('laporan-produksi')->name('laporan-produksi-')->group(function () {
+    Route::get('/', [LaporanProduksiController::class, 'index'])->name('list');
+    Route::get('/get-data', [LaporanProduksiController::class, 'getData'])->name('get-data');
+    Route::get('/create', [LaporanProduksiController::class, 'create'])->name('create');
+    Route::post('/store', [LaporanProduksiController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [LaporanProduksiController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [LaporanProduksiController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [LaporanProduksiController::class, 'delete'])->name('delete');
+});
+// END LAPORAN PRODUKSI
 
 Route::resources([
-    'roles' => RoleController::class,
+    // 'roles' => RoleController::class,
     'users' => UserController::class,
     'products' => ProductController::class,
 ]);

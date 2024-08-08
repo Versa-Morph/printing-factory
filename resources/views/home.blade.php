@@ -98,7 +98,7 @@
 
                     <p>This is your application dashboard.</p>
                     @canany(['create-role', 'edit-role', 'delete-role'])
-                        <a class="btn btn-primary" href="{{ route('roles.index') }}">
+                        <a class="btn btn-primary" href="{{ route('roles-index') }}">
                             <i class="bi bi-person-fill-gear"></i> Manage Roles</a>
                     @endcanany
                     @canany(['create-user', 'edit-user', 'delete-user'])

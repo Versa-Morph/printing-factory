@@ -59,7 +59,10 @@
                     },
                     {
                         data: 'jumlah_gaji',
-                        name: 'jumlah_gaji'
+                        name: 'jumlah_gaji',
+                        render: function(data, type, row) {
+                            return formatRupiah(data);
+                        }
                     },
                     {
                         data: 'tanggal_gaji',

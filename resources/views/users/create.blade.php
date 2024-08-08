@@ -61,7 +61,7 @@
                     <div class="mb-3 row">
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
                         <div class="col-md-6">           
-                            <select class="form-select @error('roles') is-invalid @enderror" multiple aria-label="Roles" id="roles" name="roles[]">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                 @forelse ($roles as $role)
 
                                     @if ($role!='Super Admin')
@@ -80,12 +80,8 @@
 
                                 @endforelse
                             </select>
-                            @if ($errors->has('roles'))
-                                <span class="text-danger">{{ $errors->first('roles') }}</span>
-                            @endif
                         </div>
                     </div>
-                    
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add User">
                     </div>

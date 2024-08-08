@@ -20,7 +20,7 @@ class SendForgotPassword extends Mailable
      */
     public function __construct($param)
     {
-        $this->param = $param; 
+        $this->param = $param;
     }
 
     /**
@@ -29,7 +29,7 @@ class SendForgotPassword extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Forgot Password Account Printing Vactory',
+            subject: 'Forgot Password Account Printing Factory',
         );
     }
 

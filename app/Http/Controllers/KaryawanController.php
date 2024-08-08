@@ -68,16 +68,16 @@ class KaryawanController extends Controller
     {
         try {
             $request->validate([
-                'user_id' => 'required',
-                'nama_karyawan' => 'required|string|max:225',
-                'jabatan' => 'required|string|max:225',
-                'gaji' => 'required',
-                'alamat' => 'required',
-                'no_telepon' => 'required|string|max:20',
-                'email' => 'required|string|email|max:225',
-                'tanggal_lahir' => 'required',
-                'tanggal_masuk' => 'required',
-                'status' => 'required',
+                'user_id'           => 'required',
+                'nama_karyawan'     => 'required|string|max:225',
+                'jabatan'           => 'required|string|max:225',
+                'gaji'              => 'required',
+                'alamat'            => 'required',
+                'no_telepon'        => 'required|string|max:20',
+                'email'             => 'required|string|email|max:225',
+                'tanggal_lahir'     => 'required',
+                'tanggal_masuk'     => 'required',
+                'status'            => 'required',
             ]);
     
             $karyawan = new Karyawan();
@@ -95,7 +95,7 @@ class KaryawanController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Karyawan berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 
@@ -103,7 +103,7 @@ class KaryawanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pelanggan $pelanggan)
+    public function show(Karyawan $karyawan)
     {
         //
     }
@@ -154,7 +154,7 @@ class KaryawanController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Karyawan berhasil diedit!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 
