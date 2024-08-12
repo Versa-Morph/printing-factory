@@ -25,11 +25,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    if (Auth::check() != null) {
-        return redirect('home');
-    } else {
-        return redirect('login');
-    }
+    return redirect('homepage');
 });
 
 // START FORGOT PASSWORD 
@@ -44,6 +40,8 @@ Route::prefix('forgot-password')->name('forgot-password-')->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
 
 
 
