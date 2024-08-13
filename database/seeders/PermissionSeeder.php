@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionSeeder extends Seeder
 {
@@ -43,13 +44,35 @@ class PermissionSeeder extends Seeder
             'create-rencana-produksi',
             'edit-rencana-produksi',
             'delete-rencana-produksi',
-         ];
- 
-          // Looping and Inserting Array's Permissions into Permission Table
-          foreach ($permissions as $permission) {
+            'list-order',
+            'create-order',
+            'edit-order',
+            'delete-order',
+            'list-jadwal-produksi',
+            'create-jadwal-produksi',
+            'edit-jadwal-produksi',
+            'delete-jadwal-produksi',
+            'list-laporan-produksi',
+            'create-laporan-produksi',
+            'edit-laporan-produksi',
+            'delete-laporan-produksi',
+            'list-customer',
+            'create-customer',
+            'edit-customer',
+            'delete-customer',
+        ];
+
+
+        // Looping and Inserting Array's Permissions into Permission Table
+        foreach ($permissions as $permission) {
             Permission::updateOrCreate(
                 ['name' => $permission]
             );
         }
+
+        // GIVE ALL PERMISSON TO SUPERADMIN
+        $superAdmin = Role::updateOrCreate(['name' => 'Super Admin']);
+        $permissions = Permission::all();
+        $superAdmin->givePermissionTo($permissions);
     }
 }

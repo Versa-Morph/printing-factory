@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesainProductController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GajiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JadwalProduksiController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\LaporanProduksiController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -44,18 +48,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
 
 
-
-// START PELANGGAN 
-Route::prefix('pelanggan')->name('pelanggan-')->group(function () {
-    Route::get('/', [PelangganController::class, 'index'])->name('list');
-    Route::get('/get-data', [PelangganController::class, 'getData'])->name('get-data');
-    Route::get('/create', [PelangganController::class, 'create'])->name('create');
-    Route::post('/store', [PelangganController::class, 'store'])->name('store');
-    Route::get('/edit/{id}', [PelangganController::class, 'edit'])->name('edit');
-    Route::post('/update/{id}', [PelangganController::class, 'update'])->name('update');
-    Route::get('/delete/{id}', [PelangganController::class, 'delete'])->name('delete');
+Route::prefix('customer')->name('customer-')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('list');
+    Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+    Route::get('/create', [CustomerController::class, 'create'])->name('create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
 });
-// END PELANGGAN 
 
 
 // START Karyawan 
@@ -121,6 +122,42 @@ Route::prefix('rencana-produksi')->name('rencana-produksi-')->group(function (){
     Route::get('/rencana-produksi-delete/{id}', [RencanaProduksiController::class, 'delete'])->name('delete');
 });
 // END Desain Product 
+
+// START ORDER 
+Route::prefix('order')->name('order-')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('list');
+    Route::get('/get-data', [OrderController::class, 'getData'])->name('get-data');
+    Route::get('/create', [OrderController::class, 'create'])->name('create');
+    Route::post('/store', [OrderController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delete');
+});
+// END ORDER 
+
+// START JADWAL PRODUKSI 
+Route::prefix('jadwal-produksi')->name('jadwal-produksi-')->group(function () {
+    Route::get('/', [JadwalProduksiController::class, 'index'])->name('list');
+    Route::get('/get-data', [JadwalProduksiController::class, 'getData'])->name('get-data');
+    Route::get('/create', [JadwalProduksiController::class, 'create'])->name('create');
+    Route::post('/store', [JadwalProduksiController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [JadwalProduksiController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [JadwalProduksiController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [JadwalProduksiController::class, 'delete'])->name('delete');
+});
+// END JADWAL PRODUKSI 
+
+// START LAPORAN PRODUKSI 
+Route::prefix('laporan-produksi')->name('laporan-produksi-')->group(function () {
+    Route::get('/', [LaporanProduksiController::class, 'index'])->name('list');
+    Route::get('/get-data', [LaporanProduksiController::class, 'getData'])->name('get-data');
+    Route::get('/create', [LaporanProduksiController::class, 'create'])->name('create');
+    Route::post('/store', [LaporanProduksiController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [LaporanProduksiController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [LaporanProduksiController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [LaporanProduksiController::class, 'delete'])->name('delete');
+});
+// END LAPORAN PRODUKSI 
 
 Route::resources([
     // 'roles' => RoleController::class,

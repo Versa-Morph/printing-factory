@@ -48,7 +48,7 @@ class ForgotPasswordController extends Controller
 
             return response()->json(['success' => true, 'msg' => 'Email Berhasil dikirim!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 

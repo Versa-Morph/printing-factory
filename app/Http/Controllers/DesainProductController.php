@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\DesainProduct;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use Intervention\Image\Facades\Image;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\Facades\Image as Image;
 
 class DesainProductController extends Controller
 {
@@ -92,7 +93,7 @@ class DesainProductController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Desain Product berhasil disimpan!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 
@@ -147,7 +148,7 @@ class DesainProductController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Sesain Product berhasil diedit!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 

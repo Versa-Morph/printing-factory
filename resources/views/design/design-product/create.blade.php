@@ -103,7 +103,7 @@
                                 window.location.href = '{{ route('desain-product-list') }}';
                             } else {
                                 console.log(response.msg);
-                                // alertFiled(response.msg);
+                                // alertFailed(response.msg);
                             }
                         },
                         error: function(xhr) {

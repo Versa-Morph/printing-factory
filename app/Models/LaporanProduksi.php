@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RencanaProduksi extends Model
+class LaporanProduksi extends Model
 {
     use HasFactory;
 
-    public function desain()
+    public function jadwal()
     {
-        return $this->belongsTo(DesainProduct::class, 'id_desain');
+        return $this->belongsTo(JadwalProduksi::class, 'id_jadwal');
     }
 }

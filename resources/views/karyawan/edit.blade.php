@@ -174,7 +174,7 @@
                                 alertSuccess(response.msg);
                                 window.location.href = '{{ route('karyawan-list') }}';
                             } else {
-                                alertFiled(response.msg);
+                                alertFailed(response.msg);
                             }
                         },
                         error: function(xhr) {

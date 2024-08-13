@@ -6,47 +6,52 @@
 
 @section('header-info-content')
 @endsection
-
 @section('content')
     <div class="card">
         <div class="card-body">
             <div class="row align-items-start">
                 <div class="col-sm">
-                    <a href="{{ route('gaji-create') }}" class="btn btn-light mb-4"><i class="mdi mdi-plus me-1"></i>
-                        Tambah Gaji</a>
+                    @can('create-order')
+                        <div>
+                            <a href="{{ route('jadwal-produksi-create') }}" class="btn btn-light mb-4"><i class="mdi mdi-plus me-1"></i>
+                                Tambah Jadwal Produksi</a>
+                        </div>
+                    @endcan
                 </div>
             </div>
 
             <div class="table-responsive mt-4 mt-sm-0">
-                <table class="table align-middle table-nowrap table-check" id="gaji-table">
+                <table class="table align-middle table-nowrap table-check" id="jadwal-produksi-table">
                     <thead>
                         <tr class="bg-transparent">
                             <th>No</th>
-                            <th>Nama Karyawan</th>
-                            <th>Jumlah Gaji</th>
-                            <th>Tanggal Gaji</th>
-                            <th>Keterangan</th>
+                            <th>Design Produk</th>
+                            <th>Rencana Produksi</th>
+                            <th>Tanggal Produksi</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
-                </table>
+                </table><!-- end table -->
             </div>
         </div>
+        <!-- end card body -->
     </div>
 @endsection
 
 @section('script')
+    <!-- jQuery and DataTables JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(document).ready(function() {
-            $('#gaji-table').DataTable({
+            $('#jadwal-produksi-table').DataTable({
                 processing: false,
+
                 serverSide: true,
-                ajax: '{{ route('gaji-get-data') }}',
+                ajax: '{{ route('jadwal-produksi-get-data') }}',
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -54,23 +59,16 @@
                         searchable: false
                     },
                     {
-                        data: 'karyawan.nama_karyawan',
-                        name: 'karyawan.nama_karyawan'
+                        data: 'rencana.desain.nama_desain',
+                        name: 'rencana.desain.nama_desain'
                     },
                     {
-                        data: 'jumlah_gaji',
-                        name: 'jumlah_gaji',
-                        render: function(data, type, row) {
-                            return formatRupiah(data);
-                        }
+                        data: 'rencana.jumlah_produksi',
+                        name: 'rencana.jumlah_produksi'
                     },
                     {
-                        data: 'tanggal_gaji',
-                        name: 'tanggal_gaji'
-                    },
-                    {
-                        data: 'keterangan',
-                        name: 'keterangan'
+                        data: 'tanggal_produksi',
+                        name: 'tanggal_produksi'
                     },
                     {
                         data: 'action',
@@ -79,28 +77,27 @@
                         searchable: false
                     }
                 ],
+               
+
             });
 
+            // Delete action
             $(document).on('click', '.delete', function() {
                 var url = $(this).data('url');
                 Swal.fire({
                     title: 'Yakin ingin hapus data ini?',
-                    text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                    text: "Data yang sudah di hapus tidak dapat dikembalikan!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Ya, Hapus!',
                     cancelButtonText: 'Batal'
-
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
                             url: url,
-                            type: 'DELETE',
-                            data: {
-                                _token: '{{ csrf_token() }}'
-                            },
+                            type: 'GET',
                             success: function(response) {
                                 if (response.success) {
                                     Swal.fire(
@@ -108,7 +105,7 @@
                                         response.success,
                                         'success'
                                     )
-                                    $('#gaji-table').DataTable().ajax.reload();
+                                    $('#jadwal-produksi-table').DataTable().ajax.reload();
                                 } else {
                                     Swal.fire(
                                         'Error!',
@@ -119,7 +116,7 @@
                             }
                         });
                     }
-                })
+                });
             });
         });
     </script>

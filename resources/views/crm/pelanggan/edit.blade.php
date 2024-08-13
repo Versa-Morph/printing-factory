@@ -57,6 +57,11 @@
 
 @section('script')
     <script>
+        $(document).ajaxStart(function() {
+            showLoading('Processing Request.....');
+        }).ajaxStop(function() {
+            hideLoading();
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('.form-data');
 
@@ -112,7 +117,7 @@
                                 alertSuccess(response.msg);
                                 window.location.href = '{{ route('pelanggan-list') }}';
                             } else {
-                                alertFiled(response.msg);
+                                alertFailed(response.msg);
                             }
                         },
                         error: function(xhr) {

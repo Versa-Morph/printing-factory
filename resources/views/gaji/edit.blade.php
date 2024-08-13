@@ -20,7 +20,11 @@
 
                 <div class="form-group mb-3">
                     <label for="jumlah_gaji">Jumlah Gaji</label>
-                    <input type="text" class="form-control" id="jumlah_gaji" value="{{ $gaji->jumlah_gaji }}" name="jumlah_gaji" readonly>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Rp</span>
+                        <input type="text" class="form-control" value="{{ number_format($gaji->jumlah_gaji, 0, ',', '.') }}" readonly name="jumlah_gaji" id="jumlah_gaji"
+                            placeholder="Ex: 10.000.000">
+                    </div>
                 </div>
 
                 <div class="form-group mb-3">
@@ -44,6 +48,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+         $(document).ajaxStart(function() {
+            showLoading('Processing Request.....');
+        }).ajaxStop(function() {
+            hideLoading();
+        });
+
         $(document).ready(function() {
             $('#id_karyawan').change(function() {
                 var karyawanId = $(this).val();
@@ -75,7 +85,8 @@
                 });
 
                 const karyawan = document.querySelector('select[name="id_karyawan"]').value.trim();
-                const jumlah_gaji = document.querySelector('input[name="jumlah_gaji"]').value.trim();
+                const jumlah_gaji_input = document.querySelector('input[name="jumlah_gaji"]').value.trim();
+                let jumlah_gaji = jumlah_gaji_input.replace(/[^0-9]/g, ''); // Remove formatting
                 const tanggal_gaji = document.querySelector('input[name="tanggal_gaji"]').value.trim();
                 const keterangan = document.querySelector('textarea[name="keterangan"]').value.trim();
                 let isValid = true;
@@ -101,6 +112,7 @@
 
                 if (isValid) {
                     const formData = new FormData(form);
+                    formData.set('jumlah_gaji', jumlah_gaji); 
 
                     $.ajax({
                         url: '{{ route('gaji-update',$gaji->id) }}',
@@ -113,10 +125,11 @@
                         },
                         success: function(response) {
                             if (response.success) {
+                                var url_redirect = '{{ route('gaji-list') }}';
                                 alertSuccess(response.msg);
                                 window.location.href = '{{ route('gaji-list') }}';
                             } else {
-                                alertFiled(response.msg);
+                                alertFailed(response.msg);
                             }
                         },
                         error: function(xhr) {
