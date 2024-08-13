@@ -41,11 +41,11 @@
                     </a>
                 </li>
 
-                @can('list-pelanggan')
+                @can('list-customer')
                 <li>
-                    <a href="{{ route('pelanggan-list') }}">
+                    <a href="{{ route('customer-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Pelanggan</span>
+                        <span class="menu-item" data-key="t-authentication">Customer</span>
                     </a>
                 </li>
                 @endcan

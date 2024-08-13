@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesainProductController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GajiController;
@@ -49,18 +50,15 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-
-// START PELANGGAN 
-Route::prefix('pelanggan')->name('pelanggan-')->group(function () {
-    Route::get('/', [PelangganController::class, 'index'])->name('list');
-    Route::get('/get-data', [PelangganController::class, 'getData'])->name('get-data');
-    Route::get('/create', [PelangganController::class, 'create'])->name('create');
-    Route::post('/store', [PelangganController::class, 'store'])->name('store');
-    Route::get('/edit/{id}', [PelangganController::class, 'edit'])->name('edit');
-    Route::post('/update/{id}', [PelangganController::class, 'update'])->name('update');
-    Route::get('/delete/{id}', [PelangganController::class, 'delete'])->name('delete');
+Route::prefix('customer')->name('customer-')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('list');
+    Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+    Route::get('/create', [CustomerController::class, 'create'])->name('create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
 });
-// END PELANGGAN 
 
 
 // START Karyawan 
