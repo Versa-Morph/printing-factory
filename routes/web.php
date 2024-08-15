@@ -32,20 +32,21 @@ Route::get('/', function () {
     return redirect('homepage');
 });
 
-// START FORGOT PASSWORD 
+// START FORGOT PASSWORD
 Route::prefix('forgot-password')->name('forgot-password-')->group(function () {
     Route::get('/', [ForgotPasswordController::class, 'index'])->name('view');
     Route::post('/send-email', [ForgotPasswordController::class, 'sendEmail'])->name('send-email');
     Route::get('/reset-password', [ForgotPasswordController::class, 'reset'])->name('reset-password');
     Route::post('/proses-reset-password', [ForgotPasswordController::class, 'prosesReset'])->name('proses-reset-password');
 });
-// END FORGOT PASSWORD 
+// END FORGOT PASSWORD
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
+Route::get('/homepage-role', [HomeController::class, 'homepageRole'])->name('homepage-role');
 
 
 Route::prefix('customer')->name('customer-')->group(function () {
@@ -59,8 +60,8 @@ Route::prefix('customer')->name('customer-')->group(function () {
 });
 
 
-// START Karyawan 
-Route::prefix('karyawan')->name('karyawan-')->group(function (){ 
+// START Karyawan
+Route::prefix('karyawan')->name('karyawan-')->group(function (){
     Route::get('/', [KaryawanController::class, 'index'])->name('list');
     Route::get('/karyawan-get-data', [KaryawanController::class, 'getData'])->name('get-data');
     Route::get('/karyawan-create', [KaryawanController::class, 'create'])->name('create');
@@ -69,7 +70,7 @@ Route::prefix('karyawan')->name('karyawan-')->group(function (){
     Route::post('/karyawan-update/{id}', [KaryawanController::class, 'update'])->name('update');
     Route::get('/karyawan-delete/{id}', [KaryawanController::class, 'delete'])->name('delete');
 });
-// END Karyawan 
+// END Karyawan
 
 // START ROLES
 Route::prefix('roles')->name('roles-')->group(function () {
@@ -96,11 +97,11 @@ Route::prefix('gaji')->name('gaji-')->group(function () {
     Route::get('/edit/{id}', [GajiController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [GajiController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [GajiController::class, 'delete'])->name('delete');
-}); 
-// END GAJI 
+});
+// END GAJI
 
-// START Desain Product 
-Route::prefix('desain-product')->name('desain-product-')->group(function (){ 
+// START Desain Product
+Route::prefix('desain-product')->name('desain-product-')->group(function (){
     Route::get('/', [DesainProductController::class, 'index'])->name('list');
     Route::get('/desain-product-get-data', [DesainProductController::class, 'getData'])->name('get-data');
     Route::get('/desain-product-create', [DesainProductController::class, 'create'])->name('create');
@@ -109,10 +110,10 @@ Route::prefix('desain-product')->name('desain-product-')->group(function (){
     Route::post('/desain-product-update/{id}', [DesainProductController::class, 'update'])->name('update');
     Route::get('/desain-product-delete/{id}', [DesainProductController::class, 'delete'])->name('delete');
 });
-// END Desain Product 
+// END Desain Product
 
-// START Desain Product 
-Route::prefix('rencana-produksi')->name('rencana-produksi-')->group(function (){ 
+// START Desain Product
+Route::prefix('rencana-produksi')->name('rencana-produksi-')->group(function (){
     Route::get('/', [RencanaProduksiController::class, 'index'])->name('list');
     Route::get('/rencana-produksi-get-data', [RencanaProduksiController::class, 'getData'])->name('get-data');
     Route::get('/rencana-produksi-create', [RencanaProduksiController::class, 'create'])->name('create');
@@ -121,9 +122,9 @@ Route::prefix('rencana-produksi')->name('rencana-produksi-')->group(function (){
     Route::post('/rencana-produksi-update/{id}', [RencanaProduksiController::class, 'update'])->name('update');
     Route::get('/rencana-produksi-delete/{id}', [RencanaProduksiController::class, 'delete'])->name('delete');
 });
-// END Desain Product 
+// END Desain Product
 
-// START ORDER 
+// START ORDER
 Route::prefix('order')->name('order-')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('list');
     Route::get('/get-data', [OrderController::class, 'getData'])->name('get-data');
@@ -133,9 +134,9 @@ Route::prefix('order')->name('order-')->group(function () {
     Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delete');
 });
-// END ORDER 
+// END ORDER
 
-// START JADWAL PRODUKSI 
+// START JADWAL PRODUKSI
 Route::prefix('jadwal-produksi')->name('jadwal-produksi-')->group(function () {
     Route::get('/', [JadwalProduksiController::class, 'index'])->name('list');
     Route::get('/get-data', [JadwalProduksiController::class, 'getData'])->name('get-data');
@@ -145,9 +146,9 @@ Route::prefix('jadwal-produksi')->name('jadwal-produksi-')->group(function () {
     Route::post('/update/{id}', [JadwalProduksiController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [JadwalProduksiController::class, 'delete'])->name('delete');
 });
-// END JADWAL PRODUKSI 
+// END JADWAL PRODUKSI
 
-// START LAPORAN PRODUKSI 
+// START LAPORAN PRODUKSI
 Route::prefix('laporan-produksi')->name('laporan-produksi-')->group(function () {
     Route::get('/', [LaporanProduksiController::class, 'index'])->name('list');
     Route::get('/get-data', [LaporanProduksiController::class, 'getData'])->name('get-data');
@@ -157,7 +158,7 @@ Route::prefix('laporan-produksi')->name('laporan-produksi-')->group(function () 
     Route::post('/update/{id}', [LaporanProduksiController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [LaporanProduksiController::class, 'delete'])->name('delete');
 });
-// END LAPORAN PRODUKSI 
+// END LAPORAN PRODUKSI
 
 Route::resources([
     // 'roles' => RoleController::class,

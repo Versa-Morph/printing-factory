@@ -28,6 +28,11 @@ class HomeController extends Controller
 
     public function homepage()
     {
+        return view('homepage.index1');
+    }
+
+    public function homepageRole()
+    {
         return view('homepage.index');
     }
 }

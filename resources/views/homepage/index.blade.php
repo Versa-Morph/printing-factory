@@ -162,9 +162,12 @@
             </ul>
           </div>
           <div class="avatar__btnholder">
-            <a class="btn btn-default btn-fullwidth btn-hover btn-hover-accent" href="#contact" target="_blank">
-              <span class="btn-caption">Website</span>
+            <a class="btn btn-default btn-fullwidth btn-hover btn-hover-accent" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <span class="btn-caption">Logout</span>
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
           </div>
         </div>
       </div>
@@ -179,7 +182,7 @@
             <!-- Content Block - Works Gallery Start -->
             <div class="content__block grid-block">
               <div class="container-fluid px-0 inner__gallery">
-                <div class="row gx-0 my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+                <div class="row gx-0 my-gallery justify-content-center" itemscope itemtype="http://schema.org/ImageGallery">
                   <figure class="col-12 col-md-4 gallery__item grid-item animate-card-2" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                     <a href="{{ asset('assets/images/role/sales.webp') }}" data-image="{{ asset('assets/images/role/sales.webp') }}" class="gallery__link" itemprop="contentUrl" data-size="1400x1400">
                       <img src="{{ asset('assets/images/role/sales.webp') }}" class="gallery__image" itemprop="thumbnail" alt="Image description">
@@ -193,7 +196,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -211,7 +214,25 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                        </p>
+                    </figcaption>
+                  </figure>
+
+                  <figure class="col-12 col-md-4 gallery__item grid-item animate-card-2" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                    <a href="{{ asset('assets/images/role/finance.webp') }}" data-image="{{ asset('assets/images/role/finance.webp') }}" class="gallery__link" itemprop="contentUrl" data-size="1400x1400">
+                      <img src="{{ asset('assets/images/role/finance.webp') }}" class="gallery__image" itemprop="thumbnail" alt="Image description">
+                    </a>
+                    <figcaption class="gallery__descr" itemprop="caption description">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="m-0">FINANCE &nbsp;</h5>
+                            <div class="card__tags d-flex flex-wrap justify-content-between">
+                                <span class="rounded-tag me-0">finance</span>
+                            </div>
+                        </div>
+
+                        <p class="small">
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -229,7 +250,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -247,7 +268,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -265,7 +286,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -283,7 +304,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -296,12 +317,12 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <h5 class="m-0">QC PLATE &nbsp;</h5>
                             <div class="card__tags d-flex flex-wrap justify-content-between">
-                                <span class="rounded-tag me-0">Quality Check</span>
+                                <span class="rounded-tag me-0">Quality Control</span>
                             </div>
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -314,12 +335,12 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <h5 class="m-0">ADMIN PRODUCTION &nbsp;</h5>
                             <div class="card__tags d-flex flex-wrap justify-content-between">
-                                <span class="rounded-tag me-0">Admin</span>
+                                <span class="rounded-tag me-0">Admin Production</span>
                             </div>
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -337,7 +358,25 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('login') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Login</a>
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                        </p>
+                    </figcaption>
+                  </figure>
+
+                  <figure class="col-12 col-md-4 gallery__item grid-item animate-card-2" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                    <a href="{{ asset('assets/images/role/warehouse.webp') }}" data-image="{{ asset('assets/images/role/warehouse.webp') }}" class="gallery__link" itemprop="contentUrl" data-size="1400x1400">
+                      <img src="{{ asset('assets/images/role/warehouse.webp') }}" class="gallery__image" itemprop="thumbnail" alt="Image description">
+                    </a>
+                    <figcaption class="gallery__descr" itemprop="caption description">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="m-0">WAREHOUSE &nbsp;</h5>
+                            <div class="card__tags d-flex flex-wrap justify-content-between">
+                                <span class="rounded-tag me-0">Warehouse</span>
+                            </div>
+                        </div>
+
+                        <p class="small">
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
