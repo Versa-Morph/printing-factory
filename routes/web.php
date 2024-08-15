@@ -47,6 +47,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
 Route::get('/homepage-role', [HomeController::class, 'homepageRole'])->name('homepage-role');
+Route::get('/form-customer', [HomeController::class, 'formCustomer'])->name('form-customer');
 
 
 Route::prefix('customer')->name('customer-')->group(function () {

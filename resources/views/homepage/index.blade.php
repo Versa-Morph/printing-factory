@@ -162,6 +162,9 @@
             </ul>
           </div>
           <div class="avatar__btnholder">
+            <a class="btn btn-default btn-fullwidth btn-hover btn-hover-accent mb-3" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <span class="btn-caption">Absen</span>
+            </a>
             <a class="btn btn-default btn-fullwidth btn-hover btn-hover-accent" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <span class="btn-caption">Logout</span>
             </a>

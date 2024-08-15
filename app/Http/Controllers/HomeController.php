@@ -35,4 +35,9 @@ class HomeController extends Controller
     {
         return view('homepage.index');
     }
+
+    public function formCustomer()
+    {
+        return view('crm.customers.form');
+    }
 }

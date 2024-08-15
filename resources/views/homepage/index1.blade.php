@@ -116,7 +116,7 @@
             </p>
             <h1 class="headline__title animate-headline">Clean and bright portfolio template</h1>
             <div class="headline__btnholder d-flex flex-column flex-sm-row">
-              <a class="btn mobile-vertical btn-default btn-hover btn-hover-accent animate-headline" href="#live-preview">
+              <a class="btn mobile-vertical btn-default btn-hover btn-hover-accent animate-headline" href="{{ route('form-customer') }}">
                 <span class="btn-caption">Website</span>
                 <i class="ph-bold ph-globe"></i>
               </a>
