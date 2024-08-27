@@ -15,7 +15,8 @@
                         <div class="blobs_6"></div>
                         <div class="blobs_7"></div>
                         <div class="imgcontainer">
-                            <img src="{{ asset('assets/auth/images/logo.png') }}" alt="Avatar" class="avatar">
+                            {{-- <h3 class="fw-bold text-uppercase">Plate Making <br> Polimer</h3> --}}
+                            <img src="{{ asset('assets/logo-polimer.png') }}" alt="logo polimer" class="logo polimer" width="200">
                         </div>
                         <div class="input-control">
                             <input type="email" class="form-control @error('email') is-invalid @enderror" id="input-email" placeholder="Enter Email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>

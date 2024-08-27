@@ -60,8 +60,8 @@
 
                     <div class="mb-3 row">
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
-                        <div class="col-md-6">           
-                            <select class="form-select @error('roles') is-invalid @enderror" aria-label="Roles" id="floatingSelect" name="roles[]">
+                        <div class="col-md-6">
+                            <select name = "roles"  class="form-select @error('roles') is-invalid @enderror" aria-label="Roles" id="floatingSelect" name="roles[]">
                                 @forelse ($roles as $role)
 
                                     @if ($role!='Super Admin')
@@ -69,7 +69,7 @@
                                         {{ $role }}
                                     </option>
                                     @else
-                                        @if (Auth::user()->hasRole('Super Admin'))   
+                                        @if (Auth::user()->hasRole('Super Admin'))
                                         <option value="{{ $role }}" {{ in_array($role, $userRoles ?? []) ? 'selected' : '' }}>
                                             {{ $role }}
                                         </option>
@@ -85,16 +85,16 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update User">
                     </div>
-                    
+
                 </form>
             </div>
         </div>
     </div>
-</div>    
+</div>
 @endsection
 
 @section('script')

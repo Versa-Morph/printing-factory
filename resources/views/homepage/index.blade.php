@@ -114,35 +114,38 @@
 
     <!-- Avatar Side Block Start -->
     <div id="avatar" class="avatar">
-      <div class="avatar__container d-flex flex-column justify-content-lg-between">
+      <div class="avatar__container d-flex flex-column justify-content-lg-start gap-4">
         <!-- image and logo -->
         <div class="avatar__block">
-          <div class="avatar__logo d-flex align-items-center">
-            <div class="logo__caption">
-              <p>PRINTING FACTORY</p>
-            </div>
-          </div>
           <div class="avatar__image">
-            <img src="{{ asset('assets/images/role/logo.webp') }}" alt="">
+            <img src="{{ asset('assets/logo-polimer.png') }}" alt="">
           </div>
         </div>
         <!-- data caption #1 -->
-        <div class="avatar__block">
-          <h6>
-            <small class="top">Specialization:</small>
-            specializes in packing goods
-          </h6>
+        <!-- data caption #1 -->
+        <div class="avatar__block mt-auto">
+            <h6>
+              <small class="top">Name:</small>
+              {{ Auth::user()->name }}
+            </h6>
         </div>
-        <!-- data caption #2 -->
+          <!-- data caption #2 -->
         <div class="avatar__block">
-          <h6>
-            <small class="top">Based in:</small>
-            Tangerang, Banten
-          </h6>
+            <h6>
+              <small class="top">Role:</small>
+              {{ Auth::user()->getRoleNames()[0] }}
+            </h6>
+        </div>
+          <!-- data caption #2 -->
+        <div class="avatar__block mb-3">
+            <h6>
+              <small class="top">Office:</small>
+              Tangerang, Banten
+            </h6>
         </div>
         <!-- socials and CTA button -->
         <div class="avatar__block">
-          <div class="avatar__socials">
+          {{-- <div class="avatar__socials">
             <ul class="socials-square d-flex justify-content-between">
               <li class="socials-square__item">
                 <a class="socials-square__link btn" href="https://dribbble.com/" target="_blank"><i class="ph-bold ph-dribbble-logo"></i></a>
@@ -160,9 +163,9 @@
                 <a class="socials-square__link btn" href="https://www.pinterest.com/" target="_blank"><i class="ph-bold ph-pinterest-logo"></i></a>
               </li>
             </ul>
-          </div>
+          </div> --}}
           <div class="avatar__btnholder">
-            <a class="btn btn-default btn-fullwidth btn-hover btn-hover-accent mb-3" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a class="btn btn-default btn-fullwidth btn-hover btn-hover-accent mb-3" href="{{ route('absensi') }}">
               <span class="btn-caption">Absen</span>
             </a>
             <a class="btn btn-default btn-fullwidth btn-hover btn-hover-accent" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -180,8 +183,101 @@
     <!-- Page Content Start -->
     <div id="content" class="content">
       <div class="content__wrapper">
+        <section id="about" class="inner about">
+            <!-- Content Block - Achievements Start -->
+            <div class="content__block grid-block">
+              <div class="achievements d-flex flex-column flex-md-row align-items-md-stretch">
+                <!-- achievements single item -->
+                <!-- achievements single item -->
+                <div class="achievements__item d-flex flex-column grid-item animate-card-3">
+                    <div class="achievements__card">
+                      <p class="achievements__number">22</p>
+                      <p class="achievements__descr">Attendance</p>
+                    </div>
+                  </div>
+                  <!-- achievements single item -->
+                  <div class="achievements__item d-flex flex-column grid-item animate-card-3">
+                    <div class="achievements__card">
+                      <p class="achievements__number">3</p>
+                      <p class="achievements__descr">Late</p>
+                    </div>
+                  </div>
+                <div class="achievements__item d-flex flex-column grid-item animate-card-3">
+                  <div class="achievements__card">
+                    <p class="achievements__number">3</p>
+                    <p class="achievements__descr">Absent</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Content Block - Achievements End -->
+
+            <!-- Content Block - About Me Data Start -->
+            {{-- <div class="content__block grid-block block-large">
+              <div class="container-fluid p-0">
+                <div class="row g-0 justify-content-between">
+
+                  <!-- About Me Description Start -->
+                  <div class="col-12 col-xl-8 grid-item about-descr">
+                    <p class="about-descr__text animate-in-up">
+                      I wonder if I've been changed in the night? Let me think. Was I the same when I got up this morning?
+                      I almost think I can remember feeling a little different.
+                      But if I'm not the same, the
+                      <a href="#0" class="text-link">next question</a>
+                      is 'Who in the world am I?' Ah, that's the great puzzle!
+                    </p>
+                    <p class="about-descr__text animate-in-up">
+                      Be what you would seem to be - or, if you'd like it put more simply - never imagine yourself not to be otherwise
+                      than what it might appear to others that what you were or
+                      <a href="#0" class="text-link">might have been</a>
+                      was not otherwise than what you had been
+                      would have appeared to them to be otherwise.
+                    </p>
+                    <div class="btn-group about-descr__btnholder animate-in-up">
+                      <a class="btn mobile-vertical btn-default btn-hover btn-hover-accent" href="#0">
+                        <span class="btn-caption">Download CV</span>
+                        <i class="ph-bold ph-download-simple"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- About Me Description End -->
+
+                  <!-- About Me Information Start -->
+                  <div class="col-12 col-xl-4 grid-item about-info">
+                    <div class="about-info__item animate-in-up">
+                      <h6>
+                        <small class="top">Name</small>
+                        Alex Walker
+                      </h6>
+                    </div>
+                    <div class="about-info__item animate-in-up">
+                      <h6>
+                        <small class="top">Phone</small>
+                        <a class="text-link-bold" href="tel:+12127089400">+1 212-708-9400</a>
+                      </h6>
+                    </div>
+                    <div class="about-info__item animate-in-up">
+                      <h6>
+                        <small class="top">Email</small>
+                        <a class="text-link-bold" href="mailto:example@example.com?subject=Message%20from%20your%20site">hello@yourdomain.com</a>
+                      </h6>
+                    </div>
+                    <div class="about-info__item animate-in-up">
+                      <h6>
+                        <small class="top">Location</small>
+                        <a class="text-link-bold" href="https://maps.app.goo.gl/xMJXTEUeHkv6kYRQ6" target="_blank">Odesa, Ukraine</a>
+                      </h6>
+                    </div>
+                  </div>
+                  <!-- About Me Information End -->
+
+                </div>
+              </div>
+            </div> --}}
+            <!-- Content Block - About Me Data End -->
+        </section>
         <!-- Portfolio Section Start -->
-        <section id="portfolio" class="inner inner-first portfolio">
+        <section id="portfolio" class="inner pt-0 inner-first portfolio">
             <!-- Content Block - Works Gallery Start -->
             <div class="content__block grid-block">
               <div class="container-fluid px-0 inner__gallery">
@@ -318,9 +414,9 @@
                     </a>
                     <figcaption class="gallery__descr" itemprop="caption description">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h5 class="m-0">QC PLATE &nbsp;</h5>
+                            <h5 class="m-0">QC & ADMIN PRODUCTION &nbsp;</h5>
                             <div class="card__tags d-flex flex-wrap justify-content-between">
-                                <span class="rounded-tag me-0">Quality Control</span>
+                                <span class="rounded-tag me-0">QC & Admin Production</span>
                             </div>
                         </div>
 
@@ -331,32 +427,14 @@
                   </figure>
 
                   <figure class="col-12 col-md-4 gallery__item grid-item animate-card-2" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                    <a href="{{ asset('assets/images/role/admin.webp') }}" data-image="{{ asset('assets/images/role/admin.webp') }}" class="gallery__link" itemprop="contentUrl" data-size="1400x1400">
-                      <img src="{{ asset('assets/images/role/admin.webp') }}" class="gallery__image" itemprop="thumbnail" alt="Image description">
+                    <a href="{{ asset('assets/images/role/warehouse.webp') }}" data-image="{{ asset('assets/images/role/warehouse.webp') }}" class="gallery__link" itemprop="contentUrl" data-size="1400x1400">
+                      <img src="{{ asset('assets/images/role/warehouse.webp') }}" class="gallery__image" itemprop="thumbnail" alt="Image description">
                     </a>
                     <figcaption class="gallery__descr" itemprop="caption description">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h5 class="m-0">ADMIN PRODUCTION &nbsp;</h5>
+                            <h5 class="m-0">COMMODITY &nbsp;</h5>
                             <div class="card__tags d-flex flex-wrap justify-content-between">
-                                <span class="rounded-tag me-0">Admin Production</span>
-                            </div>
-                        </div>
-
-                        <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
-                        </p>
-                    </figcaption>
-                  </figure>
-
-                  <figure class="col-12 col-md-4 gallery__item grid-item animate-card-2" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                    <a href="{{ asset('assets/images/role/delivery.webp') }}" data-image="{{ asset('assets/images/role/delivery.webp') }}" class="gallery__link" itemprop="contentUrl" data-size="1400x1400">
-                      <img src="{{ asset('assets/images/role/delivery.webp') }}" class="gallery__image" itemprop="thumbnail" alt="Image description">
-                    </a>
-                    <figcaption class="gallery__descr" itemprop="caption description">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h5 class="m-0">DELIVERY &nbsp;</h5>
-                            <div class="card__tags d-flex flex-wrap justify-content-between">
-                                <span class="rounded-tag me-0">Delivery</span>
+                                <span class="rounded-tag me-0">Commodity</span>
                             </div>
                         </div>
 
@@ -375,6 +453,24 @@
                             <h5 class="m-0">WAREHOUSE &nbsp;</h5>
                             <div class="card__tags d-flex flex-wrap justify-content-between">
                                 <span class="rounded-tag me-0">Warehouse</span>
+                            </div>
+                        </div>
+
+                        <p class="small">
+                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                        </p>
+                    </figcaption>
+                  </figure>
+
+                  <figure class="col-12 col-md-4 gallery__item grid-item animate-card-2" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                    <a href="{{ asset('assets/images/role/delivery.webp') }}" data-image="{{ asset('assets/images/role/delivery.webp') }}" class="gallery__link" itemprop="contentUrl" data-size="1400x1400">
+                      <img src="{{ asset('assets/images/role/delivery.webp') }}" class="gallery__image" itemprop="thumbnail" alt="Image description">
+                    </a>
+                    <figcaption class="gallery__descr" itemprop="caption description">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="m-0">DELIVERY &nbsp;</h5>
+                            <div class="card__tags d-flex flex-wrap justify-content-between">
+                                <span class="rounded-tag me-0">Delivery</span>
                             </div>
                         </div>
 

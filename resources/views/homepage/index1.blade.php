@@ -68,7 +68,7 @@
                 <div class="col-12">
                   <div class="header__logo">
                     <a class="d-flex justify-content-start align-items-center" href="#0" target="_blank"><!-- template link here -->
-                      <div class="logo__image">
+                      {{-- <div class="logo__image">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                           width="85px" height="85px" viewBox="0 0 85 85"
                           style="enable-background:new 0 0 85 85;" xml:space="preserve" class="gradient-fill">
@@ -92,9 +92,9 @@
                               h-3.9h-3.9h-3.9H35.7z M59.2,39.3h-3.9v-3.9h3.9V39.3z M55.3,43.2h-3.9v-3.9h3.9V43.2z"/>
                           </g>
                         </svg>
-                      </div>
+                      </div> --}}
                       <div class="logo__caption">
-                        <p>PRINTING <br> FACTORY</p>
+                        <p>PLATE MAKING<br> POLIMER</p>
                       </div>
                     </a>
                   </div>
@@ -114,7 +114,7 @@
               </svg>
               <span>ERP SYSTEM</span>
             </p>
-            <h1 class="headline__title animate-headline">Clean and bright portfolio template</h1>
+            <h1 class="headline__title animate-headline">Empowering plates polimer with seamless ERP solutions</h1>
             <div class="headline__btnholder d-flex flex-column flex-sm-row">
               <a class="btn mobile-vertical btn-default btn-hover btn-hover-accent animate-headline" href="{{ route('form-customer') }}">
                 <span class="btn-caption">Website</span>
@@ -127,62 +127,92 @@
             </div>
           </div>
           <div class="promo-image">
-            <img src="{{ asset('assets/homepage/img/demo/mockup.webp') }}" alt="test">
+            <img src="{{ asset('assets/image-homepage.png') }}" style="height: 100% !important; margin-right:100px;" alt="test">
           </div>
         </div>
 
         <div class="marquee">
           <div class="marquee__inner">
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>
             </div>
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>
             </div>
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>
             </div>
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>
             </div>
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>
             </div>
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>
             </div>
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>
             </div>
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>
             </div>
             <div class="marquee__part">
-              CV/Resume & Creative Portfolio
+              ERP Printing Factory
+              <div class="star">
+                <i class="ph-bold ph-star-four"></i>
+              </div>
+            </div>
+            <div class="marquee__part">
+              ERP Printing Factory
+              <div class="star">
+                <i class="ph-bold ph-star-four"></i>
+              </div>
+            </div>
+            <div class="marquee__part">
+              ERP Printing Factory
+              <div class="star">
+                <i class="ph-bold ph-star-four"></i>
+              </div>
+            </div>
+            <div class="marquee__part">
+              ERP Printing Factory
+              <div class="star">
+                <i class="ph-bold ph-star-four"></i>
+              </div>
+            </div>
+            <div class="marquee__part">
+              ERP Printing Factory
+              <div class="star">
+                <i class="ph-bold ph-star-four"></i>
+              </div>
+            </div>
+            <div class="marquee__part">
+              ERP Printing Factory
               <div class="star">
                 <i class="ph-bold ph-star-four"></i>
               </div>

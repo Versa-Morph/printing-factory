@@ -9,17 +9,17 @@
         <div class="card-body">
             <div class="row align-items-start">
                 <div class="col-sm">
-                    {{-- @can('create-customer')
+                    @can('create-customer')
                         <div>
                             <a href="{{ route('customer-create') }}" class="btn btn-light mb-4"><i class="mdi mdi-plus me-1"></i>
-                                Add Customer
+                                Add Lead Customers
                             </a>
                             <a href="{{ route('form-customer') }}" class="btn btn-light mb-4">
                                 <i class="mdi mdi-plus me-1"></i>
                                 Open Form
                             </a>
                         </div>
-                    @endcan --}}
+                    @endcan
                 </div>
             </div>
 

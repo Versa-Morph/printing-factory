@@ -153,4 +153,10 @@ class CustomerController extends Controller
         }
         return response()->json(['error' => 'Customer not found']);
     }
+
+    public function indexLeads()
+    {
+        $data['page_title'] = 'Leads Customers';
+        return view('crm.leads-customers.index', $data);
+    }
 }

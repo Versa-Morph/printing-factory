@@ -44,14 +44,50 @@ Route::prefix('forgot-password')->name('forgot-password-')->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard-sales', function() {
+    return view('dashboard.sales');
+})->name('dashboard.sales');
 
 Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
 Route::get('/homepage-role', [HomeController::class, 'homepageRole'])->name('homepage-role');
+Route::get('/absensi', function(){
+return view('absensi.index');
+})->name('absensi');
+
 Route::get('/form-customer', [HomeController::class, 'formCustomer'])->name('form-customer');
 
 
 Route::prefix('customer')->name('customer-')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('list');
+    Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+    Route::get('/create', [CustomerController::class, 'create'])->name('create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+});
+Route::prefix('leads-customer')->name('leads-customer-')->group(function () {
+    Route::get('/', [CustomerController::class, 'indexLeads'])->name('list');
+    // Route::get('/data', [CustomerController::class, 'getDataLeads'])->name('get-data');
+    // Route::get('/edit/{id}', [CustomerController::class, 'editLeads'])->name('edit');
+    // Route::post('/update/{id}', [CustomerController::class, 'updateLeads'])->name('update');
+    // Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+});
+Route::prefix('quotation')->name('quotation-')->group(function () {
+    Route::get('/', function(){
+        return view('crm.quotation.index');
+    })->name('list');
+    Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+    Route::get('/create', [CustomerController::class, 'create'])->name('create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+});
+Route::prefix('receive-order')->name('receive-order-')->group(function () {
+    Route::get('/', function(){
+        return view('crm.receive-order.index');
+    })->name('list');
     Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
     Route::get('/create', [CustomerController::class, 'create'])->name('create');
     Route::post('/store', [CustomerController::class, 'store'])->name('store');
