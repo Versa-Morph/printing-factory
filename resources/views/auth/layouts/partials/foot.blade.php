@@ -1,10 +1,7 @@
-<!-- JAVASCRIPT -->
-<script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{ asset('assets/libs/metismenujs/metismenujs.min.js')}}"></script>
-<script src="{{ asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
-<script src="{{ asset('assets/libs/feather-icons/feather.min.js')}}"></script>
-
-<script src="{{ asset('assets/js/pages/pass-addon.init.js')}}"></script>
+<!-- latest jquery-->
+<script src="{{ asset('assets/auth/js/jquery-3.5.1.min.js') }}"></script>
+<!-- Theme js-->
+<script src="{{ asset('assets/auth/js/script.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

@@ -100,7 +100,7 @@
                         success: function(response) {
                             if (response.success) {
                                 alertSuccess(response.msg);
-                                window.location.href = '{{ route('karyawan-list') }}';
+                                window.location.href = '{{ route('desain-product-list') }}';
                             } else {
                                 console.log(response.msg);
                                 // alertFailed(response.msg);

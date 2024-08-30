@@ -60,8 +60,8 @@
 
                     <div class="mb-3 row">
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
-                        <div class="col-md-6">           
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <div class="col-md-6">
+                            <select name = "roles" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                 @forelse ($roles as $role)
 
                                     @if ($role!='Super Admin')
@@ -69,7 +69,7 @@
                                         {{ $role }}
                                         </option>
                                     @else
-                                        @if (Auth::user()->hasRole('Super Admin'))   
+                                        @if (Auth::user()->hasRole('Super Admin'))
                                             <option value="{{ $role }}" {{ in_array($role, old('roles') ?? []) ? 'selected' : '' }}>
                                             {{ $role }}
                                             </option>
@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-</div>    
+</div>
 @endsection
 
 

@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('homepage');
     }
 
     /**
@@ -24,5 +24,20 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function homepage()
+    {
+        return view('homepage.index1');
+    }
+
+    public function homepageRole()
+    {
+        return view('homepage.index');
+    }
+
+    public function formCustomer()
+    {
+        return view('crm.customers.form');
     }
 }

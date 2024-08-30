@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesainProductController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GajiController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RencanaProduksiController;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,11 +30,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    if (Auth::check() != null) {
-        return redirect('home');
-    } else {
-        return redirect('login');
-    }
+    return redirect('homepage');
 });
 
 // START FORGOT PASSWORD
@@ -47,20 +45,57 @@ Route::prefix('forgot-password')->name('forgot-password-')->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard-sales', function() {
+    return view('dashboard.sales');
+})->name('dashboard.sales');
+
+Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
+Route::get('/homepage-role', [HomeController::class, 'homepageRole'])->name('homepage-role');
+Route::get('/absensi', function(){
+return view('absensi.index');
+})->name('absensi');
+
+Route::get('/form-customer', [HomeController::class, 'formCustomer'])->name('form-customer');
 
 
-
-// START PELANGGAN
-Route::prefix('pelanggan')->name('pelanggan-')->group(function () {
-    Route::get('/', [PelangganController::class, 'index'])->name('list');
-    Route::get('/get-data', [PelangganController::class, 'getData'])->name('get-data');
-    Route::get('/create', [PelangganController::class, 'create'])->name('create');
-    Route::post('/store', [PelangganController::class, 'store'])->name('store');
-    Route::get('/edit/{id}', [PelangganController::class, 'edit'])->name('edit');
-    Route::post('/update/{id}', [PelangganController::class, 'update'])->name('update');
-    Route::get('/delete/{id}', [PelangganController::class, 'delete'])->name('delete');
+Route::prefix('customer')->name('customer-')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('list');
+    Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+    Route::get('/create', [CustomerController::class, 'create'])->name('create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
 });
-// END PELANGGAN
+Route::prefix('leads-customer')->name('leads-customer-')->group(function () {
+    Route::get('/', [CustomerController::class, 'indexLeads'])->name('list');
+    // Route::get('/data', [CustomerController::class, 'getDataLeads'])->name('get-data');
+    // Route::get('/edit/{id}', [CustomerController::class, 'editLeads'])->name('edit');
+    // Route::post('/update/{id}', [CustomerController::class, 'updateLeads'])->name('update');
+    // Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+});
+// Route::prefix('quotation')->name('quotation-')->group(function () {
+//     Route::get('/', function(){
+//         return view('crm.quotation.index');
+//     })->name('list');
+//     Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+//     Route::get('/create', [CustomerController::class, 'create'])->name('create');
+//     Route::post('/store', [CustomerController::class, 'store'])->name('store');
+//     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+//     Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
+//     Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+// });
+Route::prefix('receive-order')->name('receive-order-')->group(function () {
+    Route::get('/', function(){
+        return view('crm.receive-order.index');
+    })->name('list');
+    Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+    Route::get('/create', [CustomerController::class, 'create'])->name('create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+});
 
 
 // START Karyawan
@@ -162,6 +197,20 @@ Route::prefix('laporan-produksi')->name('laporan-produksi-')->group(function () 
     Route::get('/delete/{id}', [LaporanProduksiController::class, 'delete'])->name('delete');
 });
 // END LAPORAN PRODUKSI
+
+// START QUOTATION
+Route::prefix('quotation')->name('quotation-')->group(function () {
+    Route::get('/', [QuotationController::class, 'index'])->name('list');
+    Route::get('/get-data', [QuotationController::class, 'getData'])->name('get-data');
+    Route::get('/create', [QuotationController::class, 'create'])->name('create');
+    Route::post('/store', [QuotationController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [QuotationController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [QuotationController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [QuotationController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [QuotationController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [QuotationController::class, 'approve'])->name('approve');
+});
+// END QUOTATION
 
 Route::resources([
     // 'roles' => RoleController::class,

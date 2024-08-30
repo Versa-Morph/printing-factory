@@ -56,6 +56,10 @@ class PermissionSeeder extends Seeder
             'create-laporan-produksi',
             'edit-laporan-produksi',
             'delete-laporan-produksi',
+            'list-customer',
+            'create-customer',
+            'edit-customer',
+            'delete-customer',
         ];
 
 

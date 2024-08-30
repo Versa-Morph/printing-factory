@@ -47,7 +47,7 @@
 @section('script')
     <script>
         $(document).ajaxStart(function() {
-            showLoading('Sedang memproses permintaan...');
+            showLoading('Processing Request.....');
         }).ajaxStop(function() {
             hideLoading();
         });

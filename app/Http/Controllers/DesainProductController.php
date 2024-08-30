@@ -83,18 +83,10 @@ class DesainProductController extends Controller
 
             if ($request->hasFile('file_desain')) {
                 $image = $request->file('file_desain');
-                $imageName = uniqid() . '' . time() . '.webp';
-
-                // Resize and compres image
-                $resizedImage = Image::make($image)
-                    ->resize(90, 90, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                    ->encode('webp', 80); // Kompresi kualitas 80%
-
-                // Save iamge after resize, compres, and change format to webp format
-                $resizedImage->save(public_path('assest/images/desain-product/' . $imageName));
-                $desain_product->file_desain = $imageName;
+                $name = time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('assets/images/desain-product/');
+                $image->move($destinationPath, $name);
+                $desain_product->file_desain = $name;
             }
 
             $desain_product->save();
@@ -146,18 +138,10 @@ class DesainProductController extends Controller
 
             if ($request->hasFile('file_desain')) {
                 $image = $request->file('file_desain');
-                $imageName = uniqid() . '' . time() . '.webp';
-
-                // Resize and compres image
-                $resizedImage = Image::make($image)
-                    ->resize(90, 90, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                    ->encode('webp', 80); // Kompresi kualitas 80%
-
-                // Save iamge after resize, compres, and change format to webp format
-                $resizedImage->save(public_path('assets/images/desain-product/' . $imageName));
-                $desain_product->file_desain = $imageName;
+                $name = time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('assets/images/desain-product/');
+                $image->move($destinationPath, $name);
+                $desain_product->file_desain = $name;
             }
 
             $desain_product->save();

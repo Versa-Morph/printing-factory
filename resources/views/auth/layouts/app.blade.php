@@ -1,15 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        @include('auth.layouts.partials.head')
-    </head>
+<head>
+    @include('auth.layouts.partials.head')
+</head>
 
-    <body>
+<body>
+    @yield('content-auth')
 
-        @yield('content-auth')
+    @include('auth.layouts.partials.foot')
+</body>
 
-        
-        @include('auth.layouts.partials.foot')
-    </body>
 </html>
