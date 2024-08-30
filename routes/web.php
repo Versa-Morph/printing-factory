@@ -14,6 +14,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RencanaProduksiController;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,17 +74,17 @@ Route::prefix('leads-customer')->name('leads-customer-')->group(function () {
     // Route::post('/update/{id}', [CustomerController::class, 'updateLeads'])->name('update');
     // Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
 });
-Route::prefix('quotation')->name('quotation-')->group(function () {
-    Route::get('/', function(){
-        return view('crm.quotation.index');
-    })->name('list');
-    Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
-    Route::get('/create', [CustomerController::class, 'create'])->name('create');
-    Route::post('/store', [CustomerController::class, 'store'])->name('store');
-    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
-    Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
-    Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
-});
+// Route::prefix('quotation')->name('quotation-')->group(function () {
+//     Route::get('/', function(){
+//         return view('crm.quotation.index');
+//     })->name('list');
+//     Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+//     Route::get('/create', [CustomerController::class, 'create'])->name('create');
+//     Route::post('/store', [CustomerController::class, 'store'])->name('store');
+//     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+//     Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
+//     Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+// });
 Route::prefix('receive-order')->name('receive-order-')->group(function () {
     Route::get('/', function(){
         return view('crm.receive-order.index');
@@ -196,6 +197,20 @@ Route::prefix('laporan-produksi')->name('laporan-produksi-')->group(function () 
     Route::get('/delete/{id}', [LaporanProduksiController::class, 'delete'])->name('delete');
 });
 // END LAPORAN PRODUKSI
+
+// START QUOTATION
+Route::prefix('quotation')->name('quotation-')->group(function () {
+    Route::get('/', [QuotationController::class, 'index'])->name('list');
+    Route::get('/get-data', [QuotationController::class, 'getData'])->name('get-data');
+    Route::get('/create', [QuotationController::class, 'create'])->name('create');
+    Route::post('/store', [QuotationController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [QuotationController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [QuotationController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [QuotationController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [QuotationController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [QuotationController::class, 'approve'])->name('approve');
+});
+// END QUOTATION
 
 Route::resources([
     // 'roles' => RoleController::class,
