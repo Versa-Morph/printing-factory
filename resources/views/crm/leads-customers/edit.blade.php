@@ -31,6 +31,9 @@
                             <textarea class="form-control" id="company_address" name="company_address" rows="3">{{ $customer->company_address }}</textarea>
                         </div>
 
+                      
+                    </div>
+                    <div class="col-lg-6">
                         <div class="mb-3">
                             <label for="company_email" class="form-label">Company Email</label>
                             <input type="email" class="form-control" id="company_email" name="company_email"
@@ -43,18 +46,6 @@
                                 value="{{ $customer->pic_name }}">
                         </div>
                         <div class="mb-3">
-                            <label for="company_status" class="form-label">Company Status</label>
-                            <select class="form-select" id="company_status" name="company_status">
-                                <option value="">Choose Status</option>
-                                <option value="potensial" {{ $customer->company_status == 'potensial' ? 'selected' : '' }}>
-                                    Potensial</option>
-                                <option value="customer" {{ $customer->company_status == 'customer' ? 'selected' : '' }}>
-                                    Customer</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="mb-3">
                             <label for="pic_phone_number" class="form-label">PIC Phone Number</label>
                             <input type="text" class="form-control" id="pic_phone_number" name="pic_phone_number"
                                 value="{{ $customer->pic_phone_number }}">
@@ -65,30 +56,6 @@
                             <input type="email" class="form-control" id="pic_email" name="pic_email"
                                 value="{{ $customer->pic_email }}">
                         </div>
-
-                        <div class="mb-3">
-                            <label for="referral_code" class="form-label">Referral Code</label>
-                            <input type="text" class="form-control" id="referral_code" name="referral_code"
-                                value="{{ $customer->referral_code }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="company_npwp" class="form-label">Company NPWP</label>
-                            <input type="text" class="form-control" id="company_npwp" name="company_npwp"
-                                value="{{ $customer->company_npwp }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="billing_address" class="form-label">Billing Address</label>
-                            <textarea class="form-control" id="billing_address" name="billing_address" rows="3">{{ $customer->billing_address }}</textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="shipping_address" class="form-label">Shipping Address</label>
-                            <textarea class="form-control" id="shipping_address" name="shipping_address" rows="3">{{ $customer->shipping_address }}</textarea>
-                        </div>
-
-
                     </div>
                 </div>
 
@@ -130,11 +97,6 @@
             const picName = document.querySelector('input[name="pic_name"]').value.trim();
             const picPhoneNumber = document.querySelector('input[name="pic_phone_number"]').value.trim();
             const picEmail = document.querySelector('input[name="pic_email"]').value.trim();
-            const referralCode = document.querySelector('input[name="referral_code"]').value.trim();
-            const companyNpwp = document.querySelector('input[name="company_npwp"]').value.trim();
-            const billingAddress = document.querySelector('textarea[name="billing_address"]').value.trim();
-            const shippingAddress = document.querySelector('textarea[name="shipping_address"]').value.trim();
-            const companyStatus = document.querySelector('select[name="company_status"]').value.trim(); // Fixed name here
 
             let isValid = true;
 
@@ -171,33 +133,13 @@
                 showError('PIC Email cannot be null', 'input[name="pic_email"]');
                 isValid = false;
             }
-            if (!referralCode) {
-                showError('Referral Code cannot be null', 'input[name="referral_code"]');
-                isValid = false;
-            }
-            if (!companyNpwp) {
-                showError('Company NPWP cannot be null', 'input[name="company_npwp"]');
-                isValid = false;
-            }
-            if (!companyStatus) {
-                showError('Company Status cannot be null', 'select[name="company_status"]');
-                isValid = false;
-            }
-            if (!billingAddress) {
-                showError('Billing Address cannot be null', 'textarea[name="billing_address"]');
-                isValid = false;
-            }
-            if (!shippingAddress) {
-                showError('Shipping Address cannot be null', 'textarea[name="shipping_address"]');
-                isValid = false;
-            }
 
             // Submit form if valid
             if (isValid) {
                 const formData = new FormData(form);
 
                 $.ajax({
-                    url: '{{ route('customer-update',$customer->id) }}',
+                    url: '{{ route('leads-customer-update',$customer->id) }}',
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -208,7 +150,7 @@
                     success: function(response) {
                         if (response.success) {
                             alertSuccess(response.msg);
-                            window.location.href = '{{ route('customer-list') }}';
+                            window.location.href = '{{ route('leads-customer-list') }}';
                         } else {
                             alertFailed(response.msg);
                         }

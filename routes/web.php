@@ -61,6 +61,8 @@ Route::get('/form-customer', [HomeController::class, 'formCustomer'])->name('for
 Route::prefix('customer')->name('customer-')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('list');
     Route::get('/data', [CustomerController::class, 'getData'])->name('get-data');
+    Route::post('/form-store', [CustomerController::class, 'storeForm'])->name('form-store');
+    Route::get('/change-status/{id}', [CustomerController::class, 'changeCustomerStatus'])->name('change-status');
     Route::get('/create', [CustomerController::class, 'create'])->name('create');
     Route::post('/store', [CustomerController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
@@ -69,10 +71,12 @@ Route::prefix('customer')->name('customer-')->group(function () {
 });
 Route::prefix('leads-customer')->name('leads-customer-')->group(function () {
     Route::get('/', [CustomerController::class, 'indexLeads'])->name('list');
-    // Route::get('/data', [CustomerController::class, 'getDataLeads'])->name('get-data');
-    // Route::get('/edit/{id}', [CustomerController::class, 'editLeads'])->name('edit');
-    // Route::post('/update/{id}', [CustomerController::class, 'updateLeads'])->name('update');
-    // Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+    Route::get('/data', [CustomerController::class, 'getDataLeads'])->name('get-data');
+    Route::get('/create', [CustomerController::class, 'createLeads'])->name('create');
+    Route::post('/store', [CustomerController::class, 'storeLeads'])->name('store');
+    Route::get('/edit/{id}', [CustomerController::class, 'editLeads'])->name('edit');
+    Route::post('/update/{id}', [CustomerController::class, 'updateLeads'])->name('update');
+    Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
 });
 // Route::prefix('quotation')->name('quotation-')->group(function () {
 //     Route::get('/', function(){

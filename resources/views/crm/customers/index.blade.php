@@ -9,17 +9,6 @@
         <div class="card-body">
             <div class="row align-items-start">
                 <div class="col-sm">
-                    {{-- @can('create-customer')
-                        <div>
-                            <a href="{{ route('customer-create') }}" class="btn btn-light mb-4"><i class="mdi mdi-plus me-1"></i>
-                                Add Customer
-                            </a>
-                            <a href="{{ route('form-customer') }}" class="btn btn-light mb-4">
-                                <i class="mdi mdi-plus me-1"></i>
-                                Open Form
-                            </a>
-                        </div>
-                    @endcan --}}
                 </div>
             </div>
 
@@ -32,7 +21,7 @@
                             <th>Address</th>
                             <th>Phone Number</th>
                             <th>Email</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -57,7 +46,7 @@
                     { data: 'company_address', name: 'company_address' },
                     { data: 'company_phone_number', name: 'company_phone_number' },
                     { data: 'company_email', name: 'company_email' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                    // { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });
