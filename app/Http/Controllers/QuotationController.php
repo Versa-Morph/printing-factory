@@ -66,6 +66,7 @@ class QuotationController extends Controller
         try {
             $quotation = Quotation::findOrFail($id);
             $quotation->po_number = $request->po_number;
+            $quotation->status = 'accepted';
             $quotation->save();
 
             return response()->json(['success' => true, 'msg' => 'Data Quotaion berhasil disimpan!']);
@@ -234,5 +235,38 @@ class QuotationController extends Controller
             return response()->json(['success' => 'Data Quotation berhasil dihapus!']);
         }
         return response()->json(['error' => 'Data Quotation tidak ditemukan']);
+    }
+
+    // Receive Order
+    public function receiveOrder()
+    {
+        $data['page_title'] = 'Quotation';
+        return view('receive-order.index', $data);
+    }
+
+    public function getDataReceiveOrder(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Quotation::orderBy('created_at', 'desc')->where('status','accepted')->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $editUrl = route('quotation-edit', $row->id);
+                    $deleteUrl = route('quotation-delete', $row->id);
+                    $dropdown = "<div class='dropdown'>
+                                    <button class='btn btn-light btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='true'>
+                                        <i class='uil uil-ellipsis-h'></i>
+                                    </button>
+                                    <ul class='dropdown-menu dropdown-menu-end'>
+                                        <li><a class='dropdown-item edit' href='$editUrl'>Edit</a></li>
+                                        <li><a class='dropdown-item approve view-details' data-id='$row->id'>Approve</a></li>
+                                        <li><a class='dropdown-item delete' href='javascript:void(0);' data-url='$deleteUrl'>Delete</a></li>
+                                    </ul>
+                                </div>";
+                    return $dropdown;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 }

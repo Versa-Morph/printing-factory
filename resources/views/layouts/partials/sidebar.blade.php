@@ -73,6 +73,12 @@
                         <span class="menu-item" data-key="t-authentication">Receive Order</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('payroll.list') }}">
+                        <i class="uil-users-alt nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Payroll</span>
+                    </a>
+                </li>
                 @endif
 
                 {{-- @if(Auth::user()->hasRole('Super Admin')||Auth::user()->hasRole('Accounting'))
