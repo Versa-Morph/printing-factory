@@ -78,11 +78,12 @@
                                 </div><!-- end col -->
                                 
                                 <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="validationCustom01">Position</label>
-                                        <input type="text" class="form-control" value="{{ $quotation->position }}" name="position">
-                                    </div>
-                                </div><!-- end col -->
+                                    <label class="col-md-2 form-label">Position <small class="text-danger">*</small></label>
+                                    <select class="form-select" name="position">
+                                        <option value="potrait" {{ $quotation->position == 'potrait' ? 'selected' : '' }}>Potrait</option>
+                                        <option value="landscape" {{ $quotation->position == 'landscape' ? 'selected' : '' }}>Landscape</option>
+                                    </select>
+                                </div>
 
                                 <div class="col-md-4">
                                     <div class="mb-3">

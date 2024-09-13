@@ -11,7 +11,7 @@
                 <div class="col-sm">
                     @can('create-customer')
                         <div>
-                            <a href="{{ route('customer-create') }}" class="btn btn-light mb-4"><i class="mdi mdi-plus me-1"></i>
+                            <a href="{{ route('leads-customer-create') }}" class="btn btn-light mb-4"><i class="mdi mdi-plus me-1"></i>
                                 Add Lead Customers
                             </a>
                             <a href="{{ route('form-customer') }}" class="btn btn-light mb-4">
@@ -50,7 +50,7 @@
             $('#customer-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('customer-get-data') }}",
+                ajax: "{{ route('leads-customer-get-data') }}",
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                     { data: 'company_name', name: 'company_name' },
@@ -86,7 +86,8 @@
                                         response.success,
                                         'success'
                                     )
-                                    $('#pelanggan-table').DataTable().ajax.reload();
+                                    window.location.href = '{{ route('leads-customer-list') }}';
+                                    // $('#pelanggan-table').DataTable().ajax.reload();
                                 } else {
                                     Swal.fire(
                                         'Error!',
