@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesainProductController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RencanaProduksiController;
+use App\Http\Controllers\WorkScheduleController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -224,6 +226,12 @@ Route::prefix('attendance')->name('attendance-')->group(function () {
 });
 Route::prefix('overtime')->name('overtime-')->group(function () {
     Route::get('/', [OvertimeController::class, 'index'])->name('list');
+});
+Route::prefix('absence')->name('absence-')->group(function () {
+    Route::get('/', [AbsenceController::class, 'index'])->name('list');
+});
+Route::prefix('work-schedule')->name('work-schedule-')->group(function () {
+    Route::get('/', [WorkScheduleController::class, 'index'])->name('list');
 });
 // END ATTENDANCE
 
