@@ -27,7 +27,7 @@
         }
         .badge-no-data{
             color: black;
-            background: rgba(0, 0, 0, 0.1);
+            background: #e6e6e686;
             padding: 16px;
             width: 91%;
             font-weight: 700;
