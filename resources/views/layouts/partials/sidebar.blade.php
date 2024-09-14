@@ -40,7 +40,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('attendance-list') }}" data-key="t-inbox">Dashboard</a></li>
-                        <li><a href="email-inbox.html" data-key="t-inbox">Overtime</a></li>
+                        <li><a href="{{ route('overtime-list') }}" data-key="t-inbox">Overtime</a></li>
                         <li><a href="email-inbox.html" data-key="t-inbox">Absence</a></li>
                         <li><a href="email-inbox.html" data-key="t-inbox">Work Schedule</a></li>
                     </ul>

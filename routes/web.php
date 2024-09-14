@@ -11,6 +11,7 @@ use App\Http\Controllers\JadwalProduksiController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaporanProduksiController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OvertimeController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -220,6 +221,9 @@ Route::prefix('quotation')->name('quotation-')->group(function () {
 // START ATTENDANCE
 Route::prefix('attendance')->name('attendance-')->group(function () {
     Route::get('/', [AttendanceController::class, 'index'])->name('list');
+});
+Route::prefix('overtime')->name('overtime-')->group(function () {
+    Route::get('/', [OvertimeController::class, 'index'])->name('list');
 });
 // END ATTENDANCE
 

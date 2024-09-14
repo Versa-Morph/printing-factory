@@ -7,6 +7,31 @@
             font-weight: 700;
             margin-bottom: 2%!important;
         }
+        .btn.dropdown-toggle {
+            border-radius: 16px!important;
+            border-color: transparent !important;
+        }
+        .badge-ontime{
+            color: rgba(160, 219, 93, 1) !important;
+            background: rgba(160, 219, 93, 0.1) !important;
+            padding: 16px;
+            width: 91%;
+            font-weight: 700;
+        }
+        .badge-late{
+            color: rgba(219, 93, 93, 1);
+            background: rgba(219, 93, 93, 0.1);
+            padding: 16px;
+            width: 91%;
+            font-weight: 700;
+        }
+        .badge-no-data{
+            color: black;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            width: 91%;
+            font-weight: 700;
+        }
     </style>
 @endsection
 
@@ -134,9 +159,47 @@
                             <th>Clock Out</th>
                             <th>Overtime In</th>
                             <th>Overtime Out</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span>26 February 2024</span>
+                            </td>
+                            <td>
+                                <span class="badge badge-ontime">08:00</span>
+                            </td>
+                            <td>
+                                <span class="badge badge-ontime">08:00</span>
+                            </td>
+                            <td>
+                                <span class="badge badge-no-data">-</span>
+                            </td>
+                            <td>
+                                <span class="badge badge-late">08:00</span>
+                            </td>
+                            <td>
+                                <span class="badge badge-late">08:00</span>
+                            </td>
+                            <td>
+                                <span class="badge badge-ontime">08:00</span>
+                            </td>
+                            <td>
+                                <center>
+                                    <div class='dropdown'>
+                                        <button class='btn btn-light btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='true'>
+                                            <i class='uil uil-ellipsis-h'></i>
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-end'>
+                                            <li><a class='dropdown-item edit' href='$editUrl'>Edit</a></li>
+                                            <li><a class='dropdown-item delete' href='javascript:void(0);' data-url='$deleteUrl'>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </center>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table><!-- end table -->
             </div>
         </div><!-- end card-body -->
