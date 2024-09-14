@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesainProductController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -215,6 +216,15 @@ Route::prefix('quotation')->name('quotation-')->group(function () {
     Route::patch('/approve/{id}', [QuotationController::class, 'approve'])->name('approve');
 });
 // END QUOTATION
+
+// START ATTENDANCE
+Route::prefix('attendance')->name('attendance-')->group(function () {
+    Route::get('/', [AttendanceController::class, 'index'])->name('list');
+});
+// END ATTENDANCE
+
+
+
 
 Route::resources([
     // 'roles' => RoleController::class,

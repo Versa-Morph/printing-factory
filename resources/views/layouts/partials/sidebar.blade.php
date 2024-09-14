@@ -32,6 +32,19 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title" data-key="t-menu">General Menu</li>
+                <li>
+                    <a href="{{ route('attendance-list') }}" class="nav-icon"></i>
+                        <i class="bx bx-home-circle nav-icon"></i>
+                        <span class="menu-item" data-key="t-email">Attendance</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('attendance-list') }}" data-key="t-inbox">Dashboard</a></li>
+                        <li><a href="email-inbox.html" data-key="t-inbox">Overtime</a></li>
+                        <li><a href="email-inbox.html" data-key="t-inbox">Absence</a></li>
+                        <li><a href="email-inbox.html" data-key="t-inbox">Work Schedule</a></li>
+                    </ul>
+                </li>
                 <li class="menu-title" data-key="t-menu">Menu</li>
 
                 {{-- <li>
