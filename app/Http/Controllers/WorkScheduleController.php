@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employe;
+use App\Models\Shift;
+use App\Models\WorkSchedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\DataTables;
 
 class WorkScheduleController extends Controller
 {
@@ -24,9 +30,49 @@ class WorkScheduleController extends Controller
         return view('human-resource.work-schedule.index', $data);
     }
 
+    public function getData(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = WorkSchedule::join('shifts', 'work_schedules.shift_id', '=', 'shifts.id')
+                ->select('work_schedules.*', 'shifts.name as shift_name', 'shifts.start_time', 'shifts.end_time')
+                ->orderBy('work_schedules.created_at', 'desc')
+                ->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('shift', function($row){
+                    return $row->shift_name;
+                })
+                ->addColumn('clock_in', function($row){
+                    return "<span class='badge bg-success'>{$row->start_time}</span>";
+                })
+                ->addColumn('clock_out', function($row){
+                    return "<span class='badge bg-danger'>{$row->end_time}</span>";
+                })
+                ->addColumn('action', function($row){
+                    $editUrl = route('hr-work-schedule-edit', $row->id);
+                    $deleteUrl = route('hr-work-schedule-delete', $row->id);
+                    $dropdown = "<div class='dropdown'>
+                                    <button class='btn btn-light btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='true'>
+                                        <i class='uil uil-ellipsis-h'></i>
+                                    </button>
+                                    <ul class='dropdown-menu dropdown-menu-end'>
+                                        <li><a class='dropdown-item edit' href='$editUrl'>Edit</a></li>
+                                        <li><a class='dropdown-item delete' href='javascript:void(0);' data-url='$deleteUrl'>Delete</a></li>
+                                    </ul>
+                                </div>";
+                    return $dropdown;
+                })
+                ->rawColumns(['clock_in', 'clock_out', 'action']) // Ensure clock_in, clock_out, and action are treated as raw HTML
+                ->make(true);
+        }
+    }
+
     public function create()
     {
-        $data['page_title'] = 'Tambah Work Schedule';
+        $data['page_title'] = 'Tambah Shift';
+        $data['employes'] = Employe::orderBy('employee_code','asc')->get();
+        $data['shifts'] = Shift::orderBy('name','asc')->get();
 
         return view('human-resource.work-schedule.create', $data);
     }
@@ -38,21 +84,32 @@ class WorkScheduleController extends Controller
     {
         try {
             $request->validate([
-                'name'          => 'required|string|max:225',
-                'start_time'    => 'required',
-                'end_time'      => 'required',
-                'description'   => 'nullable',
+                'employee'   => 'required|array',
+                'date'          => 'required',
+                'shift_id'      => 'required',
             ]);
     
-            $shift = new Shift();
-            $shift->name = $request->input('name');
-            $shift->start_time = $request->input('start_time');
-            $shift->end_time = $request->input('end_time');
-            $shift->description = $request->input('description');
-            $shift->save();
+            $startDate = Carbon::parse($request->input('date'));
+            $endDate = Carbon::parse($request->input('end_date'));
+
+            foreach ($request->input('employee') as $employee_id) {
+                $currentDate = $startDate->copy();
+
+                while ($currentDate->lte($endDate)) {
+                    $work_schedule = new WorkSchedule();
+                    $work_schedule->employee_id = $employee_id;
+                    $work_schedule->date = $currentDate->toDateString();
+                    $work_schedule->shift_id = $request->input('shift_id');
+                    $work_schedule->assigned_by = auth()->user()->name;
+                    $work_schedule->save();
+
+                    $currentDate->addDay();
+                }
+            }
     
-            return response()->json(['success' => true, 'msg' => 'Data Shift berhasil disimpan!']);
+            return response()->json(['success' => true, 'msg' => 'Data Work Schedule berhasil disimpan!']);
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
@@ -61,7 +118,7 @@ class WorkScheduleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Shift $shift)
+    public function show(WorkSchedule $workSchedule)
     {
         //
     }
@@ -71,10 +128,12 @@ class WorkScheduleController extends Controller
      */
     public function edit($id)
     {
-        $data['page_title'] = 'Edit Shift';
-        $data['shift'] = Shift::find($id);
+        $data['page_title'] = 'Edit Work Schedule';
+        $data['work_schedule'] = WorkSchedule::find($id);
+        $data['employes'] = Employe::orderBy('employee_code','asc')->get();
+        $data['shifts'] = Shift::orderBy('name','asc')->get();
 
-        return view('master-data.shift.edit', $data);
+        return view('human-resource.work-schedule.edit', $data);
     }
 
     /**
@@ -84,33 +143,27 @@ class WorkScheduleController extends Controller
     {
         try {
             $request->validate([
-                'name'          => 'required|string|max:225',
-                'start_time'    => 'required',
-                'end_time'      => 'required',
-                'description'   => 'nullable',
+                'shift_id'      => 'required',
             ]);
     
-            $shift = Shift::find($id);
-            $shift->name = $request->input('name');
-            $shift->start_time = $request->input('start_time');
-            $shift->end_time = $request->input('end_time');
-            $shift->description = $request->input('description');
-            $shift->save();
+            $work_schedule = WorkSchedule::find($id);
+            $work_schedule->shift_id = $request->input('shift_id');
+            $work_schedule->assigned_by = auth()->user()->name;
+            $work_schedule->save();
     
-            return response()->json(['success' => true, 'msg' => 'Data Quotation berhasil diedit!']);
+            return response()->json(['success' => true, 'msg' => 'Data Work Schedule berhasil diedit!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
-            // return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
+            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
 
     public function delete($id)
     {
-        $shift = Shift::find($id);
-        if ($shift) {
-            $shift->delete();
-            return response()->json(['success' => 'Data Shift berhasil dihapus!']);
+        $workSchedule = WorkSchedule::find($id);
+        if ($workSchedule) {
+            $workSchedule->delete();
+            return response()->json(['success' => 'Data Work Schedule berhasil dihapus!']);
         }
-        return response()->json(['error' => 'Data Shift tidak ditemukan']);
+        return response()->json(['error' => 'Data Work Schedule tidak ditemukan']);
     }
 }

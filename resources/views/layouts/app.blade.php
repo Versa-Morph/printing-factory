@@ -5,7 +5,7 @@
         @include('layouts.partials.head')
     </head>
 
-    <body data-topbar="dark" data-sidebar-size="lg" data-bs-theme="dark" data-sidebar="dark">
+    <body data-topbar="light" data-sidebar-size="lg" data-bs-theme="light" data-sidebar="light">
 
     <!-- Begin page -->
     <div id="layout-wrapper">
