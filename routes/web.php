@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesainProductController;
 use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GajiController;
 use Illuminate\Support\Facades\Route;
@@ -247,6 +248,18 @@ Route::prefix('employe')->name('employe-')->group(function () {
     Route::get('/delete/{id}', [EmployeController::class, 'delete'])->name('delete');
 });
 // END EMPLOYE 
+
+// START EMPLOYEE SALARY 
+Route::prefix('employee-salary')->name('employee-salary-')->group(function () {
+    Route::get('/', [EmployeeSalaryController::class, 'index'])->name('list');
+    Route::get('/get-data', [EmployeeSalaryController::class, 'getData'])->name('get-data');
+    Route::get('/create', [EmployeeSalaryController::class, 'create'])->name('create');
+    Route::post('/store', [EmployeeSalaryController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [EmployeeSalaryController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [EmployeeSalaryController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [EmployeeSalaryController::class, 'delete'])->name('delete');
+});
+// END EMPLOYE SALARY
 
 
 

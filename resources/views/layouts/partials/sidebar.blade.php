@@ -59,6 +59,13 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="{{ route('employee-salary-list') }}">
+                        <i class="bx bx-home-circle nav-icon"></i>
+                        <span class="menu-item" data-key="t-dashboard">Employee Salary</span>
+                    </a>
+                </li>
+
                 {{-- <li>
                     <a href="{{ route('home') }}">
                         <i class="bx bx-home-circle nav-icon"></i>

@@ -68,6 +68,10 @@ class PermissionSeeder extends Seeder
             'create-employe',
             'edit-employe',
             'delete-employe',
+            'list-employee-salary',
+            'create-employee-salary',
+            'edit-employee-salary',
+            'delete-employee-salary',
         ];
 
 
