@@ -60,6 +60,10 @@ class PermissionSeeder extends Seeder
             'create-customer',
             'edit-customer',
             'delete-customer',
+            'list-attendance',
+            'list-overtime',
+            'list-absence',
+            'list-work-schedule',
         ];
 
 

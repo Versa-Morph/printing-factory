@@ -32,6 +32,25 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title" data-key="t-menu">General Menu</li>
+                <li>
+                    <a href="{{ route('attendance-list') }}" class="nav-icon"></i>
+                        <i class="bx bx-home-circle nav-icon"></i>
+                        <span class="menu-item" data-key="t-email">Attendance</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('attendance-list') }}" data-key="t-inbox">Dashboard</a></li>
+                        <li><a href="{{ route('overtime-list') }}" data-key="t-inbox">Overtime</a></li>
+                        <li><a href="{{ route('absence-list') }}" data-key="t-inbox">Absence</a></li>
+                        <li><a href="{{ route('work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ route('payroll.list') }}">
+                        <i class="uil-users-alt nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Payroll</span>
+                    </a>
+                </li>
                 <li class="menu-title" data-key="t-menu">Menu</li>
 
                 {{-- <li>
@@ -74,9 +93,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('payroll.list') }}">
+                    <a href="{{ route('shift-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Payroll</span>
+                        <span class="menu-item" data-key="t-authentication">Shift</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('hr-work-schedule-list') }}">
+                        <i class="uil-users-alt nav-icon"></i>
+                        <span class="menu-item" data-key="t-authentication">Work Schedule</span>
                     </a>
                 </li>
                 @endif
