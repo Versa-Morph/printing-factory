@@ -64,6 +64,10 @@ class PermissionSeeder extends Seeder
             'list-overtime',
             'list-absence',
             'list-work-schedule',
+            'list-employe',
+            'create-employe',
+            'edit-employe',
+            'delete-employe',
         ];
 
 
