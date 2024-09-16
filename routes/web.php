@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AbsenceController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesainProductController;
+use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GajiController;
 use Illuminate\Support\Facades\Route;
@@ -10,12 +14,15 @@ use App\Http\Controllers\JadwalProduksiController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaporanProduksiController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OvertimeController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RencanaProduksiController;
+use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\WorkScheduleController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -193,6 +200,32 @@ Route::prefix('quotation')->name('quotation-')->group(function () {
 });
 // END QUOTATION
 
+// START SHIFT
+Route::prefix('shift')->name('shift-')->group(function () {
+    Route::get('/', [ShiftController::class, 'index'])->name('list');
+    Route::get('/get-data', [ShiftController::class, 'getData'])->name('get-data');
+    Route::get('/create', [ShiftController::class, 'create'])->name('create');
+    Route::post('/store', [ShiftController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [ShiftController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [ShiftController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [ShiftController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [ShiftController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [ShiftController::class, 'approve'])->name('approve');
+});
+// END SHIFT
+
+// START HR WORK SCHEDULE
+Route::prefix('hr')->name('hr-')->group(function (){
+    Route::get('/work-schedule', [WorkScheduleController::class, 'hrWorkScheduleIndex'])->name('work-schedule-list');
+    Route::get('/work-schedule-get-data', [WorkScheduleController::class, 'getData'])->name('work-schedule-get-data');
+    Route::get('/work-schedule-create', [WorkScheduleController::class, 'create'])->name('work-schedule-create');
+    Route::post('/work-schedule-store', [WorkScheduleController::class, 'store'])->name('work-schedule-store');
+    Route::get('/work-schedule-edit/{id}', [WorkScheduleController::class, 'edit'])->name('work-schedule-edit');
+    Route::post('/work-schedule-update/{id}', [WorkScheduleController::class, 'update'])->name('work-schedule-update');
+    Route::get('/work-schedule-delete/{id}', [WorkScheduleController::class, 'delete'])->name('work-schedule-delete');
+});
+// END HR WORK SCHEDULE
+
 // START RECEIVE ORDER
 Route::prefix('receive-order')->name('receive-order-')->group(function () {
     Route::get('/', [QuotationController::class, 'receiveOrder'])->name('list');
@@ -205,6 +238,47 @@ Route::get('/payroll', function() {
     return view('payroll.index');
 })->name('payroll.list');
 // End Payroll
+// START ATTENDANCE
+Route::prefix('attendance')->name('attendance-')->group(function () {
+    Route::get('/', [AttendanceController::class, 'index'])->name('list');
+});
+Route::prefix('overtime')->name('overtime-')->group(function () {
+    Route::get('/', [OvertimeController::class, 'index'])->name('list');
+});
+Route::prefix('absence')->name('absence-')->group(function () {
+    Route::get('/', [AbsenceController::class, 'index'])->name('list');
+});
+Route::prefix('work-schedule')->name('work-schedule-')->group(function () {
+    Route::get('/', [WorkScheduleController::class, 'index'])->name('list');
+});
+// END ATTENDANCE
+
+// START EMPLOYE 
+Route::prefix('employe')->name('employe-')->group(function () {
+    Route::get('/', [EmployeController::class, 'index'])->name('list');
+    Route::get('/get-data', [EmployeController::class, 'getData'])->name('get-data');
+    Route::get('/create', [EmployeController::class, 'create'])->name('create');
+    Route::post('/store', [EmployeController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [EmployeController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [EmployeController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [EmployeController::class, 'delete'])->name('delete');
+});
+// END EMPLOYE 
+
+// START EMPLOYEE SALARY 
+Route::prefix('employee-salary')->name('employee-salary-')->group(function () {
+    Route::get('/', [EmployeeSalaryController::class, 'index'])->name('list');
+    Route::get('/get-data', [EmployeeSalaryController::class, 'getData'])->name('get-data');
+    Route::get('/create', [EmployeeSalaryController::class, 'create'])->name('create');
+    Route::post('/store', [EmployeeSalaryController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [EmployeeSalaryController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [EmployeeSalaryController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [EmployeeSalaryController::class, 'delete'])->name('delete');
+});
+// END EMPLOYE SALARY
+
+
+
 Route::resources([
     // 'roles' => RoleController::class,
     'users' => UserController::class,

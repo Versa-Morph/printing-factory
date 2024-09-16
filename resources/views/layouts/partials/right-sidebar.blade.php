@@ -18,7 +18,7 @@
 
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="layout-mode"
-                    id="layout-mode-light" value="light">
+                    id="layout-mode-light" value="light" checked>
                 <label class="form-check-label" for="layout-mode-light">Light</label>
             </div>
             <div class="form-check form-check-inline">
