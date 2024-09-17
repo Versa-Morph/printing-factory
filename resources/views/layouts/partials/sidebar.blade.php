@@ -62,15 +62,9 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('employe-list') }}" data-key="t-inbox">Employe List</a></li>
+                        <li><a href="{{ route('employee-salary-list') }}" data-key="t-inbox">Employee Salary</a></li>
                         <li><a href="{{ route('hr-work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
                     </ul>
-                </li>
-
-                <li>
-                    <a href="{{ route('employee-salary-list') }}">
-                        <i class="bx bx-home-circle nav-icon"></i>
-                        <span class="menu-item" data-key="t-dashboard">Employee Salary</span>
-                    </a>
                 </li>
 
                 {{-- <li>

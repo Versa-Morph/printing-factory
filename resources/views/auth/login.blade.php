@@ -19,8 +19,8 @@
                             <img src="{{ asset('assets/logo-polimer.png') }}" alt="logo polimer" class="logo polimer" width="200">
                         </div>
                         <div class="input-control">
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="input-email" placeholder="Enter Email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
-                            @error('email')
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="input-username" placeholder="Enter Username" name="username" value="{{ old('username') }}" autocomplete="username" autofocus>
+                            @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -88,12 +88,12 @@
                     element.remove();
                 });
 
-                const email = document.querySelector('input[name="email"]').value.trim();
+                const email = document.querySelector('input[name="username"]').value.trim();
                 const password = document.querySelector('input[name="password"]').value.trim();
                 let isValid = true;
 
                 if (!email) {
-                    showError('Email tidak boleh kosong', 'input[name="email"]');
+                    showError('Username tidak boleh kosong', 'input[name="username"]');
                     isValid = false;
                 }
 
@@ -113,7 +113,7 @@
                         processData: false,
                         contentType: false,
                         headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                         },
                         success: function(response) {
                             if (response.success) {
