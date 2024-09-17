@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .heading-card-text{
+        font-weight: bold;
+        color: white;
+        margin-top: 10px;
+    }
+    .background-polimer{
+        background: #776acf;
+    }
+</style>
     <div class="card">
         <div class="card-body">
             <h4 class="card-title mb-4">Add Employee Salary</h4>
@@ -9,45 +19,50 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <h5>Personal Info</h5>
-                        <hr>
-                        <!-- Employee Selection -->
-                        <div class="mb-3">
-                            <label for="employee_id" class="form-label">Employee</label>
-                            <select class="form-select" id="employee_id" name="employee_id" >
-                                <option value="">Choose Employee</option>
-                                @foreach ($employee as $emp)
-                                    <option value="{{ $emp->id }}"
-                                        {{ old('employee_id') == $emp->id ? 'selected' : '' }}>
-                                        {{ $emp->first_name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                        <div class="card">
+                            <div class="card-header background-polimer">
+                                <h5 class="heading-card-text">Personal Info</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Employee Selection -->
+                                <div class="mb-3">
+                                    <label for="employee_id" class="form-label">Employee</label>
+                                    <select class="form-select" id="employee_id" name="employee_id" >
+                                        <option value="">Choose Employee</option>
+                                        @foreach ($employee as $emp)
+                                            <option value="{{ $emp->id }}"
+                                                {{ old('employee_id') == $emp->id ? 'selected' : '' }}>
+                                                {{ $emp->first_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+        
+                                <!-- Payment Method -->
+                                <div class="mb-3">
+                                    <label for="payment_method" class="form-label">Payment Method</label>
+                                    <input type="text" class="form-control" id="payment_method" name="payment_method" 
+                                        value="{{ old('payment_method') }}">
+                                </div>
+        
+                                <!-- Rekening Number -->
+                                <div class="mb-3">
+                                    <label for="rekening_number" class="form-label">Rekening Number</label>
+                                    <input type="text" class="form-control" id="rekening_number" name="rekening_number" 
+                                        value="{{ old('rekening_number') }}">
+                                </div>
+        
+                                <!-- Working Days -->
+                                <div class="mb-3">
+                                    <label for="working_days" class="form-label">Working Days</label>
+                                    <input type="number" class="form-control" id="working_days" name="working_days" 
+                                        value="{{ old('working_days') }}">
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Payment Method -->
-                        <div class="mb-3">
-                            <label for="payment_method" class="form-label">Payment Method</label>
-                            <input type="text" class="form-control" id="payment_method" name="payment_method" 
-                                value="{{ old('payment_method') }}">
-                        </div>
 
-                        <!-- Rekening Number -->
-                        <div class="mb-3">
-                            <label for="rekening_number" class="form-label">Rekening Number</label>
-                            <input type="text" class="form-control" id="rekening_number" name="rekening_number" 
-                                value="{{ old('rekening_number') }}">
-                        </div>
-
-                        <!-- Working Days -->
-                        <div class="mb-3">
-                            <label for="working_days" class="form-label">Working Days</label>
-                            <input type="number" class="form-control" id="working_days" name="working_days" 
-                                value="{{ old('working_days') }}">
-                        </div>
-
-
-                        <h5>Overtime</h5>
+                        {{-- <h5>Overtime</h5>
                         <hr>
                         <!-- Overtime Per Hour -->
                         <div class="mb-3">
@@ -61,92 +76,105 @@
                             <label for="additional_overtime" class="form-label">Additional Overtime</label>
                             <input type="number" step="0.01" class="form-control" id="additional_overtime"
                                 name="additional_overtime" value="{{ old('additional_overtime') }}">
+                        </div> --}}
+
+                        <div class="card">
+                            <div class="card-header background-polimer">
+                                <h5 class="heading-card-text">Income</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="basic_salary" class="form-label">Basic Salary</label>
+                                    <input type="number" step="0.01" class="form-control" id="basic_salary" name="basic_salary"
+                                         value="{{ old('basic_salary') }}">
+                                </div>
+        
+                                <!-- Transportation Incentive -->
+                                <div class="mb-3">
+                                    <label for="transportation_incentive" class="form-label">Transportation Incentive</label>
+                                    <input type="number" step="0.01" class="form-control" id="transportation_incentive"
+                                        name="transportation_incentive" value="{{ old('transportation_incentive') }}">
+                                </div>
+        
+                                <!-- Daily Incentive -->
+                                <div class="mb-3">
+                                    <label for="daily_incentive" class="form-label">Daily Incentive</label>
+                                    <input type="number" step="0.01" class="form-control" id="daily_incentive"
+                                        name="daily_incentive" value="{{ old('daily_incentive') }}">
+                                </div>
+        
+                                <!-- Position Incentive -->
+                                <div class="mb-3">
+                                    <label for="position_incentive" class="form-label">Position Incentive</label>
+                                    <input type="number" step="0.01" class="form-control" id="position_incentive"
+                                        name="position_incentive" value="{{ old('position_incentive') }}">
+                                </div>
+                            </div>
                         </div>
 
-                        <h5>Income</h5>
-                        <hr>
-
-                        <!-- Basic Salary -->
-                        <div class="mb-3">
-                            <label for="basic_salary" class="form-label">Basic Salary</label>
-                            <input type="number" step="0.01" class="form-control" id="basic_salary" name="basic_salary"
-                                 value="{{ old('basic_salary') }}">
-                        </div>
-
-                        <!-- Transportation Incentive -->
-                        <div class="mb-3">
-                            <label for="transportation_incentive" class="form-label">Transportation Incentive</label>
-                            <input type="number" step="0.01" class="form-control" id="transportation_incentive"
-                                name="transportation_incentive" value="{{ old('transportation_incentive') }}">
-                        </div>
-
-                        <!-- Daily Incentive -->
-                        <div class="mb-3">
-                            <label for="daily_incentive" class="form-label">Daily Incentive</label>
-                            <input type="number" step="0.01" class="form-control" id="daily_incentive"
-                                name="daily_incentive" value="{{ old('daily_incentive') }}">
-                        </div>
-
-                        <!-- Position Incentive -->
-                        <div class="mb-3">
-                            <label for="position_incentive" class="form-label">Position Incentive</label>
-                            <input type="number" step="0.01" class="form-control" id="position_incentive"
-                                name="position_incentive" value="{{ old('position_incentive') }}">
-                        </div>
 
 
                     </div>
                     <div class="col-lg-6">
 
-                        <h5>BPJS Kesehatan</h5>
-                        <hr>
-                        <!-- BPJS Kesehatan Base -->
-                        <div class="mb-3">
-                            <label for="bpjs_kesehatan_base" class="form-label">BPJS Kesehatan Base</label>
-                            <input type="number" step="0.01" class="form-control" id="bpjs_kesehatan_base"
-                                name="bpjs_kesehatan_base" value="{{ old('bpjs_kesehatan_base') }}">
+                        <div class="card">
+                            <div class="card-header background-polimer">
+                                <h5 class="heading-card-text">BPJS Kesehatan</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- BPJS Kesehatan Base -->
+                                <div class="mb-3">
+                                    <label for="bpjs_kesehatan_base" class="form-label">BPJS Kesehatan Base</label>
+                                    <input type="number" step="0.01" class="form-control" id="bpjs_kesehatan_base"
+                                        name="bpjs_kesehatan_base" value="{{ old('bpjs_kesehatan_base') }}">
+                                </div>
+
+                                <!-- BPJS Kesehatan Employee -->
+                                <div class="mb-3">
+                                    <label for="bpjs_kesehatan_employee" class="form-label">BPJS Kesehatan Employee (%)</label>
+                                    <input type="number" class="form-control" id="bpjs_kesehatan_employee"
+                                        name="bpjs_kesehatan_employee" value="{{ old('bpjs_kesehatan_employee') }}">
+                                </div>
+
+                                <!-- BPJS Kesehatan Employer -->
+                                <div class="mb-3">
+                                    <label for="bpjs_kesehatan_employer" class="form-label">BPJS Kesehatan Employer (%)</label>
+                                    <input type="number" class="form-control" id="bpjs_kesehatan_employer"
+                                        name="bpjs_kesehatan_employer" value="{{ old('bpjs_kesehatan_employer') }}">
+                                </div>
+
+                            </div>
                         </div>
+                        
+                        <div class="card">
+                            <div class="card-header background-polimer">
+                                <h5 class="heading-card-text">BPJS Ketenagakerjaan</h5>
+                            </div>
+                            <div class="card-body">
+                                 <!-- BPJS Ketenagakerjaan Base -->
+                                <div class="mb-3">
+                                    <label for="bpjs_ketenagakerjaan_base" class="form-label">BPJS Ketenagakerjaan Base</label>
+                                    <input type="number" step="0.01" class="form-control" id="bpjs_ketenagakerjaan_base"
+                                        name="bpjs_ketenagakerjaan_base" value="{{ old('bpjs_ketenagakerjaan_base') }}">
+                                </div>
 
-                        <!-- BPJS Kesehatan Employee -->
-                        <div class="mb-3">
-                            <label for="bpjs_kesehatan_employee" class="form-label">BPJS Kesehatan Employee (%)</label>
-                            <input type="number" class="form-control" id="bpjs_kesehatan_employee"
-                                name="bpjs_kesehatan_employee" value="{{ old('bpjs_kesehatan_employee') }}">
+                                <!-- BPJS Ketenagakerjaan Employee -->
+                                <div class="mb-3">
+                                    <label for="bpjs_ketenagakerjaan_employee" class="form-label">BPJS Ketenagakerjaan Employee
+                                        (%)</label>
+                                    <input type="number" class="form-control" id="bpjs_ketenagakerjaan_employee"
+                                        name="bpjs_ketenagakerjaan_employee" value="{{ old('bpjs_ketenagakerjaan_employee') }}">
+                                </div>
+
+                                <!-- BPJS Ketenagakerjaan Employer -->
+                                <div class="mb-3">
+                                    <label for="bpjs_ketenagakerjaan_employer" class="form-label">BPJS Ketenagakerjaan Employer
+                                        (%)</label>
+                                    <input type="number" class="form-control" id="bpjs_ketenagakerjaan_employer"
+                                        name="bpjs_ketenagakerjaan_employer" value="{{ old('bpjs_ketenagakerjaan_employer') }}">
+                                </div>
+                            </div>
                         </div>
-
-                        <!-- BPJS Kesehatan Employer -->
-                        <div class="mb-3">
-                            <label for="bpjs_kesehatan_employer" class="form-label">BPJS Kesehatan Employer (%)</label>
-                            <input type="number" class="form-control" id="bpjs_kesehatan_employer"
-                                name="bpjs_kesehatan_employer" value="{{ old('bpjs_kesehatan_employer') }}">
-                        </div>
-
-                        <h5>BPJS Ketenagakerjaan</h5>
-                        <hr>
-                        <!-- BPJS Ketenagakerjaan Base -->
-                        <div class="mb-3">
-                            <label for="bpjs_ketenagakerjaan_base" class="form-label">BPJS Ketenagakerjaan Base</label>
-                            <input type="number" step="0.01" class="form-control" id="bpjs_ketenagakerjaan_base"
-                                name="bpjs_ketenagakerjaan_base" value="{{ old('bpjs_ketenagakerjaan_base') }}">
-                        </div>
-
-                        <!-- BPJS Ketenagakerjaan Employee -->
-                        <div class="mb-3">
-                            <label for="bpjs_ketenagakerjaan_employee" class="form-label">BPJS Ketenagakerjaan Employee
-                                (%)</label>
-                            <input type="number" class="form-control" id="bpjs_ketenagakerjaan_employee"
-                                name="bpjs_ketenagakerjaan_employee" value="{{ old('bpjs_ketenagakerjaan_employee') }}">
-                        </div>
-
-                        <!-- BPJS Ketenagakerjaan Employer -->
-                        <div class="mb-3">
-                            <label for="bpjs_ketenagakerjaan_employer" class="form-label">BPJS Ketenagakerjaan Employer
-                                (%)</label>
-                            <input type="number" class="form-control" id="bpjs_ketenagakerjaan_employer"
-                                name="bpjs_ketenagakerjaan_employer" value="{{ old('bpjs_ketenagakerjaan_employer') }}">
-                        </div>
-
-
                     </div>
                 </div>
 
@@ -210,10 +238,10 @@
                 const basic_salary = document.querySelector('input[name="basic_salary"]').value.trim();
 
                 // Other fields
-                const overtime_per_hour = document.querySelector('input[name="overtime_per_hour"]').value
-                    .trim();
-                const additional_overtime = document.querySelector('input[name="additional_overtime"]')
-                    .value.trim();
+                // const overtime_per_hour = document.querySelector('input[name="overtime_per_hour"]').value
+                //     .trim();
+                // const additional_overtime = document.querySelector('input[name="additional_overtime"]')
+                //     .value.trim();
                 const transportation_incentive = document.querySelector(
                     'input[name="transportation_incentive"]').value.trim();
                 const daily_incentive = document.querySelector('input[name="daily_incentive"]').value
@@ -271,8 +299,8 @@
                 formData.append('rekening_number', rekening_number);
                 formData.append('working_days', working_days);
                 formData.append('basic_salary', basic_salary);
-                formData.append('overtime_per_hour', overtime_per_hour);
-                formData.append('additional_overtime', additional_overtime);
+                // formData.append('overtime_per_hour', overtime_per_hour);
+                // formData.append('additional_overtime', additional_overtime);
                 formData.append('transportation_incentive', transportation_incentive);
                 formData.append('daily_incentive', daily_incentive);
                 formData.append('position_incentive', position_incentive);
