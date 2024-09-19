@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DesainProductController;
 use App\Http\Controllers\EmployeController;
@@ -39,6 +40,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return redirect('homepage');
 });
+
+Route::post('/send-login', [LoginController::class, 'login'])->name('send-login');
 
 // START FORGOT PASSWORD
 Route::prefix('forgot-password')->name('forgot-password-')->group(function () {

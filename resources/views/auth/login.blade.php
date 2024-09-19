@@ -107,7 +107,7 @@
                     const formData = new FormData(form);
 
                     $.ajax({
-                        url: '{{ route('login') }}',
+                        url: '{{ route('send-login') }}',
                         type: 'POST',
                         data: formData,
                         processData: false,
@@ -124,7 +124,12 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 });
-                                window.location.href = '{{ route('home') }}';
+                                var isSuperAdmin = response.isSuperAdmin;
+                                if (isSuperAdmin) {
+                                    window.location.href = '{{ route('homepage-role') }}';
+                                }else{
+                                    window.location.href = '{{ route('home') }}';
+                                }
                             } else {
                                 Swal.fire({
                                     icon: "error",
