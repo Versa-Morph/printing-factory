@@ -426,7 +426,7 @@ class PermissionSeeder extends Seeder
 
     public function setupRoleAccountingStaff(){
         // PERMISSION Accounting 
-        $Accounting = Role::updateOrCreate(['name' => 'Accounting']);
+        $Accounting = Role::updateOrCreate(['name' => 'Accounting Staff']);
         $accessAccounting = [
             'list-attendance',
             'list-overtime',
