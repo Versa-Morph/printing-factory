@@ -74,23 +74,72 @@ class PermissionSeeder extends Seeder
             'delete-employee-salary',
 
             // HR MANAGER 
-            'menu-manager-hr',
-            'dashboard-manager',
+            'menu-manager',
+            'dashboard-manager-hr',
             'employee-management',
             'absence-management',
             'payroll-management',
             'list-work-schedule',
 
-            // HR STAFF 
-            'menu-staff-hr',
-            'dashboard-staff',
-            'employee-records',
+            // HR  
+            'menu-staff',
+            'dashboard-staff-hr',
             'employee-records',
             'absence-requests',
             'payroll-access',
             'self-service',
+         
+            'menu-analytics-manager',
             'attendance-analysis',
+            'payroll-analysis',
+            'employee-performance',
 
+            'menu-analytics-staff',
+            'task-performance',
+            'absence-reports',
+
+            'list-shift',
+            'master-data',
+
+            'settings',
+            'user-preferences',
+            'role-specific-settings',
+            'logout',
+
+
+            // SALES 
+            'dashboard-manager-sales',
+            'customer-management',
+            'quotation-management',
+            'order-management',
+            'sales-team-management',
+            'discount-&-Promotion-Management',
+
+            'dashboard-manager-sales',
+            'sales-task',
+            'sales-performance-reports',
+            'kpi-tracking',
+            'customer-analytics',
+            'quotation-&-order-analytics',
+            'personal-sales-reports',
+            'customer-interaction-analysis',
+
+            // Accounting 
+            'dashboard-manager-accounting',
+            'invoice-management',
+            'accounts-receivable',
+            'accounts-payable',
+            'tax-management',
+            'general-ledger',
+            'financial-reporting',
+            'dashboard-staff-accounting',
+            'financial-analysis',
+            'cash-flow-analysis',
+            'tax-analysis',
+            'budget-&-Forecast',
+            'accounts-performance',
+            'transaction-reports',
+            'payment-analysis',
         ];
 
 

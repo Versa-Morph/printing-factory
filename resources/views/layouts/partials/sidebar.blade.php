@@ -8,7 +8,7 @@
                 <img src="{{ asset('assets/images/logo-polimer.jpg') }}" alt="" height="26">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('assets/images/logo-polimer.jpg') }}" alt="" height="26"> <span class="logo-txt"></span>
+                <img src="{{ asset('assets/images/logo-polimer.jpg') }}" alt="" height="80"> <span class="logo-txt"></span>
             </span>
         </a>
 
@@ -52,106 +52,49 @@
                     </a>
                 </li>
 
-                @can('menu-manager-hr')
-                    <li class="menu-title" data-key="t-menu">ROLE MENU : MANAGER</li>
-                @endcan
+                @if(Auth::user()->hasRole('Human Resource') || Auth::user()->hasRole('Human Resource Manager') || Auth::user()->hasRole('Human Resource Staff') || Auth::user()->dashboard_view == 'hr')
+                    @include('layouts.partials.role-sidebar.sidebar-hr')
+                @endif
+                @if(Auth::user()->hasRole('Sales') || Auth::user()->hasRole('Sales Manager') || Auth::user()->hasRole('Sales Staff') || Auth::user()->dashboard_view == 'sales')
+                    @include('layouts.partials.role-sidebar.sidebar-sales')
+                @endif
+                @if(Auth::user()->hasRole('Accounting') || Auth::user()->hasRole('Accounting Manager') || Auth::user()->hasRole('Accounting Staff') || Auth::user()->dashboard_view == 'accounting')
+                    @include('layouts.partials.role-sidebar.sidebar-accounting')
+                @endif
 
-                @can('dashboard-manager')
+                @can('settings')
+                    <li class="menu-title" data-key="t-menu">SETTINGS</li>
+                @endcan
+                @can('user-preferences')
                 <li>
                     <a href="#">
                         <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Dashboard</span>
+                        <span class="menu-item" data-key="t-authentication">User Preferences</span>
                     </a>
                 </li>
                 @endcan
-
-                @can('employee-management')
-                <li>
-                    <a href="#" class="nav-icon"></i>
-                        <i class="bx bx-home-circle nav-icon"></i>
-                        <span class="menu-item" data-key="t-email">Employee Management</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        @can('list-employe')
-                            <li><a href="{{ route('employe-list') }}" data-key="t-inbox">List</a></li>
-                        @endcan
-
-                        @can('list-employee-salary')
-                        <li><a href="{{ route('employee-salary-list') }}" data-key="t-inbox">Salary</a></li>
-                        @endcan
-
-                        @can('list-work-schedule')
-                        <li><a href="{{ route('list-work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
-                        @endcan
-
-                    </ul>
-                </li>
-                @endcan
-
-                @can('absence-management')
+                @can('role-specific-settings')
                 <li>
                     <a href="#">
                         <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Absence Management</span>
+                        <span class="menu-item" data-key="t-authentication">Role Specific Settings</span>
                     </a>
                 </li>
                 @endcan
 
-                @can('payroll-management')
+                @can('logout')
                 <li>
-                    <a href="#">
+                    <a href="#" onclick="event.preventDefault();
+                                  document.getElementById('logout-form').submit();" >
                         <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Payroll Management</span>
+                        <span class="menu-item" data-key="t-authentication">Logout</span>
                     </a>
                 </li>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
                 @endcan
-
-                @can('menu-staff-hr')
-                <li class="menu-title" data-key="t-menu">ROLE MENU : STAFF</li>
-                @endcan
-
-                @can('dashboard-staff')
-                <li>
-                    <a href="#">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Dashboard</span>
-                    </a>
-                </li>
-                @endcan
-
-                @can('dashboard-staff')
-                <li>
-                    <a href="#">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Employee Records</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Absence Requests</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Payroll Access</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Self-Service</span>
-                    </a>
-                </li>
-                <li class="menu-title" data-key="t-menu">ANALYTICS MENU : MANAGER</li>
-
-                <li>
-                    <a href="{{ route('shift-list') }}">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Shift</span>
-                    </a>
-                </li>
 
                 
                 @if(Auth::user()->hasRole('Sales'))

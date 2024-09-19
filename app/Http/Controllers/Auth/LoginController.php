@@ -62,6 +62,8 @@ class LoginController extends Controller
         return response()->json(['failed' => true, 'msg' => 'Login failed. Username or Password wrong!.']);
     }
 
+
+
     protected function attemptLogin(Request $request)
     {
         return $this->guard()->attempt(

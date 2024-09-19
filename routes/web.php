@@ -43,6 +43,10 @@ Route::get('/', function () {
 
 Route::post('/send-login', [LoginController::class, 'login'])->name('send-login');
 
+// REDIRECT SCREEN FOR ADMIN
+Route::get('/please-wait', [HomeController::class, 'redirectPage'])->name('please-wait');
+Route::post('/update-dashboard-view', [HomeController::class, 'updateDashboardView'])->name('update-dashboard-view');
+
 // START FORGOT PASSWORD
 Route::prefix('forgot-password')->name('forgot-password-')->group(function () {
     Route::get('/', [ForgotPasswordController::class, 'index'])->name('view');
