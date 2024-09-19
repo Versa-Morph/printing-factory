@@ -55,7 +55,7 @@
 @can('menu-staff')
     <li class="menu-title" data-key="t-menu">ROLE MENU : STAFF</li>
 @endcan
-@can('dashboard-manager-sales')
+@can('dashboard-staff-sales')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
