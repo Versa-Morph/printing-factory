@@ -74,13 +74,15 @@ class PermissionSeeder extends Seeder
             'delete-employee-salary',
 
             // HR MANAGER 
+            'menu-manager-hr',
             'dashboard-manager',
             'employee-management',
             'absence-management',
-            'absence-management',
             'payroll-management',
+            'list-work-schedule',
 
             // HR STAFF 
+            'menu-staff-hr',
             'dashboard-staff',
             'employee-records',
             'employee-records',

@@ -52,7 +52,9 @@
                     </a>
                 </li>
 
-                <li class="menu-title" data-key="t-menu">ROLE MENU : MANAGER</li>
+                @can('menu-manager-hr')
+                    <li class="menu-title" data-key="t-menu">ROLE MENU : MANAGER</li>
+                @endcan
 
                 @can('dashboard-manager')
                 <li>
@@ -78,32 +80,46 @@
                         <li><a href="{{ route('employee-salary-list') }}" data-key="t-inbox">Employee Salary</a></li>
                         @endcan
 
-                        <li><a href="{{ route('hr-work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
+                        @can('list-work-schedule')
+                        <li><a href="{{ route('list-work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
+                        @endcan
+
                     </ul>
                 </li>
                 @endcan
 
+                @can('absence-management')
                 <li>
                     <a href="#">
                         <i class="uil-users-alt nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Absence Management</span>
                     </a>
                 </li>
+                @endcan
+
+                @can('payroll-management')
                 <li>
                     <a href="#">
                         <i class="uil-users-alt nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Payroll Management</span>
                     </a>
                 </li>
+                @endcan
 
+                @can('menu-staff-hr')
                 <li class="menu-title" data-key="t-menu">ROLE MENU : STAFF</li>
+                @endcan
 
+                @can('dashboard-staff')
                 <li>
                     <a href="#">
                         <i class="uil-users-alt nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Dashboard</span>
                     </a>
                 </li>
+                @endcan
+
+                @can('dashboard-staff')
                 <li>
                     <a href="#">
                         <i class="uil-users-alt nav-icon"></i>
