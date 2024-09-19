@@ -13,7 +13,7 @@
 </style>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title mb-4">Add Employee Salary</h4>
+            <h4 class="card-title mb-4">Add Salary</h4>
 
             <form class="form-data" enctype="multipart/form-data">
                 <div class="row">

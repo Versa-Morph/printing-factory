@@ -70,7 +70,7 @@ class WorkScheduleController extends Controller
 
     public function create()
     {
-        $data['page_title'] = 'Tambah Shift';
+        $data['page_title'] = 'Tambah Work Schedule';
         $data['employes'] = Employe::orderBy('employee_code','asc')->get();
         $data['shifts'] = Shift::orderBy('name','asc')->get();
 

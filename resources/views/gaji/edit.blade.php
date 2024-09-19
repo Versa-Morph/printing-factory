@@ -112,7 +112,7 @@
 
                 if (isValid) {
                     const formData = new FormData(form);
-                    formData.set('jumlah_gaji', jumlah_gaji); 
+                    formData.set('jumlah_gaji', jumlah_gaji);
 
                     $.ajax({
                         url: '{{ route('gaji-update',$gaji->id) }}',

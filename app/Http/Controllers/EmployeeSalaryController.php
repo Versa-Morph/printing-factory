@@ -20,7 +20,7 @@ class EmployeeSalaryController extends Controller
 
     public function index()
     {
-        $data['page_title'] = 'Employee Salary';
+        $data['page_title'] = 'Salary';
         return view('employee-salary.index', $data);
     }
 
@@ -54,7 +54,7 @@ class EmployeeSalaryController extends Controller
      */
     public function create()
     {
-        $data['page_title'] = 'Create Employe';
+        $data['page_title'] = 'Employe';
         $data['employee'] = Employe::orderBy('first_name','asc')->get();
 
         return view('employee-salary.create', $data);
@@ -126,7 +126,7 @@ class EmployeeSalaryController extends Controller
      */
     public function edit($id)
     {
-        $data['page_title'] = 'Edit Employe';
+        $data['page_title'] = 'Employe';
         $data['employee'] = Employe::orderBy('first_name','asc')->get();
         $data['employeeSalary'] = EmployeeSalary::find($id);
 

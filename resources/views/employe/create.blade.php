@@ -7,63 +7,65 @@
 
             <form class="form-data" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <!-- User Selection -->
+                    <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Employee Information</h4>
+                    <hr class="my-15">
+                    <div class="col-lg-4">
+                        <!-- First Name -->
                         <div class="mb-3">
-                            <label for="user_id" class="form-label">Select User</label>
-                            <select class="form-select" id="user_id" name="user_id">
-                                <option value="">Choose User</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <label for="first_name" class="form-label">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="first_name" placeholder="Ex:David" name="first_name" value="{{ old('first_name') }}">
                         </div>
+                    </div>
 
+                    <div class="col-lg-4">
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" placeholder="Ex:admin@gmail.com" id="email" name="email" value="{{ old('email') }}">
+                        </div>
+                    </div>
+                        
+                    <div class="col-lg-4">
+                        <!-- Last Name -->
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Ex:david" id="last_name" name="last_name" value="{{ old('last_name') }}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
                         <!-- Employee Code -->
                         <div class="mb-3">
                             <label for="employee_code" class="form-label">Employee Code</label>
-                            <input type="text" class="form-control" id="employee_code" name="employee_code"
-                                value="{{ old('employee_code') }}">
+                            <input type="text" class="form-control" placeholder="Ex:EMP 01" id="employee_code" name="employee_code" value="{{ old('employee_code') }}">
                         </div>
-
-                        <!-- First Name -->
-                        <div class="mb-3">
-                            <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name"
-                                value="{{ old('first_name') }}">
-                        </div>
-
-                        <!-- Last Name -->
-                        <div class="mb-3">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                value="{{ old('last_name') }}">
-                        </div>
-
-                        <!-- Email -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                value="{{ old('email') }}">
-                        </div>
-
+                    </div>
+                    <div class="col-lg-4">
                         <!-- Phone -->
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone"
-                                value="{{ old('phone') }}">
+                            <input type="text" class="form-control" placeholder="Ex:08xxxxxxxxx" id="phone" name="phone" value="{{ old('phone') }}">
                         </div>
+                    </div>
 
-                        <!-- Date of Birth -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="date_of_birth" class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"
-                                value="{{ old('date_of_birth') }}">
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                              <input type="password" class="form-control" placeholder="********" id="password" name="password">
                         </div>
+                    </div>
 
-                        <!-- Gender -->
+                    <!-- Hire Date -->
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="hire_date" class="form-label">Hire Date</label>
+                            <input type="date" class="form-control" id="hire_date" name="hire_date"
+                                value="{{ old('hire_date') }}">
+                        </div>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
                             <select class="form-select" id="gender" name="gender">
@@ -72,27 +74,25 @@
                                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
                             </select>
                         </div>
+                    </div>
 
-                        <!-- Address -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea class="form-control" id="address" name="address" rows="3">{{ old('address') }}</textarea>
+                            <label for="password_confirmation" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" placeholder="********" id="password_confirmation" name="password_confirmation">
                         </div>
-
-                        <!-- Hire Date -->
+                    </div>
+                    
+                    <!-- Marital Status -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="hire_date" class="form-label">Hire Date</label>
-                            <input type="date" class="form-control" id="hire_date" name="hire_date"
-                                value="{{ old('hire_date') }}">
+                            <label for="marital_status" class="form-label">Marital Status</label>
+                            <input type="text" class="form-control" placeholder="Ex:Single/Married" id="marital_status" name="marital_status" value="{{ old('marital_status') }}">
                         </div>
+                    </div>
 
-                        <!-- Profile Picture -->
-                        <div class="mb-3">
-                            <label for="profile_picture" class="form-label">Profile Picture</label>
-                            <input type="file" class="form-control" id="profile_picture" name="profile_picture">
-                        </div>
-
-                        <!-- Status Attendance -->
+                    <!-- Status Attendance -->
+                    <div class="col-lg-2">
                         <div class="mb-3">
                             <label for="status-empoye" class="form-label">Status Employee</label>
                             <select class="form-select" id="status_employe" name="status_employe">
@@ -104,86 +104,60 @@
                                     Terminated</option>
                             </select>
                         </div>
-
                     </div>
 
-                    <div class="col-lg-6">
-                        <!-- KTP Number -->
+                    <!-- Date of Birth -->
+                    <div class="col-lg-2">
                         <div class="mb-3">
-                            <label for="ktp_number" class="form-label">KTP Number</label>
-                            <input type="text" class="form-control" id="ktp_number" name="ktp_number"
-                                value="{{ old('ktp_number') }}">
+                            <label for="date_of_birth" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth') }}">
                         </div>
+                    </div>
 
-                        <!-- KTP File -->
+                    <!-- Address -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="ktp_file" class="form-label">KTP File</label>
-                            <input type="file" class="form-control" id="ktp_file" name="ktp_file">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" placeholder="Ex: Jakarta" name="address" rows="3">{{ old('address') }}</textarea>
                         </div>
+                    </div>
 
-                        <!-- NPWP Number -->
+                    <!-- Address -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="npwp_number" class="form-label">NPWP Number</label>
-                            <input type="text" class="form-control" id="npwp_number" name="npwp_number"
-                                value="{{ old('npwp_number') }}">
-                        </div>
+                            <label for="roles" class="form-label">Roles <span class="text-danger">*</span></label>
+                            <select name = "roles" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                @forelse ($roles as $role)
 
-                        <!-- NPWP File -->
+                                    @if ($role!='Super Admin')
+                                        <option value="{{ $role }}" {{ in_array($role, old('roles') ?? []) ? 'selected' : '' }}>
+                                        {{ $role }}
+                                        </option>
+                                    @else
+                                        @if (Auth::user()->hasRole('Super Admin'))
+                                            <option value="{{ $role }}" {{ in_array($role, old('roles') ?? []) ? 'selected' : '' }}>
+                                            {{ $role }}
+                                            </option>
+                                        @endif
+                                    @endif
+
+                                @empty
+
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!-- Profile Picture -->
                         <div class="mb-3">
-                            <label for="npwp_file" class="form-label">NPWP File</label>
-                            <input type="file" class="form-control" id="npwp_file" name="npwp_file">
+                            <label for="profile_picture" class="form-label">Profile Picture</label>
+                            <input type="file" class="form-control" id="profile_picture" name="profile_picture">
                         </div>
+                    </div>
 
-                        <!-- BPJS Kesehatan Number -->
-                        <div class="mb-3">
-                            <label for="bpjs_kesehatan_number" class="form-label">BPJS Kesehatan Number</label>
-                            <input type="text" class="form-control" id="bpjs_kesehatan_number"
-                                name="bpjs_kesehatan_number" value="{{ old('bpjs_kesehatan_number') }}">
-                        </div>
-
-                        <!-- BPJS Kesehatan File -->
-                        <div class="mb-3">
-                            <label for="bpjs_kesehatan_file" class="form-label">BPJS Kesehatan File</label>
-                            <input type="file" class="form-control" id="bpjs_kesehatan_file"
-                                name="bpjs_kesehatan_file">
-                        </div>
-
-                        <!-- BPJS Ketenagakerjaan Number -->
-                        <div class="mb-3">
-                            <label for="bpjs_ketenagakerjaan_number" class="form-label">BPJS Ketenagakerjaan
-                                Number</label>
-                            <input type="text" class="form-control" id="bpjs_ketenagakerjaan_number"
-                                name="bpjs_ketenagakerjaan_number" value="{{ old('bpjs_ketenagakerjaan_number') }}">
-                        </div>
-
-                        <!-- BPJS Ketenagakerjaan File -->
-                        <div class="mb-3">
-                            <label for="bpjs_ketenagakerjaan_file" class="form-label">BPJS Ketenagakerjaan File</label>
-                            <input type="file" class="form-control" id="bpjs_ketenagakerjaan_file"
-                                name="bpjs_ketenagakerjaan_file">
-                        </div>
-
-                        <!-- Family Card Number -->
-                        <div class="mb-3">
-                            <label for="family_card_number" class="form-label">Family Card Number</label>
-                            <input type="text" class="form-control" id="family_card_number" name="family_card_number"
-                                value="{{ old('family_card_number') }}">
-                        </div>
-
-                        <!-- Family Card File -->
-                        <div class="mb-3">
-                            <label for="family_card_file" class="form-label">Family Card File</label>
-                            <input type="file" class="form-control" id="family_card_file" name="family_card_file">
-                        </div>
-
-                        <!-- Marital Status -->
-                        <div class="mb-3">
-                            <label for="marital_status" class="form-label">Marital Status</label>
-                            <input type="text" class="form-control" id="marital_status" name="marital_status"
-                                value="{{ old('marital_status') }}">
-                        </div>
-
-                        <!-- Status Attendance -->
+                    <!-- Status Attendance -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="status_attendance" class="form-label">Status Attendance</label>
                             <select class="form-select" id="status_attendance" name="status_attendance">
@@ -195,6 +169,89 @@
                             </select>
                         </div>
 
+                    </div>
+
+                    <h4 class="box-title text-info mb-0 mt-4"><i class="ti-user me-15"></i> Data Information</h4>
+                    <hr class="my-15">
+
+                    <!-- KTP Number -->
+                    <div class="col-lg-3">
+                        <div class="mb-3">
+                            <label for="ktp_number" class="form-label">KTP Number</label>
+                            <input type="text" class="form-control" placeholder="Ex:320xxxxx" id="ktp_number" name="ktp_number" value="{{ old('ktp_number') }}">
+                        </div>
+                    </div>
+
+                    <!-- KTP File -->
+                    <div class="col-lg-3">
+                        <div class="mb-3">
+                            <label for="ktp_file" class="form-label">KTP File</label>
+                            <input type="file" class="form-control" id="ktp_file" name="ktp_file">
+                        </div>
+                    </div>
+
+                    <!-- NPWP Number -->
+                    <div class="col-lg-3">
+                        <div class="mb-3">
+                            <label for="npwp_number" class="form-label">NPWP Number</label>
+                            <input type="text" class="form-control" placeholder="54xxxxx" id="npwp_number" name="npwp_number" value="{{ old('npwp_number') }}">
+                        </div>
+                    </div>
+
+                    <!-- NPWP File -->
+                    <div class="col-lg-3">
+                        <div class="mb-3">
+                            <label for="npwp_file" class="form-label">NPWP File</label>
+                            <input type="file" class="form-control" id="npwp_file" name="npwp_file">
+                        </div>
+                    </div>
+
+                    <!-- BPJS Kesehatan Number -->
+                    <div class="col-lg-3">
+                        <div class="mb-3">
+                            <label for="bpjs_kesehatan_number" class="form-label">BPJS Kesehatan Number</label>
+                            <input type="text" class="form-control" placeholder="Ex:32xxxxxxx" id="bpjs_kesehatan_number" name="bpjs_kesehatan_number" value="{{ old('bpjs_kesehatan_number') }}">
+                        </div>
+                    </div>
+
+                    <!-- BPJS Kesehatan File -->
+                    <div class="col-lg-3">
+                        <div class="mb-3">
+                            <label for="bpjs_kesehatan_file" class="form-label">BPJS Kesehatan File</label>
+                            <input type="file" class="form-control" id="bpjs_kesehatan_file" name="bpjs_kesehatan_file">
+                        </div>
+                    </div>
+
+                    <!-- BPJS Ketenagakerjaan Number -->
+                    <div class="col-lg-3">
+                        <div class="mb-3">
+                            <label for="bpjs_ketenagakerjaan_number" class="form-label">BPJS Ketenagakerjaan Number</label>
+                            <input type="text" class="form-control" id="bpjs_ketenagakerjaan_number" placeholder="Ex:32xxxxxxx" name="bpjs_ketenagakerjaan_number" value="{{ old('bpjs_ketenagakerjaan_number') }}">
+                        </div>
+                    </div>
+
+                    <!-- BPJS Ketenagakerjaan File -->
+                    <div class="col-lg-3">
+                        <div class="mb-3">
+                            <label for="bpjs_ketenagakerjaan_file" class="form-label">BPJS Ketenagakerjaan File</label>
+                            <input type="file" class="form-control" id="bpjs_ketenagakerjaan_file" name="bpjs_ketenagakerjaan_file">
+                        </div>
+                    </div>
+
+                    <!-- Family Card Number -->
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label for="family_card_number" class="form-label">Family Card Number</label>
+                            <input type="text" class="form-control" placeholder="Ex:32xxxxxxx" id="family_card_number" name="family_card_number" value="{{ old('family_card_number') }}">
+                        </div>
+                    </div>
+
+                    <!-- Family Card File -->
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label for="family_card_file" class="form-label">Family Card File</label>
+                            <input type="file" class="form-control" id="family_card_file" name="family_card_file">
+                        </div>
                     </div>
                 </div>
 
@@ -225,7 +282,6 @@
             });
 
             // Collect form data
-            const user_id = document.querySelector('select[name="user_id"]').value.trim();
             const employee_code = document.querySelector('input[name="employee_code"]').value.trim();
             const first_name = document.querySelector('input[name="first_name"]').value.trim();
             const email = document.querySelector('input[name="email"]').value.trim();
@@ -233,12 +289,6 @@
             const status_employe = document.querySelector('select[name="status_employe"]').value.trim();
 
             let isValid = true;
-
-            // Validation
-            if (!user_id) {
-                showError('User cannot be null', 'select[name="user_id"]');
-                isValid = false;
-            }
             if (!employee_code) {
                 showError('Employee Code cannot be null', 'input[name="employee_code"]');
                 isValid = false;

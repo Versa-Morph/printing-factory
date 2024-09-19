@@ -5,19 +5,19 @@
     <div class="navbar-brand-box">
         <a href="#!" class="logo logo-dark">
             <span class="logo-sm">
-                <img src="assets/images/logo-sm.svg" alt="" height="26">
+                <img src="{{ asset('assets/images/logo-polimer.jpg') }}" alt="" height="26">
             </span>
             <span class="logo-lg">
-                <img src="assets/images/logo-sm.svg" alt="" height="26"> <span class="logo-txt">Vuesy</span>
+                <img src="{{ asset('assets/images/logo-polimer.jpg') }}" alt="" height="26"> <span class="logo-txt"></span>
             </span>
         </a>
 
         <a href="#!" class="logo logo-light">
             <span class="logo-sm">
-                <img src="assets/images/logo-sm.svg" alt="" height="26">
+                <img src="{{ asset('assets/images/logo-polimer.jpg') }}" alt="" height="26">
             </span>
             <span class="logo-lg">
-                <img src="assets/images/logo-sm.svg" alt="" height="26"> <span class="logo-txt">Vuesy</span>
+                <img src="{{ asset('assets/images/logo-polimer.jpg') }}" alt="" height="56"> <span class="logo-txt"></span>
             </span>
         </a>
     </div>
@@ -42,7 +42,7 @@
                         <li><a href="{{ route('attendance-list') }}" data-key="t-inbox">Dashboard</a></li>
                         <li><a href="{{ route('overtime-list') }}" data-key="t-inbox">Overtime</a></li>
                         <li><a href="{{ route('absence-list') }}" data-key="t-inbox">Absence</a></li>
-                        <li><a href="{{ route('work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
+                        <li><a href="{{ route('hr-work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
                     </ul>
                 </li>
                 <li>
@@ -73,11 +73,11 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         @can('list-employe')
-                            <li><a href="{{ route('employe-list') }}" data-key="t-inbox">Employe List</a></li>
+                            <li><a href="{{ route('employe-list') }}" data-key="t-inbox">List</a></li>
                         @endcan
 
                         @can('list-employee-salary')
-                        <li><a href="{{ route('employee-salary-list') }}" data-key="t-inbox">Employee Salary</a></li>
+                        <li><a href="{{ route('employee-salary-list') }}" data-key="t-inbox">Salary</a></li>
                         @endcan
 
                         @can('list-work-schedule')
@@ -147,9 +147,9 @@
                 <li class="menu-title" data-key="t-menu">ANALYTICS MENU : MANAGER</li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('shift-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Attendance Analysis</span>
+                        <span class="menu-item" data-key="t-authentication">Shift</span>
                     </a>
                 </li>
 
@@ -185,18 +185,6 @@
                     <a href="{{ route('receive-order-list') }}">
                         <i class="uil-users-alt nav-icon"></i>
                         <span class="menu-item" data-key="t-authentication">Receive Order</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('shift-list') }}">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Shift</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('hr-work-schedule-list') }}">
-                        <i class="uil-users-alt nav-icon"></i>
-                        <span class="menu-item" data-key="t-authentication">Work Schedule</span>
                     </a>
                 </li>
                 @endif

@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class EmployeController extends Controller
 {
@@ -57,6 +60,7 @@ class EmployeController extends Controller
     {
         $data['page_title'] = 'Create Employe';
         $data['users'] = User::orderBy('name','asc')->get();
+        $data['roles'] = Role::pluck('name')->all();
 
         return view('employe.create', $data);
     }
@@ -68,34 +72,51 @@ class EmployeController extends Controller
     {
         try {
             $request->validate([
-                'user_id'                   => 'nullable|exists:users,id',
-                'employee_code'             => 'required|string|max:255',
-                'first_name'                => 'required|string|max:255',
-                'last_name'                 => 'nullable|string|max:255',
-                'email'                     => 'required|string|email|max:255|unique:employes,email',
-                'phone'                     => 'nullable|string|max:20',
-                'date_of_birth'             => 'nullable|date',
-                'gender'                    => 'nullable|string',
-                'address'                   => 'nullable|string',
-                'hire_date'                 => 'required|date',
-                'status_employe'                    => 'required|string|max:50',
-                'profile_picture'           => 'nullable|string',
-                'ktp_number'                => 'nullable|string|max:50',
-                'ktp_file'                  => 'nullable|string',
-                'npwp_number'               => 'nullable|string|max:50',
-                'npwp_file'                 => 'nullable|string',
-                'bpjs_kesehatan_number'     => 'nullable|string|max:50',
-                'bpjs_kesehatan_file'       => 'nullable|string',
-                'bpjs_ketenagakerjaan_number' => 'nullable|string|max:50',
-                'bpjs_ketenagakerjaan_file' => 'nullable|string',
-                'family_card_number'        => 'nullable|string|max:50',
-                'family_card_file'          => 'nullable|string',
-                'marital_status'            => 'nullable|string|max:50',
-                'status_attendance'         => 'required|in:mobile,office',
+                'user_id'                       => 'nullable|exists:users,id',
+                'employee_code'                 => 'required|string|max:255',
+                'first_name'                    => 'required|string|max:255',
+                'last_name'                     => 'required|string|max:255',
+                'email'                         => 'required|string|email|max:255|unique:employes,email',
+                'phone'                         => 'nullable|string|max:20',
+                'date_of_birth'                 => 'nullable|date',
+                'gender'                        => 'nullable|string',
+                'address'                       => 'nullable|string',
+                'hire_date'                     => 'required|date',
+                'status_employe'                => 'required|string|max:50',
+                'profile_picture'               => 'nullable|string',
+                'ktp_number'                    => 'nullable|string|max:50',
+                'ktp_file'                      => 'nullable|string',
+                'npwp_number'                   => 'nullable|string|max:50',
+                'npwp_file'                     => 'nullable|string',
+                'bpjs_kesehatan_number'         => 'nullable|string|max:50',
+                'bpjs_kesehatan_file'           => 'nullable|string',
+                'bpjs_ketenagakerjaan_number'   => 'nullable|string|max:50',
+                'bpjs_ketenagakerjaan_file'     => 'nullable|string',
+                'family_card_number'            => 'nullable|string|max:50',
+                'family_card_file'              => 'nullable|string',
+                'marital_status'                => 'nullable|string|max:50',
+                'status_attendance'             => 'required|in:mobile,office',
             ]);
     
+            // user
+            $user = new User();
+            $user->name = $request->input('first_name');
+            $user->email = $request->input('email');
+            $user->username = $request->input('last_name');
+            $user->password = Hash::make($request->password);
+            if ($request->hasFile('profile_picture')) {
+                $image = $request->file('profile_picture');
+                $name = time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('assets/img/users/');
+                $image->move($destinationPath, $name);
+                $user->avatar = $name;
+            }
+
+            $user->assignRole($request->roles);
+            $user->save();
+            
             $employe = new Employe();
-            $employe->user_id = $request->input('user_id');
+            $employe->user_id = $user->id;
             $employe->employee_code = $request->input('employee_code');
             $employe->first_name = $request->input('first_name');
             $employe->last_name = $request->input('last_name');
@@ -215,9 +236,10 @@ class EmployeController extends Controller
     public function edit($id)
     {
         $data['page_title'] = 'Edit Employe';
-        $data['users'] = User::orderBy('name','asc')->get();
-        $data['employe'] = Employe::find($id);
-
+        $data['employe'] = Employe::where('id', $id)->first();
+        $data['roles'] = Role::pluck('name');
+        $data['employeRoles'] = $data['employe']->user->getRoleNames()[0];
+        
         return view('employe.edit', $data);
     }
 
@@ -259,9 +281,28 @@ class EmployeController extends Controller
                 'marital_status'            => 'nullable|string|max:50',
                 'status_attendance'         => 'required|in:mobile,office',
             ]);
-    
+            // Employee
             $employe = Employe::find($id);
-            $employe->user_id = $request->input('user_id');
+    
+            // User
+            $user = User::find($employe->user_id);
+            $user->name = $request->input('first_name');
+            $user->email = $request->input('email');
+            $user->username = $request->input('last_name');
+            $user->password = Hash::make($request->password);
+
+            if ($request->hasFile('profile_picture')) {
+                $image = $request->file('profile_picture');
+                $name = time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('assets/img/users/');
+                $image->move($destinationPath, $name);
+                $user->avatar = $name;
+            }
+
+            $user->syncRoles($request->roles);
+            $user->save();
+
+            $employe->user_id = $user->id;
             $employe->employee_code = $request->input('employee_code');
             $employe->first_name = $request->input('first_name');
             $employe->last_name = $request->input('last_name');

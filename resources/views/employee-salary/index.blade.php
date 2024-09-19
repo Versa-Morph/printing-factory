@@ -11,7 +11,7 @@
                 <div class="col-sm">
                     @can('create-employee-salary')
                     <div>
-                        <a href="{{ route('employee-salary-create') }}" class="btn btn-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Create Employee Salary</a>
+                        <a href="{{ route('employee-salary-create') }}" class="btn btn-light mb-4 bg-primary text-light"><i class="mdi mdi-plus me-1"></i> Create Salary</a>
                     </div>
                     @endcan
                 </div>
