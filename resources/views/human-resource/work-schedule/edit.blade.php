@@ -6,6 +6,25 @@
 @section('header-info-content')
 @endsection
 @section('content')
+<div class="col-sm-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="box-title text-info mb-0"><i class="mdi mdi-account me-15"></i> Employee Information</h4>
+                    <hr class="my-15">
+
+                    <div>
+                        <p class="mb-10"><span class="text-bold">Name :</span><span class="text-gray ps-10">{{ $work_schedule->employee->employee_code }}</span> </p>
+                        <p class="mb-10"><span class="text-bold">Username :</span><span class="text-gray ps-10">{{ $work_schedule->employee->first_name }}</span> </p>
+                        <p class="mb-10"><span class="text-bold">Nip :</span><span class="text-gray ps-10">{{ $work_schedule->employee->ktp_number }}</span></p>
+                        {{-- <p class="mb-10"><span class="text-bold">Company :</span><span class="text-gray ps-10">{{ $work_schedule->employee->company->name }}</span> </p> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header justify-content-between d-flex align-items-center">
@@ -14,21 +33,14 @@
             <div class="card-body">
                 <form class="form-data">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom01">Start Date</label>
+                                <label class="form-label" for="validationCustom01">Date</label>
                                 <input type="text" disabled class="form-control" value="{{ $work_schedule->date }}" name="date" placeholder="Ex:..">
                             </div>
                         </div><!-- end col -->
 
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label class="form-label" for="validationCustom01">Employee</label>
-                                <input type="text" disabled class="form-control" value="{{ $work_schedule->employee->employee_code }}" name="date" placeholder="Ex:..">
-                            </div>
-                        </div><!-- end col -->
-
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="mb-3"style="text-align: left">
                                 <label class="form-label">Shift</label>
                                 <select class="form-select form-select-sm mr-sm-2 @error('shift_id') is-invalid @enderror" id="shift_id" name="shift_id" style="width:100%">
@@ -43,7 +55,7 @@
                         </div>
 
                     </div><!-- end row -->
-                    <a href="{{ route('karyawan-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
+                    <a href="{{ route('hr-work-schedule-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
                     <button type="submit" class="btn btn-primary" style="float: right">Simpan</button>
                 </form><!-- end form -->
             </div><!-- end card body -->

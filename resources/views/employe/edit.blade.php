@@ -7,94 +7,79 @@
 
             <form class="form-data" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <!-- User Selection -->
+                    <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Employee Information</h4>
+                    <hr class="my-15">
+                    <!-- First Name -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="user_id" class="form-label">Select User</label>
-                            <select class="form-select" id="user_id" name="user_id">
-                                <option value="">Choose User</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ $employe->user_id == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <label for="first_name" class="form-label">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $employe->first_name }}">
                         </div>
+                    </div>
 
-                        <!-- Employee Code -->
+                    <!-- Email -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="employee_code" class="form-label">Employee Code</label>
-                            <input type="text" class="form-control" id="employee_code" name="employee_code"
-                                value="{{ $employe->employee_code }}">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $employe->email }}">
                         </div>
+                    </div>
 
-                        <!-- First Name -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name"
-                                value="{{ $employe->first_name }}">
+                            <label for="last_name" class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="last_name" class="form-control" id="last_name" name="last_name" value="{{ $employe->last_name }}">
                         </div>
+                    </div>
 
-                        <!-- Last Name -->
+                    <!-- Employee Code -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                value="{{ $employe->last_name }}">
+                            <label for="employee_code" class="form-label">Employee Code <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="employee_code" name="employee_code" value="{{ $employe->employee_code }}">
                         </div>
+                    </div>
 
-                        <!-- Email -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                value="{{ $employe->email }}">
-                        </div>
-
-                        <!-- Phone -->
+                    <!-- Phone -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone"
-                                value="{{ $employe->phone }}">
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{ $employe->phone }}">
                         </div>
+                    </div>
 
-                        <!-- Date of Birth -->
+                    <!-- Phone -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="date_of_birth" class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"
-                                value="{{ $employe->date_of_birth }}">
+                            <label for="phone" class="form-label">New Password (Optional)</label>
+                            <input type="password" class="form-control" placeholder="*******" id="password" name="password">
                         </div>
+                    </div>
 
-                        <!-- Gender -->
+                    <!-- Hire Date -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="gender" class="form-label">Gender</label>
+                            <label for="hire_date" class="form-label">Hire Date<span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="hire_date" name="hire_date" value="{{ $employe->hire_date }}">
+                        </div>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender<span class="text-danger">*</span></label>
                             <select class="form-select" id="gender" name="gender">
                                 <option value="">Select Gender</option>
                                 <option value="male" {{ $employe->gender == 'male' ? 'selected' : '' }}>Male</option>
                                 <option value="female" {{ $employe->gender == 'female' ? 'selected' : '' }}>Female</option>
                             </select>
                         </div>
+                    </div>
 
-                        <!-- Address -->
+                    <!-- Status Attendance -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea class="form-control" id="address" name="address" rows="3">{{ $employe->address }}</textarea>
-                        </div>
-
-                        <!-- Hire Date -->
-                        <div class="mb-3">
-                            <label for="hire_date" class="form-label">Hire Date</label>
-                            <input type="date" class="form-control" id="hire_date" name="hire_date"
-                                value="{{ $employe->hire_date }}">
-                        </div>
-
-                        <!-- Profile Picture -->
-                        <div class="mb-3">
-                            <label for="profile_picture" class="form-label">Profile Picture</label>
-                            <input type="file" class="form-control" id="profile_picture" name="profile_picture">
-                        </div>
-
-                        <!-- Status Attendance -->
-                        <div class="mb-3">
-                            <label for="status-empoye" class="form-label">Status Employee</label>
+                            <label for="status-empoye" class="form-label">Status Employee <span class="text-danger">*</span></label>
                             <select class="form-select" id="status_employe" name="status_employe">
                                 <option value="">Select Status</option>
                                 <option value="active" {{ $employe->status == 'active' ? 'selected' : '' }}>Active</option>
@@ -104,86 +89,150 @@
                                     Terminated</option>
                             </select>
                         </div>
-
                     </div>
 
-                    <div class="col-lg-6">
-                        <!-- KTP Number -->
+                    @if (Auth::user()->hasRole('Super Admin'))
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="roles" class="form-label">Roles</label>
+                            <select name = "roles"  class="form-select @error('roles') is-invalid @enderror" aria-label="Roles" id="floatingSelect" name="roles">
+                                <option value="">-- Select Role --</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role }}" {{ $role == $employeRoles ? 'selected' : '' }}>{{ $role }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Profile Picture -->
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label for="profile_picture" class="form-label">Profile Picture</label>
+                            <input type="file" class="form-control" id="profile_picture" name="profile_picture">
+                        </div>
+                    </div>
+
+                    <!-- Date of Birth -->
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label for="date_of_birth" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ $employe->date_of_birth }}">
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" name="address" rows="3">{{ $employe->address }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Employee Information</h4>
+                    <hr class="my-15">
+                    
+                    <!-- KTP Number -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="ktp_number" class="form-label">KTP Number</label>
                             <input type="text" class="form-control" id="ktp_number" name="ktp_number"
-                                value="{{ $employe->ktp_number }}">
+                            value="{{ $employe->ktp_number }}">
                         </div>
+                    </div>
 
-                        <!-- KTP File -->
+                    <!-- KTP File -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="ktp_file" class="form-label">KTP File</label>
                             <input type="file" class="form-control" id="ktp_file" name="ktp_file">
                         </div>
+                    </div>
 
-                        <!-- NPWP Number -->
+                    <!-- NPWP Number -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="npwp_number" class="form-label">NPWP Number</label>
                             <input type="text" class="form-control" id="npwp_number" name="npwp_number"
-                                value="{{ $employe->npwp_number }}">
+                            value="{{ $employe->npwp_number }}">
                         </div>
+                    </div>
 
-                        <!-- NPWP File -->
+                    <!-- NPWP File -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="npwp_file" class="form-label">NPWP File</label>
                             <input type="file" class="form-control" id="npwp_file" name="npwp_file">
                         </div>
+                    </div>
 
-                        <!-- BPJS Kesehatan Number -->
+                    <!-- BPJS Kesehatan Number -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="bpjs_kesehatan_number" class="form-label">BPJS Kesehatan Number</label>
                             <input type="text" class="form-control" id="bpjs_kesehatan_number"
-                                name="bpjs_kesehatan_number" value="{{ $employe->bpjs_kesehatan_number }}">
+                            name="bpjs_kesehatan_number" value="{{ $employe->bpjs_kesehatan_number }}">
                         </div>
+                    </div>
 
-                        <!-- BPJS Kesehatan File -->
+                    <!-- BPJS Kesehatan File -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="bpjs_kesehatan_file" class="form-label">BPJS Kesehatan File</label>
                             <input type="file" class="form-control" id="bpjs_kesehatan_file"
-                                name="bpjs_kesehatan_file">
+                            name="bpjs_kesehatan_file">
                         </div>
+                    </div>
 
-                        <!-- BPJS Ketenagakerjaan Number -->
+                    <!-- BPJS Ketenagakerjaan Number -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="bpjs_ketenagakerjaan_number" class="form-label">BPJS Ketenagakerjaan
                                 Number</label>
-                            <input type="text" class="form-control" id="bpjs_ketenagakerjaan_number"
+                                <input type="text" class="form-control" id="bpjs_ketenagakerjaan_number"
                                 name="bpjs_ketenagakerjaan_number" value="{{ $employe->bpjs_ketenagakerjaan_number }}">
                         </div>
+                    </div>
 
-                        <!-- BPJS Ketenagakerjaan File -->
+                    <!-- BPJS Ketenagakerjaan File -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="bpjs_ketenagakerjaan_file" class="form-label">BPJS Ketenagakerjaan File</label>
                             <input type="file" class="form-control" id="bpjs_ketenagakerjaan_file"
-                                name="bpjs_ketenagakerjaan_file">
+                            name="bpjs_ketenagakerjaan_file">
                         </div>
+                    </div>
 
-                        <!-- Family Card Number -->
+                    <!-- Family Card Number -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="family_card_number" class="form-label">Family Card Number</label>
                             <input type="text" class="form-control" id="family_card_number" name="family_card_number"
-                                value="{{ $employe->family_card_number }}">
+                            value="{{ $employe->family_card_number }}">
                         </div>
+                    </div>
 
-                        <!-- Family Card File -->
+                    <!-- Family Card File -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="family_card_file" class="form-label">Family Card File</label>
                             <input type="file" class="form-control" id="family_card_file" name="family_card_file">
                         </div>
+                    </div>
 
-                        <!-- Marital Status -->
+                    <!-- Marital Status -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="marital_status" class="form-label">Marital Status</label>
                             <input type="text" class="form-control" id="marital_status" name="marital_status"
-                                value="{{ $employe->marital_status }}">
+                            value="{{ $employe->marital_status }}">
                         </div>
+                    </div>
 
-                        <!-- Status Attendance -->
+                    <!-- Status Attendance -->
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="status_attendance" class="form-label">Status Attendance</label>
                             <select class="form-select" id="status_attendance" name="status_attendance">
@@ -194,10 +243,8 @@
                                 </option>
                             </select>
                         </div>
-
                     </div>
                 </div>
-
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>
         </div><!-- end card-body -->
@@ -225,7 +272,6 @@
             });
 
             // Collect form data
-            const user_id = document.querySelector('select[name="user_id"]').value.trim();
             const employee_code = document.querySelector('input[name="employee_code"]').value.trim();
             const first_name = document.querySelector('input[name="first_name"]').value.trim();
             const email = document.querySelector('input[name="email"]').value.trim();
@@ -235,10 +281,6 @@
             let isValid = true;
 
             // Validation
-            if (!user_id) {
-                showError('User cannot be null', 'select[name="user_id"]');
-                isValid = false;
-            }
             if (!employee_code) {
                 showError('Employee Code cannot be null', 'input[name="employee_code"]');
                 isValid = false;

@@ -16,7 +16,7 @@
             <div class="col-sm">
                 @can('create-karyawan')
                 <div>
-                    <a href="{{ route('hr-work-schedule-create') }}" class="btn btn-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Work Schedule</a>
+                    <a href="{{ route('hr-work-schedule-create') }}" class="btn btn-light text-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Work Schedule</a>
                 </div>
                 @endcan
             </div>
@@ -48,6 +48,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script>
 $(document).ready(function() {

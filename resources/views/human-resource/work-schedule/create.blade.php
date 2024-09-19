@@ -1,7 +1,18 @@
 @extends('layouts.app')
 
-@section('style')
-@endsection
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <style>
+        .table-hover{
+            border: snow !important;
+        }
+        
+        .dataTables_scrollBody{
+            border: none !important;
+
+        }
+    </style>
+@endpush
 
 @section('header-info-content')
 @endsection
@@ -12,7 +23,7 @@
                 <h4 class="card-title">{{ $page_title }}</h4>
             </div><!-- end card header -->
             <div class="card-body">
-                <form class="form-data">
+                <form class="form-data" id="wo-form">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
@@ -41,21 +52,56 @@
                                 </select>
                             </div>
                         </div>
-                        
-                        <div class="col-lg-12 col-md-12">
-                            <div class="mb-3">
-                                <label for="choices-multiple-remove-button" class="form-label font-size-13 text-muted">Employee <small class="text-danger">*</small></label>
-                                <select class="js-example-basic-multiple form-control" name="employee[]" multiple="multiple">
-                                    @foreach ($employes as $employee)
-                                    <option value="{{ $employee->id }}"
-                                        {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
-                                        {{ $employee->employee_code }} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div><!-- end col -->
 
+                        <div class="form-group">
+                            <div class="d-flex flex-row justify-content-between mt-10">
+                                <label class="form-label mt-5">Employee <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        
                     </div><!-- end row -->
+
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table id="workingTable" class="table table-hover no-border">
+                                <thead>
+                                    <tr class="text-uppercase bg-lightest">
+                                        <th style="min-width: 200px"><span class="text-dark ">No</span></th>
+                                        <th style="min-width: 200px"><span class="text-dark ">Name</span></th>
+                                        <th style="min-width: 80px"><span class="text-dark">NIK</span></th>
+                                        <th style="min-width: 90px" class="text-center"><span class="text-dark">Checklist</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($employes as $employee)
+                                    <tr class="row-employee">										
+                                        <td class="text-start" style="max-width: 360px">
+                                            <span class="text-dark ms-10">
+                                                {{ $loop->iteration }}
+                                            </span>
+                                        </td>
+                                        <td class="text-start" style="max-width: 360px">
+                                            <span class="text-dark ms-10">
+                                                {{ $employee->employee_code }}
+                                            </span>
+                                        </td>
+                                        <td class="text-start">
+                                            <span class="text-dark ms-10">
+                                                {{ $employee->ktp_number }}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="demo-checkbox">
+                                                <input name="employee[]" type="checkbox" value="{{$employee->id}}" {{ in_array($employee->id, old('employee') ?? []) ? 'checked' : '' }} class="filled-in">
+                                                <label for="" style="height: 0px; min-width: 0;"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                     <a href="{{ route('karyawan-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
                     <button type="submit" class="btn btn-primary" style="float: right">Simpan</button>
@@ -68,6 +114,32 @@
 @section('script')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+{{-- <script src="{{ asset('assets/js/datatable/datatables.min.js') }}"></script> --}}
+
+<script>
+    $("#wo-form").on("submit", function() {
+        $('#workingTable').DataTable().search('').draw();
+        // return false;
+    });
+
+        $('.row-employee').click(function () {
+            let data = $(this).find('input:checkbox');
+            data.prop('checked', !data.is(':checked'));
+        });
+
+        $(function() {
+            $('#workingTable').DataTable({
+                "scrollY": "350px",
+                "scrollCollapse": true,
+                "paging": false,
+                info: false,
+            });
+        })
+
+        
+</script>
+
 <script>
     $(document).ready(function() {
     $('.js-example-basic-multiple').select2();
