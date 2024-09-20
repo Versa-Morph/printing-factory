@@ -10,57 +10,43 @@
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Support</span>
+            <span class="menu-item" data-key="t-authentication">Production Planning</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Complaint Management</span>
+            <span class="menu-item" data-key="t-authentication">Machine & Equipment Management</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Feedback</span>
+            <span class="menu-item" data-key="t-authentication">Production Tracking</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Repair & Reclaim</span>
+            <span class="menu-item" data-key="t-authentication">Reporting</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Knowledge Base Management</span>
-        </a>
-    </li>
-@endcan
-
-@can('dashboard-manager-accounting')
-    <li>
-        <a href="#">
-            <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Employee Self-Service</span>
+            <span class="menu-item" data-key="t-authentication">Incident Management</span>
         </a>
     </li>
 @endcan
@@ -77,111 +63,87 @@
         </a>
     </li>
 @endcan
-
-@can('dashboard-manager-accounting')
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Support</span>
+            <span class="menu-item" data-key="t-authentication">Production Tasks</span>
         </a>
     </li>
 @endcan
-
-@can('dashboard-manager-accounting')
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Complaint Management</span>
+            <span class="menu-item" data-key="t-authentication">Machine Operation</span>
         </a>
     </li>
 @endcan
-
-@can('dashboard-manager-accounting')
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Feedback</span>
+            <span class="menu-item" data-key="t-authentication">Production Output</span>
         </a>
     </li>
 @endcan
-
-@can('dashboard-manager-accounting')
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Repair & Reclaim</span>
-        </a>
-    </li>
-@endcan
-
-@can('dashboard-manager-accounting')
-    <li>
-        <a href="#">
-            <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Knowledge Base Access</span>
+            <span class="menu-item" data-key="t-authentication">Reporting</span>
         </a>
     </li>
 @endcan
 
 
 @can('menu-analytics-manager')
-    <li class="menu-title" data-key="t-menu">ANALYTICS MENU : MANAGER</li>
+<li class="menu-title" data-key="t-menu">ANALYTICS MENU : MANAGER</li>
 @endcan
-
-@can('dashboard-manager-accounting')
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Interaction Analysis</span>
+            <span class="menu-item" data-key="t-authentication">Production Efficiency</span>
         </a>
     </li>
 @endcan
-
-@can('dashboard-manager-accounting')
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Complaint Analysis</span>
+            <span class="menu-item" data-key="t-authentication">Machine Utilization</span>
         </a>
     </li>
 @endcan
-@can('dashboard-manager-accounting')
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Support Ticket Analysis</span>
+            <span class="menu-item" data-key="t-authentication">Incident Analysis</span>
         </a>
     </li>
 @endcan
-@can('dashboard-manager-accounting')
-    <li>
-        <a href="#">
-            <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Feedback Analysis</span>
-        </a>
-    </li>
-@endcan
-
 
 
 @can('menu-analytics-staff')
     <li class="menu-title" data-key="t-menu">ANALYTICS MENU : STAFF</li>
 @endcan
-
-@can('dashboard-manager-accounting')
+    
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Ticket Reports</span>
+            <span class="menu-item" data-key="t-authentication">Task Performance</span>
         </a>
     </li>
 @endcan
-
-@can('dashboard-manager-accounting')
+    
+@can('dashboard-staff-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Feedback Reports</span>
+            <span class="menu-item" data-key="t-authentication">Machine Operation Reports</span>
         </a>
     </li>
 @endcan

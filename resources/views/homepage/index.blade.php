@@ -331,7 +331,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=finance" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -349,7 +349,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=customer-care" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -367,7 +367,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=graphic-design" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -385,7 +385,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=dtps" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -403,7 +403,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=production" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -421,7 +421,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=admin-and-qc" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -439,7 +439,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=commodity" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -457,7 +457,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=warehouse" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>
@@ -475,7 +475,7 @@
                         </div>
 
                         <p class="small">
-                            <a href="{{ route('home') }}" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
+                            <a href="{{ route('please-wait') }}?view=delivery" class="btn btn-lg w-100 small rounded-5 text-white" style="border:1px solid #fff; height:50px;">Open Dashboard</a>
                         </p>
                     </figcaption>
                   </figure>

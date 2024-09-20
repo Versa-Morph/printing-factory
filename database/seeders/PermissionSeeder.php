@@ -140,6 +140,8 @@ class PermissionSeeder extends Seeder
             'accounts-performance',
             'transaction-reports',
             'payment-analysis',
+
+            // FINANCE 
         ];
 
 

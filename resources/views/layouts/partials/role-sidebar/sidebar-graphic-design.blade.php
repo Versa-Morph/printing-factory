@@ -10,57 +10,35 @@
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Support</span>
+            <span class="menu-item" data-key="t-authentication">Project Management</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Complaint Management</span>
+            <span class="menu-item" data-key="t-authentication">Design Approval</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Feedback</span>
+            <span class="menu-item" data-key="t-authentication">Resource Management</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Repair & Reclaim</span>
-        </a>
-    </li>
-@endcan
-
-@can('dashboard-manager-accounting')
-    <li>
-        <a href="#">
-            <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Knowledge Base Management</span>
-        </a>
-    </li>
-@endcan
-
-@can('dashboard-manager-accounting')
-    <li>
-        <a href="#">
-            <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Employee Self-Service</span>
+            <span class="menu-item" data-key="t-authentication">Reporting</span>
         </a>
     </li>
 @endcan
@@ -77,48 +55,35 @@
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Support</span>
+            <span class="menu-item" data-key="t-authentication">Project Management</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Complaint Management</span>
+            <span class="menu-item" data-key="t-authentication">Design Approval</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Feedback</span>
+            <span class="menu-item" data-key="t-authentication">Resource Management</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Repair & Reclaim</span>
-        </a>
-    </li>
-@endcan
-
-@can('dashboard-manager-accounting')
-    <li>
-        <a href="#">
-            <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Knowledge Base Access</span>
+            <span class="menu-item" data-key="t-authentication">Reporting</span>
         </a>
     </li>
 @endcan
@@ -127,21 +92,11 @@
 @can('menu-analytics-manager')
     <li class="menu-title" data-key="t-menu">ANALYTICS MENU : MANAGER</li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Interaction Analysis</span>
-        </a>
-    </li>
-@endcan
-
-@can('dashboard-manager-accounting')
-    <li>
-        <a href="#">
-            <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Complaint Analysis</span>
+            <span class="menu-item" data-key="t-authentication">Project Performance</span>
         </a>
     </li>
 @endcan
@@ -149,7 +104,7 @@
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Support Ticket Analysis</span>
+            <span class="menu-item" data-key="t-authentication">Resource Utilization</span>
         </a>
     </li>
 @endcan
@@ -157,7 +112,7 @@
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Feedback Analysis</span>
+            <span class="menu-item" data-key="t-authentication">Design Submission Analysis</span>
         </a>
     </li>
 @endcan
@@ -167,21 +122,19 @@
 @can('menu-analytics-staff')
     <li class="menu-title" data-key="t-menu">ANALYTICS MENU : STAFF</li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Ticket Reports</span>
+            <span class="menu-item" data-key="t-authentication">Task Reports</span>
         </a>
     </li>
 @endcan
-
 @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Customer Feedback Reports</span>
+            <span class="menu-item" data-key="t-authentication">Design Feedback Reports</span>
         </a>
     </li>
 @endcan

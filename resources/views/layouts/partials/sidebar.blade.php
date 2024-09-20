@@ -61,6 +61,33 @@
                 @if(Auth::user()->hasRole('Accounting') || Auth::user()->hasRole('Accounting Manager') || Auth::user()->hasRole('Accounting Staff') || Auth::user()->dashboard_view == 'accounting')
                     @include('layouts.partials.role-sidebar.sidebar-accounting')
                 @endif
+                @if(Auth::user()->hasRole('Finance') || Auth::user()->hasRole('Finance Manager') || Auth::user()->hasRole('Finance Staff') || Auth::user()->dashboard_view == 'finance')
+                    @include('layouts.partials.role-sidebar.sidebar-finance')
+                @endif
+                @if(Auth::user()->hasRole('Customer Care') || Auth::user()->hasRole('Customer Care Manager') || Auth::user()->hasRole('Customer Care Staff') || Auth::user()->dashboard_view == 'customer-care')
+                    @include('layouts.partials.role-sidebar.sidebar-customer-care')
+                @endif
+                @if(Auth::user()->hasRole('Graphic Design') || Auth::user()->hasRole('Graphic Design Manager') || Auth::user()->hasRole('Graphic Design Staff') || Auth::user()->dashboard_view == 'graphic-design')
+                    @include('layouts.partials.role-sidebar.sidebar-graphic-design')
+                @endif
+                @if(Auth::user()->hasRole('DTPS') || Auth::user()->hasRole('DTPS Manager') || Auth::user()->hasRole('DTPS Staff') || Auth::user()->dashboard_view == 'dtps')
+                    @include('layouts.partials.role-sidebar.sidebar-dtps')
+                @endif
+                @if(Auth::user()->hasRole('Production') || Auth::user()->hasRole('Production Manager') || Auth::user()->hasRole('Production Staff') || Auth::user()->dashboard_view == 'production')
+                    @include('layouts.partials.role-sidebar.sidebar-production')
+                @endif
+                @if(Auth::user()->hasRole('Admin and QC') || Auth::user()->hasRole('Admin and QC Manager') || Auth::user()->hasRole('Admin and QC Staff') || Auth::user()->dashboard_view == 'admin-and-qc')
+                    @include('layouts.partials.role-sidebar.sidebar-admin-and-qc')
+                @endif
+                @if(Auth::user()->hasRole('Commodity') || Auth::user()->hasRole('Commodity Manager') || Auth::user()->hasRole('Commodity Staff') || Auth::user()->dashboard_view == 'commodity')
+                    @include('layouts.partials.role-sidebar.sidebar-commodity')
+                @endif
+                @if(Auth::user()->hasRole('Warehouse') || Auth::user()->hasRole('Warehouse Manager') || Auth::user()->hasRole('Warehouse Staff') || Auth::user()->dashboard_view == 'warehouse')
+                    @include('layouts.partials.role-sidebar.sidebar-warehouse')
+                @endif
+                @if(Auth::user()->hasRole('Delivery') || Auth::user()->hasRole('Delivery Manager') || Auth::user()->hasRole('Delivery Staff') || Auth::user()->dashboard_view == 'delivery')
+                    @include('layouts.partials.role-sidebar.sidebar-delivery')
+                @endif
 
                 @can('settings')
                     <li class="menu-title" data-key="t-menu">SETTINGS</li>
