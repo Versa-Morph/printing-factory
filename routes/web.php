@@ -20,6 +20,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PwaController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RencanaProduksiController;
 use App\Http\Controllers\ShiftController;
@@ -68,6 +69,14 @@ Route::get('/homepage-role', [HomeController::class, 'homepageRole'])->name('hom
 Route::get('/absensi', function(){
 return view('absensi.index');
 })->name('absensi');
+
+// PWA 
+
+Route::prefix('pwa')->name('pwa-')->group(function () {
+    Route::get('/homepage', [PwaController::class, 'index'])->name('homepage');
+});
+
+// END PWA 
 
 Route::get('/form-customer', [HomeController::class, 'formCustomer'])->name('form-customer');
 
