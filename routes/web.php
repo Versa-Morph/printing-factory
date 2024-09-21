@@ -25,6 +25,7 @@ use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RencanaProduksiController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\WorkScheduleController;
+use App\Http\Controllers\Auth\LoginNewController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -42,7 +43,7 @@ Route::get('/', function () {
     return redirect('homepage');
 });
 
-Route::post('/send-login', [LoginController::class, 'login'])->name('send-login');
+Route::post('/send-login', [LoginNewController::class, 'login'])->name('send-login');
 
 // REDIRECT SCREEN FOR ADMIN
 Route::get('/please-wait', [HomeController::class, 'redirectPage'])->name('please-wait');
