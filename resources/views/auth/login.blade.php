@@ -57,6 +57,11 @@
 @section('script-auth')
 {{-- UPDATE  --}}
     <script>
+         $(document).ajaxStart(function() {
+            showLoading('Processing Request.....');
+        }).ajaxStop(function() {
+            hideLoading();
+        });
         function alertSuccess(msg) {
             Swal.fire({
                 position: "center",
@@ -75,6 +80,22 @@
                 timer: 1500
             });
         }
+
+        function showLoading(message) {
+            Swal.fire({
+                title: message,
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+        }
+
+        function hideLoading() {
+            Swal.close();
+        }
+
 
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('.form-data');

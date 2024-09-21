@@ -1,0 +1,17 @@
+{
+    "name": "Printing Factory",
+    "short_name": "LPT",
+    "start_url": "/pwa/homepage",
+    "background_color": "#6777ef",
+    "description": "Printing Factory",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "logo-polimer.jpg",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

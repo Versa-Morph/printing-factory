@@ -13,5 +13,9 @@ class WorkSchedule extends Model
     {
         return $this->belongsTo(Employe::class, 'employee_id');
     }
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class, 'shift_id');
+    }
 
 }

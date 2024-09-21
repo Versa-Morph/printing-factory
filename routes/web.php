@@ -73,7 +73,12 @@ return view('absensi.index');
 // PWA 
 
 Route::prefix('pwa')->name('pwa-')->group(function () {
+    Route::get('/login', [PwaController::class, 'loginPwa'])->name('login');
+    Route::get('/Logout', [PwaController::class, 'Logout'])->name('logout');
+
     Route::get('/homepage', [PwaController::class, 'index'])->name('homepage');
+    Route::get('/attend', [PwaController::class, 'attend'])->name('attend');
+    Route::post('/store-attend', [PwaController::class, 'storeAttend'])->name('store-attend');
 });
 
 // END PWA 

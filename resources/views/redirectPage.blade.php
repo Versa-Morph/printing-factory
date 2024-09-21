@@ -523,7 +523,7 @@
           }
       }
 
-      const interval = setInterval(() => {
+      $(document).ready(() => {
         var dataType = "json"; //'expected datatype from server
         var token = $('input[name="_token"]').val();
         var view = '{{ Request::get('view') }}';
@@ -531,26 +531,26 @@
             window.location.href = '{{ route('login') }}';
         } else {
             (async () => {
-            const rawResponse = await fetch('{{route("update-dashboard-view")}}', {
-                method: 'post',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-Requested-With':'XMLHttpRequest',
-                    'X-CSRF-TOKEN': token
-                },
-                body: JSON.stringify({view: '{{ Request::get('view') }}'})
-            });
-            const content = await rawResponse.json();
+                const rawResponse = await fetch('{{route("update-dashboard-view")}}', {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': token
+                    },
+                    body: JSON.stringify({ view: '{{ Request::get('view') }}' })
+                });
+                const content = await rawResponse.json();
                 if (content.msg == 'suceess') {
-                  clearInterval(interval);
                     window.location.href = '{{ route('home') }}';
-                }else{
+                } else {
                     window.location.href = '{{ route('login') }}';
                 }
             })();
         }
-    }, 1000);
+    });
+
 
 </script>
 </html>

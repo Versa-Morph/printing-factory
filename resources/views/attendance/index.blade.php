@@ -3,29 +3,33 @@
 @section('style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <style>
-        .text-heading{
+        .text-heading {
             font-weight: 700;
-            margin-bottom: 2%!important;
+            margin-bottom: 2% !important;
         }
+
         .btn.dropdown-toggle {
-            border-radius: 16px!important;
+            border-radius: 16px !important;
             border-color: transparent !important;
         }
-        .badge-ontime{
+
+        .badge-ontime {
             color: rgba(160, 219, 93, 1) !important;
             background: rgba(160, 219, 93, 0.1) !important;
             padding: 16px;
             width: 91%;
             font-weight: 700;
         }
-        .badge-late{
+
+        .badge-late {
             color: rgba(219, 93, 93, 1);
             background: rgba(219, 93, 93, 0.1);
             padding: 16px;
             width: 91%;
             font-weight: 700;
         }
-        .badge-no-data{
+
+        .badge-no-data {
             color: black;
             background: #e6e6e686;
             padding: 16px;
@@ -152,6 +156,7 @@
                 <table class="table align-middle table-nowrap table-check" id="customer-table">
                     <thead>
                         <tr class="bg-transparent">
+                            <th>Employee Name</th>
                             <th>Date</th>
                             <th>Clock In</th>
                             <th>Break</th>
@@ -163,42 +168,53 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <span>26 February 2024</span>
-                            </td>
-                            <td>
-                                <span class="badge badge-ontime">08:00</span>
-                            </td>
-                            <td>
-                                <span class="badge badge-ontime">08:00</span>
-                            </td>
-                            <td>
-                                <span class="badge badge-no-data">-</span>
-                            </td>
-                            <td>
-                                <span class="badge badge-late">08:00</span>
-                            </td>
-                            <td>
-                                <span class="badge badge-late">08:00</span>
-                            </td>
-                            <td>
-                                <span class="badge badge-ontime">08:00</span>
-                            </td>
-                            <td>
-                                <center>
-                                    <div class='dropdown'>
-                                        <button class='btn btn-light btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='true'>
-                                            <i class='uil uil-ellipsis-h'></i>
-                                        </button>
-                                        <ul class='dropdown-menu dropdown-menu-end'>
-                                            <li><a class='dropdown-item edit' href='$editUrl'>Edit</a></li>
-                                            <li><a class='dropdown-item delete' href='javascript:void(0);' data-url='$deleteUrl'>Delete</a></li>
-                                        </ul>
-                                    </div>
-                                </center>
-                            </td>
-                        </tr>
+                        @foreach ($attendance as $item)
+                            <tr>
+                                <td>
+                                    <span>{{ $item->employee->first_name  }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ \Carbon\Carbon::parse($item->date)->format('d F Y') }}</span>
+                                </td>
+                                <td>
+                                    @if ($item->clock_in != null)
+                                        <span class="badge {{ $item->status == 'late' ? 'badge-late' : 'badge-ontime' }}">{{ $item->clock_in }}</span>
+                                    @else
+                                        <span class="badge badge-no-data">-</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <span class="badge {{ $item->clock_out != null ? 'badge-ontime' : 'badge-no-data' }}">{{ $item->clock_out ?? '-' }}</span>
+                                </td>
+                                <td>
+                                    <span class="badge {{ $item->break_start != null ? 'badge-ontime' : 'badge-no-data' }}">{{ $item->break_start ?? '-' }}</span>
+                                </td>
+                                <td>
+                                    <span class="badge {{ $item->break_end != null ? 'badge-ontime' : 'badge-no-data' }}"">{{ $item->break_end ?? '-' }}</span>
+                                </td>
+                                <td>
+                                    <span class="badge {{ $item->overtime_in != null ? 'badge-ontime' : 'badge-no-data' }}"">{{ $item->overtime_in ?? '-' }}</span>
+                                </td>
+                                <td>
+                                    <span class="badge {{ $item->overtime_out != null ? 'badge-ontime' : 'badge-no-data' }}"">{{ $item->overtime_out ?? '-' }}</span>
+                                </td>
+                                <td>
+                                    <center>
+                                        <div class='dropdown'>
+                                            <button class='btn btn-light btn-sm dropdown-toggle' type='button'
+                                                data-bs-toggle='dropdown' aria-expanded='true'>
+                                                <i class='uil uil-ellipsis-h'></i>
+                                            </button>
+                                            <ul class='dropdown-menu dropdown-menu-end'>
+                                                <li><a class='dropdown-item edit' href='$editUrl'>Edit</a></li>
+                                                <li><a class='dropdown-item delete' href='javascript:void(0);'
+                                                        data-url='$deleteUrl'>Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </center>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table><!-- end table -->
             </div>
@@ -302,7 +318,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#customer-table').DataTable({ });
+            $('#customer-table').DataTable({});
         });
 
         // Delete action

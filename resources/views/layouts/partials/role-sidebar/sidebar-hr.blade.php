@@ -35,12 +35,17 @@
 @endcan
 
 @can('absence-management')
-    <li>
-        <a href="#">
-            <i class="uil-users-alt nav-icon"></i>
-            <span class="menu-item" data-key="t-authentication">Absence Management</span>
-        </a>
-    </li>
+<li>
+    <a href="{{ route('attendance-list') }}" class="nav-icon"></i>
+        <i class="bx bx-home-circle nav-icon"></i>
+        <span class="menu-item" data-key="t-email">Absence Management</span>
+    </a>
+    <ul class="sub-menu" aria-expanded="false">
+        <li><a href="{{ route('absence-list') }}" data-key="t-inbox">Absence</a></li>
+        <li><a href="{{ route('absence-list-queue') }}" data-key="t-inbox">Queue</a></li>
+        <li><a href="{{ route('absence-list-history') }}" data-key="t-inbox">History</a></li>
+    </ul>
+</li>
 @endcan
 
 @can('payroll-management')
