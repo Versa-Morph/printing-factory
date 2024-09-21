@@ -12,18 +12,8 @@
 
 <div class="card">
     <div class="card-body">
-        <div class="row align-items-start">
-            <div class="col-sm">
-                @can('create-karyawan')
-                <div>
-                    <a href="{{ route('absence-create') }}" class="btn btn-light text-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Absence</a>
-                </div>
-                @endcan
-            </div>
-        </div>
-
         <div class="table-responsive mt-4 mt-sm-0">
-            <table class="table align-middle table-nowrap table-check" id="absence-table">
+            <table class="table align-middle table-nowrap table-check" id="history-table">
                 <thead>
                     <tr class="bg-transparent">
                         <th>No</th>
@@ -33,7 +23,6 @@
                         <th>Leave Type</th>
                         <th>Reason</th>
                         <th>Status</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -54,10 +43,10 @@
 
 <script>
 $(document).ready(function() {
-    $('#absence-table').DataTable({
+    $('#history-table').DataTable({
         processing: false,
         serverSide: true,
-        ajax: '{{ route('absence-get-data') }}',
+        ajax: '{{ route('absence-get-data-history') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'employee', name: 'employee' },
@@ -66,7 +55,6 @@ $(document).ready(function() {
             { data: 'leave_type', name: 'leave_type' },
             { data: 'reason', name: 'reason' },
             { data: 'status', name: 'status' },
-            { data: 'action', name: 'action', orderable: false, searchable: false }
         ]
     });
 

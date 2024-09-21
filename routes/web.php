@@ -242,6 +242,26 @@ Route::prefix('hr')->name('hr-')->group(function (){
 });
 // END HR WORK SCHEDULE
 
+// START ABSENCE
+Route::prefix('absence')->name('absence-')->group(function (){
+    Route::get('/', [AbsenceController::class, 'index'])->name('list');
+    Route::get('/get-data', [AbsenceController::class, 'getData'])->name('get-data');
+    Route::get('/create', [AbsenceController::class, 'create'])->name('create');
+    Route::post('/store', [AbsenceController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [AbsenceController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [AbsenceController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [AbsenceController::class, 'delete'])->name('delete');
+
+    // Queue
+    Route::get('/queue', [AbsenceController::class, 'indexQueue'])->name('list-queue');
+    Route::get('/get-data-queue', [AbsenceController::class, 'getDataQueue'])->name('get-data-queue');
+
+    // History
+    Route::get('/history', [AbsenceController::class, 'indexHistory'])->name('list-history');
+    Route::get('/get-data-history', [AbsenceController::class, 'getDataHistory'])->name('get-data-history');
+});
+// END ABSENCE
+
 // START RECEIVE ORDER
 Route::prefix('receive-order')->name('receive-order-')->group(function () {
     Route::get('/', [QuotationController::class, 'receiveOrder'])->name('list');
@@ -261,9 +281,9 @@ Route::prefix('attendance')->name('attendance-')->group(function () {
 Route::prefix('overtime')->name('overtime-')->group(function () {
     Route::get('/', [OvertimeController::class, 'index'])->name('list');
 });
-Route::prefix('absence')->name('absence-')->group(function () {
-    Route::get('/', [AbsenceController::class, 'index'])->name('list');
-});
+// Route::prefix('absence')->name('absence-')->group(function () {
+//     Route::get('/', [AbsenceController::class, 'index'])->name('list');
+// });
 Route::prefix('work-schedule')->name('work-schedule-')->group(function () {
     Route::get('/', [WorkScheduleController::class, 'index'])->name('list');
 });
