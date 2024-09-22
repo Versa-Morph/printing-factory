@@ -41,7 +41,7 @@
         }
         .btn-create{
             background: rgba(79, 86, 211, 1);
-            color: white;  
+            color: white;
             font-weight: 600;
             float: right
         }
@@ -49,21 +49,26 @@
 @endsection
 
 @section('content')
-<div class="row align-items-end">
-    <div class="col-sm">
-        <div>
-            <a href="#" class="btn btn-create mb-4">
-                <i class="mdi mdi-plus me-1"></i>
-                Request Schedule
-            </a>
-        </div>
-    </div>
-</div>
-    <div class="card">
-        <div class="card-body">
+    <div class="card br-20">
+        <div class="card-body px-0">
+            <div class="row align-items-start">
+                <div class="col-sm d-flex justify-content-between align-items-center">
+                    <div class="ms-3">
+                        <h4 class="pb-0 mb-0">Work Schedule</h4>
+                        <h5 class="text-secondary">Week 9 ( 26 February 2024 - 1 March 2024)</h5>
+                    </div>
+
+                    {{-- @can('create-employee-salary') --}}
+                    <div>
+                        <a href="#" class="btn btn-light me-3"><i class="mdi mdi-plus me-1"></i> Create Work Schedule</a>
+                    </div>
+                    {{-- @endcan --}}
+                </div>
+            </div>
+
+            <hr>
 
             <div class="table-responsive mt-4 mt-sm-0">
-                <h5 class="text-white mb-2 text-heading">Week 9 ( 26 February 2024 - 1 March 2024) </h5>
                 <table class="table align-middle table-nowrap table-check" id="customer-table">
                     <thead>
                         <tr class="bg-transparent">

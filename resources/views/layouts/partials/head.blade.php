@@ -21,3 +21,42 @@
 <link href="{{ asset('assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 @yield('style')
 @stack('styles')
+
+<style>
+    .br-20 {
+        border-radius: 20px !important;
+    }
+
+    .br-top-20 {
+        border-radius: 20px 20px 0 0 !important;
+    }
+    .br-bot-20 {
+        border-radius: 0 0 20px 20px !important;
+    }
+    .dataTables_length {
+        margin-left: 20px !important;
+    }
+    .dataTables_filter {
+        margin-right: 20px !important;
+    }
+    .dataTables_length select {
+        border-radius: 5px !important;
+        padding: 5px 10px;
+        color: #ffffff;
+        background: #001F3F;
+    }
+    .dataTables_info {
+        margin-top: 10px !important;
+        margin-left: 20px !important;
+    }
+    .dataTables_paginate {
+        margin-top: 10px !important;
+        margin-right: 20px !important;
+    }
+    thead tr th {
+        padding: 30px !important;
+        background-color: #001F3F !important;
+        color: white !important;
+        text-transform: uppercase !important;
+    }
+</style>

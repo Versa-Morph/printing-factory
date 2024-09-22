@@ -5,17 +5,23 @@
 @endsection
 
 @section('content')
-    <div class="card">
-        <div class="card-body">
+    <div class="card br-20">
+        <div class="card-body px-0">
             <div class="row align-items-start">
-                <div class="col-sm">
+                <div class="col-sm d-flex justify-content-between align-items-center">
+                    <div class="ms-3">
+                        <h4 class="pb-0 mb-0">Employee Salary</h4>
+                    </div>
+
                     @can('create-employee-salary')
                     <div>
-                        <a href="{{ route('employee-salary-create') }}" class="btn btn-light mb-4 bg-primary text-light"><i class="mdi mdi-plus me-1"></i> Create Salary</a>
+                        <a href="{{ route('employee-salary-create') }}" class="btn btn-light me-3"><i class="mdi mdi-plus me-1"></i> Create Salary</a>
                     </div>
                     @endcan
                 </div>
             </div>
+
+            <hr>
 
             <div class="table-responsive mt-4 mt-sm-0">
                 <table class="table align-middle table-nowrap table-check" id="employee-salary-table">
