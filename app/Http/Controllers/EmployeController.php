@@ -289,7 +289,9 @@ class EmployeController extends Controller
             $user->name = $request->input('first_name');
             $user->email = $request->input('email');
             $user->username = $request->input('last_name');
-            $user->password = Hash::make($request->password);
+            if ($request->input('password') != null) {
+                $user->password = Hash::make($request->password);
+            }
 
             if ($request->hasFile('profile_picture')) {
                 $image = $request->file('profile_picture');

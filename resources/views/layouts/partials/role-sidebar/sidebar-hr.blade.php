@@ -96,7 +96,7 @@
         </a>
     </li>
 @endcan
-
+{{-- 
 @can('self-service')
     <li>
         <a href="#">
@@ -104,7 +104,7 @@
             <span class="menu-item" data-key="t-authentication">Self-Service</span>
         </a>
     </li>
-@endcan
+@endcan --}}
 
 @can('menu-analytics-manager')
     <li class="menu-title" data-key="t-menu">ANALYTICS MENU : MANAGER</li>
