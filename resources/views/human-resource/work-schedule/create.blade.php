@@ -1,17 +1,6 @@
 @extends('layouts.app')
 
 @push('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <style>
-        .table-hover{
-            border: snow !important;
-        }
-        
-        .dataTables_scrollBody{
-            border: none !important;
-
-        }
-    </style>
 @endpush
 
 @section('header-info-content')
@@ -62,14 +51,14 @@
                     </div><!-- end row -->
 
                     <div class="row">
-                        <div class="table-responsive">
-                            <table id="workingTable" class="table table-hover no-border">
+                        <div class="table-responsive mt-4 mt-sm-0">
+                            <table class="table align-middle table-nowrap table-check" id="workingTable">
                                 <thead>
-                                    <tr class="text-uppercase bg-lightest">
-                                        <th style="min-width: 200px"><span class="text-dark ">No</span></th>
-                                        <th style="min-width: 200px"><span class="text-dark ">Name</span></th>
-                                        <th style="min-width: 80px"><span class="text-dark">NIK</span></th>
-                                        <th style="min-width: 90px" class="text-center"><span class="text-dark">Checklist</span></th>
+                                    <tr class="bg-transparent">
+                                        <th style="">No</th>
+                                        <th style="">Name</th>
+                                        <th style="">NIK</th>
+                                        <th style="" class="text-center">Checklist</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,11 +88,11 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
-                            </table>
+                            </table><!-- end table -->
                         </div>
                     </div>
 
-                    <a href="{{ route('karyawan-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
+                    <a href="{{ route('hr-work-schedule-list') }}" class="btn btn-danger" style="float: left">Kembali</a>
                     <button type="submit" class="btn btn-primary" style="float: right">Simpan</button>
                 </form><!-- end form -->
             </div><!-- end card body -->
@@ -115,7 +104,6 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-{{-- <script src="{{ asset('assets/js/datatable/datatables.min.js') }}"></script> --}}
 
 <script>
     $("#wo-form").on("submit", function() {
@@ -175,7 +163,7 @@
                         success: function(response) {
                             if (response.success) {
                                 alertSuccess(response.msg);
-                                window.location.href = '{{ route('karyawan-list') }}';
+                                window.location.href = '{{ route('hr-work-schedule-list') }}';
                             } else {
                                 alertFailed(response.msg);
                             }

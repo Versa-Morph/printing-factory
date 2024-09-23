@@ -109,7 +109,6 @@ class WorkScheduleController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Data Work Schedule berhasil disimpan!']);
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }

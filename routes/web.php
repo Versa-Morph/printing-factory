@@ -26,6 +26,7 @@ use App\Http\Controllers\RencanaProduksiController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\WorkScheduleController;
 use App\Http\Controllers\Auth\LoginNewController;
+use App\Http\Controllers\OfficeInventoryController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -318,6 +319,18 @@ Route::prefix('employee-salary')->name('employee-salary-')->group(function () {
     Route::get('/delete/{id}', [EmployeeSalaryController::class, 'delete'])->name('delete');
 });
 // END EMPLOYE SALARY
+
+// START OFFICE INVENTORY 
+Route::prefix('office-inventory')->name('office-inventory-')->group(function () {
+    Route::get('/', [OfficeInventoryController::class, 'index'])->name('list');
+    Route::get('/get-data', [OfficeInventoryController::class, 'getData'])->name('get-data');
+    Route::get('/create', [OfficeInventoryController::class, 'create'])->name('create');
+    Route::post('/store', [OfficeInventoryController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OfficeInventoryController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OfficeInventoryController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [OfficeInventoryController::class, 'delete'])->name('delete');
+});
+// END OFFICE INVNTORY
 
 
 

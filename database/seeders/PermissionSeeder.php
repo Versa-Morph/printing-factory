@@ -141,6 +141,13 @@ class PermissionSeeder extends Seeder
             'transaction-reports',
             'payment-analysis',
 
+
+            // Office Inventory
+            'list-office-inventory',
+            'create-office-inventory',
+            'edit-office-inventory',
+            'delete-office-inventory',
+            
             // FINANCE 
         ];
 

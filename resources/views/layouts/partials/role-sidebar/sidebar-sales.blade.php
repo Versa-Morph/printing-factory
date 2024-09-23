@@ -51,6 +51,15 @@
     </li>
 @endcan
 
+@can('list-office-inventory')
+    <li>
+        <a href="{{ route('office-inventory-list') }}">
+            <i class="uil-users-alt nav-icon"></i>
+            <span class="menu-item" data-key="t-authentication">Office Inventory</span>
+        </a>
+    </li>
+@endcan
+
 
 @can('menu-staff')
     <li class="menu-title" data-key="t-menu">ROLE MENU : STAFF</li>
