@@ -83,17 +83,17 @@ class EmployeController extends Controller
                 'address'                       => 'nullable|string',
                 'hire_date'                     => 'required|date',
                 'status_employe'                => 'required|string|max:50',
-                'profile_picture'               => 'nullable|string',
+                'profile_picture'               => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'ktp_number'                    => 'nullable|string|max:50',
-                'ktp_file'                      => 'nullable|string',
+                'ktp_file'                      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'npwp_number'                   => 'nullable|string|max:50',
-                'npwp_file'                     => 'nullable|string',
+                'npwp_file'                     => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'bpjs_kesehatan_number'         => 'nullable|string|max:50',
-                'bpjs_kesehatan_file'           => 'nullable|string',
+                'bpjs_kesehatan_file'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'bpjs_ketenagakerjaan_number'   => 'nullable|string|max:50',
-                'bpjs_ketenagakerjaan_file'     => 'nullable|string',
+                'bpjs_ketenagakerjaan_file'     => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'family_card_number'            => 'nullable|string|max:50',
-                'family_card_file'              => 'nullable|string',
+                'family_card_file'              => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'marital_status'                => 'nullable|string|max:50',
                 'status_attendance'             => 'required|in:mobile,office',
             ]);
@@ -104,14 +104,6 @@ class EmployeController extends Controller
             $user->email = $request->input('email');
             $user->username = $request->input('last_name');
             $user->password = Hash::make($request->password);
-            if ($request->hasFile('profile_picture')) {
-                $image = $request->file('profile_picture');
-                $name = time() . '.' . $image->getClientOriginalExtension();
-                $destinationPath = public_path('assets/img/users/');
-                $image->move($destinationPath, $name);
-                $user->avatar = $name;
-            }
-
             $user->assignRole($request->roles);
             $user->save();
             
@@ -217,7 +209,8 @@ class EmployeController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Employee data saved successfully!']);
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => 'Failed to save data!']);
+            dd($th->getMessage());
+            // return response()->json(['failed' => true, 'msg' => 'Failed to save data!']);
         }
     }
     
@@ -261,25 +254,25 @@ class EmployeController extends Controller
                     'max:255',
                     Rule::unique('employes', 'email')->ignore($id) // Ignore the email for the current record
                 ],
-                'phone'                     => 'nullable|string|max:20',
-                'date_of_birth'             => 'nullable|date',
-                'gender'                    => 'nullable|string',
-                'address'                   => 'nullable|string',
-                'hire_date'                 => 'required|date',
-                'status_employe'                    => 'required|string|max:50',
-                'profile_picture'           => 'nullable|string',
-                'ktp_number'                => 'nullable|string|max:50',
-                'ktp_file'                  => 'nullable|string',
-                'npwp_number'               => 'nullable|string|max:50',
-                'npwp_file'                 => 'nullable|string',
-                'bpjs_kesehatan_number'     => 'nullable|string|max:50',
-                'bpjs_kesehatan_file'       => 'nullable|string',
-                'bpjs_ketenagakerjaan_number' => 'nullable|string|max:50',
-                'bpjs_ketenagakerjaan_file' => 'nullable|string',
-                'family_card_number'        => 'nullable|string|max:50',
-                'family_card_file'          => 'nullable|string',
-                'marital_status'            => 'nullable|string|max:50',
-                'status_attendance'         => 'required|in:mobile,office',
+                'phone'                         => 'nullable|string|max:20',
+                'date_of_birth'                 => 'nullable|date',
+                'gender'                        => 'nullable|string',
+                'address'                       => 'nullable|string',
+                'hire_date'                     => 'required|date',
+                'status_employe'                => 'required|string|max:50',
+                'profile_picture'               => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'ktp_number'                    => 'nullable|string|max:50',
+                'ktp_file'                      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'npwp_number'                   => 'nullable|string|max:50',
+                'npwp_file'                     => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'bpjs_kesehatan_number'         => 'nullable|string|max:50',
+                'bpjs_kesehatan_file'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'bpjs_ketenagakerjaan_number'   => 'nullable|string|max:50',
+                'bpjs_ketenagakerjaan_file'     => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'family_card_number'            => 'nullable|string|max:50',
+                'family_card_file'              => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'marital_status'                => 'nullable|string|max:50',
+                'status_attendance'             => 'required|in:mobile,office',
             ]);
             // Employee
             $employe = Employe::find($id);
@@ -291,14 +284,6 @@ class EmployeController extends Controller
             $user->username = $request->input('last_name');
             if ($request->input('password') != null) {
                 $user->password = Hash::make($request->password);
-            }
-
-            if ($request->hasFile('profile_picture')) {
-                $image = $request->file('profile_picture');
-                $name = time() . '.' . $image->getClientOriginalExtension();
-                $destinationPath = public_path('assets/img/users/');
-                $image->move($destinationPath, $name);
-                $user->avatar = $name;
             }
 
             $user->syncRoles($request->roles);
