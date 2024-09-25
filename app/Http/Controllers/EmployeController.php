@@ -209,8 +209,7 @@ class EmployeController extends Controller
     
             return response()->json(['success' => true, 'msg' => 'Employee data saved successfully!']);
         } catch (\Throwable $th) {
-            dd($th->getMessage());
-            // return response()->json(['failed' => true, 'msg' => 'Failed to save data!']);
+            return response()->json(['failed' => true, 'msg' => $th->getMessage()]);
         }
     }
     

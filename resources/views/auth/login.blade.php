@@ -143,7 +143,6 @@
                                     icon: "success",
                                     title: response.msg,
                                     showConfirmButton: false,
-                                    timer: 1500
                                 });
                                 var isSuperAdmin = response.isSuperAdmin;
                                 if (isSuperAdmin) {
@@ -151,13 +150,15 @@
                                 }else{
                                     window.location.href = '{{ route('home') }}';
                                 }
+                                console.log('fail => ' +response);
+
                             } else {
                                 Swal.fire({
                                     icon: "error",
                                     title: "Oops...",
                                     text: response.msg,
-                                    timer: 1500
                                 });
+                                console.log('fail => ' +response);
                             }
                         },
                         error: function(xhr) {

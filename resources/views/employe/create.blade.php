@@ -36,7 +36,7 @@
                     <div class="col-lg-4">
                         <!-- Employee Code -->
                         <div class="mb-3">
-                            <label for="employee_code" class="form-label">Employee Code</label>
+                            <label for="employee_code" class="form-label">Employee Code <span class="text-danger">*</span></label></label>
                             <input type="text" class="form-control" placeholder="Ex:EMP 01" id="employee_code" name="employee_code" value="{{ old('employee_code') }}">
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                     <!-- Hire Date -->
                     <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="hire_date" class="form-label">Hire Date</label>
+                            <label for="hire_date" class="form-label" >Hire Date <span class="text-danger">*</span></label></label>
                             <input type="date" class="form-control" id="hire_date" name="hire_date"
                                 value="{{ old('hire_date') }}">
                         </div>
@@ -94,7 +94,7 @@
                     <!-- Status Attendance -->
                     <div class="col-lg-2">
                         <div class="mb-3">
-                            <label for="status-empoye" class="form-label">Status Employee</label>
+                            <label for="status-empoye" class="form-label">Status Employee <span class="text-danger">*</span></label></label>
                             <select class="form-select" id="status_employe" name="status_employe">
                                 <option value="">Select Status</option>
                                 <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
@@ -159,7 +159,7 @@
                     <!-- Status Attendance -->
                     <div class="col-lg-4">
                         <div class="mb-3">
-                            <label for="status_attendance" class="form-label">Status Attendance</label>
+                            <label for="status_attendance" class="form-label">Status Attendance <span class="text-danger">*</span></label></label>
                             <select class="form-select" id="status_attendance" name="status_attendance">
                                 <option value="">Select Attendance Status</option>
                                 <option value="mobile" {{ old('status_attendance') == 'mobile' ? 'selected' : '' }}>Mobile
@@ -282,15 +282,31 @@
             });
 
             // Collect form data
+            const password_confirmation = document.querySelector('input[name="password_confirmation"]').value.trim();
+            const password = document.querySelector('input[name="password"]').value.trim();
+            const last_name = document.querySelector('input[name="last_name"]').value.trim();
             const employee_code = document.querySelector('input[name="employee_code"]').value.trim();
             const first_name = document.querySelector('input[name="first_name"]').value.trim();
             const email = document.querySelector('input[name="email"]').value.trim();
             const hire_date = document.querySelector('input[name="hire_date"]').value.trim();
             const status_employe = document.querySelector('select[name="status_employe"]').value.trim();
+            const status_attendance = document.querySelector('select[name="status_attendance"]').value.trim();
 
             let isValid = true;
+            if (!password_confirmation) {
+                showError('Confirm Password cannot be null', 'input[name="password_confirmation"]');
+                isValid = false;
+            }
+            if (!password) {
+                showError('Password cannot be null', 'input[name="password"]');
+                isValid = false;
+            }
             if (!employee_code) {
                 showError('Employee Code cannot be null', 'input[name="employee_code"]');
+                isValid = false;
+            }
+            if (!last_name) {
+                showError('Username cannot be null', 'input[name="last_name"]');
                 isValid = false;
             }
             if (!first_name) {
@@ -307,6 +323,10 @@
             }
             if (!status_employe) {
                 showError('Hire Date cannot be null', 'select[name="status_employe"]');
+                isValid = false;
+            }
+            if (!status_attendance) {
+                showError('Status Attendance cannot be null', 'select[name="status_attendance"]');
                 isValid = false;
             }
             
