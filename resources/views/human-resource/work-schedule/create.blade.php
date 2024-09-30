@@ -71,7 +71,7 @@
                                         </td>
                                         <td class="text-start" style="max-width: 360px">
                                             <span class="text-dark ms-10">
-                                                {{ $employee->employee_code }}
+                                                {{ $employee->user->name }}
                                             </span>
                                         </td>
                                         <td class="text-start">

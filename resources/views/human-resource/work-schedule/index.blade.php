@@ -18,6 +18,14 @@
                 <div>
                     <a href="{{ route('hr-work-schedule-create') }}" class="btn btn-light text-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Work Schedule</a>
                 </div>
+                <div>
+                    <form id="delete-form" method="POST" action="{{ route('hr-work-schedule-delete-checklist') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-light text-light mb-4 bg-primary">
+                            <i class="mdi mdi-plus me-1"></i> Delete Data
+                        </button>
+                    </form>
+                </div>
                 @endcan
             </div>
         </div>
@@ -32,6 +40,7 @@
                         <th>Clock In</th>
                         <th>Clock Out</th>
                         <th>Action</th>
+                        <th>Checklist</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -51,23 +60,63 @@
 
 
 <script>
-$(document).ready(function() {
-    $('#work-schedule-table').DataTable({
-        processing: false,
-        serverSide: true,
-        ajax: '{{ route('hr-work-schedule-get-data') }}',
-        columns: [
-            { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-            { data: 'date', name: 'date' },
-            { data: 'shift', name: 'shift' }, // Display shift name
-            { data: 'clock_in', name: 'clock_in' }, // Clock in with badge
-            { data: 'clock_out', name: 'clock_out' }, // Clock out with badge
-            { data: 'action', name: 'action', orderable: false, searchable: false }
-        ]
+    $(document).ready(function() {
+        $('#work-schedule-table').DataTable({
+            processing: false,
+            serverSide: true,
+            ajax: '{{ route('hr-work-schedule-get-data') }}',
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'date', name: 'date' },
+                { data: 'shift', name: 'shift' },
+                { data: 'clock_in', name: 'clock_in' },
+                { data: 'clock_out', name: 'clock_out' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+                { data: 'employee_checklist', name: 'employee_checklist', orderable: false, searchable: false, render: function(data, type, row) {
+                    return `
+                        <div class="demo-checkbox">
+                            <input name="employee[]" type="checkbox" value="${row.id}" 
+                                class="filled-in" id="employee-${row.id}">
+                            <label for="employee-${row.id}" style="height: 0px; min-width: 0;"></label>
+                        </div>`;
+                }}
+            ]
+        });
+
+
+
+    // Delete Checklist
+    $('#delete-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        var selectedIds = [];
+        $('input[name="employee[]"]:checked').each(function() {
+            selectedIds.push($(this).val());
+        });
+
+        if (selectedIds.length === 0) {
+            alert("Please select at least one record to delete.");
+            return;
+        }
+
+        $.ajax({
+            url: '{{ route('hr-work-schedule-delete-checklist') }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                employee_ids: selectedIds
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.success);
+                    $('#work-schedule-table').DataTable().ajax.reload();
+                } else {
+                    alert(response.error);
+                }
+            }
+        });
     });
-
-
-
+    
     // Delete action
     $(document).on('click', '.delete', function () {
         var url = $(this).data('url');
