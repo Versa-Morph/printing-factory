@@ -22,9 +22,6 @@
             height: 400px;
         }
     </style>
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
     <div class="col-lg-12 mx-auto">
         <div class="card">
@@ -48,7 +45,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Address</label>
-                                        <textarea name="description" class="form-control" placeholder="Ex:..."></textarea>
+                                        <textarea name="address" class="form-control" placeholder="Ex:..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -74,6 +71,11 @@
                                         <input type="text" class="form-control" id="longitude" name="longitude"
                                             value="{{ old('longitude') }}" placeholder="Ex:..">
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="radius" class="form-label">Radius</label>
+                                        <input type="number" class="form-control" id="radius" name="radius"
+                                            value="{{ old('radius') }}" placeholder="Ex:..">
+                                    </div>
 
                                     <div class="mb-3">
                                         <label for="" class="form-label" required>Blocking Location<span
@@ -81,7 +83,7 @@
                                         <select name="status" id="" class="form-control">
                                             <option value="" disabled>Choose Status</option>
                                             <option value="1">Yes</option>
-                                            <option value="1">No</option>
+                                            <option value="0">No</option>
                                         </select>
                                     </div>
                                 </div>
@@ -98,8 +100,7 @@
 @endsection
 
 @section('script')
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('.form-data');
@@ -115,10 +116,9 @@
 
                 const title = document.querySelector('input[name="title"]').value.trim();
                 const status = document.querySelector('select[name="status"]').value.trim();
-                console.log(title,status);
                 let isValid = true;
 
-                if (!name) {
+                if (!title) {
                     showError('Title is required', 'input[name="title"]');
                     isValid = false;
                 }

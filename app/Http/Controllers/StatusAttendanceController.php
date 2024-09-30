@@ -24,14 +24,14 @@ class StatusAttendanceController extends Controller
     }
 
     public function getData(Request $request)
-    {
+    {   
         if ($request->ajax()) {
             $data = StatusAttendance::orderBy('created_at', 'desc')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $editUrl = route('shift-edit', $row->id);
-                    $deleteUrl = route('shift-delete', $row->id);
+                    $editUrl = route('status-attendance-edit', $row->id);
+                    $deleteUrl = route('status-attendance-delete', $row->id);
                     $dropdown = "<div class='dropdown'>
                                     <button class='btn btn-light btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='true'>
                                         <i class='uil uil-ellipsis-h'></i>

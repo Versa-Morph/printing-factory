@@ -155,10 +155,9 @@
                             <label for="status_attendance" class="form-label">Status Attendance <span class="text-danger">*</span></label></label>
                             <select class="form-select" id="status_attendance" name="status_attendance">
                                 <option value="">Select Attendance Status</option>
-                                <option value="mobile" {{ $employe->status_attendance == 'mobile' ? 'selected' : '' }}>Mobile
-                                </option>
-                                <option value="office" {{ $employe->status_attendance == 'office' ? 'selected' : '' }}>Office
-                                </option>
+                                @foreach ($statusAttendance as $sa)
+                                    <option value="{{ $sa->id }}" {{ $employe->status_attendance == $sa->id ? 'selected' : '' }}>{{ $sa->title }}</option>
+                                @endforeach
                             </select>
                         </div>
 

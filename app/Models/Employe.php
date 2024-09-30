@@ -18,4 +18,9 @@ class Employe extends Model
     {
         return $this->hasMany(EmployeeSalary::class);
     }
+
+    public function statusAttendance()
+    {
+        return $this->belongsTo(StatusAttendance::class,'status_attendance');
+    }
 }

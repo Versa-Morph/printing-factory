@@ -73,8 +73,8 @@
                         <div class="reset-btn" onclick="location.href='{{ route('pwa-homepage') }}'">
                             <a href="#">Back</a>
                         </div>
-                        <div class="filter-btn" id="submit-button" onclick="submitAttend()">
-                            <a href="#">Submit</a>
+                        <div class="filter-btn" onclick="submitAttend()">
+                            <a href="#" >Submit</a>
                         </div>
                     </div>
                 </div>
@@ -88,134 +88,33 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function showLoading(message) {
-            Swal.fire({
-                title: message,
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-        }
-
-        function hideLoading() {
-            Swal.close();
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
-            // Fungsi untuk menghitung jarak antara dua titik (Haversine formula)
-            function calculateDistance(lat1, lon1, lat2, lon2) {
-                const R = 6371; // Radius bumi dalam kilometer
-                const dLat = deg2rad(lat2 - lat1);
-                const dLon = deg2rad(lon2 - lon1);
-                const a =
-                    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
-                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                const distance = R * c; // Jarak dalam kilometer
-                hideLoading();
-                return distance;
-            }
-
-            // Konversi derajat ke radian
-            function deg2rad(deg) {
-                return deg * (Math.PI / 180);
-            }
-
-            // Fungsi untuk mendapatkan IP pengguna (untuk logging atau keperluan lain)
+            // Fungsi untuk mendapatkan IP pengguna
             function getUserIP() {
                 return '{{ request()->ip() }}';
             }
 
+            // Ambil lokasi pengguna
             function getLocation() {
-                showLoading('Please Wait..');
-                const submitButton = document.querySelector('#submit-button');
-
-                // Mengubah gaya tombol menjadi tidak aktif
-                submitButton.style.pointerEvents = 'none'; // Menonaktifkan klik
-                submitButton.style.opacity = '0.5'; // Mengubah opasitas (opsional)
-
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position) {
-                        const userLatitude = position.coords.latitude;
-                        const userLongitude = position.coords.longitude;
-
                         $('.latitude').val(position.coords.latitude);
                         $('.longitude').val(position.coords.longitude);
-
-                        const allowedStatus = '{{ $data_location['status'] }}';
-                        if (allowedStatus == 'blocking') {
-                            const allowedLatitude = {{ $data_location['data_location']->latitude }};
-                            const allowedLongitude = {{ $data_location['data_location']->longitude }};
-                            const allowedRadius = {{ $data_location['data_location']->radius }};
-
-                            const distance = calculateDistance(userLatitude, userLongitude, allowedLatitude,
-                                allowedLongitude);
-                            console.log(distance);
-
-                            if (distance <= allowedRadius) {
-                                // Jika pengguna dalam radius
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success',
-                                    text: 'You are within the allowed location',
-                                });
-                                // Mengaktifkan kembali tombol
-                                submitButton.style.pointerEvents = 'auto'; // Mengaktifkan klik
-                                submitButton.style.opacity = '1'; // Mengembalikan opasitas
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'You are outside the allowed location',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Reload Page',
-                                    cancelButtonText: 'Back to Home Screen',
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        // Reload halaman
-                                        location.reload();
-                                    } else if (result.isDismissed) {
-                                        // Kembali ke halaman home
-                                        window.location.href ='{{ route('pwa-homepage') }}'; 
-                                    }
-                                });
-                                // Menonaktifkan tombol
-                                submitButton.style.pointerEvents = 'none'; // Menonaktifkan klik
-                                submitButton.style.opacity = '0.5'; // Mengubah opasitas
-                            }
-                        } else {
-                            hideLoading();
-                        }
                     }, function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'You must turn on the location and reload the page to be able to continue!!',
-                        });
-                        // Menonaktifkan tombol
-                        submitButton.style.pointerEvents = 'none'; // Menonaktifkan klik
-                        submitButton.style.opacity = '0.5'; // Mengubah opasitas
+                        showAlert('You must turn on the location and reload the page to be able to continue!!');
                     });
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'You must turn on the location and reload the page to be able to continue!!',
-                    });
-                    // Menonaktifkan tombol
-                    submitButton.style.pointerEvents = 'none'; // Menonaktifkan klik
-                    submitButton.style.opacity = '0.5'; // Mengubah opasitas
+                    showAlert('You must turn on the location and reload the page to be able to continue!!');
                 }
             }
 
-
+            // Panggil fungsi untuk mendapatkan lokasi
             getLocation();
 
-        });
 
+
+
+        });
         // Fungsi untuk menampilkan SweetAlert
         function showAlert(message) {
             Swal.fire({
@@ -240,9 +139,9 @@
             }
 
             if ($('#lat').val() === '' || $('#long').val() === '') {
-                showAlert('You must turn on the location and reload the page to be able to continue!!');
-                e.preventDefault(); // Cegah pengiriman form jika gambar tidak ada
-            }
+                    showAlert('You must turn on the location and reload the page to be able to continue!!');
+                    e.preventDefault(); // Cegah pengiriman form jika gambar tidak ada
+                }
             $('.form').submit();
         }
     </script>

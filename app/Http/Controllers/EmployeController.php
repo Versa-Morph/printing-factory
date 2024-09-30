@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employe;
+use App\Models\StatusAttendance;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -61,6 +62,7 @@ class EmployeController extends Controller
         $data['page_title'] = 'Create Employe';
         $data['users'] = User::orderBy('name','asc')->get();
         $data['roles'] = Role::pluck('name')->all();
+        $data['statusAttendance'] = StatusAttendance::orderBy('created_at', 'desc')->get();
 
         return view('employe.create', $data);
     }
@@ -95,7 +97,7 @@ class EmployeController extends Controller
                 'family_card_number'            => 'nullable|string|max:50',
                 'family_card_file'              => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'marital_status'                => 'nullable|string|max:50',
-                'status_attendance'             => 'required|in:mobile,office',
+                'status_attendance'             => 'required',
             ]);
     
             // user
@@ -231,6 +233,7 @@ class EmployeController extends Controller
         $data['employe'] = Employe::where('id', $id)->first();
         $data['roles'] = Role::pluck('name');
         $data['employeRoles'] = $data['employe']->user->getRoleNames()[0];
+        $data['statusAttendance'] = StatusAttendance::orderBy('created_at', 'desc')->get();
         
         return view('employe.edit', $data);
     }
@@ -271,7 +274,7 @@ class EmployeController extends Controller
                 'family_card_number'            => 'nullable|string|max:50',
                 'family_card_file'              => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'marital_status'                => 'nullable|string|max:50',
-                'status_attendance'             => 'required|in:mobile,office',
+                'status_attendance'             => 'required',
             ]);
             // Employee
             $employe = Employe::find($id);

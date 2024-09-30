@@ -36,11 +36,15 @@ class PwaController extends Controller
         $getShift = WorkSchedule::with('shift')->where('employee_id',$getEmployeId)->where('date',date('Y-m-d'))->first();
         return $getShift->shift ?? null;
     }
+    
     public function attend(){
         if (Auth::check() != true) {
             return redirect()->route('pwa-login');
         }
         $data['page_title'] = 'Attendance';
+        $dataLocation = checkBlockLocation();
+        // dd($dataLocation);
+        $data['data_location'] = checkBlockLocation();
         return view('pwa.attend.index', $data);
     }
 
