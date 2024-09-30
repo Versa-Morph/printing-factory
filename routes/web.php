@@ -261,6 +261,7 @@ Route::prefix('hr')->name('hr-')->group(function (){
     Route::get('/work-schedule-edit/{id}', [WorkScheduleController::class, 'edit'])->name('work-schedule-edit');
     Route::post('/work-schedule-update/{id}', [WorkScheduleController::class, 'update'])->name('work-schedule-update');
     Route::get('/work-schedule-delete/{id}', [WorkScheduleController::class, 'delete'])->name('work-schedule-delete');
+    Route::post('/work-schedule-delete-checklist', [WorkScheduleController::class, 'deleteChecklist'])->name('work-schedule-delete-checklist');
 });
 // END HR WORK SCHEDULE
 

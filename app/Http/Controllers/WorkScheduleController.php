@@ -63,10 +63,18 @@ class WorkScheduleController extends Controller
                                 </div>";
                     return $dropdown;
                 })
-                ->rawColumns(['clock_in', 'clock_out', 'action']) // Ensure clock_in, clock_out, and action are treated as raw HTML
+                ->addColumn('employee_checklist', function($row) {
+                    return "
+                        <div class='demo-checkbox'>
+                            <input name='employee[]' type='checkbox' value='{$row->employee_id}' class='filled-in' id='employee-{$row->employee_id}'>
+                            <label for='employee-{$row->employee_id}' style='height: 0px; min-width: 0;'></label>
+                        </div>";
+                })
+                ->rawColumns(['clock_in', 'clock_out', 'action', 'employee_checklist']) // Include employee_checklist as raw HTML
                 ->make(true);
         }
     }
+
 
     public function create()
     {
@@ -165,4 +173,17 @@ class WorkScheduleController extends Controller
         }
         return response()->json(['error' => 'Data Work Schedule tidak ditemukan']);
     }
+
+    public function deleteChecklist(Request $request)
+    {
+        $employeeIds = $request->input('employee_ids');
+        
+        if ($employeeIds) {
+            WorkSchedule::whereIn('id', $employeeIds)->delete();
+            return response()->json(['success' => 'Selected work schedules have been deleted successfully!']);
+        }
+
+        return response()->json(['error' => 'No records selected for deletion!']);
+    }
+
 }
