@@ -37,7 +37,7 @@
             <div class="container">
                 <hr class="mt-1">
                 <h5>Date : <span
-                        class="badge text-bg-primary">{{ date('Y-m-d') }}</span>
+                        class="badge text-bg-primary">{{ date('d-m-Y') }}</span>
                 @if ($shift != null)
                     <h5>Shift : <span
                             class="badge text-bg-primary">{{ isset($shift) && $shift->name == null ? '-' : $shift->name . ' (' . $shift->start_time . ' - ' . $shift->end_time . ') ' }}</span>
