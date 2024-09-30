@@ -168,3 +168,12 @@
     </li>
 @endcan
 
+@can('list-status-attendance')
+    <li>
+        <a href="{{ route('status-attendance-list') }}">
+            <i class="uil-users-alt nav-icon"></i>
+            <span class="menu-item" data-key="t-authentication">Status Attendance</span>
+        </a>
+    </li>
+@endcan
+

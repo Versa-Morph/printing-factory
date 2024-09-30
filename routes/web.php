@@ -27,6 +27,7 @@ use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\WorkScheduleController;
 use App\Http\Controllers\Auth\LoginNewController;
 use App\Http\Controllers\OfficeInventoryController;
+use App\Http\Controllers\StatusAttendanceController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -236,6 +237,20 @@ Route::prefix('shift')->name('shift-')->group(function () {
     Route::patch('/approve/{id}', [ShiftController::class, 'approve'])->name('approve');
 });
 // END SHIFT
+
+// START STATUS ATTENDANCE
+Route::prefix('status-attendance')->name('status-attendance-')->group(function () {
+    Route::get('/', [StatusAttendanceController::class, 'index'])->name('list');
+    Route::get('/get-data', [StatusAttendanceController::class, 'getData'])->name('get-data');
+    Route::get('/create', [StatusAttendanceController::class, 'create'])->name('create');
+    Route::post('/store', [StatusAttendanceController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [StatusAttendanceController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [StatusAttendanceController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [StatusAttendanceController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [StatusAttendanceController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [StatusAttendanceController::class, 'approve'])->name('approve');
+});
+// END STATUS ATTENDANCE
 
 // START HR WORK SCHEDULE
 Route::prefix('hr')->name('hr-')->group(function (){

@@ -147,6 +147,12 @@ class PermissionSeeder extends Seeder
             'create-office-inventory',
             'edit-office-inventory',
             'delete-office-inventory',
+
+            // Status Attendance - Master data
+            'list-status-attendance',
+            'create-status-attendance',
+            'edit-status-attendance',
+            'delete-status-attendance',
             
             // FINANCE 
         ];
@@ -221,6 +227,10 @@ class PermissionSeeder extends Seeder
             'settings',
             'user-preferences',
             'role-specific-settings',
+            'list-status-attendance',
+            'create-status-attendance',
+            'edit-status-attendance',
+            'delete-status-attendance',
             'logout'
         ] ;
         $permissionsHR = Permission::whereIn('name',$accessHr)->get();
