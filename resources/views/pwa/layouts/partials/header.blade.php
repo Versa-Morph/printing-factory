@@ -1,4 +1,4 @@
-<header id="top-navbar" class="top-navbar"> 
+<header id="top-navbar" class="top-navbar">
     <div class="container">
         <div class="top-navbar_full">
             <div class="back-btn">
@@ -15,7 +15,7 @@
                 </a>
             </div>
             <div class="top-navbar-title">
-                <p>Printing Factory</p>
+                <p class="text-uppercase">Potopolimer</p>
             </div>
             <div class="skip-btn-goal">
                 {{-- <a href="notification.html">

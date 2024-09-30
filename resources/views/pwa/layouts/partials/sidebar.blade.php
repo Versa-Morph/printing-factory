@@ -7,6 +7,10 @@
             <div class="dropdown">
                 <div class="setting-page-full">
                     <div class="setting-page-wrapper">
+                        <div class="setting-deatils mb-2 p-3" style="background-color: #f1f1f1; border-radius:20px 20px 0 0;">
+                            <img src="{{ asset('assets/logo-polimer.png') }}" class="d-block mx-auto" style="max-width: 50%;"
+                                alt="category-img" />
+                        </div>
                         <a href="{{ route('pwa-logout') }}" class="mt-8">
                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -41,7 +45,7 @@
                     </div>
                     <div class="setting-border mt-8"></div>
                 </div>
-            </div>	
+            </div>
         </div>
     </div>
 </div>
