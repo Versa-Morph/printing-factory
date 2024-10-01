@@ -119,27 +119,15 @@
                     <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="roles" class="form-label">Roles <span class="text-danger">*</span></label>
-                            <select name = "roles" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                @forelse ($roles as $role)
-
-                                    @if ($role!='Super Admin')
-                                        <option value="{{ $role }}" {{ in_array($role, old('roles') ?? []) ? 'selected' : '' }}>
-                                        {{ $role }}
-                                        </option>
-                                    @else
-                                        @if (Auth::user()->hasRole('Super Admin'))
-                                            <option value="{{ $role }}" {{ in_array($role, old('roles') ?? []) ? 'selected' : '' }}>
-                                            {{ $role }}
-                                            </option>
-                                        @endif
-                                    @endif
-
-                                @empty
-
-                                @endforelse
+                            <select name = "roles"  class="form-select @error('roles') is-invalid @enderror" aria-label="Roles" id="floatingSelect" name="roles">
+                                <option value="">-- Select Role --</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role }}" {{ $role == $employeRoles ? 'selected' : '' }}>{{ $role }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
+                    
 
                     <div class="col-lg-4">
                         <!-- Profile Picture -->

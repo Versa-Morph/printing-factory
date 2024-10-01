@@ -99,7 +99,15 @@
             }
         });
 
+    // "Checklist All" button
+    $('#check-all').click(function() {
+        $('.employee-checkbox').prop('checked', true);
+    });
 
+    // "Unchecklist" button
+    $('#uncheck-all').click(function() {
+        $('.employee-checkbox').prop('checked', false);
+    });
 
     // Delete Checklist
     $('#delete-form').on('submit', function(e) {
