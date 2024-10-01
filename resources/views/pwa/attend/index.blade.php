@@ -147,9 +147,9 @@
 
                         const allowedStatus = '{{ $data_location['status'] }}';
                         if (allowedStatus == 'blocking') {
-                            const allowedLatitude = {{ $data_location['data_location']->latitude }};
-                            const allowedLongitude = {{ $data_location['data_location']->longitude }};
-                            const allowedRadius = {{ $data_location['data_location']->radius }};
+                            const allowedLatitude = '{{ $data_location['data_location']->latitude }}';
+                            const allowedLongitude = '{{ $data_location['data_location']->longitude }}';
+                            const allowedRadius = '{{ $data_location['data_location']->radius }}';
 
                             const distance = calculateDistance(userLatitude, userLongitude, allowedLatitude,
                                 allowedLongitude);
@@ -187,6 +187,9 @@
                                 submitButton.style.opacity = '0.5'; // Mengubah opasitas
                             }
                         } else {
+                             // Mengaktifkan kembali tombol
+                            submitButton.style.pointerEvents = 'auto'; // Mengaktifkan klik
+                            submitButton.style.opacity = '1'; // Mengembalikan opasitas
                             hideLoading();
                         }
                     }, function() {
