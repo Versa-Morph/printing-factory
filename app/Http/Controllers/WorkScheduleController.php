@@ -31,7 +31,7 @@ class WorkScheduleController extends Controller
             $data = WorkSchedule::join('shifts', 'work_schedules.shift_id', '=', 'shifts.id')
                 ->join('employes', 'work_schedules.employee_id', '=', 'employes.id')
                 ->select('work_schedules.*', 'shifts.name as shift_name', 'shifts.start_time', 'shifts.end_time', 'employes.first_name as employee_firstname', 'employes.last_name as employee_lastname')
-                ->orderBy('work_schedules.created_at', 'desc')
+                ->orderBy('work_schedules.created_at', 'asc')
                 ->where('work_schedules.employee_id', Auth::user()->employee ? Auth::user()->employee->id : null)
                 ->when(!Auth::user()->employee, function ($query) {
                     return $query->whereRaw('1 = 0'); // Menambahkan kondisi agar tidak ada hasil jika tidak ada employee
@@ -69,7 +69,7 @@ class WorkScheduleController extends Controller
             $data = WorkSchedule::join('shifts', 'work_schedules.shift_id', '=', 'shifts.id')
                 ->join('employes', 'work_schedules.employee_id', '=', 'employes.id')
                 ->select('work_schedules.*', 'shifts.name as shift_name', 'shifts.start_time', 'shifts.end_time', 'employes.first_name as employee_firstname', 'employes.last_name as employee_lastname')
-                ->orderBy('work_schedules.created_at', 'desc')
+                ->orderBy('work_schedules.created_at', 'asc')
                 ->get();
 
             return DataTables::of($data)
@@ -128,10 +128,12 @@ class WorkScheduleController extends Controller
     public function store(Request $request)
     {
         try {
+            // Validasi input
             $request->validate([
                 'employee'   => 'required|array',
-                'date'          => 'required',
-                'shift_id'      => 'required',
+                'date'       => 'required|date',
+                'end_date'   => 'required|date|after_or_equal:date',
+                'shift_id'   => 'required',
             ]);
 
             $startDate = Carbon::parse($request->input('date'));
@@ -140,7 +142,20 @@ class WorkScheduleController extends Controller
             foreach ($request->input('employee') as $employee_id) {
                 $currentDate = $startDate->copy();
 
+                // Iterasi setiap tanggal dari startDate hingga endDate
                 while ($currentDate->lte($endDate)) {
+                    // Cek apakah sudah ada data WorkSchedule untuk employee_id dan currentDate
+                    $existingSchedule = WorkSchedule::where('employee_id', $employee_id)
+                        ->where('date', $currentDate->toDateString())
+                        ->where('shift_id', $request->input('shift_id'))
+                        ->exists();
+
+                    if ($existingSchedule) {
+                        // Jika sudah ada, jangan simpan dan teruskan ke tanggal berikutnya
+                        return response()->json(['failed' => true, 'msg' => 'Work schedule sudah ada untuk tanggal tersebut!']);
+                    }
+
+                    // Jika tidak ada, maka simpan data baru
                     $work_schedule = new WorkSchedule();
                     $work_schedule->employee_id = $employee_id;
                     $work_schedule->date = $currentDate->toDateString();
@@ -148,6 +163,7 @@ class WorkScheduleController extends Controller
                     $work_schedule->assigned_by = auth()->user()->name;
                     $work_schedule->save();
 
+                    // Tambahkan 1 hari ke currentDate
                     $currentDate->addDay();
                 }
             }
@@ -157,6 +173,7 @@ class WorkScheduleController extends Controller
             return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
         }
     }
+
 
 
     /**
