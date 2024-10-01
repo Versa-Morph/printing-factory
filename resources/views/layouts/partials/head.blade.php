@@ -54,9 +54,12 @@
         margin-right: 20px !important;
     }
     thead tr th {
-        padding: 30px !important;
+        padding: 15px !important;
         background-color: #001F3F !important;
         color: white !important;
         text-transform: uppercase !important;
+    }
+    .highlight-today {
+        background-color: #d4edda !important; /* Warna hijau muda */
     }
 </style>

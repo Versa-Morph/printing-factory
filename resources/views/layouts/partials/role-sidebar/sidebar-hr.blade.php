@@ -27,7 +27,7 @@
             @endcan
 
             @can('list-work-schedule')
-                <li><a href="{{ route('work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
+                <li><a href="{{ route('hr-work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
             @endcan
 
         </ul>
@@ -96,7 +96,7 @@
         </a>
     </li>
 @endcan
-{{-- 
+{{--
 @can('self-service')
     <li>
         <a href="#">

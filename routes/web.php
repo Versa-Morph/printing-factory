@@ -73,7 +73,7 @@ Route::get('/absensi', function(){
 return view('absensi.index');
 })->name('absensi');
 
-// PWA 
+// PWA
 
 Route::prefix('pwa')->name('pwa-')->group(function () {
     Route::get('/login', [PwaController::class, 'loginPwa'])->name('login');
@@ -84,7 +84,7 @@ Route::prefix('pwa')->name('pwa-')->group(function () {
     Route::post('/store-attend', [PwaController::class, 'storeAttend'])->name('store-attend');
 });
 
-// END PWA 
+// END PWA
 
 Route::get('/form-customer', [HomeController::class, 'formCustomer'])->name('form-customer');
 
@@ -309,10 +309,11 @@ Route::prefix('overtime')->name('overtime-')->group(function () {
 // });
 Route::prefix('work-schedule')->name('work-schedule-')->group(function () {
     Route::get('/', [WorkScheduleController::class, 'index'])->name('list');
+    Route::get('/work-schedule-get-data', [WorkScheduleController::class, 'getDataIndex'])->name('get-data-by-id');
 });
 // END ATTENDANCE
 
-// START EMPLOYE 
+// START EMPLOYE
 Route::prefix('employe')->name('employe-')->group(function () {
     Route::get('/', [EmployeController::class, 'index'])->name('list');
     Route::get('/get-data', [EmployeController::class, 'getData'])->name('get-data');
@@ -322,9 +323,9 @@ Route::prefix('employe')->name('employe-')->group(function () {
     Route::post('/update/{id}', [EmployeController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [EmployeController::class, 'delete'])->name('delete');
 });
-// END EMPLOYE 
+// END EMPLOYE
 
-// START EMPLOYEE SALARY 
+// START EMPLOYEE SALARY
 Route::prefix('employee-salary')->name('employee-salary-')->group(function () {
     Route::get('/', [EmployeeSalaryController::class, 'index'])->name('list');
     Route::get('/get-data', [EmployeeSalaryController::class, 'getData'])->name('get-data');
@@ -336,7 +337,7 @@ Route::prefix('employee-salary')->name('employee-salary-')->group(function () {
 });
 // END EMPLOYE SALARY
 
-// START OFFICE INVENTORY 
+// START OFFICE INVENTORY
 Route::prefix('office-inventory')->name('office-inventory-')->group(function () {
     Route::get('/', [OfficeInventoryController::class, 'index'])->name('list');
     Route::get('/get-data', [OfficeInventoryController::class, 'getData'])->name('get-data');
