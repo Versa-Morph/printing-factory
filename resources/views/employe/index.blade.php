@@ -49,7 +49,7 @@
     <script>
         $(document).ready(function() {
             $('#employe-table').DataTable({
-                processing: true,
+                processing: false,
                 serverSide: true,
                 ajax: "{{ route('employe-get-data') }}",
                 columns: [
