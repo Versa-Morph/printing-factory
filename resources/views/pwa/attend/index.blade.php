@@ -114,9 +114,10 @@
                     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
                     Math.sin(dLon / 2) * Math.sin(dLon / 2);
                 const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                const distance = R * c; // Jarak dalam kilometer
+                const distanceInKm = R * c; // Jarak dalam kilometer
+                const distanceInMeters = distanceInKm * 1000; // Konversi ke meter
                 hideLoading();
-                return distance;
+                return distanceInMeters;
             }
 
             // Konversi derajat ke radian
