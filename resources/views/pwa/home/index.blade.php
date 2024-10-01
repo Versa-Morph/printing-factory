@@ -39,10 +39,10 @@
                 <hr class="mt-1">
                 <h5>Date : <span class="badge text-bg-primary">{{ date('d-m-Y') }}</span>
                     @if ($shift != null)
-                        <h5>Shift : <span class="badge text-bg-primary">{{ $shift->name ?? '-' }} ({{ $shift->start_time }}
-                                - {{ $shift->end_time }})</span></h5>
-                    @else
-                        <h5>Shift : <span class="badge text-bg-primary">-</span></h5>
+                        <h5>Shift : <span
+                                class="badge text-bg-primary">{{ isset($shift) && $shift->name == null ? '-' : $shift->name . ' (' . $shift->start_time . ' - ' . $shift->end_time . ') ' }}</span>
+                        @else
+                            <h5>Shift : <span class="badge text-bg-primary">-</span>
                     @endif
                     <hr>
 
