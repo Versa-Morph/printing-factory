@@ -42,7 +42,7 @@
                         <li><a href="{{ route('attendance-list') }}" data-key="t-inbox">Dashboard</a></li>
                         <li><a href="{{ route('overtime-list') }}" data-key="t-inbox">Overtime</a></li>
                         <li><a href="{{ route('absence-list') }}" data-key="t-inbox">Absence</a></li>
-                        <li><a href="{{ route('hr-work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
+                        <li><a href="{{ route('work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
                     </ul>
                 </li>
                 <li>
@@ -52,7 +52,7 @@
                     </a>
                 </li>
 
-                
+
 
                 @if(Auth::user()->hasRole('Human Resource') || Auth::user()->hasRole('Human Resource Manager') || Auth::user()->hasRole('Human Resource Staff') || Auth::user()->dashboard_view == 'hr')
                     @include('layouts.partials.role-sidebar.sidebar-hr')
@@ -125,7 +125,7 @@
                 </form>
                 @endcan
 
-                
+
                 @if(Auth::user()->hasRole('Sales'))
                 <li class="menu-title" data-key="t-menu">Menu</li>
 

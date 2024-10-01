@@ -22,6 +22,39 @@ class WorkScheduleController extends Controller
     {
         $data['page_title'] = 'Work Schedule';
         return view('work-schedule.index', $data);
+
+    }
+
+    public function getDataIndex(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = WorkSchedule::join('shifts', 'work_schedules.shift_id', '=', 'shifts.id')
+                ->join('employes', 'work_schedules.employee_id', '=', 'employes.id')
+                ->select('work_schedules.*', 'shifts.name as shift_name', 'shifts.start_time', 'shifts.end_time', 'employes.first_name as employee_firstname', 'employes.last_name as employee_lastname')
+                ->orderBy('work_schedules.created_at', 'desc')
+                ->where('work_schedules.employee_id', Auth::user()->employee ? Auth::user()->employee->id : null)
+                ->when(!Auth::user()->employee, function ($query) {
+                    return $query->whereRaw('1 = 0'); // Menambahkan kondisi agar tidak ada hasil jika tidak ada employee
+                })
+                ->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('employee_name', function($row){
+                    return $row->employee_firstname. ' ' . $row->employee_lastname;
+                })
+                ->addColumn('shift', function($row){
+                    return $row->shift_name;
+                })
+                ->addColumn('clock_in', function($row){
+                    return "<span class='badge bg-success'>{$row->start_time}</span>";
+                })
+                ->addColumn('clock_out', function($row){
+                    return "<span class='badge bg-danger'>{$row->end_time}</span>";
+                })
+                ->rawColumns(['clock_in', 'clock_out', 'employee_name']) // Include employee_checklist as raw HTML
+                ->make(true);
+        }
     }
 
     public function hrWorkScheduleIndex()
@@ -34,12 +67,16 @@ class WorkScheduleController extends Controller
     {
         if ($request->ajax()) {
             $data = WorkSchedule::join('shifts', 'work_schedules.shift_id', '=', 'shifts.id')
-                ->select('work_schedules.*', 'shifts.name as shift_name', 'shifts.start_time', 'shifts.end_time')
+                ->join('employes', 'work_schedules.employee_id', '=', 'employes.id')
+                ->select('work_schedules.*', 'shifts.name as shift_name', 'shifts.start_time', 'shifts.end_time', 'employes.first_name as employee_firstname', 'employes.last_name as employee_lastname')
                 ->orderBy('work_schedules.created_at', 'desc')
                 ->get();
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('employee_name', function($row){
+                    return $row->employee_firstname. ' ' . $row->employee_lastname;
+                })
                 ->addColumn('shift', function($row){
                     return $row->shift_name;
                 })
@@ -70,7 +107,7 @@ class WorkScheduleController extends Controller
                             <label for='employee-{$row->employee_id}' style='height: 0px; min-width: 0;'></label>
                         </div>";
                 })
-                ->rawColumns(['clock_in', 'clock_out', 'action', 'employee_checklist']) // Include employee_checklist as raw HTML
+                ->rawColumns(['clock_in', 'clock_out', 'action', 'employee_checklist', 'employee_name']) // Include employee_checklist as raw HTML
                 ->make(true);
         }
     }
@@ -96,7 +133,7 @@ class WorkScheduleController extends Controller
                 'date'          => 'required',
                 'shift_id'      => 'required',
             ]);
-    
+
             $startDate = Carbon::parse($request->input('date'));
             $endDate = Carbon::parse($request->input('end_date'));
 
@@ -114,7 +151,7 @@ class WorkScheduleController extends Controller
                     $currentDate->addDay();
                 }
             }
-    
+
             return response()->json(['success' => true, 'msg' => 'Data Work Schedule berhasil disimpan!']);
         } catch (\Throwable $th) {
             return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
@@ -152,12 +189,12 @@ class WorkScheduleController extends Controller
             $request->validate([
                 'shift_id'      => 'required',
             ]);
-    
+
             $work_schedule = WorkSchedule::find($id);
             $work_schedule->shift_id = $request->input('shift_id');
             $work_schedule->assigned_by = auth()->user()->name;
             $work_schedule->save();
-    
+
             return response()->json(['success' => true, 'msg' => 'Data Work Schedule berhasil diedit!']);
         } catch (\Throwable $th) {
             return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
@@ -177,7 +214,7 @@ class WorkScheduleController extends Controller
     public function deleteChecklist(Request $request)
     {
         $employeeIds = $request->input('employee_ids');
-        
+
         if ($employeeIds) {
             WorkSchedule::whereIn('id', $employeeIds)->delete();
             return response()->json(['success' => 'Selected work schedules have been deleted successfully!']);

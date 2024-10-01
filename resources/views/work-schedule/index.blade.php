@@ -55,20 +55,34 @@
                 <div class="col-sm d-flex justify-content-between align-items-center">
                     <div class="ms-3">
                         <h4 class="pb-0 mb-0">Work Schedule</h4>
-                        <h5 class="text-secondary">Week 9 ( 26 February 2024 - 1 March 2024)</h5>
+                        {{-- <h5 class="text-secondary">Week 9 ( 26 February 2024 - 1 March 2024)</h5> --}}
                     </div>
 
                     {{-- @can('create-employee-salary') --}}
                     <div>
-                        <a href="#" class="btn btn-light me-3"><i class="mdi mdi-plus me-1"></i> Create Work Schedule</a>
+                        {{-- <a href="#" class="btn btn-light me-3"><i class="mdi mdi-plus me-1"></i> Create Work Schedule</a> --}}
                     </div>
                     {{-- @endcan --}}
                 </div>
             </div>
 
             <hr>
-
             <div class="table-responsive mt-4 mt-sm-0">
+                <table class="table align-middle table-nowrap table-check" id="work-schedule-table">
+                    <thead>
+                        <tr class="bg-transparent">
+                            <th>No</th>
+                            <th>Date</th>
+                            <th>Employee</th>
+                            <th>Shift</th>
+                            <th>Clock In</th>
+                            <th>Clock Out</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table><!-- end table -->
+            </div>
+            {{-- <div class="table-responsive mt-4 mt-sm-0">
                 <table class="table align-middle table-nowrap table-check" id="customer-table">
                     <thead>
                         <tr class="bg-transparent">
@@ -173,146 +187,43 @@
                         </tr>
                     </tbody>
                 </table><!-- end table -->
-            </div>
+            </div> --}}
         </div><!-- end card-body -->
     </div><!-- end card -->
 @endsection
 
 @section('script')
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
-    {{-- CHART HEADER  --}}
-    <!-- Chart code -->
-    <script>
-        am5.ready(function() {
-            // Chart configurations
-            const chartConfigs = [{
-                    id: "chart-attendance",
-                    data: [{
-                        value: 10,
-                        category: "Present"
-                    }, {
-                        value: 5,
-                        category: "Absent"
-                    }]
-                },
-                {
-                    id: "chart-tardiness",
-                    data: [{
-                        value: 8,
-                        category: "On Time"
-                    }, {
-                        value: 7,
-                        category: "Late"
-                    }]
-                },
-                {
-                    id: "chart-overtime",
-                    data: [{
-                        value: 12,
-                        category: "Regular Hours"
-                    }, {
-                        value: 3,
-                        category: "Overtime"
-                    }]
-                },
-                {
-                    id: "chart-permission",
-                    data: [{
-                        value: 9,
-                        category: "Approved"
-                    }, {
-                        value: 6,
-                        category: "Pending"
-                    }]
-                }
-            ];
-
-            // Loop through each chart configuration and create a pie chart
-            chartConfigs.forEach(config => {
-                // Create root element
-                var root = am5.Root.new(config.id);
-
-                // Set themes
-                root.setThemes([
-                    am5themes_Animated.new(root)
-                ]);
-
-                // Create chart
-                var chart = root.container.children.push(am5percent.PieChart.new(root, {
-                    layout: root.verticalLayout,
-                    innerRadius: am5.percent(50)
-                }));
-
-                // Create series
-                var series = chart.series.push(am5percent.PieSeries.new(root, {
-                    valueField: "value",
-                    categoryField: "category",
-                    alignLabels: false
-                }));
-
-                // Disable the labels
-                series.labels.template.setAll({
-                    forceHidden: true
-                });
-
-                // Set data
-                series.data.setAll(config.data);
-
-                // Enable tooltips
-                series.slices.template.set("tooltipText", "{category}: {value}");
-
-                // Play initial series animation
-                series.appear(1000, 100);
-            });
-        }); // end am5.ready()
-    </script>
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-    <script>
-        $(document).ready(function() {
-            $('#customer-table').DataTable({ });
-        });
-
-        // Delete action
-        $(document).on('click', '.delete', function() {
-            var url = $(this).data('url');
-            Swal.fire({
-                title: 'Are you sure you want to delete this data?',
-                text: "Deleted data cannot be returned!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: url,
-                        type: 'GET',
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire(
-                                    'Deleted!',
-                                    response.success,
-                                    'success'
-                                )
-                                $('#pelanggan-table').DataTable().ajax.reload();
-                            } else {
-                                Swal.fire(
-                                    'Error!',
-                                    response.error,
-                                    'error'
-                                )
-                            }
-                        }
+<script>
+    $(document).ready(function() {
+        var today = new Date().toISOString().split('T')[0];
+        $('#work-schedule-table').DataTable({
+            processing: false,
+            serverSide: true,
+            ajax: '{{ route('work-schedule-get-data-by-id') }}',
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'date', name: 'date' },
+                { data: 'employee_name', name: 'employee_name' },
+                { data: 'shift', name: 'shift' },
+                { data: 'clock_in', name: 'clock_in' },
+                { data: 'clock_out', name: 'clock_out' },
+            ],
+            rowCallback: function(row, data) {
+                // Jika tanggal di data sama dengan hari ini
+                if (data.date === today) {
+                    // Tambahkan warna ke semua <td> dalam baris
+                    $('td', row).each(function() {
+                        $(this).addClass('highlight-today');
                     });
                 }
-            });
+            }
         });
-    </script>
+});
+</script>
 @endsection
