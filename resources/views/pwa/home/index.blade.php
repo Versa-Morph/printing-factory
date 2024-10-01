@@ -161,6 +161,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        // FLOW ATTENDANCE  
         function handleAttendance(type) {
             switch (type) {
                 case 'clock-in':
