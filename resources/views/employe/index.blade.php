@@ -50,7 +50,7 @@
         $(document).ready(function() {
             $('#employe-table').DataTable({
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 ajax: "{{ route('employe-get-data') }}",
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },

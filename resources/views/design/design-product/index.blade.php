@@ -53,7 +53,7 @@
 $(document).ready(function() {
     $('#desain-product-table').DataTable({
         processing: false,
-        serverSide: true,
+        serverSide: false,
         ajax: '{{ route('desain-product-get-data') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },

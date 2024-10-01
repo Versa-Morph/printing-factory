@@ -50,7 +50,7 @@
             $('#jadwal-produksi-table').DataTable({
                 processing: false,
 
-                serverSide: true,
+                serverSide: false,
                 ajax: '{{ route('jadwal-produksi-get-data') }}',
                 columns: [{
                         data: 'DT_RowIndex',

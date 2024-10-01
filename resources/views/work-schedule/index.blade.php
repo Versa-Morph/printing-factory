@@ -204,7 +204,7 @@
         var today = new Date().toISOString().split('T')[0];
         $('#work-schedule-table').DataTable({
             processing: false,
-            serverSide: true,
+            serverSide: false,
             ajax: '{{ route('work-schedule-get-data-by-id') }}',
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },

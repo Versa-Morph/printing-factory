@@ -38,3 +38,19 @@ if (!function_exists('checkBlockLocation')) {
         }
     }
 }
+
+if (!function_exists('checkStatusLogin')) {
+    function checkStatusLogin()
+    {
+        $cek = Employe::where('user_id',Auth::user()->id)->first();
+        if ($cek != null) {
+            if ($cek->status == 'active') {
+                return 'allow';
+            }else{
+                return 'not allow';
+            }
+        }else{
+            return 'not allow';
+        }
+    }
+}

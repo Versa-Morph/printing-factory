@@ -60,7 +60,7 @@
 $(document).ready(function() {
     $('#office-inventory-table').DataTable({
         processing: false,
-        serverSide: true,
+        serverSide: false,
         ajax: '{{ route('office-inventory-get-data') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },

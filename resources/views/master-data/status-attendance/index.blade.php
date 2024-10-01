@@ -56,7 +56,7 @@
         $(document).ready(function() {
             $('#status-attendance-table').DataTable({
                 processing: false,
-                serverSide: true,
+                serverSide: false,
                 ajax: '{{ route('status-attendance-get-data') }}',
                 columns: [{
                         data: 'DT_RowIndex',

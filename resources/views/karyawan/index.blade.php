@@ -58,7 +58,7 @@
 $(document).ready(function() {
     $('#karyawan-table').DataTable({
         processing: false,
-        serverSide: true,
+        serverSide: false,
         ajax: '{{ route('karyawan-get-data') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
