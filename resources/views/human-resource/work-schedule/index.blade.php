@@ -21,10 +21,16 @@
                 <div>
                     <form id="delete-form" method="POST" action="{{ route('hr-work-schedule-delete-checklist') }}">
                         @csrf
-                        <button type="submit" class="btn btn-light text-light mb-4 bg-primary">
-                            <i class="mdi mdi-plus me-1"></i> Delete Data
+                        <button type="submit" class="btn btn-light text-light mb-4 bg-danger">
+                             Delete Data
                         </button>
                     </form>
+                    <button type="button" id="check-all" class="btn btn-light text-light mb-4 bg-success">
+                        Checklist All
+                    </button>
+                    <button type="button" id="uncheck-all" class="btn btn-light text-light mb-4 bg-secondary">
+                        Unchecklist
+                    </button>
                 </div>
                 @endcan
             </div>
@@ -62,28 +68,36 @@
 <script>
     $(document).ready(function() {
         $('#work-schedule-table').DataTable({
-            processing: false,
-            serverSide: true,
-            ajax: '{{ route('hr-work-schedule-get-data') }}',
-            columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                { data: 'date', name: 'date' },
-                { data: 'shift', name: 'shift' },
-                { data: 'clock_in', name: 'clock_in' },
-                { data: 'clock_out', name: 'clock_out' },
-                { data: 'action', name: 'action', orderable: false, searchable: false },
-                { data: 'employee_checklist', name: 'employee_checklist', orderable: false, searchable: false, render: function(data, type, row) {
-                    return `
-                        <div class="demo-checkbox">
-                            <input name="employee[]" type="checkbox" value="${row.id}" 
-                                class="filled-in" id="employee-${row.id}">
-                            <label for="employee-${row.id}" style="height: 0px; min-width: 0;"></label>
-                        </div>`;
-                }}
-            ]
-        });
+        processing: false,
+        serverSide: true,
+        ajax: '{{ route('hr-work-schedule-get-data') }}',
+        columns: [
+            { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+            { data: 'date', name: 'date' },
+            { data: 'shift', name: 'shift' },
+            { data: 'clock_in', name: 'clock_in' },
+            { data: 'clock_out', name: 'clock_out' },
+            { data: 'action', name: 'action', orderable: false, searchable: false },
+            { data: 'employee_checklist', name: 'employee_checklist', orderable: false, searchable: false, render: function(data, type, row) {
+                return `
+                    <div class="demo-checkbox">
+                        <input name="employee[]" type="checkbox" value="${row.id}" 
+                               class="filled-in employee-checkbox" id="employee-${row.id}">
+                        <label for="employee-${row.id}" style="height: 0px; min-width: 0;"></label>
+                    </div>`;
+            }}
+        ]
+    });
 
+    // "Checklist All" button
+    $('#check-all').click(function() {
+        $('.employee-checkbox').prop('checked', true);
+    });
 
+    // "Unchecklist" button
+    $('#uncheck-all').click(function() {
+        $('.employee-checkbox').prop('checked', false);
+    });
 
     // Delete Checklist
     $('#delete-form').on('submit', function(e) {
