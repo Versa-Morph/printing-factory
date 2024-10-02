@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,6 +33,13 @@ class UserController extends Controller
         return view('users.index', [
             'users' => User::latest('id')->paginate(3)
         ]);
+    }
+
+    public function profile($id)
+    {
+        $data['user'] = User::find($id);
+
+        return view('users.profile', $data);
     }
 
     /**
@@ -108,6 +116,64 @@ class UserController extends Controller
         return redirect()->back()
                 ->withSuccess('User is updated successfully.');
     }
+
+    public function updateProfile(Request $request, $id)
+    {
+        try {
+            // Find the user by ID
+            $user = User::findOrFail($id);
+
+            // Validate the request data
+            $request->validate([
+                'username'      => 'required|string',
+                'old_password'  => [
+                    'nullable',
+                    function ($attribute, $value, $fail) use ($request, $user) {
+                        // Only check old password if new password is being set
+                        if ($request->filled('new_password') && !Hash::check($value, $user->password)) {
+                            $fail('The old password is incorrect.');
+                        }
+                    },
+                ],
+                'new_password'  => 'nullable|string|min:8|different:old_password',
+                'email'         => 'required|email|unique:users,email,' . $user->id,
+                'avatar'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+
+            // Update user details
+            $user->username = $request->input('username');
+            $user->email = $request->input('email');
+
+            // Check if old password matches before updating the password
+            if ($request->filled('old_password') && $request->filled('new_password')) {
+                if (Hash::check($request->input('old_password'), $user->password)) {
+                    $user->password = bcrypt($request->input('new_password'));
+                } else {
+                    // Old password doesn't match, handle the error
+                    return redirect()->back()->with('failed', "Old password doesn't match!");
+                }
+            }
+
+            // Handle avatar upload
+            if ($request->hasFile('avatar')) {
+                $image = $request->file('avatar');
+                $name = time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('assets/img/users/');
+                $image->move($destinationPath, $name);
+                $user->avatar = $name; // Assuming the column is named 'avatar'
+            }
+
+            $user->save();
+
+            // Flash success message and redirect
+            return redirect()->back()->with('success', "Update data profile successfully!");
+        } catch (\Throwable $th) {
+            // Flash error message and redirect on exception
+            return redirect()->back()->with('failed', "Failed to update data profile!");
+        }
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

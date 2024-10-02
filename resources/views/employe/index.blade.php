@@ -49,8 +49,8 @@
     <script>
         $(document).ready(function() {
             $('#employe-table').DataTable({
-                processing: true,
-                serverSide: false,
+                processing: false,
+                serverSide: true,
                 ajax: "{{ route('employe-get-data') }}",
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },

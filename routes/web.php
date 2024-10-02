@@ -349,7 +349,15 @@ Route::prefix('office-inventory')->name('office-inventory-')->group(function () 
 });
 // END OFFICE INVNTORY
 
-
+// START Profile
+Route::prefix('profile')->name('profile-')->group(function () {
+    Route::get('/{id}', [UserController::class, 'profile'])->name('list');
+    Route::get('/create', [UserController::class, 'create'])->name('create');
+    Route::post('/store', [UserController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+    Route::patch('/update/{id}', [UserController::class, 'updateProfile'])->name('update');
+});
+// END Profile
 
 Route::resources([
     // 'roles' => RoleController::class,
