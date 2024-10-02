@@ -203,7 +203,9 @@
                     break;
 
                 case 'overtime-in':
-                    if ({{ isset($cekAttendance->overtime_in) ? 'true' : 'false' }}) {
+                    if (!{{ isset($cekAttendance->clock_in) ? 'true' : 'false' }}) {
+                        Swal.fire('Error', 'You must clock in first before starting a overtime!', 'warning');
+                    }else if ({{ isset($cekAttendance->overtime_in) ? 'true' : 'false' }}) {
                         Swal.fire('Error', 'You have already clocked in for overtime!', 'warning');
                     } else {
                         window.location.href = "{{ route('pwa-attend') }}?type=overtime-in";
