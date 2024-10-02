@@ -62,6 +62,9 @@ class PermissionSeeder extends Seeder
             'delete-customer',
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'list-employe',
@@ -172,19 +175,19 @@ class PermissionSeeder extends Seeder
 
 
         // HR 
-        // $this->setupRoleHR();
-        // $this->setupRoleHRManager();
-        // $this->setupRoleHRStaff();
+        $this->setupRoleHR();
+        $this->setupRoleHRManager();
+        $this->setupRoleHRStaff();
 
-        // // Sales 
-        // $this->setupRoleSales();
-        // $this->setupRoleSalesManager();
-        // $this->setupRoleSalesStaff();
+        // Sales 
+        $this->setupRoleSales();
+        $this->setupRoleSalesManager();
+        $this->setupRoleSalesStaff();
 
-        // // Accounting 
-        // $this->setupRoleAccounting();
-        // $this->setupRoleAccountingManager();
-        // $this->setupRoleAccountingStaff();
+        // Accounting 
+        $this->setupRoleAccounting();
+        $this->setupRoleAccountingManager();
+        $this->setupRoleAccountingStaff();
     }
 
     public function setupRoleHR(){
@@ -193,6 +196,9 @@ class PermissionSeeder extends Seeder
         $accessHr = [
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'list-employe',
@@ -243,6 +249,9 @@ class PermissionSeeder extends Seeder
         $accessHr = [
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'list-employe',
@@ -280,6 +289,9 @@ class PermissionSeeder extends Seeder
         $accessHr = [
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'menu-staff',
@@ -308,6 +320,12 @@ class PermissionSeeder extends Seeder
         $accessSales = [
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'dashboard-manager-sales',
@@ -339,6 +357,12 @@ class PermissionSeeder extends Seeder
         $accessSales = [
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'dashboard-manager-sales',
@@ -365,6 +389,9 @@ class PermissionSeeder extends Seeder
         $accessSales = [
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'dashboard-staff-sales',
@@ -389,6 +416,12 @@ class PermissionSeeder extends Seeder
         $accessAccounting = [
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'dashboard-manager-accounting',
@@ -420,6 +453,12 @@ class PermissionSeeder extends Seeder
         $accessAccounting = [
             'list-attendance',
             'list-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
+            'create-overtime',
+            'edit-overtime',
+            'delete-overtime',
             'list-absence',
             'list-work-schedule',
             'dashboard-manager-accounting',

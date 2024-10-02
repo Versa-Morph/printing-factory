@@ -3,14 +3,14 @@
 use App\Models\Employe;
 use Illuminate\Support\Facades\Auth;
 
-if (!function_exists('getUserID')) {
+if (!function_exists('getEmployeID')) {
     function getEmployeID()
     {
         $getEmployeId = Employe::where('user_id',Auth::user()->id)->first();
         if ($getEmployeId != null) {
             return $getEmployeId->id;
         }else{
-            return '-';
+            return 0;
         }
     }
 }
