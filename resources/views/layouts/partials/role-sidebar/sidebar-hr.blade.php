@@ -30,6 +30,10 @@
                 <li><a href="{{ route('hr-work-schedule-list') }}" data-key="t-inbox">Work Schedule</a></li>
             @endcan
 
+            @can('list-overtime')
+                <li><a href="{{ route('overtime-manager-list') }}" data-key="t-inbox">Overtime</a></li>
+            @endcan
+
         </ul>
     </li>
 @endcan

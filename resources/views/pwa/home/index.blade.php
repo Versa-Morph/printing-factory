@@ -123,7 +123,7 @@
                             </a>
 
                             <!-- Overtime In -->
-                            <a href="javascript:void(0)" onclick="handleAttendance('overtime-in')">
+                            <a href="javascript:void(0)" onclick="handleAttendance('{{ !empty($cekOvertime) ? 'overtime-in' : 'no-data-overtime' }}')">
                                 <div class="categories-content shadow-sm rounded-2 card-content">
                                     <div>
                                         <center>
@@ -175,6 +175,8 @@
                 case 'clock-out':
                     if (!{{ isset($cekAttendance->clock_in) ? 'true' : 'false' }}) {
                         Swal.fire('Error', 'You must clock in first!', 'warning');
+                    }else if (!{{ isset($cekAttendance->break_end) ? 'true' : 'false' }}) {
+                        Swal.fire('Error', 'You must break end in first!', 'warning');
                     } else if ({{ isset($cekAttendance->clock_out) ? 'true' : 'false' }}) {
                         Swal.fire('Error', 'You have already clocked out!', 'warning');
                     } else {
@@ -220,6 +222,9 @@
                     } else {
                         window.location.href = "{{ route('pwa-attend') }}?type=overtime-out";
                     }
+                    break;
+                case 'no-data-overtime':
+                    Swal.fire('Error', "You don't have an overtime request or your overtime data has not been approved, please check your overtime data again on the dashboard!", 'warning');
                     break;
 
                 default:

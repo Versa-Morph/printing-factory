@@ -252,6 +252,27 @@ Route::prefix('status-attendance')->name('status-attendance-')->group(function (
 });
 // END STATUS ATTENDANCE
 
+// START STATUS ATTENDANCE
+Route::prefix('overtime')->name('overtime-')->group(function () {
+    Route::get('/', [OvertimeController::class, 'index'])->name('list');
+    Route::get('/create', [OvertimeController::class, 'create'])->name('create');
+    Route::post('/store', [OvertimeController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OvertimeController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OvertimeController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [OvertimeController::class, 'delete'])->name('delete');
+    Route::get('/approve/{id}', [OvertimeController::class, 'approve'])->name('approve');
+});
+Route::prefix('manager/overtime')->name('overtime-manager-')->group(function () {
+    Route::get('/', [OvertimeController::class, 'indexManager'])->name('list');
+    Route::get('/create', [OvertimeController::class, 'create'])->name('create');
+    Route::post('/store', [OvertimeController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OvertimeController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OvertimeController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [OvertimeController::class, 'delete'])->name('delete');
+    Route::get('/approve/{id}', [OvertimeController::class, 'approve'])->name('approve');
+});
+// END STATUS ATTENDANCE
+
 // START HR WORK SCHEDULE
 Route::prefix('hr')->name('hr-')->group(function (){
     Route::get('/work-schedule', [WorkScheduleController::class, 'hrWorkScheduleIndex'])->name('work-schedule-list');
@@ -301,9 +322,7 @@ Route::get('/payroll', function() {
 Route::prefix('attendance')->name('attendance-')->group(function () {
     Route::get('/', [AttendanceController::class, 'index'])->name('list');
 });
-Route::prefix('overtime')->name('overtime-')->group(function () {
-    Route::get('/', [OvertimeController::class, 'index'])->name('list');
-});
+
 // Route::prefix('absence')->name('absence-')->group(function () {
 //     Route::get('/', [AbsenceController::class, 'index'])->name('list');
 // });

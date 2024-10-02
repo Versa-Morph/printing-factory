@@ -76,9 +76,9 @@
     }
 
     $(document).ajaxStart(function() {
-        showLoading('Processing Request.....');
+        // showLoading('Processing Request.....');
     }).ajaxStop(function() {
-        hideLoading();
+        // hideLoading();
     });
 
  </script>
