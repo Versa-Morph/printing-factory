@@ -44,10 +44,10 @@
 
                         <div class="mt-n5 position-relative">
                             <div class="text-center">
-                                <img src="{{ asset('assets/images/users/avatar-3.jpg') }}" alt=""class="avatar-xl rounded-circle img-thumbnail">
+                                <img src="{{ $user->avatar ? asset('assets/img/users/' . $user->avatar) : asset('assets/img/users/user.jpg') }}" alt="" class="avatar-xl rounded-circle img-thumbnail">
 
                                 <div class="mt-3">
-                                    <h5 class="mb-1">Marie N.</h5>
+                                    <h5 class="mb-1">{{ ($user->username ?? '') }}</h5>
                                     <div>
                                         <a href="#" class="badgebg-success-subtle text-success m-1">{{ $user->getRoleNames()[0] ?? '' }}</a>
                                     </div>
