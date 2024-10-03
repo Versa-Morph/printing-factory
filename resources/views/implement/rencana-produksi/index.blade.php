@@ -54,7 +54,7 @@
 $(document).ready(function() {
     $('#rencana-produksi-table').DataTable({
         processing: false,
-        serverSide: true,
+        serverSide: false,
         ajax: '{{ route('rencana-produksi-get-data') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },

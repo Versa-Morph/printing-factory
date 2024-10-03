@@ -61,7 +61,7 @@
         $(document).ready(function() {
             $('#employee-salary-table').DataTable({
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 ajax: "{{ route('employee-salary-get-data') }}",
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },

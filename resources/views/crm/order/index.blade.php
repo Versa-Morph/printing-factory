@@ -51,7 +51,7 @@
         $(document).ready(function() {
             $('#order-table').DataTable({
                 processing: false,
-                serverSide: true,
+                serverSide: false,
                 ajax: '{{ route('order-get-data') }}',
                 columns: [
                     {

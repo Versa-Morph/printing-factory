@@ -53,7 +53,7 @@
             $('#laporan-produksi-table').DataTable({
                 processing: false,
 
-                serverSide: true,
+                serverSide: false,
                 ajax: '{{ route('laporan-produksi-get-data') }}',
                 columns: [{
                         data: 'DT_RowIndex',

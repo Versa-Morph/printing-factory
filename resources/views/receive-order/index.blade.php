@@ -45,7 +45,7 @@
 $(document).ready(function() {
     $('#receive-order-table').DataTable({
         processing: false,
-        serverSide: true,
+        serverSide: false,
         ajax: '{{ route('receive-order-get-data') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },

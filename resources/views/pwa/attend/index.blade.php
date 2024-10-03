@@ -114,9 +114,10 @@
                     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
                     Math.sin(dLon / 2) * Math.sin(dLon / 2);
                 const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                const distance = R * c; // Jarak dalam kilometer
+                const distanceInKm = R * c; // Jarak dalam kilometer
+                const distanceInMeters = distanceInKm * 1000; // Konversi ke meter
                 hideLoading();
-                return distance;
+                return distanceInMeters;
             }
 
             // Konversi derajat ke radian
@@ -147,9 +148,9 @@
 
                         const allowedStatus = '{{ $data_location['status'] }}';
                         if (allowedStatus == 'blocking') {
-                            const allowedLatitude = {{ $data_location['data_location']->latitude }};
-                            const allowedLongitude = {{ $data_location['data_location']->longitude }};
-                            const allowedRadius = {{ $data_location['data_location']->radius }};
+                            const allowedLatitude = '{{ $data_location['data_location']->latitude }}';
+                            const allowedLongitude = '{{ $data_location['data_location']->longitude }}';
+                            const allowedRadius = '{{ $data_location['data_location']->radius }}';
 
                             const distance = calculateDistance(userLatitude, userLongitude, allowedLatitude,
                                 allowedLongitude);
@@ -187,6 +188,9 @@
                                 submitButton.style.opacity = '0.5'; // Mengubah opasitas
                             }
                         } else {
+                             // Mengaktifkan kembali tombol
+                            submitButton.style.pointerEvents = 'auto'; // Mengaktifkan klik
+                            submitButton.style.opacity = '1'; // Mengembalikan opasitas
                             hideLoading();
                         }
                     }, function() {

@@ -172,19 +172,19 @@ class PermissionSeeder extends Seeder
 
 
         // HR 
-        $this->setupRoleHR();
-        $this->setupRoleHRManager();
-        $this->setupRoleHRStaff();
+        // $this->setupRoleHR();
+        // $this->setupRoleHRManager();
+        // $this->setupRoleHRStaff();
 
-        // Sales 
-        $this->setupRoleSales();
-        $this->setupRoleSalesManager();
-        $this->setupRoleSalesStaff();
+        // // Sales 
+        // $this->setupRoleSales();
+        // $this->setupRoleSalesManager();
+        // $this->setupRoleSalesStaff();
 
-        // Accounting 
-        $this->setupRoleAccounting();
-        $this->setupRoleAccountingManager();
-        $this->setupRoleAccountingStaff();
+        // // Accounting 
+        // $this->setupRoleAccounting();
+        // $this->setupRoleAccountingManager();
+        // $this->setupRoleAccountingStaff();
     }
 
     public function setupRoleHR(){

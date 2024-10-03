@@ -212,8 +212,7 @@
                 <button type="button" class="btn header-item user text-start d-flex align-items-center"
                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-3.jpg"
-                        alt="Header Avatar">
+                    <img class="rounded-circle header-profile-user" src="{{ Auth::user()->avatar ? asset('assets/img/users/' . $user->avatar) : asset('assets/img/users/user.jpg') }}" alt="Header Avatar">
                     <span class="ms-2 d-none d-xl-inline-block user-item-desc">
                         <span class="user-name">{{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i></span>
                     </span>
@@ -221,7 +220,7 @@
                 <div class="dropdown-menu dropdown-menu-end pt-0">
                     <h6 class="dropdown-header">Welcome {{ Auth::user()->name }}!</h6>
                     <a class="dropdown-item" href="{{ route('profile-list',Auth::user()->id) }}"><i class="mdi mdi-account-circle text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
-                    <a class="dropdown-item" href="apps-chat.html"><i
+                    {{-- <a class="dropdown-item" href="apps-chat.html"><i
                             class="mdi mdi-message-text-outline text-muted font-size-16 align-middle me-1"></i> <span
                             class="align-middle">Messages</span></a>
                     <a class="dropdown-item" href="apps-kanban-board.html"><i
@@ -240,7 +239,7 @@
                             class="badgebg-success-subtle text-success ms-auto">New</span></a>
                     <a class="dropdown-item" href="auth-lockscreen-cover.html"><i
                             class="mdi mdi-lock text-muted font-size-16 align-middle me-1"></i> <span
-                            class="align-middle">Lock screen</span></a>
+                            class="align-middle">Lock screen</span></a> --}}
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

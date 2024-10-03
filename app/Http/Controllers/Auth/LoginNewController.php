@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -16,17 +17,26 @@ class LoginNewController extends Controller
                 'username' => 'required|string',
                 'password' => 'required|string',
             ]);
-    
+
             if ($this->attemptLogin($request)) {
                 if ($request->hasSession()) {
                     $request->session()->put('auth.password_confirmed_at', time());
                 }
-    
+
                 $checkIsSuperAdmin = Auth::user()->hasRole('Super Admin');
-    
-                return response()->json(['success' => true, 'msg' => 'Login berhasil!', 'isSuperAdmin' => $checkIsSuperAdmin]);
+
+                if (!$checkIsSuperAdmin) {
+                    if (checkStatusLogin() == 'allow') {
+                        return response()->json(['success' => true, 'msg' => 'Login berhasil!', 'isSuperAdmin' => $checkIsSuperAdmin, 'status' => checkStatusLogin()]);
+                    } else {
+                        Auth::logout();
+                        return response()->json(['failed' => true, 'msg' => 'Your account is inactive!.']);
+                    }
+                } else {
+                    return response()->json(['success' => true, 'msg' => 'Login berhasil!', 'isSuperAdmin' => $checkIsSuperAdmin]);
+                }
             }
-    
+
             return response()->json(['failed' => true, 'msg' => 'Login failed. Username or Password wrong!']);
         } catch (\Throwable $th) {
             return response()->json(['failed' => true, 'msg' => $th->getMessage()]);

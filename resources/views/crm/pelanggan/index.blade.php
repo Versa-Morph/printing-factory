@@ -51,7 +51,7 @@
             $('#pelanggan-table').DataTable({
                 processing: false,
 
-                serverSide: true,
+                serverSide: false,
                 ajax: '{{ route('pelanggan-get-data') }}',
                 columns: [{
                         data: 'DT_RowIndex',

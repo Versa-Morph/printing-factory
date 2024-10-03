@@ -60,7 +60,7 @@
           $(document).ajaxStart(function() {
             showLoading('Processing Request.....');
         }).ajaxStop(function() {
-            hideLoading();
+            // hideLoading();
         });
         function alertSuccess(msg) {
             Swal.fire({
@@ -136,7 +136,30 @@
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                         },
                         success: function(response) {
-                            window.location.href = '{{ route('pwa-homepage') }}';
+                            console.log(response);
+                            
+                            if (response.success) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: response.msg,
+                                    showConfirmButton: false,
+                                });
+                                window.location.href = '{{ route('pwa-homepage') }}';
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: response.msg,
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Tindakan yang akan dilakukan setelah tombol OK diklik
+                                        console.log("OK clicked");
+                                    }
+                                });
+
+                                console.log('fail => ' +response);
+                            }
                         },
                         error: function(xhr) {
                             const errors = xhr.responseJSON.errors;

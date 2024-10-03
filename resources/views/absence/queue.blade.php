@@ -45,7 +45,7 @@
 $(document).ready(function() {
     $('#queue-table').DataTable({
         processing: false,
-        serverSide: true,
+        serverSide: false,
         ajax: '{{ route('absence-get-data-queue') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },

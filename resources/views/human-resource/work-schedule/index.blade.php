@@ -69,7 +69,7 @@
 
         $('#work-schedule-table').DataTable({
             processing: false,
-            serverSide: true,
+            serverSide: false,
             ajax: '{{ route('hr-work-schedule-get-data') }}',
             columns: [
                 { data: 'employee_checklist', name: 'employee_checklist', orderable: false, searchable: false, render: function(data, type, row) {
