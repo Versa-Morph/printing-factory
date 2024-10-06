@@ -212,7 +212,7 @@
                 <button type="button" class="btn header-item user text-start d-flex align-items-center"
                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{ Auth::user()->avatar ? asset('assets/img/users/' . $user->avatar) : asset('assets/img/users/user.jpg') }}" alt="Header Avatar">
+                    <img class="rounded-circle header-profile-user" src="{{ Auth::user()->avatar ? asset('assets/img/users/' . Auth::user()->avatar) : asset('assets/img/users/user.jpg') }}" alt="Header Avatar">
                     <span class="ms-2 d-none d-xl-inline-block user-item-desc">
                         <span class="user-name">{{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i></span>
                     </span>
