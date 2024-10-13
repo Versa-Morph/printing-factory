@@ -134,7 +134,6 @@ class PwaController extends Controller
     
             return redirect()->route('pwa-homepage')->with('success', 'Attendance recorded successfully.');
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             return redirect()->route('pwa-homepage')->with('failed', 'Attendance failed recorded.');
         }
     }

@@ -321,6 +321,7 @@ Route::get('/payroll', function() {
 // START ATTENDANCE
 Route::prefix('attendance')->name('attendance-')->group(function () {
     Route::get('/', [AttendanceController::class, 'index'])->name('list');
+    Route::get('/maps/{id}/{tanggal}', [AttendanceController::class, 'maps'])->name('maps');
 });
 
 // Route::prefix('absence')->name('absence-')->group(function () {
