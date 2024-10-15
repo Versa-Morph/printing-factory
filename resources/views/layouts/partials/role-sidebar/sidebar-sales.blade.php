@@ -12,7 +12,7 @@
 @endcan
 @can('customer-management')
     <li>
-        <a href="#">
+        <a href="{{ route('leads-customer-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Customer Management</span>
         </a>
@@ -20,7 +20,7 @@
 @endcan
 @can('quotation-management')
     <li>
-        <a href="#">
+        <a href="{{ route('quotation-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Quotation Management</span>
         </a>
@@ -28,7 +28,7 @@
 @endcan
 @can('order-management')
     <li>
-        <a href="#">
+        <a href="{{ route('order-management-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Order Management</span>
         </a>

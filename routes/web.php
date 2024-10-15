@@ -87,6 +87,9 @@ Route::prefix('pwa')->name('pwa-')->group(function () {
 // END PWA
 
 Route::get('/form-customer', [HomeController::class, 'formCustomer'])->name('form-customer');
+Route::post('/form-customer', [CustomerController::class, 'storeFormCustomer'])->name('store-form-customer');
+Route::post('/check-referal-code', [CustomerController::class, 'checkReferralCode'])->name('check-referal-code');
+
 
 
 Route::prefix('customer')->name('customer-')->group(function () {
@@ -221,6 +224,13 @@ Route::prefix('quotation')->name('quotation-')->group(function () {
     Route::get('/delete/{id}', [QuotationController::class, 'delete'])->name('delete');
     Route::get('/modal-approve/{id}', [QuotationController::class, 'modalApprove'])->name('modal-approve');
     Route::patch('/approve/{id}', [QuotationController::class, 'approve'])->name('approve');
+});
+// END QUOTATION
+
+// START QUOTATION
+Route::prefix('order-management')->name('order-management-')->group(function () {
+    Route::get('/', [QuotationController::class, 'orderManagement'])->name('list');
+    Route::get('/get-data', [QuotationController::class, 'getDataOrderManagement'])->name('get-data');
 });
 // END QUOTATION
 

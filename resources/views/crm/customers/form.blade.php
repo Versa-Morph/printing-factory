@@ -26,6 +26,9 @@
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('assets/form-customer/css/custom.css') }}" rel="stylesheet">
 
+	{{-- Toastify --}}
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 
 <body class="style_2">
@@ -76,18 +79,19 @@
 	                </div>
 	                <!-- /col -->
 					
-					{{-- <form class="form-data"> --}}
+					{{-- <form class="" >
+						@csrf --}}
 						<div class="col-xl-5 col-lg-5">
 							<div id="wizard_container">
 								<div id="top-wizard">
 									<div id="progressbar"></div>
 								</div>
 								<!-- /top-wizard -->
-								<form id="wrapped" class="form-data" autocomplete="off">
+								<form id="" action="{{ route('store-form-customer') }}" method="POST" class="form-data" autocomplete="off">
+									@csrf
 									<input id="website" name="website" type="text" value="">
 									<!-- Leave for security protection, read docs for details -->
 									<div id="middle-wizard">
-
 										<div class="step">
 											<h3 class="main_question"><strong>1 of 5</strong>Company Information?</h3>
 											<div class="row">
@@ -109,46 +113,48 @@
 												</div>
 												<div class="col-lg-12 form-group">
 													<label for="company_address">Company Address</label>
-													<textarea name="company_address" id="company_address" class="form-control" style="height:180px;" onkeyup="getVals(this, 'additional_message');"></textarea>
+													<textarea name="company_address" id="company_address" class="form-control" style="height:180px;">{{ old('company_address') }}</textarea>
 												</div>
+												
 											</div>
 										</div>
 										<!-- /step 1-->
-
+								
 										<div class="step">
 											<h3 class="main_question mb-4"><strong>2 of 5</strong>PIC (Person In Charge) Information</h3>
 											<div class="review_block">
 												<div class="row">
 													<div class="col-lg-6 mb-3">
-														<label for="company_name" class="form-label">PIC Name</label>
+														<label for="pic_name" class="form-label">PIC Name</label>
 														<input type="text" class="form-control" id="pic_name" name="pic_name" value="{{ old('pic_name') }}">
 													</div>
 													<div class="col-lg-6 mb-3">
-														<label for="company_name" class="form-label">PIC Phone Number</label>
+														<label for="pic_phone_number" class="form-label">PIC Phone Number</label>
 														<input type="number" class="form-control" id="pic_phone_number" name="pic_phone_number" value="{{ old('pic_phone_number') }}">
 													</div>
 													<div class="col-lg-12 mb-3">
-														<label for="company_name" class="form-label">PIC Email</label>
+														<label for="referal_code" class="form-label">Referral Code</label>
+														<input type="text" class="form-control" id="referal_code" name="referal_code">
+														<span class="text-danger" id="referal_code_error"></span>
+													</div>
+													
+													<div class="col-lg-12 mb-3">
+														<label for="pic_email" class="form-label">PIC Email</label>
 														<input type="email" class="form-control" id="pic_email" name="pic_email" value="{{ old('pic_email') }}">
 													</div>
 												</div>
 											</div>
 										</div>
 										<!-- /step 2-->
-
+								
 										<div class="step">
 											<h3 class="main_question"><strong>3 of 5</strong>Additional Company Details</h3>
 											<div class="review_block">
 												<div class="row">
 													<div class="col-lg-6 mb-3">
-														<label for="referral_code" class="form-label">Referral Code</label>
-														<input type="text" class="form-control" id="referral_code" name="referral_code" value="{{ old('company_name') }}">
-													</div>
-													<div class="col-lg-6 mb-3">
 														<label for="company_status" class="form-label">Company Status</label>
 														<select class="form-select" id="company_status" name="company_status">
-															<option value="">Choose Status</option>
-															<option value="potensial" {{ old('company_status') == 'potensial' ? 'selected' : '' }}>
+															<option selected value="potensial" {{ old('company_status') == 'potensial' ? 'selected' : '' }}>
 																Potensial</option>
 															<option value="customer" {{ old('company_status') == 'customer' ? 'selected' : '' }}>
 																Customer</option>
@@ -158,18 +164,18 @@
 											</div>
 										</div>
 										<!-- /step 3-->
-
+								
 										<div class="submit step">
 											<h3 class="main_question"><strong>4 of 4</strong>Addresses</h3>
 											<div class="summary">
 												<div class="row">
 													<div class="col-lg-12 form-group">
 														<label for="billing_address">Billing Address</label>
-														<textarea name="billing_address" id="billing_address" class="form-control" style="height:180px;" onkeyup="getVals(this, 'billing_address');"></textarea>
+														<textarea name="billing_address" id="billing_address" class="form-control" style="height:180px;">{{ old('billing_address') }}</textarea>
 													</div>
 													<div class="col-lg-12 form-group">
 														<label for="shipping_address">Shipping Address</label>
-														<textarea name="shipping_address" id="shipping_address" class="form-control" style="height:180px;" onkeyup="getVals(this, 'shipping_address');"></textarea>
+														<textarea name="shipping_address" id="shipping_address" class="form-control" style="height:180px;">{{ old('shipping_address') }}</textarea>
 													</div>
 												</div>
 											</div>
@@ -177,15 +183,15 @@
 										<!-- /step 4-->
 									</div>
 									<!-- /middle-wizard -->
-
+								
 									<div id="bottom-wizard">
 										<button type="button" name="backward" class="backward">Prev</button>
 										<button type="button" name="forward" class="forward">Next</button>
 										<button type="submit" name="process" class="submit">Submit</button>
 									</div>
 									<!-- /bottom-wizard -->
-
-								</form>
+								
+								</form>								
 							</div>
 							<!-- /Wizard container -->
 						</div>
@@ -242,7 +248,112 @@
 	<!-- Wizard script -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="{{ asset('assets/form-customer/js/survey_func.js') }}"></script>
+
+	{{-- Toastify --}}
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 	<script>
+		$(document).ready(function() {
+			$('#next_step_btn').on('click', function(e) {
+				e.preventDefault(); // Mencegah tombol Next melakukan aksi default
+
+				let referalCode = $('#referal_code').val();
+				let referalCodeError = $('#referal_code_error');
+
+				// Validasi referral code tidak kosong
+				if (!referalCode) {
+					referalCodeError.text('Referral code harus diisi');
+					return; // Hentikan eksekusi lebih lanjut
+				}
+
+				// Jika referral code diisi, lanjutkan ke AJAX request
+				$.ajax({
+					url: "{{ route('check-referal-code') }}", // Panggil route untuk validasi
+					type: 'POST',
+					data: {
+						_token: '{{ csrf_token() }}',
+						referal_code: referalCode
+					},
+					success: function(response) {
+						if (response.valid) {
+							referalCodeError.text(''); // Kosongkan pesan error jika valid
+							// Lanjutkan ke langkah berikutnya
+							$('.forward').click();
+						} else {
+							referalCodeError.text('Referral code tidak valid'); // Tampilkan pesan error
+						}
+					},
+					error: function(xhr, status, error) {
+						console.log(error); // Log error jika AJAX gagal
+					}
+				});
+			});
+		});
+
+
+	</script>
+	@if(session()->has('success'))
+		<script>
+				Toastify({
+					text: "{{ session()->get('success') }}",
+					close: true,
+					gravity: "top", // `top` or `bottom`
+					position: "center", // `left`, `center` or `center`
+					stopOnFocus: true, // Prevents dismissing of toast on hover
+					style: {
+						background: "#D5F3E9",
+						color: "#1f7556"
+					},
+					duration: 3000
+				}).showToast();
+		</script>
+	@endif
+
+	@if(session()->has('warning'))
+	<script>
+			Toastify({
+				text: "{{ session()->get('warning') }}",
+				close: true,
+				gravity: "top", // `top` or `bottom`
+				position: "center", // `left`, `center` or `center`
+				stopOnFocus: true, // Prevents dismissing of toast on hover
+				style: {
+					background: "#FBEFDB",
+					color: "#916c2e"
+				},
+				duration: 3000
+			}).showToast();
+	</script>
+	@endif
+
+	@if(session()->has('failed'))
+	<script>
+		Toastify({
+			text: "🚨 {{ session()->get('failed') }}",
+			close: true,
+			gravity: "top", // `top` or `bottom`
+			position: "center", // `left`, `center` or `center`
+			stopOnFocus: true, // Prevents dismissing of toast on hover
+			theme: "dark",
+			style: {
+				background: "#fde1e1",
+				color: "#924040"
+			},
+			duration: 5000
+		}).showToast();
+	</script>
+
+	<script>
+		function phoneMask() {
+			var num = $(this).val().replace(/\D/g,'');
+			$(this).val(num.substring(0,13));
+		}
+		$('[type="tel"]').keyup(phoneMask);
+	</script>
+
+	@endif
+
+	{{-- <script>
 		function showLoading(message) {
 			Swal.fire({
 				title: message,
@@ -402,6 +513,6 @@
 			
 	
 		});
-	</script>
+	</script> --}}
 </body>
 </html>

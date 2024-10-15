@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Employe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
@@ -98,6 +99,66 @@ class CustomerController extends Controller
             return response()->json(['failed' => true, 'msg' => 'Failed to save customer data!']);
         }
     }
+
+    public function storeFormCustomer(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $request->validate([
+                'company_name'          => 'required|string|max:255',
+                'company_code'          => 'required|string|max:50',
+                'company_phone_number'  => 'required|string|max:20',
+                'company_address'       => 'required|string',
+                'company_email'         => 'required|string|email|max:255',
+
+                'pic_name'              => 'required|string|max:255',
+                'pic_phone_number'      => 'required|string|max:20',
+                'pic_email'             => 'required|string|email|max:255',
+                'referal_code'          => 'required|string|max:20',
+            ]);
+
+            // Check if the referral code exists in the Employe table
+            $employe = Employe::where('employee_code', $request->referal_code)->first();
+
+            if (!$employe) {
+                return redirect()->back()->with('failed', 'Referral Code tidak ditemukan, silakan masukkan referral code yang valid.');
+            }
+
+            // If the referral code exists, proceed with saving the customer data
+            $data = new Customer();
+            $data->company_name = $request->company_name;
+            $data->company_code = $request->company_code;
+            $data->company_phone_number = $request->company_phone_number;
+            $data->company_address = $request->company_address;
+            $data->company_email = $request->company_email;
+            $data->pic_name = $request->pic_name;
+            $data->pic_phone_number = $request->pic_phone_number;
+            $data->pic_email = $request->pic_email;
+            $data->referral_code = $request->referal_code;
+            $data->company_status = $request->company_status;
+            $data->created_by = Auth::user()->name;
+            $data->save();
+
+            return redirect()->back()->with('success', 'Data Customer Telah Dibuat');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('failed', 'Data Customer Gagal Dibuat');
+        }
+    }
+
+    public function checkReferralCode(Request $request)
+    {
+        $referalCode = $request->referal_code;
+        $isValid = Employe::where('employee_code', $referalCode)->exists(); // Cek keberadaan referral code di tabel karyawan (Employee)
+    
+        if ($isValid) {
+            return response()->json(['valid' => true]);
+        } else {
+            return response()->json(['valid' => false]);
+        }
+    }
+
+
+
     public function storeForm(Request $request)
     {
         try {
@@ -291,14 +352,17 @@ class CustomerController extends Controller
     {
         try {
             $request->validate([
-                'company_name' => 'required|string|max:255',
-                'company_code' => 'required|string|max:50',
-                'company_phone_number' => 'required|string|max:20',
-                'company_address' => 'required|string',
-                'company_email' => 'required|string|email|max:255',
-                'pic_name' => 'required|string|max:255',
-                'pic_phone_number' => 'required|string|max:20',
-                'pic_email' => 'required|string|email|max:255',
+                'company_name'          => 'required|string|max:255',
+                'company_code'          => 'required|string|max:50',
+                'company_phone_number'  => 'required|string|max:20',
+                'company_address'       => 'required|string',
+                'company_email'         => 'required|string|email|max:255',
+                'pic_name'              => 'required|string|max:255',
+                'pic_phone_number'      => 'required|string|max:20',
+                'pic_email'             => 'required|string|email|max:255',
+                'company_npwp'          => 'nullable|string||max:255',
+                'billing_address'       => 'nullable|string||max:255',
+                'shipping_address'      => 'nullable|string||max:255',
             ]);
 
             $data = Customer::find($id);
