@@ -57,6 +57,29 @@
                                 value="{{ $customer->pic_email }}">
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="billing_address" class="form-label">Billing Address</label>
+                            <textarea class="form-control" id="billing_address" name="billing_address" rows="3">{{ $customer->billing_address }}</textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-lg-12">
+                            <label for="company_address" class="form-label">Company Adress</label>
+                            <input type="text" class="form-control" id="company_address" name="company_address" value="{{ $customer->company_npwp }}">
+                        </div>
+
+                        <div class="col-lg-6 mt-2">
+                            <label for="billing_address" class="form-label">Billing Address</label>
+                            <textarea class="form-control" id="billing_address" name="billing_address" rows="3">{{ $customer->billing_address }}</textarea>
+                        </div>
+
+                        <div class="col-lg-6 mt-2">
+                            <label for="shipping_address" class="form-label">Shipping Address</label>
+                            <textarea class="form-control" id="shipping_address" name="shipping_address" rows="3">{{ $customer->shipping_address }}</textarea>
+                        </div>
+                    </div>
                 </div>
 
 

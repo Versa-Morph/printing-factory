@@ -74,7 +74,7 @@ $(document).ready(function() {
     $('#quotation-table').DataTable({
         processing: false,
         serverSide: false,
-        ajax: '{{ route('quotation-get-data') }}',
+        ajax: '{{ route('order-management-get-data') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'quotation_number', name: 'quotation_number' },

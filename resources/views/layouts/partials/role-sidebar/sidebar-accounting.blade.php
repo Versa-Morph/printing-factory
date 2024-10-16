@@ -13,7 +13,7 @@
 
 @can('dashboard-manager-accounting')
     <li>
-        <a href="#">
+        <a href="{{ route('leads-customer-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Customer Support</span>
         </a>

@@ -55,6 +55,39 @@ class QuotationController extends Controller
         }
     }
 
+    public function orderManagement()
+    {
+        $data['page_title'] = 'Order Management';
+        return view('order-management.index', $data);
+    }
+
+    public function getDataOrderManagement(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Quotation::orderBy('po_number', 'asc')->where('status','accepted')->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $editUrl = route('quotation-edit', $row->id);
+                    $approveUrl = route('quotation-modal-approve', $row->id);
+                    $deleteUrl = route('quotation-delete', $row->id);
+                    $dropdown = "<div class='dropdown'>
+                                    <button class='btn btn-light btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='true'>
+                                        <i class='uil uil-ellipsis-h'></i>
+                                    </button>
+                                    <ul class='dropdown-menu dropdown-menu-end'>
+                                        <li><a class='dropdown-item edit' href='$editUrl'>Edit</a></li>
+                                        <li><a class='dropdown-item approve view-details' data-id='$row->id'>Approve</a></li>
+                                        <li><a class='dropdown-item delete' href='javascript:void(0);' data-url='$deleteUrl'>Delete</a></li>
+                                    </ul>
+                                </div>";
+                    return $dropdown;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
     public function modalApprove($id)
     {
         $data['quotation'] = Quotation::findOrFail($id);
@@ -67,11 +100,20 @@ class QuotationController extends Controller
             $quotation = Quotation::findOrFail($id);
             $quotation->po_number = $request->po_number;
             $quotation->status = 'accepted';
+
+            if ($request->hasFile('quotation')) {
+                $image = $request->file('quotation');
+                $name = time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('assets/img/quotation/');
+                $image->move($destinationPath, $name);
+                $quotation->file = $name;
+            }
+
             $quotation->save();
 
-            return response()->json(['success' => true, 'msg' => 'Data Quotaion berhasil disimpan!']);
+            return redirect()->back()->with('success', 'Berhasil Approve');
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => 'Data Gagal Di Update!']);
+            return redirect()->back()->with('failed', 'Gagal Approve');
         }
     }
 

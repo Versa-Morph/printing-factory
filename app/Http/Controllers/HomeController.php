@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employe;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,9 @@ class HomeController extends Controller
 
     public function formCustomer()
     {
-        return view('crm.customers.form');
+        $data['employes'] = Employe::orderBy('employee_code','asc')->get();
+
+        return view('crm.customers.form',$data);
     }
 
     
