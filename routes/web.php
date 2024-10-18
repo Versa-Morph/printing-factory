@@ -103,6 +103,7 @@ Route::prefix('customer')->name('customer-')->group(function () {
     Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
 });
+
 Route::prefix('leads-customer')->name('leads-customer-')->group(function () {
     Route::get('/', [CustomerController::class, 'indexLeads'])->name('list');
     Route::get('/data', [CustomerController::class, 'getDataLeads'])->name('get-data');
