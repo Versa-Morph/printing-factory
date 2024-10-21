@@ -4,7 +4,7 @@
 
 @can('dashboard-manager-sales')
     <li>
-        <a href="#">
+        <a href="{{ route('sales-performace-report-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Dashboard</span>
         </a>
@@ -66,7 +66,7 @@
 @endcan
 @can('dashboard-staff-sales')
     <li>
-        <a href="#">
+        <a href="{{ route('sales-performace-report-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Dashboard</span>
         </a>
@@ -74,7 +74,7 @@
 @endcan
 @can('customer-management')
     <li>
-        <a href="#">
+        <a href="{{ route('leads-customer-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Customer Management</span>
         </a>
@@ -82,7 +82,7 @@
 @endcan
 @can('quotation-management')
     <li>
-        <a href="#">
+        <a href="{{ route('quotation-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Quotation Management</span>
         </a>
@@ -90,7 +90,7 @@
 @endcan
 @can('order-management')
     <li>
-        <a href="#">
+        <a href="{{ route('order-management-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Order Management</span>
         </a>
@@ -112,7 +112,7 @@
 
 @can('sales-performance-reports')
     <li>
-        <a href="#">
+        <a href="{{ route('sales-performace-report-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Sales Performance Reports</span>
         </a>
@@ -136,7 +136,7 @@
 @endcan
 @can('quotation-&-order-analytics')
     <li>
-        <a href="#">
+        <a href="{{ route('sales-performace-report-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Quotation & Order Analytics</span>
         </a>
@@ -148,7 +148,7 @@
 @endcan
 @can('personal-sales-reports')
     <li>
-        <a href="#">
+        <a href="{{ route('sales-performace-report-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Personal Sales Reports</span>
         </a>
