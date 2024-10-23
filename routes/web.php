@@ -27,6 +27,7 @@ use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\WorkScheduleController;
 use App\Http\Controllers\Auth\LoginNewController;
 use App\Http\Controllers\OfficeInventoryController;
+use App\Http\Controllers\SalesPerformanceReportController;
 use App\Http\Controllers\StatusAttendanceController;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,6 +104,7 @@ Route::prefix('customer')->name('customer-')->group(function () {
     Route::post('/update/{id}', [CustomerController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
 });
+
 Route::prefix('leads-customer')->name('leads-customer-')->group(function () {
     Route::get('/', [CustomerController::class, 'indexLeads'])->name('list');
     Route::get('/data', [CustomerController::class, 'getDataLeads'])->name('get-data');
@@ -224,6 +226,20 @@ Route::prefix('quotation')->name('quotation-')->group(function () {
     Route::get('/delete/{id}', [QuotationController::class, 'delete'])->name('delete');
     Route::get('/modal-approve/{id}', [QuotationController::class, 'modalApprove'])->name('modal-approve');
     Route::patch('/approve/{id}', [QuotationController::class, 'approve'])->name('approve');
+});
+// END QUOTATION
+
+// START SALES PERFORMANCE REPORT
+Route::prefix('sales-performace-report')->name('sales-performace-report-')->group(function () {
+    Route::get('/', [SalesPerformanceReportController::class, 'index'])->name('list');
+    Route::get('/get-data', [SalesPerformanceReportController::class, 'getData'])->name('get-data');
+    Route::get('/create', [SalesPerformanceReportController::class, 'create'])->name('create');
+    Route::post('/store', [SalesPerformanceReportController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [SalesPerformanceReportController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [SalesPerformanceReportController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [SalesPerformanceReportController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [SalesPerformanceReportController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [SalesPerformanceReportController::class, 'approve'])->name('approve');
 });
 // END QUOTATION
 

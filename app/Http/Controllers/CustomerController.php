@@ -279,7 +279,17 @@ class CustomerController extends Controller
     public function getDataLeads(Request $request)
     {
         if ($request->ajax()) {
-            $data = Customer::orderBy('created_at', 'desc')->where('company_status','potensial')->get();
+
+            if (Auth::user()->role == 'sales') {
+                // If the user's role is 'sales', they can only see their own accounts
+                $data = Customer::orderBy('created_at', 'desc')
+                                ->where('created_by', Auth::user()->name)
+                                ->get();
+            } else {
+                // For other roles, they can see all accounts
+                $data = Customer::orderBy('created_at', 'desc')->get();
+            }
+            
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {

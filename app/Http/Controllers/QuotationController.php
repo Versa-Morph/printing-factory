@@ -9,6 +9,7 @@ use App\Models\Quotation;
 use App\Models\QuotationRemarks;
 use App\Models\QuotationTerms;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class QuotationController extends Controller
@@ -31,7 +32,14 @@ class QuotationController extends Controller
     public function getData(Request $request)
     {
         if ($request->ajax()) {
-            $data = Quotation::orderBy('created_at', 'desc')->get();
+            if (Auth::user()->role == 'sales') {
+                // If the user's role is 'sales', they can only see their own accounts
+                $data = Quotation::orderBy('created_at', 'desc')
+                                ->where('created_by', Auth::user()->name)
+                                ->get();
+            } else {
+                $data = Quotation::orderBy('created_at', 'desc')->get();
+            }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -64,7 +72,14 @@ class QuotationController extends Controller
     public function getDataOrderManagement(Request $request)
     {
         if ($request->ajax()) {
-            $data = Quotation::orderBy('po_number', 'asc')->where('status','accepted')->get();
+            if (Auth::user()->role == 'sales') {
+                $data = Quotation::orderBy('po_number', 'asc')
+                                ->where('status','accepted')
+                                ->where('created_by', Auth::user()->name)
+                                ->get();
+            } else {
+                $data = Quotation::orderBy('po_number', 'asc')->where('status','accepted')->get();
+            }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -169,6 +184,7 @@ class QuotationController extends Controller
             $quotation->status_change_at = now();
             $quotation->valid_until = $request->input('valid_until');
             $quotation->po_number = $request->input('po_number');
+            $quotation->created_by = Auth::user()->name;
             $quotation->save();
     
             if ($request->has('remark') && is_array($request->remark)) {
@@ -260,6 +276,7 @@ class QuotationController extends Controller
             $quotation->status_change_at = now();
             $quotation->valid_until = $request->input('valid_until');
             $quotation->po_number = $request->input('po_number');
+            $quotation->updated_by = Auth::user()->name;
             $quotation->save();
     
             return response()->json(['success' => true, 'msg' => 'Data Quotation berhasil diedit!']);
