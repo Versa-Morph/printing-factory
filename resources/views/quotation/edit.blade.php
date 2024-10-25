@@ -51,11 +51,15 @@
                                 
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="validationCustom01">Product Type <small class="text-danger">*</small></label>
-                                        <input type="text" class="form-control" value="{{ $quotation->product_type }}" name="product_type">
+                                        <label class="form-label" for="productType">Product Type <small class="text-danger">*</small></label>
+                                        <select class="form-select" id="productType" name="product_type">
+                                            <option value="liquid photopolymer plate" {{ $quotation->product_type == 'liquid photopolymer plate' ? 'selected' : '' }}>Liquid Photopolymer Plate</option>
+                                            <option value="solid photopolymer plate" {{ $quotation->product_type == 'solid photopolymer plate' ? 'selected' : '' }}>Solid Photopolymer Plate</option>
+                                            <option value="digital solid photopolymer plate" {{ $quotation->product_type == 'digital solid photopolymer plate' ? 'selected' : '' }}>Digital Solid Photopolymer Plate</option>
+                                        </select>
                                     </div>
-                                </div><!-- end col -->
-
+                                </div>
+                                
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label class="form-label" for="validationCustom01">Material Detail</label>
@@ -65,10 +69,12 @@
 
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="validationCustom01">Thickness</label>
-                                        <input type="number" class="form-control" value="{{ $quotation->thickness }}" name="thickness">
+                                        <label class="form-label" for="thickness">Thickness</label>
+                                        <select class="form-select" id="thickness" name="thickness">
+                                            <!-- Thickness options will be populated dynamically -->
+                                        </select>
                                     </div>
-                                </div><!-- end col -->
+                                </div>
 
                                 <div class="col-md-4">
                                     <div class="mb-3">
@@ -214,6 +220,40 @@
 @endsection
 
 @section('script')
+<script>
+    document.getElementById('productType').addEventListener('change', function() {
+        const thickness = document.getElementById('thickness');
+        thickness.innerHTML = ''; // Clear existing options
+        let options = [];
+    
+        if (this.value === 'liquid photopolymer plate' || this.value === 'solid photopolymer plate') {
+            options = [
+                { value: '3mm', text: '3mm' },
+                { value: '4mm', text: '4mm' },
+                { value: '3+4mm', text: '3+4mm' },
+                { value: '4+3mm', text: '4+3mm' },
+                { value: '7mm', text: '7mm' },
+            ];
+        } else if (this.value === 'digital solid photopolymer plate') {
+            options = [
+                { value: '1,7mm', text: '1,7mm' },
+                { value: '1,14mm', text: '1,14mm' },
+                { value: '0,95mm', text: '0,95mm' },
+                { value: '0,75mm', text: '0,75mm' }
+            ];
+        }
+    
+        options.forEach(optionData => {
+            const option = document.createElement('option');
+            option.value = optionData.value;
+            option.textContent = optionData.text;
+            thickness.appendChild(option);
+        });
+    });
+    
+    // Trigger change event on page load to set initial thickness options
+    document.getElementById('productType').dispatchEvent(new Event('change'));
+</script>
 <script>
     function addQuotationRemark() {
         var rowCount = $('#remarksTable tr').length;
