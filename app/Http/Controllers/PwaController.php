@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\AttendanceDetail;
 use App\Models\Employe;
+use App\Models\Overtime;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,7 @@ class PwaController extends Controller
         $getEmployeId = Employe::where('user_id',Auth::user()->id)->first();
         $data['shift'] = $this->getShift($getEmployeId->id);
         $data['cekAttendance'] = Attendance::where('employee_id',$getEmployeId->id)->where('date',date('Y-m-d'))->first();
+        $data['cekOvertime'] = Overtime::where('employee_id',$getEmployeId->id)->where('date',date('Y-m-d'))->where('status',2)->first();
         return view('pwa.home.index', $data);
     }
 
@@ -132,7 +134,6 @@ class PwaController extends Controller
     
             return redirect()->route('pwa-homepage')->with('success', 'Attendance recorded successfully.');
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             return redirect()->route('pwa-homepage')->with('failed', 'Attendance failed recorded.');
         }
     }

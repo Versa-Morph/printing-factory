@@ -47,18 +47,6 @@
 @endsection
 
 @section('content')
-    <div class="row align-items-end">
-        <div class="col-sm">
-            <div>
-                @can('create-overtime')
-                    <a href="{{ route('overtime-create') }}" class="btn btn-create mb-4">
-                        <i class="mdi mdi-plus me-1"></i>
-                        Request Overtime
-                    </a>
-                @endcan
-            </div>
-        </div>
-    </div>
     <div class="card">
         <div class="card-body">
 
@@ -120,23 +108,16 @@
                                                 <ul class='dropdown-menu dropdown-menu-end'>
                                                     @if (Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Human Resource Manager') || Auth::user()->hasRole('Human Resource Staff'))
                                                         @if ($item->status == 1)
-                                                            <li><a class='dropdown-item approve' href="javascript:void(0);"
-                                                                    data-url='{{ route('overtime-approve', $item->id) }}'>Approve</a>
-                                                            </li>
-                                                        @endif
-                                                    @else
-                                                        @if ($item->employee->id != getEmployeID())
-                                                            <li><a class='dropdown-item approve' href="javascript:void(0);"
-                                                                    data-url='{{ route('overtime-approve', $item->id) }}'>Approve</a>
-                                                            </li>
+                                                            @if ($item->employee->id != getEmployeID())
+                                                                <li><a class='dropdown-item approve' href="javascript:void(0);"
+                                                                        data-url='{{ route('overtime-approve', $item->id) }}'>Approve</a>
+                                                                </li>
+                                                                <li><a class='dropdown-item delete' href='javascript:void(0);'
+                                                                        data-url='{{ route('overtime-delete', $item->id) }}'>Delete</a>
+                                                                </li>
+                                                            @endif
                                                         @endif
                                                     @endif
-                                                    <li><a class='dropdown-item edit'
-                                                            href='{{ route('overtime-edit', $item->id) }}'>Edit</a></li>
-                                                    <li><a class='dropdown-item delete' href='javascript:void(0);'
-                                                            data-url='{{ route('overtime-delete', $item->id) }}'>Delete</a>
-                                                    </li>
-
                                                 </ul>
                                             </div>
                                         </center>
@@ -190,7 +171,7 @@
                                     response.success,
                                     'success'
                                 )
-                                window.location.href = '{{ route('overtime-list') }}';
+                                window.location.href = '{{ route('overtime-manager-list') }}';
                             } else {
                                 Swal.fire(
                                     'Error!',
@@ -227,7 +208,7 @@
                                     response.success,
                                     'success'
                                 )
-                                window.location.href = '{{ route('overtime-list') }}';
+                                window.location.href = '{{ route('overtime-manager-list') }}';
                             } else {
                                 Swal.fire(
                                     'Error!',

@@ -206,9 +206,7 @@
                                                 <i class='uil uil-ellipsis-h'></i>
                                             </button>
                                             <ul class='dropdown-menu dropdown-menu-end'>
-                                                <li><a class='dropdown-item edit' href='$editUrl'>Edit</a></li>
-                                                <li><a class='dropdown-item delete' href='javascript:void(0);'
-                                                        data-url='$deleteUrl'>Delete</a></li>
+                                                <li><a class='dropdown-item edit' href='{{ route('attendance-maps',['id' => $item->id ,'tanggal' => $item->date]) }}'>Monitoring</a></li>
                                             </ul>
                                         </div>
                                     </center>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\AttendanceDetail;
 use App\Models\Employe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,16 @@ class AttendanceController extends Controller
             }
         })->orderBy('date','desc')->get();
         return view('attendance.index', $data);
+    }
+
+    public function maps($id,$tanggal){
+        $data['page_title'] = 'Maps Attendance';
+        $role = Auth::user()->hasRole('Super Admin');
+        $getEmployeId = $this->getIdEmploye();
+
+        $data['attendanceEmploye'] = Attendance::with('employee')->where('id',$id)->first();
+        $data['attendance'] = AttendanceDetail::where('attendance_id',$id)->get();
+        return view('attendance.maps', $data);
     }
 
 }

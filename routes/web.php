@@ -28,6 +28,7 @@ use App\Http\Controllers\WorkScheduleController;
 use App\Http\Controllers\Auth\LoginNewController;
 use App\Http\Controllers\OfficeInventoryController;
 use App\Http\Controllers\SalesPerformanceReportController;
+use App\Http\Controllers\SalesTaskController;
 use App\Http\Controllers\StatusAttendanceController;
 use Illuminate\Support\Facades\Auth;
 
@@ -264,6 +265,20 @@ Route::prefix('shift')->name('shift-')->group(function () {
 });
 // END SHIFT
 
+// START SHIFT
+Route::prefix('sales-task')->name('sales-task-')->group(function () {
+    Route::get('/', [SalesTaskController::class, 'index'])->name('list');
+    Route::get('/get-data', [SalesTaskController::class, 'getData'])->name('get-data');
+    Route::get('/create', [SalesTaskController::class, 'create'])->name('create');
+    Route::post('/store', [SalesTaskController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [SalesTaskController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [SalesTaskController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [SalesTaskController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [SalesTaskController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [SalesTaskController::class, 'approve'])->name('approve');
+});
+// END SHIFT
+
 // START STATUS ATTENDANCE
 Route::prefix('status-attendance')->name('status-attendance-')->group(function () {
     Route::get('/', [StatusAttendanceController::class, 'index'])->name('list');
@@ -275,6 +290,27 @@ Route::prefix('status-attendance')->name('status-attendance-')->group(function (
     Route::get('/delete/{id}', [StatusAttendanceController::class, 'delete'])->name('delete');
     Route::get('/modal-approve/{id}', [StatusAttendanceController::class, 'modalApprove'])->name('modal-approve');
     Route::patch('/approve/{id}', [StatusAttendanceController::class, 'approve'])->name('approve');
+});
+// END STATUS ATTENDANCE
+
+// START STATUS ATTENDANCE
+Route::prefix('overtime')->name('overtime-')->group(function () {
+    Route::get('/', [OvertimeController::class, 'index'])->name('list');
+    Route::get('/create', [OvertimeController::class, 'create'])->name('create');
+    Route::post('/store', [OvertimeController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OvertimeController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OvertimeController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [OvertimeController::class, 'delete'])->name('delete');
+    Route::get('/approve/{id}', [OvertimeController::class, 'approve'])->name('approve');
+});
+Route::prefix('manager/overtime')->name('overtime-manager-')->group(function () {
+    Route::get('/', [OvertimeController::class, 'indexManager'])->name('list');
+    Route::get('/create', [OvertimeController::class, 'create'])->name('create');
+    Route::post('/store', [OvertimeController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OvertimeController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OvertimeController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [OvertimeController::class, 'delete'])->name('delete');
+    Route::get('/approve/{id}', [OvertimeController::class, 'approve'])->name('approve');
 });
 // END STATUS ATTENDANCE
 
@@ -326,10 +362,9 @@ Route::get('/payroll', function() {
 // START ATTENDANCE
 Route::prefix('attendance')->name('attendance-')->group(function () {
     Route::get('/', [AttendanceController::class, 'index'])->name('list');
+    Route::get('/maps/{id}/{tanggal}', [AttendanceController::class, 'maps'])->name('maps');
 });
-Route::prefix('overtime')->name('overtime-')->group(function () {
-    Route::get('/', [OvertimeController::class, 'index'])->name('list');
-});
+
 // Route::prefix('absence')->name('absence-')->group(function () {
 //     Route::get('/', [AbsenceController::class, 'index'])->name('list');
 // });
