@@ -98,7 +98,7 @@
 @endcan
 @can('sales-task')
     <li>
-        <a href="#">
+        <a href="{{ route('sales-task-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Sales Task</span>
         </a>

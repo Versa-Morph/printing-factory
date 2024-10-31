@@ -28,6 +28,7 @@ use App\Http\Controllers\WorkScheduleController;
 use App\Http\Controllers\Auth\LoginNewController;
 use App\Http\Controllers\OfficeInventoryController;
 use App\Http\Controllers\SalesPerformanceReportController;
+use App\Http\Controllers\SalesTaskController;
 use App\Http\Controllers\StatusAttendanceController;
 use Illuminate\Support\Facades\Auth;
 
@@ -261,6 +262,20 @@ Route::prefix('shift')->name('shift-')->group(function () {
     Route::get('/delete/{id}', [ShiftController::class, 'delete'])->name('delete');
     Route::get('/modal-approve/{id}', [ShiftController::class, 'modalApprove'])->name('modal-approve');
     Route::patch('/approve/{id}', [ShiftController::class, 'approve'])->name('approve');
+});
+// END SHIFT
+
+// START SHIFT
+Route::prefix('sales-task')->name('sales-task-')->group(function () {
+    Route::get('/', [SalesTaskController::class, 'index'])->name('list');
+    Route::get('/get-data', [SalesTaskController::class, 'getData'])->name('get-data');
+    Route::get('/create', [SalesTaskController::class, 'create'])->name('create');
+    Route::post('/store', [SalesTaskController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [SalesTaskController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [SalesTaskController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [SalesTaskController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [SalesTaskController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [SalesTaskController::class, 'approve'])->name('approve');
 });
 // END SHIFT
 
