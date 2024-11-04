@@ -11,6 +11,8 @@ use App\Models\QuotationTerms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
+use PDF;
+
 
 class QuotationController extends Controller
 {
@@ -44,6 +46,7 @@ class QuotationController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $editUrl = route('quotation-edit', $row->id);
+                    $invoiceUrl = route('quotation-invoice', $row->id);
                     $approveUrl = route('quotation-modal-approve', $row->id);
                     $deleteUrl = route('quotation-delete', $row->id);
                     $dropdown = "<div class='dropdown'>
@@ -53,6 +56,7 @@ class QuotationController extends Controller
                                     <ul class='dropdown-menu dropdown-menu-end'>
                                         <li><a class='dropdown-item edit' href='$editUrl'>Edit</a></li>
                                         <li><a class='dropdown-item approve view-details' data-id='$row->id'>Approve</a></li>
+                                        <li><a class='dropdown-item edit' href='$invoiceUrl'>Cetak Invoice</a></li>
                                         <li><a class='dropdown-item delete' href='javascript:void(0);' data-url='$deleteUrl'>Delete</a></li>
                                     </ul>
                                 </div>";
@@ -61,6 +65,17 @@ class QuotationController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+    public function invoice($id)
+    {
+        $data['page_title'] = 'Invoice';
+        $quotation = Quotation::findOrFail($id);
+        $customer = Customer::where('company_code',$quotation->company_code)->get()->first();
+        $pdf = PDF::loadView('quotation.invoice', compact('quotation','customer'));
+        $pdf->setPaper('A4', 'portrait');
+        $filename = 'Quotation-' . $quotation->no_quotation . '.pdf';
+        return $pdf->stream($filename);
     }
 
     public function orderManagement()

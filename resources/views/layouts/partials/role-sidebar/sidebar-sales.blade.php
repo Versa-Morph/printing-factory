@@ -36,7 +36,7 @@
 @endcan
 @can('sales-team-management')
     <li>
-        <a href="#">
+        <a href="{{ route('sales-task-management-list') }}">
             <i class="uil-users-alt nav-icon"></i>
             <span class="menu-item" data-key="t-authentication">Sales Team Management</span>
         </a>

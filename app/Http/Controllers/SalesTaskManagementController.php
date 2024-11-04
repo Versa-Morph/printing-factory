@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Employe;
 use App\Models\SalesTask;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
-class SalesTaskController extends Controller
+class SalesTaskManagementController extends Controller
 {
     // public function __construct()
     // {
@@ -23,8 +22,8 @@ class SalesTaskController extends Controller
 
     public function index()
     {
-        $data['page_title'] = 'Sales Task';
-        return view('sales-task.index', $data);
+        $data['page_title'] = 'Sales Team Management';
+        return view('sales-task-management.index', $data);
     }
 
     public function getData(Request $request)
@@ -41,8 +40,8 @@ class SalesTaskController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $editUrl = route('sales-task-edit', $row->id);
-                    $deleteUrl = route('sales-task-delete', $row->id);
+                    $editUrl = route('sales-task-management-edit', $row->id);
+                    $deleteUrl = route('sales-task-management-delete', $row->id);
                     $dropdown = "<div class='dropdown'>
                                     <button class='btn btn-light btn-sm dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='true'>
                                         <i class='uil uil-ellipsis-h'></i>
@@ -64,10 +63,11 @@ class SalesTaskController extends Controller
      */
     public function create()
     {
-        $data['page_title'] = 'Tambah Sales Task';
+        $data['page_title'] = 'Tambah Sales Team Management';
         $data['sales_task'] = SalesTask::orderBy('task_name','asc')->get();
+        $data['employes']   = Employe::orderBy('first_name','asc')->get();
 
-        return view('sales-task.create', $data);
+        return view('sales-task-management.create', $data);
     }
 
     /**
@@ -94,7 +94,7 @@ class SalesTaskController extends Controller
             $salesTask->priority = $request->input('priority');
             $salesTask->status = $request->input('status');
             $salesTask->remarks = $request->input('remarks');
-            $salesTask->assigned_employee_id = $employee->id;
+            $salesTask->assigned_employee_id = $request->employee_id;
             $salesTask->save();
     
             return response()->json(['success' => true, 'msg' => 'Data Sales Task berhasil disimpan!']);
@@ -119,8 +119,9 @@ class SalesTaskController extends Controller
     {
         $data['page_title'] = 'Edit Sales Task';
         $data['sales_task'] = SalesTask::find($id);
+        $data['employes']   = Employe::orderBy('first_name','asc')->get();
 
-        return view('sales-task.edit', $data);
+        return view('sales-task-management.edit', $data);
     }
 
     /**
@@ -146,7 +147,7 @@ class SalesTaskController extends Controller
             $salesTask->priority = $request->input('priority');
             $salesTask->status = $request->input('status');
             $salesTask->remarks = $request->input('remarks');
-            $salesTask->assigned_employee_id = $employee->id;
+            $salesTask->assigned_employee_id = $request->employee_id;
             $salesTask->save();
     
             return response()->json(['success' => true, 'msg' => 'Data Sales Task berhasil diedit!']);
@@ -164,5 +165,4 @@ class SalesTaskController extends Controller
         }
         return response()->json(['error' => 'Data Sales Task tidak ditemukan']);
     }
-
 }
