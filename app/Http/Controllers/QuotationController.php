@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Karyawan;
 use App\Models\Quotation;
+use App\Models\QuotationDetail;
 use App\Models\QuotationRemarks;
 use App\Models\QuotationTerms;
 use Illuminate\Http\Request;
@@ -168,12 +169,8 @@ class QuotationController extends Controller
             $request->validate([
                 'quotation_number'      => 'required',
                 'company_code'          => 'required|string|max:225',
-                'product_type'          => 'required|string|max:225',
-                'material_detail'       => 'required',
-                'thickness'             => 'nullable',
                 'reduction'             => 'nullable',
                 'position'              => 'nullable',
-                'price'                 => 'required',
                 'discount_percent'      => 'nullable',
                 'discount_price'        => 'nullable',
                 'datetime'              => 'nullable',
@@ -186,12 +183,8 @@ class QuotationController extends Controller
             $quotation = new Quotation();
             $quotation->quotation_number = $request->input('quotation_number');
             $quotation->company_code = $request->input('company_code');
-            $quotation->product_type = $request->input('product_type');
-            $quotation->material_detail = $request->input('material_detail');
-            $quotation->thickness = $request->input('thickness');
             $quotation->reduction = $request->input('reduction');
             $quotation->position = $request->input('position');
-            $quotation->price = $request->input('price');
             $quotation->discount_percent = $request->input('discount_percent');
             $quotation->discount_price = $request->input('discount_price');
             $quotation->datetime = now();
@@ -202,6 +195,22 @@ class QuotationController extends Controller
             $quotation->created_by = Auth::user()->name;
             $quotation->save();
     
+            if ($request->has('product_type') && is_array($request->product_type)) {
+                $productType = [];
+                foreach ($request->product_type as $key => $value) {
+                    $productType[] = [
+                        'quotation_id'  => $quotation->id,
+                        'product_type'  => $request->product_type[$key], 
+                        'material'      => $request->material[$key], 
+                        'thickness'     => $request->thickness[$key], 
+                        'unit'          => $request->unit[$key], 
+                        'price'         => $request->price[$key], 
+
+                    ];
+                }
+                QuotationDetail::insert($productType);
+            }
+
             if ($request->has('remark') && is_array($request->remark)) {
                 $remarks = [];
                 foreach ($request->remark as $key => $value) {
@@ -260,12 +269,8 @@ class QuotationController extends Controller
             $request->validate([
                 'quotation_number'      => 'required',
                 'company_code'          => 'required|string|max:225',
-                'product_type'          => 'required|string|max:225',
-                'material_detail'       => 'required',
-                'thickness'             => 'nullable',
                 'reduction'             => 'nullable',
                 'position'              => 'nullable',
-                'price'                 => 'required',
                 'discount_percent'      => 'nullable',
                 'discount_price'        => 'nullable',
                 'datetime'              => 'nullable',
@@ -278,12 +283,8 @@ class QuotationController extends Controller
             $quotation = Quotation::find($id);
             $quotation->quotation_number = $request->input('quotation_number');
             $quotation->company_code = $request->input('company_code');
-            $quotation->product_type = $request->input('product_type');
-            $quotation->material_detail = $request->input('material_detail');
-            $quotation->thickness = $request->input('thickness');
             $quotation->reduction = $request->input('reduction');
             $quotation->position = $request->input('position');
-            $quotation->price = $request->input('price');
             $quotation->discount_percent = $request->input('discount_percent');
             $quotation->discount_price = $request->input('discount_price');
             $quotation->datetime = now();
@@ -294,6 +295,48 @@ class QuotationController extends Controller
             $quotation->updated_by = Auth::user()->name;
             $quotation->save();
     
+            $quotation->quotationRemark()->delete();
+            $quotation->quotationTerm()->delete();
+            $quotation->quotationDetail()->delete();
+
+            if ($request->has('product_type') && is_array($request->product_type)) {
+                $productType = [];
+                foreach ($request->product_type as $key => $value) {
+                    $productType[] = [
+                        'quotation_id'  => $quotation->id,
+                        'product_type'  => $request->product_type[$key], 
+                        'material'      => $request->material[$key], 
+                        'thickness'     => $request->thickness[$key], 
+                        'unit'          => $request->unit[$key], 
+                        'price'         => $request->price[$key], 
+
+                    ];
+                }
+                QuotationDetail::insert($productType);
+            }
+
+            if ($request->has('remark') && is_array($request->remark)) {
+                $remarks = [];
+                foreach ($request->remark as $key => $value) {
+                    $remarks[] = [
+                        'quotation_id'  => $quotation->id,
+                        'remark'        => $value,
+                    ];
+                }
+                QuotationRemarks::insert($remarks);
+            }
+    
+            if ($request->has('term_condition') && is_array($request->term_condition)) {
+                $terms = [];
+                foreach ($request->term_condition as $key => $value) {
+                    $terms[] = [
+                        'quotation_id'      => $quotation->id,
+                        'term_condition'    => $value,
+                    ];
+                }
+                QuotationTerms::insert($terms);
+            }
+
             return response()->json(['success' => true, 'msg' => 'Data Quotation berhasil diedit!']);
         } catch (\Throwable $th) {
             return response()->json(['failed' => true, 'msg' => $th->getMessage()]);

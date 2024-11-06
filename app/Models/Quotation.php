@@ -18,4 +18,9 @@ class Quotation extends Model
     {
         return $this->hasMany(QuotationTerms::class);
     }
+
+    public function quotationDetail()
+    {
+        return $this->hasMany(QuotationDetail::class);
+    }
 }

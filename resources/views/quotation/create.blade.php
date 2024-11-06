@@ -51,33 +51,6 @@
         
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="productType">Product Type <small class="text-danger">*</small></label>
-                                        <select class="form-select" id="productType" name="product_type">
-                                            <option selected value="liquid photopolymer plate">Liquid Photopolymer Plate</option>
-                                            <option value="solid photopolymer plate">Solid Photopolymer Plate</option>
-                                            <option value="digital solid photopolymer plate">Digital Solid Photopolymer Plate</option>
-                                        </select>
-                                    </div>
-                                </div>
-        
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="validationCustom01">Material Detail</label>
-                                        <input type="text" class="form-control" name="material_detail" placeholder="Ex:Material Detail..">
-                                    </div>
-                                </div><!-- end col -->
-        
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="thickness">Thickness</label>
-                                        <select class="form-select" id="thickness" name="thickness">
-                                            <!-- Thickness options will be populated based on the product type selection -->
-                                        </select>
-                                    </div>
-                                </div>
-        
-                                <div class="col-md-4">
-                                    <div class="mb-3">
                                         <label class="form-label" for="validationCustom01">Reduction</label>
                                         <input type="number" class="form-control" name="reduction" placeholder="Ex:10">
                                     </div>
@@ -90,13 +63,6 @@
                                         <option value="landscape">Landscape</option>
                                     </select>
                                 </div>
-        
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="validationCustom01">Price <small class="text-danger">*</small></label>
-                                        <input type="number" class="form-control" name="price" placeholder="Ex:1.000.000">
-                                    </div>
-                                </div><!-- end col -->
         
                                 <div class="col-md-4">
                                     <div class="mb-3">
@@ -136,6 +102,94 @@
                                     </div>
                                 </div><!-- end col -->
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header justify-content-between d-flex align-items-center">
+                            <h4 class="card-title">Material</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <h4>Quotation Material</h4>
+                            <hr>
+                            <div class="row mt-2">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="materialsTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Description <small class="text-danger">*</small></th>
+                                                    <th>Material <small class="text-danger">*</small></th>
+                                                    <th>Unit <small class="text-danger">*</small></th>
+                                                    <th>Thickness <small class="text-danger">*</small></th>
+                                                    <th>Unit Price (Rp.) <small class="text-danger">*</small></th>
+                                                    <th>ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="form-select" id="productType" name="product_type[]">
+                                                            <option selected value="liquid photopolymer plate">Liquid Photopolymer Plate</option>
+                                                            <option value="digitalisasi solid">Digitalisasi Solid</option>
+                                                            <option value="dry offset">Dry Offset</option>
+                                                            <option value="lasser film printing">Lasser Film Printing</option>
+                                                            <option value="letter press">Letter Press</option>
+                                                            <option value="resin polymer ppi 40">Resin Polymer PPI 40</option>
+                                                            <option value="resin polymer ppa 06">Resin Polymer PPA 06</option>
+                                                            <option value="base film">Base Film</option>
+                                                            <option value="bopp film">BOPP Film</option>
+                                                            <option value="astralon">Astralon</option>
+                                                            <option value="bonding machine">Bonding Machine</option>
+                                                            <option value="stripping / stoper 3m">Stripping / Stoper 3m</option>
+                                                            <option value="ablative film">Ablative Film</option>
+                                                            <option value="digital solid">Digital Solid</option>
+                                                            <option value="letter press">Letter Press</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-select" id="" name="material[]">
+                                                            <option selected value="ppi 40">PPI 40</option>
+                                                            <option value="ppi 106">PPI 106</option>
+                                                            <option value="huaguang">Huaguang</option>
+                                                            <option value="toray">Toray </option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-select" id="" name="unit[]">
+                                                            <option selected value="cm2">Cm2</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-select" id="" name="thickness[]">
+                                                            <option selected value="0,175">0,175</option>
+                                                            <option value="0,73">0,73</option>
+                                                            <option value="0,83">0,83</option>
+                                                            <option value="0,95">0,95</option>
+                                                            <option value="1,14">1,14</option>
+                                                            <option value="1,7">1,7</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="7">7</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" class="form-control" name="price[]" placeholder="Ex:Price..">
+                                                    </td>
+
+                                                    <td>
+                                                        <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addQuotationMaterial()">
+                                                            <i class="bx bx-plus-circle mx-auto"></i>
+                                                        </button>
+                                                    <td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            </div><!-- end row -->
                         </div>
                     </div>
 
@@ -262,6 +316,22 @@
 </script>
 
 <script>
+    function addQuotationMaterial() {
+        var rowCount = $('#materialsTable tr').length;
+        $("#materialsTable").find('tbody')
+            .append(
+                $('<tr>' +
+                    '<td><select class="form-select" id="productType" name="product_type[]"><option selected value="liquid photopolymer plate">Liquid Photopolymer Plate</option><option value="digitalisasi solid">Digitalisasi Solid</option><option value="dry offset">Dry Offset</option><option value="lasser film printing">Lasser Film Printing</option><option value="letter press">Letter Press</option><option value="resin polymer ppi 40">Resin Polymer PPI 40</option><option value="resin polymer ppa 06">Resin Polymer PPA 06</option><option value="base film">Base Film</option><option value="bopp film">BOPP Film</option><option value="astralon">Astralon</option><option value="bonding machine">Bonding Machine</option><option value="stripping / stoper 3m">Stripping / Stoper 3m</option><option value="ablative film">Ablative Film</option><option value="digital solid">Digital Solid</option><option value="letter press">Letter Press</option></select>' +
+                    '<td><select class="form-select" id="" name="material[]"><option selected value="ppi 40">PPI 40</option><option value="ppi 106">PPI 106</option><option value="huaguang">Huaguang</option><option value="toray">Toray </option></select>' +
+                    '<td><select class="form-select" id="" name="unit[]"><option selected value="cm2">Cm2</option></select>' +
+                    '<td><select class="form-select" id="" name="thickness[]"><option selected value="0,175">0,175</option><option value="0,73">0,73</option><option value="0,83">0,83</option><option value="0,95">0,95</option><option value="1,14">1,14</option><option value="1,7">1,7</option><option value="3">3</option><option value="4">4</option><option value="7">7</option></select>' +
+                    '<td><input type="number" class="form-control" name="price[]" placeholder="Ex:Price..">' +
+                    '<td style="max-width: 6% !important"><button type="button" class="btn btn-outline-danger btn-remove" onclick="$(this).parent().parent().remove();changeOptionValue();"><i class="bx bx-minus-circle mx-auto"></i></button></td>' +
+                    '</tr>'
+            )
+        );
+    }
+
     function addQuotationRemarks() {
         var rowCount = $('#remarksTable tr').length;
         $("#remarksTable").find('tbody')

@@ -29,9 +29,6 @@
                         <th>No</th>
                         <th>Quotation Number</th>
                         <th>Company Code</th>
-                        <th>Product Type</th>
-                        <th>Material Detail</th>
-                        <th>Thickness</th>
                         <th>PO Number</th>
                         <th>File</th>
                         <th>Action</th>
@@ -79,9 +76,6 @@ $(document).ready(function() {
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'quotation_number', name: 'quotation_number' },
             { data: 'company_code', name: 'company_code' },
-            { data: 'product_type', name: 'product_type' },
-            { data: 'material_detail', name: 'material_detail' },
-            { data: 'thickness', name: 'thickness' },
             { data: 'po_number', name: 'po_number' },
             {
                 data: 'file',

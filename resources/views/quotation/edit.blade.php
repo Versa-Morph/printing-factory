@@ -48,33 +48,6 @@
                                         <input type="text" class="form-control" value="{{ $quotation->quotation_number }}" name="quotation_number">
                                     </div>
                                 </div><!-- end col -->
-                                
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="productType">Product Type <small class="text-danger">*</small></label>
-                                        <select class="form-select" id="productType" name="product_type">
-                                            <option value="liquid photopolymer plate" {{ $quotation->product_type == 'liquid photopolymer plate' ? 'selected' : '' }}>Liquid Photopolymer Plate</option>
-                                            <option value="solid photopolymer plate" {{ $quotation->product_type == 'solid photopolymer plate' ? 'selected' : '' }}>Solid Photopolymer Plate</option>
-                                            <option value="digital solid photopolymer plate" {{ $quotation->product_type == 'digital solid photopolymer plate' ? 'selected' : '' }}>Digital Solid Photopolymer Plate</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="validationCustom01">Material Detail</label>
-                                        <input type="text" class="form-control" value="{{ $quotation->material_detail }}" name="material_detail">
-                                    </div>
-                                </div><!-- end col -->
-
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="thickness">Thickness</label>
-                                        <select class="form-select" id="thickness" name="thickness">
-                                            <!-- Thickness options will be populated dynamically -->
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <div class="col-md-4">
                                     <div class="mb-3">
@@ -90,13 +63,6 @@
                                         <option value="landscape" {{ $quotation->position == 'landscape' ? 'selected' : '' }}>Landscape</option>
                                     </select>
                                 </div>
-
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="validationCustom01">Price <small class="text-danger">*</small></label>
-                                        <input type="number" class="form-control" value="{{ $quotation->price }}" name="price">
-                                    </div>
-                                </div><!-- end col -->
 
                                 <div class="col-md-4">
                                     <div class="mb-3">
@@ -130,6 +96,94 @@
                                 </div><!-- end col -->
 
                             </div><!-- end row -->
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header justify-content-between d-flex align-items-center">
+                            <h4 class="card-title">Material <small class="text-danger">*</small></h4>
+                            <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addQuotationMaterial()">
+                                <i class="bx bx-plus-circle"></i> Add Field
+                            </button>
+                        </div><!-- end card header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="materialsTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Description <small class="text-danger">*</small></th>
+                                                    <th>Material <small class="text-danger">*</small></th>
+                                                    <th>Unit <small class="text-danger">*</small></th>
+                                                    <th>Thickness <small class="text-danger">*</small></th>
+                                                    <th>Unit Price (Rp.) <small class="text-danger">*</small></th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($quotation->quotationDetail ?? [] as $key => $item)
+                                                    <tr>
+                                                        <td>
+                                                            <select class="form-select" id="productType" name="product_type[]">
+                                                                <option value="liquid photopolymer plate" {{ $item->product_type == 'liquid photopolymer plate' ? 'selected' : '' }}>Liquid Photopolymer Plate</option>
+                                                                <option value="digitalisasi solid" {{ $item->product_type == 'digitalisasi solid' ? 'selected' : '' }}>Digitalisasi Solid</option>
+                                                                <option value="dry offset" {{ $item->product_type == 'dry offset' ? 'selected' : '' }}>Dry Offset</option>
+                                                                <option value="lasser film printing" {{ $item->product_type == 'lasser film printing' ? 'selected' : '' }}>Lasser Film Printing</option>
+                                                                <option value="letter press" {{ $item->product_type == 'letter press' ? 'selected' : '' }}>Letter Press</option>
+                                                                <option value="resin polymer ppi 40" {{ $item->product_type == 'resin polymer ppi 40' ? 'selected' : '' }}>Resin Polymer PPI 40</option>
+                                                                <option value="resin polymer ppa 06" {{ $item->product_type == 'resin polymer ppa 06' ? 'selected' : '' }}>Resin Polymer PPA 06</option>
+                                                                <option value="base film" {{ $item->product_type == 'base film' ? 'selected' : '' }}>Base Film</option>
+                                                                <option value="bopp film" {{ $item->product_type == 'bopp film' ? 'selected' : '' }}>BOPP Film</option>
+                                                                <option value="astralon" {{ $item->product_type == 'astralon' ? 'selected' : '' }}>Astralon</option>
+                                                                <option value="bonding machine" {{ $item->product_type == 'bonding machine' ? 'selected' : '' }}>Bonding Machine</option>
+                                                                <option value="stripping / stoper 3m" {{ $item->product_type == 'stripping / stoper 3m' ? 'selected' : '' }}>Stripping / Stoper 3m</option>
+                                                                <option value="ablative film" {{ $item->product_type == 'ablative film' ? 'selected' : '' }}>Ablative Film</option>
+                                                                <option value="digital solid" {{ $item->product_type == 'digital solid' ? 'selected' : '' }}>Digital Solid</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select" id="material" name="material[]">
+                                                                <option value="ppi 40" {{ $item->material == 'ppi 40' ? 'selected' : '' }}>PPI 40</option>
+                                                                <option value="ppi 106" {{ $item->material == 'ppi 106' ? 'selected' : '' }}>PPI 106</option>
+                                                                <option value="huaguang" {{ $item->material == 'huaguang' ? 'selected' : '' }}>Huaguang</option>
+                                                                <option value="toray" {{ $item->material == 'toray' ? 'selected' : '' }}>Toray</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select" id="unit" name="unit[]">
+                                                                <option value="cm2" {{ $item->unit == 'cm2' ? 'selected' : '' }}>Cm2</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select" id="" name="thickness[]">
+                                                                <option value="0,175" {{ $item->thickness == '0,175' ? 'selected' : '' }}>0,175</option>
+                                                                <option value="0,73" {{ $item->thickness == '0,73' ? 'selected' : '' }}>0,73</option>
+                                                                <option value="0,83" {{ $item->thickness == '0,83' ? 'selected' : '' }}>0,83</option>
+                                                                <option value="0,95" {{ $item->thickness == '0,95' ? 'selected' : '' }}>0,95</option>
+                                                                <option value="1,14" {{ $item->thickness == '1,14' ? 'selected' : '' }}>1,14</option>
+                                                                <option value="1,7" {{ $item->thickness == '1,7' ? 'selected' : '' }}>1,7</option>
+                                                                <option value="3" {{ $item->thickness == '3' ? 'selected' : '' }}>3</option>
+                                                                <option value="4" {{ $item->thickness == '4' ? 'selected' : '' }}>4</option>
+                                                                <option value="7" {{ $item->thickness == '7' ? 'selected' : '' }}>7</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" class="form-control" name="price[]" placeholder="Ex:Price.." value="{{ $item->price }}">
+                                                        </td>
+
+                                                        <td style="max-width: 6% !important">
+                                                            <button type="button" class="btn btn-outline-danger btn-remove" onclick="$(this).closest('tr').remove();">
+                                                                <i class="bx bx-minus-circle"></i> Remove
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -255,6 +309,22 @@
     document.getElementById('productType').dispatchEvent(new Event('change'));
 </script>
 <script>
+    function addQuotationMaterial() {
+        var rowCount = $('#materialsTable tr').length;
+        $("#materialsTable").find('tbody')
+            .append(
+                $('<tr>' +
+                    '<td><select class="form-select" id="productType" name="product_type[]"><option selected value="liquid photopolymer plate">Liquid Photopolymer Plate</option><option value="digitalisasi solid">Digitalisasi Solid</option><option value="dry offset">Dry Offset</option><option value="lasser film printing">Lasser Film Printing</option><option value="letter press">Letter Press</option><option value="resin polymer ppi 40">Resin Polymer PPI 40</option><option value="resin polymer ppa 06">Resin Polymer PPA 06</option><option value="base film">Base Film</option><option value="bopp film">BOPP Film</option><option value="astralon">Astralon</option><option value="bonding machine">Bonding Machine</option><option value="stripping / stoper 3m">Stripping / Stoper 3m</option><option value="ablative film">Ablative Film</option><option value="digital solid">Digital Solid</option><option value="letter press">Letter Press</option></select>' +
+                    '<td><select class="form-select" id="" name="material[]"><option selected value="ppi 40">PPI 40</option><option value="ppi 106">PPI 106</option><option value="huaguang">Huaguang</option><option value="toray">Toray </option></select>' +
+                    '<td><select class="form-select" id="" name="unit[]"><option selected value="cm2">Cm2</option></select>' +
+                    '<td><select class="form-select" id="" name="thickness[]"><option selected value="0,175">0,175</option><option value="0,73">0,73</option><option value="0,83">0,83</option><option value="0,95">0,95</option><option value="1,14">1,14</option><option value="1,7">1,7</option><option value="3">3</option><option value="4">4</option><option value="7">7</option></select>' +
+                    '<td><input type="number" class="form-control" name="price[]" placeholder="Ex:Price..">' +
+                    '<td style="max-width: 6% !important"><button type="button" class="btn btn-outline-danger btn-remove" onclick="$(this).parent().parent().remove();changeOptionValue();"><i class="bx bx-minus-circle mx-auto"></i></button></td>' +
+                    '</tr>'
+            )
+        );
+    }
+
     function addQuotationRemark() {
         var rowCount = $('#remarksTable tr').length;
         $("#remarksTable").find('tbody')
