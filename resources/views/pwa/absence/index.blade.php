@@ -23,7 +23,7 @@
             width: auto;
             font-weight: 700;
             font-size: 10px;
-            text-transform: uppercase; 
+            text-transform: uppercase;
         }
 
         .badge-late {
@@ -33,8 +33,9 @@
             width: auto;
             font-weight: 700;
             font-size: 10px;
-            text-transform: uppercase; 
+            text-transform: uppercase;
         }
+
         .badge-warning {
             color: rgb(200, 219, 93);
             background: #dbc45d1a;
@@ -42,7 +43,7 @@
             width: auto;
             font-weight: 700;
             font-size: 10px;
-            text-transform: uppercase; 
+            text-transform: uppercase;
         }
 
         .badge-no-data {
@@ -52,8 +53,9 @@
             width: auto;
             font-weight: 700;
             font-size: 10px;
-            text-transform: uppercase; 
+            text-transform: uppercase;
         }
+
         .badge-info {
             color: black;
             background: rgba(7, 101, 243, 0.1);
@@ -62,7 +64,7 @@
             height: auto;
             font-weight: 700;
             font-size: 10px;
-            text-transform: uppercase; 
+            text-transform: uppercase;
         }
 
         .btn-create {
@@ -317,11 +319,9 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        @if ($item->status == 'pending')
-                                            <a class="btn btn-danger delete"
-                                                data-url='{{ route('pwa-absence-delete', $item->id) }}'>Delete</a>
-                                            <button type="submit" class="btn btn-primary btn-create">Submit</button>
-                                        @endif
+                                        <a class="btn btn-danger delete"
+                                            data-url='{{ route('pwa-absence-delete', $item->id) }}'>Delete</a>
+                                        <button type="submit" class="btn btn-primary btn-create">Submit</button>
                                     </div>
                                     </form><!-- end form -->
 
