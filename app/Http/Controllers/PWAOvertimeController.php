@@ -7,13 +7,8 @@ use App\Models\Overtime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class OvertimeController extends Controller
+class PWAOvertimeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('permission:list-overtime', ['only' => ['index']]);
-    }
 
     public function index()
     {
@@ -25,25 +20,7 @@ class OvertimeController extends Controller
                 return $query->where('employee_id', getEmployeID());
             }
         })->orderBy('date','desc')->get();
-        return view('overtime.index', $data);
-    }
-    public function indexManager()
-    {
-        $data['page_title'] = 'Overtime';
-        $role = Auth::user()->hasRole('Super Admin');
-        $data['overtime'] = Overtime::with('employee')
-        ->when(function ($query) use($role) {
-            if ($role == false) {
-                return $query->where('employee_id', getEmployeID());
-            }
-        })->orderBy('date','desc')->get();
-        return view('overtime.index-manager', $data);
-    }
-    public function create()
-    {
-        $data['page_title'] = 'Create Overtime';
-        $data['employee'] = Employe::orderBy('first_name','asc')->get();
-        return view('overtime.create', $data);
+        return view('pwa.overtime.index', $data);
     }
 
     public function store(Request $request)
@@ -59,7 +36,8 @@ class OvertimeController extends Controller
             $check = Overtime::where('employee_id',$request->input('employee_id') != null ? $request->input('employee_id') : getEmployeID())->where('date',$request->input('date'))->first();
     
             if (!empty($check)) {
-                return response()->json(['failed' => true, 'msg' => 'Sudah memiliki data overtime pada tanggal yang dipilih!']);
+                session()->flash('failed', 'Sudah memiliki data overtime pada tanggal yang dipilih!');
+                return redirect()->back();
             }
             $data = new Overtime();
             $data->employee_id = $request->input('employee_id') != null ? $request->input('employee_id') : getEmployeID();
@@ -70,11 +48,12 @@ class OvertimeController extends Controller
             $data->description = $request->input('description');
             $data->status = 1;
             $data->save();
-    
-            return response()->json(['success' => true, 'msg' => 'Data Overtime berhasil disimpan!']);
-        } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
 
+            session()->flash('success', 'Data Overtime berhasil disimpan!');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            session()->flash('failed', $th->getMessage());
+            return redirect()->back();
         }
     }
     public function edit($id)
@@ -82,7 +61,7 @@ class OvertimeController extends Controller
         $data['page_title'] = 'Edit Overtime';
         $data['overtime'] = Overtime::find($id);
         $data['employee'] = Employe::orderBy('first_name','asc')->get();
-        return view('overtime.edit', $data);
+        return view('pwa.overtime.edit', $data);
     }
     public function update(Request $request,$id)
     {
@@ -97,7 +76,8 @@ class OvertimeController extends Controller
             $check = Overtime::where('id','!=',$id)->where('employee_id',$request->input('employee_id') != null ? $request->input('employee_id') : getEmployeID())->where('date',$request->input('date'))->first();
     
             if (!empty($check)) {
-                return response()->json(['failed' => true, 'msg' => 'Sudah memiliki data overtime pada tanggal yang dipilih!']);
+                session()->flash('failed', 'Sudah memiliki data overtime pada tanggal yang dipilih!');
+                return redirect()->back();
             }
 
             $data = Overtime::find($id);
@@ -110,28 +90,14 @@ class OvertimeController extends Controller
             $data->status = 1;
             $data->save();
     
-            return response()->json(['success' => true, 'msg' => 'Data Overtime berhasil disimpan!']);
+            session()->flash('success', 'Data Overtime berhasil diupdate!');
+            return redirect()->back();
         } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
-
+            session()->flash('failed', 'Gagal Simpan Data');
+            return redirect()->back();
         }
     }
 
-    public function approve($id)
-    {
-        try {
-            $data = Overtime::find($id);
-            $data->status = 2;
-            $data->datetime_approve = date('Y-m-d H:i:s');
-            $data->approve_by = Auth::user()->name;
-            $data->save();
-    
-            return response()->json(['success' => true, 'msg' => 'Data Overtime berhasil disimpan!']);
-        } catch (\Throwable $th) {
-            return response()->json(['failed' => true, 'msg' => 'Gagal Simpan Data!']);
-
-        }
-    }
 
     public function delete(Request $request,$id)
     {

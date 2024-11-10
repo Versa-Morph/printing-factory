@@ -226,7 +226,7 @@
                     }
                     break;
                 case 'no-data-overtime':
-                    Swal.fire('Error', "You don't have an overtime request or your overtime data has not been approved, please check your overtime data again on the dashboard!", 'warning');
+                    Swal.fire('Error', "You don't have an overtime request or your overtime data has not been approved, please make a request or check your overtime data again on the overtime mobile app page or dashboard!", 'warning');
                     break;
 
                 default:
