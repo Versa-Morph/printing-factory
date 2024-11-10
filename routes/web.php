@@ -29,6 +29,7 @@ use App\Http\Controllers\Auth\LoginNewController;
 use App\Http\Controllers\OfficeInventoryController;
 use App\Http\Controllers\SalesPerformanceReportController;
 use App\Http\Controllers\SalesTaskController;
+use App\Http\Controllers\SalesTaskManagementController;
 use App\Http\Controllers\StatusAttendanceController;
 use Illuminate\Support\Facades\Auth;
 
@@ -223,6 +224,7 @@ Route::prefix('quotation')->name('quotation-')->group(function () {
     Route::get('/create', [QuotationController::class, 'create'])->name('create');
     Route::post('/store', [QuotationController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [QuotationController::class, 'edit'])->name('edit');
+    Route::get('/invoice/{id}', [QuotationController::class, 'invoice'])->name('invoice');
     Route::post('/update/{id}', [QuotationController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [QuotationController::class, 'delete'])->name('delete');
     Route::get('/modal-approve/{id}', [QuotationController::class, 'modalApprove'])->name('modal-approve');
@@ -265,7 +267,7 @@ Route::prefix('shift')->name('shift-')->group(function () {
 });
 // END SHIFT
 
-// START SHIFT
+// START SALES TASK
 Route::prefix('sales-task')->name('sales-task-')->group(function () {
     Route::get('/', [SalesTaskController::class, 'index'])->name('list');
     Route::get('/get-data', [SalesTaskController::class, 'getData'])->name('get-data');
@@ -277,7 +279,21 @@ Route::prefix('sales-task')->name('sales-task-')->group(function () {
     Route::get('/modal-approve/{id}', [SalesTaskController::class, 'modalApprove'])->name('modal-approve');
     Route::patch('/approve/{id}', [SalesTaskController::class, 'approve'])->name('approve');
 });
-// END SHIFT
+// END SALES TASK
+
+// START SALES TASK MANAGEMENT
+Route::prefix('sales-task-management')->name('sales-task-management-')->group(function () {
+    Route::get('/', [SalesTaskManagementController::class, 'index'])->name('list');
+    Route::get('/get-data', [SalesTaskManagementController::class, 'getData'])->name('get-data');
+    Route::get('/create', [SalesTaskManagementController::class, 'create'])->name('create');
+    Route::post('/store', [SalesTaskManagementController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [SalesTaskManagementController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [SalesTaskManagementController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [SalesTaskManagementController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [SalesTaskManagementController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [SalesTaskManagementController::class, 'approve'])->name('approve');
+});
+// END SALES TASK MANAGEMENT
 
 // START STATUS ATTENDANCE
 Route::prefix('status-attendance')->name('status-attendance-')->group(function () {

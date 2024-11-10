@@ -16,21 +16,23 @@
             <div class="col-sm">
                 @can('create-karyawan')
                 <div>
-                    <a href="{{ route('quotation-create') }}" class="btn btn-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Quotation</a>
+                    <a href="{{ route('sales-task-management-create') }}" class="btn btn-light mb-4 bg-primary"><i class="mdi mdi-plus me-1"></i> Tambah Task Team Management</a>
                 </div>
                 @endcan
             </div>
         </div>
 
         <div class="table-responsive mt-4 mt-sm-0">
-            <table class="table align-middle table-nowrap table-check" id="quotation-table">
+            <table class="table align-middle table-nowrap table-check" id="karyawan-table">
                 <thead>
                     <tr class="bg-transparent">
                         <th>No</th>
-                        <th>Quotation Number</th>
-                        <th>Company Code</th>
-                        <th>PO Number</th>
-                        <th>File</th>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                        <th>Due Date</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Remark</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -41,23 +43,6 @@
     <!-- end card body -->
 </div>
 
-
-<div id="modalContainer">
-    <!-- Modal -->
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailModalLabel">Approve</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalBody">
-                    <!-- Order details will be populated here -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('script')
@@ -68,47 +53,20 @@
 
 <script>
 $(document).ready(function() {
-    $('#quotation-table').DataTable({
+    $('#karyawan-table').DataTable({
         processing: false,
         serverSide: false,
-        ajax: '{{ route('quotation-get-data') }}',
+        ajax: '{{ route('sales-task-management-get-data') }}',
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-            { data: 'quotation_number', name: 'quotation_number' },
-            { data: 'company_code', name: 'company_code' },
-            { data: 'po_number', name: 'po_number' },
-            {
-                data: 'file',
-                name: 'file',
-                orderable: false,
-                searchable: false,
-                render: function(data, type, row) {
-                    if (data) {
-                        // Construct the file URL
-                        return `<a href="{{ asset('assets/img/quotation') }}/${data}" target="_blank">${data}</a>`;
-                    }
-                    return ''; // Return empty if no file
-                }
-            },
+            { data: 'task_name', name: 'task_name' },
+            { data: 'description', name: 'description' },
+            { data: 'due_date', name: 'due_date' },
+            { data: 'priority', name: 'priority' },
+            { data: 'status', name: 'status' },
+            { data: 'remarks', name: 'remarks' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ]
-    });
-
-
-    // Event listener for opening modal
-    $('#quotation-table').on('click', '.view-details', function() {
-        var orderId = $(this).data('id');
-        $.ajax({
-            url: '/quotation/modal-approve/' + orderId,
-            method: 'GET',
-            success: function(data) {
-                $('#modalBody').html(data);
-                $('#detailModal').modal('show');
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                alert('There was an error fetching the details. Please try again later.');
-            }
-        });
     });
 
     // Delete action
@@ -135,7 +93,7 @@ $(document).ready(function() {
                                 response.success,
                                 'success'
                             )
-                            $('#quotation-table').DataTable().ajax.reload();
+                            $('#pelanggan-table').DataTable().ajax.reload();
                         } else {
                             Swal.fire(
                                 'Error!',
