@@ -29,7 +29,7 @@ class AbsenceController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('employee', function($row){
-                    return $row->employee->employee_code;
+                    return $row->employee->first_name;
                 })
                 ->addColumn('action', function($row){
                     $editUrl = route('absence-edit', $row->id);
@@ -64,7 +64,7 @@ class AbsenceController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('employee', function($row){
-                    return $row->employee->employee_code;
+                    return $row->employee->first_name;
                 })
                 ->addColumn('action', function($row){
                     $editUrl = route('absence-edit', $row->id);
@@ -99,7 +99,7 @@ class AbsenceController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('employee', function($row){
-                    return $row->employee->employee_code;
+                    return $row->employee->first_name;
                 })
                 ->addColumn('action', function($row){
                     $editUrl = route('absence-edit', $row->id);
@@ -123,7 +123,7 @@ class AbsenceController extends Controller
     public function create()
     {
         $data['page_title'] = 'Tambah Absence';
-        $data['employes'] = Employe::orderBy('employee_code','asc')->get();
+        $data['employes'] = Employe::orderBy('first_name','asc')->get();
 
         return view('absence.create', $data);
     }
@@ -174,7 +174,7 @@ class AbsenceController extends Controller
     {
         $data['page_title'] = 'Edit Work Schedule';
         $data['absence'] = Absence::find($id);
-        $data['employes'] = Employe::orderBy('employee_code','asc')->get();
+        $data['employes'] = Employe::orderBy('first_name','asc')->get();
 
         return view('absence.edit', $data);
     }
@@ -211,7 +211,7 @@ class AbsenceController extends Controller
 
     public function delete($id)
     {
-        $absence = Absences::find($id);
+        $absence = Absence::find($id);
         if ($absence) {
             $absence->delete();
             return response()->json(['success' => 'Data Absence berhasil dihapus!']);

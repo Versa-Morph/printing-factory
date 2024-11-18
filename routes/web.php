@@ -30,6 +30,8 @@ use App\Http\Controllers\OfficeInventoryController;
 use App\Http\Controllers\SalesPerformanceReportController;
 use App\Http\Controllers\SalesTaskController;
 use App\Http\Controllers\SalesTaskManagementController;
+use App\Http\Controllers\PWAAbsenceController;
+use App\Http\Controllers\PWAOvertimeController;
 use App\Http\Controllers\StatusAttendanceController;
 use Illuminate\Support\Facades\Auth;
 
@@ -85,6 +87,21 @@ Route::prefix('pwa')->name('pwa-')->group(function () {
     Route::get('/homepage', [PwaController::class, 'index'])->name('homepage');
     Route::get('/attend', [PwaController::class, 'attend'])->name('attend');
     Route::post('/store-attend', [PwaController::class, 'storeAttend'])->name('store-attend');
+
+
+    Route::prefix('overtime')->name('overtime-')->group(function () {
+        Route::get('/', [PWAOvertimeController::class, 'index'])->name('list');
+        Route::post('/store', [PWAOvertimeController::class, 'store'])->name('store');
+        Route::post('/update/{id}', [PWAOvertimeController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [PWAOvertimeController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('absence')->name('absence-')->group(function (){
+        Route::get('/', [PWAAbsenceController::class, 'index'])->name('list');
+        Route::post('/store', [PWAAbsenceController::class, 'store'])->name('store');
+        Route::post('/update/{id}', [PWAAbsenceController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [PWAAbsenceController::class, 'delete'])->name('delete');
+    });
 });
 
 // END PWA

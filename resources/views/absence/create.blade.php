@@ -34,7 +34,7 @@
                                     @foreach ($employes as $employee)
                                     <option value="{{ $employee->id }}"
                                         {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
-                                        {{ $employee->employee_code }} </option>
+                                        {{ $employee->first_name }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -43,7 +43,7 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label class="form-label" for="validationCustom01">Start Date <small class="text-danger">*</small></label>
-                                <input type="start_date" class="form-control" name="start_date" placeholder="Ex:">
+                                <input type="date" class="form-control" name="start_date" placeholder="Ex:">
                             </div>
                         </div><!-- end col -->
 
