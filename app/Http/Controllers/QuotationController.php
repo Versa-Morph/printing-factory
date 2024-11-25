@@ -32,6 +32,32 @@ class QuotationController extends Controller
         return view('quotation.index', $data);
     }
 
+    public function getQuotationDetails($id)
+    {
+        $quotation = Quotation::where('id', $id)->first();
+        $quotationMaterial = QuotationDetail::where('quotation_id', $id)->get();
+        $quotationRemark = QuotationRemarks::where('quotation_id', $id)->get();
+        $quotationTerm = QuotationTerms::where('quotation_id', $id)->get();
+        if ($quotation) {
+            return response()->json([
+                'quotation_number' => $quotation->quotation_number,
+                'reduction' => $quotation->reduction,
+                'discount_percent' => $quotation->discount_percent,
+                'price' => $quotation->price,
+                'status' => $quotation->status,
+                'valid_until' => $quotation->valid_until,
+                'po_number' => $quotation->po_number,
+                'company_code' => $quotation->company_code,
+                'position' => $quotation->position,
+                'remarks' => $quotationRemark,
+                'details' => $quotationMaterial,
+                'terms' => $quotationTerm,
+            ]);
+        }
+        return response()->json(['message' => 'Quotation not found'], 404);
+    }
+
+
     public function getData(Request $request)
     {
         if ($request->ajax()) {
