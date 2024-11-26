@@ -11,7 +11,32 @@
     </li>
 @endcan
 
-@can('dashboard-manager-accounting')
+@can('customer-management')
+    <li>
+        <a href="{{ route('leads-customer-list') }}">
+            <i class="uil-users-alt nav-icon"></i>
+            <span class="menu-item" data-key="t-authentication">Customer Management</span>
+        </a>
+    </li>
+@endcan
+@can('order-management')
+    <li>
+        <a href="{{ route('order-management-list') }}">
+            <i class="uil-users-alt nav-icon"></i>
+            <span class="menu-item" data-key="t-authentication">Order Management</span>
+        </a>
+    </li>
+@endcan
+@can('sales-team-management')
+    <li>
+        <a href="{{ route('sales-task-management-list') }}">
+            <i class="uil-users-alt nav-icon"></i>
+            <span class="menu-item" data-key="t-authentication">Task Management</span>
+        </a>
+    </li>
+@endcan
+
+{{-- @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
@@ -63,7 +88,7 @@
             <span class="menu-item" data-key="t-authentication">Employee Self-Service</span>
         </a>
     </li>
-@endcan
+@endcan --}}
 
 
 @can('menu-staff')
@@ -78,7 +103,32 @@
     </li>
 @endcan
 
-@can('dashboard-manager-accounting')
+@can('customer-management')
+    <li>
+        <a href="{{ route('leads-customer-list') }}">
+            <i class="uil-users-alt nav-icon"></i>
+            <span class="menu-item" data-key="t-authentication">Customer Management</span>
+        </a>
+    </li>
+@endcan
+@can('order-management')
+    <li>
+        <a href="{{ route('order-management-list') }}">
+            <i class="uil-users-alt nav-icon"></i>
+            <span class="menu-item" data-key="t-authentication">Order Management</span>
+        </a>
+    </li>
+@endcan
+@can('sales-team-management')
+    <li>
+        <a href="{{ route('sales-task-management-list') }}">
+            <i class="uil-users-alt nav-icon"></i>
+            <span class="menu-item" data-key="t-authentication">Task Management</span>
+        </a>
+    </li>
+@endcan
+
+{{-- @can('dashboard-manager-accounting')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
@@ -184,4 +234,4 @@
             <span class="menu-item" data-key="t-authentication">Customer Feedback Reports</span>
         </a>
     </li>
-@endcan
+@endcan --}}
