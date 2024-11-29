@@ -254,6 +254,8 @@ Route::prefix('order-management')->name('order-management-')->group(function () 
     Route::post('/store', [OrderController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
+    Route::get('/detail/{id}', [OrderController::class, 'show'])->name('show');
+    Route::post('/detail/{id}', [OrderController::class, 'detail'])->name('detail');
     Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delete');
     Route::get('/modal-approve/{id}', [OrderController::class, 'modalApprove'])->name('modal-approve');
     Route::patch('/approve/{id}', [OrderController::class, 'approve'])->name('approve');

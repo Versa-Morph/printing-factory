@@ -180,6 +180,71 @@
 
                     <div class="card">
                         <div class="card-header justify-content-between d-flex align-items-center">
+                            <h4 class="card-title">Order Management Design</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <h4>Order Management Design</h4>
+                                <div>
+
+                                    <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addOrderDesigns()">
+                                        <i class="bx bx-plus-circle mx-auto"></i>
+                                    </button>
+                                </div>
+                            <hr>
+                            <div class="row mt-2">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="orderDesignsTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Document Name<small class="text-danger">*</small></th>
+                                                    <th>Document Path<small class="text-danger">*</small></th>
+                                                    <th>Status<small class="text-danger">*</small></th>
+                                                    <th>ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($order->orderDesign ?? [] as $key => $order_design)
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" class="form-control" value="{{ $order_design->document_name }}" name="document_name[]" placeholder="Ex:">
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            @if ($order_design->document_path)
+                                                                <a href="{{ asset($order_design->document_path) }}" target="_blank" class="me-2">View File</a>
+                                                            @endif
+                                                            <input type="file" class="form-control" name="document_path[]" placeholder="Ex:">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-select" name="status[]">
+                                                            <option selected value="waiting">Waiting</option>
+                                                            <option value="approved">Approved</option>
+                                                            <option value="rejected">Rejected</option>
+                                                            <option value="revision">Revision</option>
+                                                        </select>
+                                                    </td>
+
+                                                    <td>
+                                                        <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addOrderDesigns()">
+                                                            <i class="bx bx-plus-circle mx-auto"></i>
+                                                        </button>
+                                                    <td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            </div><!-- end row -->
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header justify-content-between d-flex align-items-center">
                             <h4 class="card-title">Order Management Remarks</h4>
                         </div>
                         <div class="card-body">
@@ -203,11 +268,11 @@
                                                         <textarea name="remark[]" placeholder="Remark" class="form-control" id="remark" rows="4">{{ $order_remark->remark }}</textarea>
                                                     </td>
 
-                                                    <td>
+                                                    {{-- <td>
                                                         <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addOrderRemarks()">
                                                             <i class="bx bx-plus-circle mx-auto"></i>
                                                         </button>
-                                                    <td>
+                                                    <td> --}}
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -244,11 +309,11 @@
                                                         <input type="text" class="form-control" value="{{ $order_color->color_name }}" name="color_name[]" placeholder="Ex:">
                                                     </td>
 
-                                                    <td>
+                                                    {{-- <td>
                                                         <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addOrderColors()">
                                                             <i class="bx bx-plus-circle mx-auto"></i>
                                                         </button>
-                                                    <td>
+                                                    <td> --}}
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -294,11 +359,11 @@
                                                         <input type="number" class="form-control" name="quantity[]" placeholder="Ex:">
                                                     </td>
 
-                                                    <td>
+                                                    {{-- <td>
                                                         <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addOrderSizes()">
                                                             <i class="bx bx-plus-circle mx-auto"></i>
                                                         </button>
-                                                    <td>
+                                                    <td> --}}
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -457,6 +522,20 @@ function removeRow(button) {
         );
     }
 
+    function addOrderDesigns() {
+        var rowCount = $('#orderDesignsTable tr').length;
+        $("#orderDesignsTable").find('tbody')
+            .append(
+                $('<tr>' +
+                    '<td><input type="text" class="form-control" name="document_name[]" placeholder="Ex:">' +
+                    '<td><input type="file" class="form-control" name="document_path[]" placeholder="Ex:">' +
+                    '<td><select class="form-select" name="status[]"><option selected value="waiting">Waiting</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="revision">Revision</option></select>' +
+                    '<td style="max-width: 6% !important"><button type="button" class="btn btn-outline-danger btn-remove" onclick="$(this).parent().parent().remove();changeOptionValue();"><i class="bx bx-minus-circle mx-auto"></i></button></td>' +
+                    '</tr>'
+            )
+        );
+    }
+
     function addOrderColors() {
         var rowCount = $('#orderColorsTable tr').length;
         $("#orderColorsTable").find('tbody')
@@ -507,7 +586,7 @@ function removeRow(button) {
                     const formData = new FormData(form);
 
                     $.ajax({
-                        url: '{{ route('order-management-update',$order->id) }}',
+                        url: '{{ route('order-management-detail',$order->id) }}',
                         type: 'POST',
                         data: formData,
                         processData: false,
