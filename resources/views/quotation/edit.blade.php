@@ -25,7 +25,7 @@
                                         <select class="form-select form-select-sm mr-sm-2 @error('company_code') is-invalid @enderror" id="company_code" name="company_code" style="width:100%">
                                             <option disabled selected>Choose Company Code</option>
                                             @foreach ($customers as $customer)
-                                            <option value="{{ $customer->id }}"
+                                            <option value="{{ $customer->company_code }}"
                                                 {{ old('company_code', $quotation->company_code) == $customer->company_code ? 'selected' : '' }}>
                                                 {{ $customer->company_code }} </option>
                                             @endforeach

@@ -42,7 +42,7 @@
         </a>
     </li>
 @endcan
-@can('discount-&-Promotion-Management')
+{{-- @can('discount-&-Promotion-Management')
     <li>
         <a href="#">
             <i class="uil-users-alt nav-icon"></i>
@@ -58,7 +58,7 @@
             <span class="menu-item" data-key="t-authentication">Office Inventory</span>
         </a>
     </li>
-@endcan
+@endcan --}}
 
 
 @can('menu-staff')
@@ -106,7 +106,7 @@
 @endcan
 
 
-@can('menu-analytics-manager')
+{{-- @can('menu-analytics-manager')
     <li class="menu-title" data-key="t-menu">ANALYTICS MENU : MANAGER</li>
 @endcan
 
@@ -161,6 +161,6 @@
             <span class="menu-item" data-key="t-authentication">Customer Interaction Analysis</span>
         </a>
     </li>
-@endcan
+@endcan --}}
 
 

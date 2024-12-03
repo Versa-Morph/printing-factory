@@ -102,17 +102,17 @@
     <table class="customer-info">
         <tr>
             <td><strong>To:</strong> {{ $quotation->company_code }}</td>
-            <td><strong>Attention:</strong> {{ $customer->company_name }}</td>
+            <td><strong>Attention:</strong> {{ $customer->company_name ?? '' }}</td>
         </tr>
         <tr>
-            <td>{{ $customer->company_address }}</td>
+            <td>{{ $customer->company_address ?? '' }}</td>
             <td></td>
         </tr>
         <tr>
-            <td>{{ $customer->company_phone_number }}</td>
+            <td>{{ $customer->company_phone_number ?? ''}}</td>
         </tr>
         <tr>
-            <td>{{ $customer->pic_email }}</td>
+            <td>{{ $customer->pic_email ?? ''}}</td>
             <td></td>
         </tr>
     </table>
@@ -129,42 +129,25 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($quotation->quotationDetail as $quotationDetail)
             <tr>
-                <td>1</td>
-                <td>Liquid Photopolymer Plate</td>
-                <td>PPI 40</td>
-                <td>Cm2</td>
-                <td>0,175 mm</td>
-                <td>Rp.139,00</td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $quotationDetail->product_type }}</td>
+                <td>{{ $quotationDetail->material }}</td>
+                <td>{{ $quotationDetail->thickness }}</td>
+                <td>{{ $quotationDetail->unit }}</td>
+                <td>Rp.{{ number_format($quotationDetail->price,0) }}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Liquid Photopolymer Plate</td>
-                <td>PPI A06</td>
-                <td>Cm2</td>
-                <td>0,73 mm</td>
-                <td>Rp.159,00</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Liquid Photopolymer Plate</td>
-                <td>Huanguang</td>
-                <td>Cm2</td>
-                <td>0,83mm</td>
-                <td>Rp.129,00</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 
     <div class="notes">
         <p><strong>Term & Condition:</strong></p>
         <ul>
-            <li>Surat penawaran harga ini berlaku 30 hari dari sekarang</li>
-            <li>Harga belum termasuk pajak PPN</li>
-            <li>Minimum Order 1.000 Cm2</li>
-            <li>Pembayaran: Tunai, Transfer, Pembayaran 30 Hari</li>
-            <li>Ke Bank BCA atas nama Poto Polimer Indonesia No.Rek 497 651 5188</li>
-            <li>Delivery term: Free min. 1000 cm2 utk area Jabodetabek</li>
+            @foreach ($quotation->quotationTerm as $quotationTerm)
+            <li>{{ $quotationTerm->term_condition }}</li>
+            @endforeach
         </ul>
     </div>
 
@@ -172,8 +155,8 @@
         <p>Salam,</p>
         <img src="path-to-your-signature.jpg" alt="Signature">
         <p>PT. Poto Polimer Indonesia</p>
-        <p>Nuke Hapsari S</p>
-        <p>Sales Executive</p>
+        <p>{{ $quotaation->created_by }}</p>
+        {{-- <p>Sales Executive</p> --}}
     </div>
 </body>
 </html>

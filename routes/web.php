@@ -265,8 +265,19 @@ Route::prefix('sales-performace-report')->name('sales-performace-report-')->grou
 
 // START QUOTATION
 Route::prefix('order-management')->name('order-management-')->group(function () {
-    Route::get('/', [QuotationController::class, 'orderManagement'])->name('list');
-    Route::get('/get-data', [QuotationController::class, 'getDataOrderManagement'])->name('get-data');
+    Route::get('/', [OrderController::class, 'index'])->name('list');
+    Route::get('/get-data', [OrderController::class, 'getData'])->name('get-data');
+    Route::get('/create', [OrderController::class, 'create'])->name('create');
+    Route::post('/store', [OrderController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
+    Route::get('/detail/{id}', [OrderController::class, 'show'])->name('show');
+    Route::post('/detail/{id}', [OrderController::class, 'detail'])->name('detail');
+    Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delete');
+    Route::get('/modal-approve/{id}', [OrderController::class, 'modalApprove'])->name('modal-approve');
+    Route::patch('/approve/{id}', [OrderController::class, 'approve'])->name('approve');
+    Route::get('/details/{id}', [QuotationController::class, 'getQuotationDetails'])->name('details');
+
 });
 // END QUOTATION
 
