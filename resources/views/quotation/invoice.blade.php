@@ -87,11 +87,20 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ public_path('assets/images/logo-polimer.jpg') }}" width="60px" alt="">
-        <h1>Poto Polimer Indonesia pt</h1>
-        <p class="subtitle">Villa Melati Mas Blok B8 No.16 A-B, Jalan Raya Serpon. Desa/Kelurahan Lengkong Karya, Kec. Serpong Utara, Kota Tangerang Selatan, Provinsi Banten, Kode Pos: 15310</p>
-        <p class="subtitle">Telp: +62 21 22232940 Fax: +62 21 22232940 Email: potopolimer@gmail.com</p>
+        <table>
+            <tr>
+                <td>
+                    <img src="{{ public_path('assets/images/logo-polimer.jpg') }}" width="60px" alt="">
+                </td>
+                <td>
+                    <h1>Poto Polimer Indonesia pt</h1>
+                    <p class="subtitle">Villa Melati Mas Blok B8 No.16 A-B, Jalan Raya Serpon. Desa/Kelurahan Lengkong Karya, Kec. Serpong Utara, Kota Tangerang Selatan, Provinsi Banten, Kode Pos: 15310</p>
+                    <p class="subtitle">Telp: +62 21 22232940 Fax: +62 21 22232940 Email: potopolimer@gmail.com</p>
+                </td>
+            </tr>
+        </table>
     </div>
+    <hr>
     
     <div class="quotation-number">
         <b>QUOTATION </b>
@@ -155,7 +164,7 @@
         <p>Salam,</p>
         <img src="path-to-your-signature.jpg" alt="Signature">
         <p>PT. Poto Polimer Indonesia</p>
-        <p>{{ $quotaation->created_by }}</p>
+        <p>{{ $quotation->created_by }}</p>
         {{-- <p>Sales Executive</p> --}}
     </div>
 </body>
