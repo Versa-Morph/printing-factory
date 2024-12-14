@@ -29,6 +29,14 @@ class QuotationController extends Controller
     public function index()
     {
         $data['page_title'] = 'Quotation';
+
+        $getDataQuotations = Quotation::query();
+        $data['customers'] = Customer::select('company_code', 'company_name')->get()->keyBy('company_code')->toArray();
+        if (Auth::user()->role == 'sales') {
+            $getDataQuotations = $getDataQuotations->where('created_by', Auth::user()->name);
+        }
+        $data['quotations'] = $getDataQuotations->orderBy('created_at', 'desc')->paginate(10);
+
         return view('quotation.index', $data);
     }
 
@@ -205,7 +213,7 @@ class QuotationController extends Controller
                 'valid_until'           => 'nullable',
                 'po_number'             => 'nullable',
             ]);
-    
+
             $quotation = new Quotation();
             $quotation->quotation_number = $request->input('quotation_number');
             $quotation->company_code = $request->input('company_code');
@@ -220,17 +228,17 @@ class QuotationController extends Controller
             $quotation->po_number = $request->input('po_number');
             $quotation->created_by = Auth::user()->name;
             $quotation->save();
-    
+
             if ($request->has('product_type') && is_array($request->product_type)) {
                 $productType = [];
                 foreach ($request->product_type as $key => $value) {
                     $productType[] = [
                         'quotation_id'  => $quotation->id,
-                        'product_type'  => $request->product_type[$key], 
-                        'material'      => $request->material[$key], 
-                        'thickness'     => $request->thickness[$key], 
-                        'unit'          => $request->unit[$key], 
-                        'price'         => $request->price[$key], 
+                        'product_type'  => $request->product_type[$key],
+                        'material'      => $request->material[$key],
+                        'thickness'     => $request->thickness[$key],
+                        'unit'          => $request->unit[$key],
+                        'price'         => $request->price[$key],
 
                     ];
                 }
@@ -247,7 +255,7 @@ class QuotationController extends Controller
                 }
                 QuotationRemarks::insert($remarks);
             }
-    
+
             if ($request->has('term_condition') && is_array($request->term_condition)) {
                 $terms = [];
                 foreach ($request->term_condition as $key => $value) {
@@ -305,7 +313,7 @@ class QuotationController extends Controller
                 'valid_until'           => 'nullable',
                 'po_number'             => 'nullable',
             ]);
-    
+
             $quotation = Quotation::find($id);
             $quotation->quotation_number = $request->input('quotation_number');
             $quotation->company_code = $request->input('company_code');
@@ -320,7 +328,7 @@ class QuotationController extends Controller
             $quotation->po_number = $request->input('po_number');
             $quotation->updated_by = Auth::user()->name;
             $quotation->save();
-    
+
             $quotation->quotationRemark()->delete();
             $quotation->quotationTerm()->delete();
             $quotation->quotationDetail()->delete();
@@ -330,11 +338,11 @@ class QuotationController extends Controller
                 foreach ($request->product_type as $key => $value) {
                     $productType[] = [
                         'quotation_id'  => $quotation->id,
-                        'product_type'  => $request->product_type[$key], 
-                        'material'      => $request->material[$key], 
-                        'thickness'     => $request->thickness[$key], 
-                        'unit'          => $request->unit[$key], 
-                        'price'         => $request->price[$key], 
+                        'product_type'  => $request->product_type[$key],
+                        'material'      => $request->material[$key],
+                        'thickness'     => $request->thickness[$key],
+                        'unit'          => $request->unit[$key],
+                        'price'         => $request->price[$key],
 
                     ];
                 }
@@ -351,7 +359,7 @@ class QuotationController extends Controller
                 }
                 QuotationRemarks::insert($remarks);
             }
-    
+
             if ($request->has('term_condition') && is_array($request->term_condition)) {
                 $terms = [];
                 foreach ($request->term_condition as $key => $value) {

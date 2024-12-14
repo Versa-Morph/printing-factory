@@ -5,7 +5,7 @@
 <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
 <meta content="Themesdesign" name="author" />
 <!-- App favicon -->
-<link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico')}}">
+<link rel="shortcut icon" href="{{ asset('assets/logo-polimer.jpg')}}">
 
 <!-- plugin css -->
 <link href="{{ asset('assets/libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />

@@ -9,7 +9,7 @@
                     </span>
                     <span class="logo-lg">
                         <img src="assets/images/logo-sm.svg" alt="" height="26"> <span
-                            class="logo-txt">Vusey</span>
+                            class="logo-txt">Potopolimer</span>
                     </span>
                 </a>
 
@@ -19,7 +19,7 @@
                     </span>
                     <span class="logo-lg">
                         <img src="assets/images/logo-sm.svg" alt="" height="26"> <span
-                            class="logo-txt">Vusey</span>
+                            class="logo-txt">Potopolimer</span>
                     </span>
                 </a>
 
@@ -29,7 +29,8 @@
                 <i class="fa fa-fw fa-bars font-size-16"></i>
             </button>
 
-            <form class="app-search d-none d-lg-block">
+            <form class="app-search d-none">
+            {{-- <form class="app-search d-none d-lg-block"> --}}
                 <div class="position-relative">
                     <input type="text" class="form-control" placeholder="Search...">
                     <span class="bx bx-search icon-sm"></span>
@@ -58,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block language-switch">
+            <div class="dropdown d-inline-block language-switch d-none">
                 <button type="button" class="btn header-item noti-icon" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <img id="header-lang-img" src="assets/images/flags/us.jpg" alt="Header Language" height="16">
@@ -96,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block">
+            <div class="dropdown d-inline-block d-none">
                 <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bx bx-bell icon-sm"></i>

@@ -4,8 +4,8 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="">
-<link rel="icon" href="#!" type="image/x-icon" />
-<link rel="shortcut icon" href="#!" type="image/x-icon" />
+<link rel="icon" href="{{ asset('assets/logo-polimer.jpg') }}" type="image/x-icon" />
+<link rel="shortcut icon" href="{{ asset('assets/logo-polimer.jpg') }}" type="image/x-icon" />
 <title>Printing Factory</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 

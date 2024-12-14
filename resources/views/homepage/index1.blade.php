@@ -17,9 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Template Favicon & Icons Start -->
-    <link rel="icon" href="{{ asset('assets/homepage/img/favicon/favicon.ico') }}" sizes="any">
-    <link rel="icon" href="{{ asset('assets/homepage/img/favicon/icon.svg') }}" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="{{ asset('assets/homepage/img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" href="{{ asset('assets/logo-polimer.jpg') }}" sizes="any">
+    <link rel="icon" href="{{ asset('assets/logo-polimer.jpg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ asset('assets/logo-polimer.jpg') }}">
     <!-- Template Favicon & Icons End -->
 
     <!-- Facebook Metadata Start -->
@@ -116,7 +116,7 @@
             </p>
             <h1 class="headline__title animate-headline">Empowering plates polimer with seamless ERP solutions</h1>
             <div class="headline__btnholder d-flex flex-column flex-sm-row">
-              <a class="btn mobile-vertical btn-default btn-hover btn-hover-accent animate-headline" href="{{ route('form-customer') }}">
+              <a class="btn mobile-vertical btn-default btn-hover btn-hover-accent animate-headline" href="{{ url('https://photopolymer.co.id/') }}" target="_blank">
                 <span class="btn-caption">Website</span>
                 <i class="ph-bold ph-globe"></i>
               </a>
